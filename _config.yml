@@ -1,6 +1,6 @@
-source: .
 lang: ja
-layout: blog
+layout: default
+source: .
 lsi: false
 safe: true
 incremental: false

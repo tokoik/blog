@@ -208,6 +208,4 @@ void display(void)
 }
 ```
 
-{% gist c146d997b8267ca774b734382d3527af %}
-
 - [マウスで図形を回転するプログラム](https://gist.github.com/tokoik/c146d997b8267ca774b734382d3527af)
