@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
+    {% if page.use_math %}
+      <script id="MathJax-script" async src="https://jsdelivr.net"></script>
+    {% endif %}
+    <title>{{ page.title }}</title>
+  </head>
+  <body>
+    <h1>床井研究室</h1>
+    <h2>{{ page.title }}</h2>
+    {{ content }}
+  </body>
+</html>
