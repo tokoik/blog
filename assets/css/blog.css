@@ -192,7 +192,7 @@ main th, main td {
 /*
 画像
 */
-img {
+main img {
   border: none;
 	max-width: 100%;
 	height: auto;
@@ -200,15 +200,15 @@ img {
 	display: block;
 	float: none;
 }
-img.left {
+main img.left {
   display: inline;
   float: left;
 }
-img.right {
+main img.right {
   display: inline;
 	float: right;
 }
-img.inline {
+main img.inline {
 	display: inline;
 	float: none;
 	margin: 0;
