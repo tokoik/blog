@@ -29,15 +29,7 @@ strong {
 	font-weight: bold;
 	color: #ff0000;
 }
-code {
-	color: #5f0000;
-	padding: 2px;
-	border-radius: 4px;
-	background-color: #f7f7f7;
-}
-kbd {
-	color: #cc5555;
-}
+/*
 pre {
 	white-space: -moz-pre-wrap;
 	white-space: -pre-wrap;
@@ -45,6 +37,7 @@ pre {
 	white-space: pre-wrap;
 	word-wrap: break-word;
 }
+*/
 
 /*
 グレー文字
@@ -137,9 +130,11 @@ main p {
 整形済みテキスト
 */
 main pre {
+  /*
 	background-color: #fff;
 	border-style: solid;
 	border-color: #ada;
+  */
 	border-width: 1px;
 	margin-left: 4em;
 	margin-right: 4em;
