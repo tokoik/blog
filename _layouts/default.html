@@ -1,16 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="床井浩平">
+    <meta name="description" content="{{ page.description | default: '和歌山大学システム工学部 床井研究室の学生向けのブログのアーカイブです' }}">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}床井研究室</title>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@tokoik">
+    <meta name="twitter:title" content="{{ page.title | default: '床井研究室' }}">
+    <meta name="twitter:description" content="和歌山大学システム工学部 床井研究室の学生向けのブログのアーカイブです">
+    <meta name="twitter:image" content="{{ '/assets/laboratory.png' | absolute_url }}">
+
+    <!-- OGP -->
+    <meta property="og:title" content="{{ page.title | default: '床井研究室' }}">
+    <meta property="og:site_name" content="床井研究室">
+    <meta property="og:description" content="和歌山大学システム工学部 床井研究室の学生向けのブログのアーカイブです">
+    <meta property="og:image" content="{{ '/assets/laboratory.png' | absolute_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ '/assets/favicon.ico' | relative_url }}">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
-    {% if page.use_math %}
-      <script id="MathJax-script" async src="https://jsdelivr.net"></script>
-    {% endif %}
-    <title>{{ page.title }}</title>
+
+    <!-- MathJax 4 -->
+    {% if page.use_math %}<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>{% endif %}
   </head>
   <body>
-    <h1>床井研究室</h1>
-    <h2>{{ page.title }}</h2>
-    {{ content }}
+    <header>
+      <h1><a href="{{ '/' | relative_url }}">床井研究室</a></h1>
+      {% if page.title %}<h2>{{ page.title }}</h2>{% endif %}
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer>
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" width="80" height="15"></a>
+    </footer>
   </body>
 </html>
