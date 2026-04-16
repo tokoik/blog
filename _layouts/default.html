@@ -28,7 +28,6 @@
     <link rel="shortcut icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
 
     <!-- MathJax 4 -->
@@ -37,7 +36,7 @@
   <body>
     <header>
       <h1><a href="{{ '/' | relative_url }}">床井研究室</a></h1>
-      {% if page.title %}<h2>{{ page.title }}</h2><hr>{% endif %}
+      {% if page.title %}<h2>{{ page.title }}</h2>{% endif %}
     </header>
 
     <main>
