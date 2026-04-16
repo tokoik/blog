@@ -1,7 +1,8 @@
+source: .
 lang: ja
+layout: blog
 lsi: false
 safe: true
-source: .
 incremental: false
 highlighter: rouge
 gist:
