@@ -112,8 +112,7 @@ main {
 記事の段落
 */
 main p {
-	margin: 0.3em 0.5em 0.5em 1em;
-  text-indent: 1em;
+	margin: 0.3em 0.5em 0.5em 1.3em;
 	line-height: 150%;
 }
 
@@ -409,7 +408,7 @@ div.sidebar li {
   background-color: #82071e;
 }
 .highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cp, .highlight .cpf, .highlight .c1, .highlight .cs {
-  color: #6e7781;
+  color: #3a8028;
 }
 .highlight .gl {
   color: #6e7781;
