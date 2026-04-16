@@ -322,7 +322,6 @@ div.sidebar li {
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
   color: #24292f;
-  background-color: #f6f8fa;
 }
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv {
   color: #cf222e;
@@ -332,7 +331,6 @@ div.sidebar li {
 }
 .highlight .gd {
   color: #82071e;
-  background-color: #ffebe9;
 }
 .highlight .nb {
   color: #953800;
@@ -357,7 +355,6 @@ div.sidebar li {
 }
 .highlight .gi {
   color: #116329;
-  background-color: #dafbe1;
 }
 .highlight .ges {
   font-weight: bold;
