@@ -16,7 +16,7 @@ published: true
 </div>
 
 <div class="sidebar">
-<h2>講義</h2>
+<h2>講義資料</h2>
 <ul>
   <li><a href="/gg/">ゲームグラフィックス特論</a></li>
   <li><a href="/cg/">コンピュータグラフィックス</a></li>
