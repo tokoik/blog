@@ -20,10 +20,10 @@ published: true
 <ul>
   <li><a href="/gg/">ゲームグラフィックス特論</a></li>
   <li><a href="/cg/">コンピュータグラフィックス</a></li>
-  <li><a href="/cgpe/">CG 制作演習</a><ul>
-    <li><a href="https://1drv.ms/b/c/97b5162e87b0c344/IQBEw7CHLha1IICXv4gDAAAAAbixVF-19IhBls8pfmQic_k?e=qy6sAS">2020 年版</a> (PDF)</li>
-    <li><a href="https://1drv.ms/b/c/97b5162e87b0c344/IQBEw7CHLha1IICXO5MDAAAAAa1C0PzSvBFeU546A2P1MBs?e=NUZFyu">2021 年版</a> (PDF)</li>
-  </ul></li>
+  <li><a href="/cgpe/">CG 制作演習</a>:
+    <a href="https://1drv.ms/b/c/97b5162e87b0c344/IQBEw7CHLha1IICXv4gDAAAAAbixVF-19IhBls8pfmQic_k?e=qy6sAS">2020 年</a>,
+    <a href="https://1drv.ms/b/c/97b5162e87b0c344/IQBEw7CHLha1IICXO5MDAAAAAa1C0PzSvBFeU546A2P1MBs?e=NUZFyu">2021 年</a>
+  </li>
   <li><a href="/vd/">ビジュアルデザイン</a></li>
   <li><a href="/mm/">マルチメディア技術</a></li>
   <li><a href="/msb/">メディアサイエンス基礎</a></li>
@@ -40,14 +40,14 @@ published: true
   <li><a href="/ray/">安直レイトレーシング入門</a></li>
   <li><a href="/shori1/latex.html">LaTeX の概要</a></li>
   <li><a href="/vr/vrmlintro.pdf">VRML に触ってみる (PDF)</a></li>
-  <li>Processing 入門 (PDF)<ul>
-    <li><a href="/mdextercise1.pdf">1 日目</a></li>
-    <li><a href="/mdextercise2.pdf">2 日目</a></li>
-  </ul></li>
-  <li>WebGL 入門 (PDF)<ul>
-    <li><a href="/cg1.pdf">第 1 回</a></li>
-    <li><a href="/cg2.pdf">第 2 回</a></li>
-  </ul></li>
+  <li>Processing 入門 (PDF):
+    <a href="/mdextercise1.pdf">1 日目</a>,
+    <a href="/mdextercise2.pdf">2 日目</a>
+  </li>
+  <li>WebGL 入門 (PDF):
+    <a href="/cg1.pdf">第 1 回</a>,
+    <a href="/cg2.pdf">第 2 回</a>
+  </li>
 </ul>
 <h2>書籍</h2>
 <ul>
