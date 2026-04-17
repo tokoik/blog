@@ -108,6 +108,17 @@ h4, h4 a:link, h4 a:visited, h4 a:focus, h4 a:hover, h4 a:active {
 }
 
 /*
+ボタン
+*/
+button {
+  font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Noto Sans JP", sans-serif;
+  font-size: medium;
+  background-color: #ada;
+  border: none;
+  cursor: pointer;
+}
+
+/*
 記事の本文
 */
 main {

@@ -37,12 +37,12 @@
     <header>
       <h1><a href="{{ '/' | relative_url }}">床井研究室</a></h1>
       <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h2>{% if page.title %}{{ page.title }}{% endif %}</h2>
-      <div>
-        <button {% if page.previous %}onclick="location.href='{{ page.previous | relative_url }}'"{% else %}disabled{% endif %}>前</button>
-        <button {% if page.next %}onclick="location.href='{{ page.next | relative_url }}'"{% else %}disabled{% endif %}>次</button>
+        <h2>{% if page.title %}{{ page.title }}{% endif %}</h2>
+        <div>
+          <button {% if page.previous %}onclick="location.href='{{ page.previous | relative_url }}'"{% else %}disabled{% endif %}>前</button>
+          <button {% if page.next %}onclick="location.href='{{ page.next | relative_url }}'"{% else %}disabled{% endif %}>次</button>
+        </div>
       </div>
-    </div>
     </header>
 
     <main>
