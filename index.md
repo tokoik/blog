@@ -16,8 +16,7 @@ published: true
 </div>
 
 <div class="sidebar">
-
-<h3>講義</h3>
+<h2>講義</h2>
 <ul>
   <li><a href="/gg/">ゲームグラフィックス特論</a></li>
   <li><a href="/cg/">コンピュータグラフィックス</a></li>
@@ -37,7 +36,7 @@ published: true
   <li><a href="/kiso2/">情報基礎演習II</a></li>
   <li><a href="/kpro2/">基礎プログラミングII</a></li>
 </ul>
-<h3>その他</h3>
+<h2>その他</h2>
 <ul>
   <li><a href="/opengl/libglut.html">手抜き OpenGL 入門</a></li>
   <li><a href="/GLFWdraft.pdf">GLFW による OpenGL 入門 (PDF)</a></li>
@@ -47,5 +46,4 @@ published: true
   <li><a href="/shori1/latex.html">LaTeX の概要</a></li>
   <li><a href="/vr/vrmlintro.pdf">VRML に触ってみる (PDF)</a></li>
 </ul>
-
 </div>
