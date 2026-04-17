@@ -291,24 +291,21 @@ div.main {
 サイドバー
 */
 div.sidebar {
-	border-left: solid 1px #ada;
+	margin: 0;
 	padding-left: 0.5em;
+	border-left: solid 1px #ada;
 	font-size: 90%;
 	float: right;
 	position: relative;
 	width: 22%;
-	margin: 0;
 }
 div.sidebar h2 {
+	margin: 1em 0 0.5em 0;
+	padding: 2px;
+	border-bottom: dashed 1px #ada;
 	font-size: medium;
 	background-color: #ada;
 	text-align: center;
-	margin: 0.5em 0 0.5em 0;
-	padding: 2px;
-}
-div.sidebar div.sidemenu {
-	font-weight: bold;
-	margin: 0.5em 0 0.5em 0.2em;
 }
 div.sidebar ul {
 	list-style-type: square;
