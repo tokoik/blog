@@ -5,7 +5,7 @@
 */
 body {
 	font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Noto Sans JP", sans-serif;
-	font-size: 10pt;
+	font-size: small;
 	background-color: #ffe;
 	color: #030;
 }
@@ -112,7 +112,7 @@ h4, h4 a:link, h4 a:visited, h4 a:focus, h4 a:hover, h4 a:active {
 */
 button {
   font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Noto Sans JP", sans-serif;
-  font-size: medium;
+  font-size: small;
   background-color: #ada;
   border: none;
   cursor: pointer;
@@ -156,7 +156,7 @@ main blockquote {
 	border-style: none;
 	background-color: #dfd;
 	margin: 1em 4em 1em 4em;
-	padding: 1em;
+	padding: 0.5em;
 }
 
 /*
@@ -262,7 +262,7 @@ hr {
 */
 footer {
 	clear: both;
-	font-size: 90%;
+	font-size: small;
 	text-align: right;
 	border-top: solid 1px #ada;
 	margin-top: 0.5em;
@@ -274,10 +274,10 @@ footer {
 */
 main span.footnote {
 	vertical-align: super;
-	font-size: 70%;
+	font-size: x-small;
 }
 main div.footnote {
-	font-size: 90%;
+	font-size: small;
 	border-style: solid;
 	border-color: #ada;
 	border-width: 1px 0px 0px 0px;
@@ -305,7 +305,7 @@ div.sidebar {
 	margin: 0;
 	padding-left: 0.5em;
 	border-left: solid 1px #ada;
-	font-size: 90%;
+	font-size: small;
 	float: right;
 	position: relative;
 	width: 22%;

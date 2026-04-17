@@ -85,6 +85,8 @@ void display(void)
 }
 ```
 
+- [マルチテクスチャのサンプル](https://github.com/tokoik/multitexture)
+
 ## GLH, GLEW, Glad, GLee, ExtGL
 
 多分，[nvsdk](http://developer.nvidia.com/object/nvsdk_home.html) なんかに入っている GLH (platform-indepenedent C++ OpenGL helper library) ってのを使うのがスジなんでしょうね．拡張機能の利用をサポートするライブラリには，この他に [GLEW](http://glew.sourceforge.net/), [Glad](https://glad.dav1d.de/), [GLee](http://elf-stone.com/glee.php), [ExtGL](http://www.levp.de/3d/index.html)（これは開発をやめてしまったらしい）などがあるようです．Windows で OpenGL の拡張機能を使うときに悩む人は結構いるんでしょうか．
