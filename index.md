@@ -21,14 +21,10 @@ published: true
   <li><a href="/gg/">ゲームグラフィックス特論</a></li>
   <li><a href="/cg/">コンピュータグラフィックス</a></li>
   <li><a href="/cgpe/">ＣＧ制作演習</a></li>
-  <li><a href="/cgintro/">ＣＧ入門</a></li>
-  <li><a href="/intro/">デザイン情報入門セミナー</a></li>
-  <li><a href="/gairon/">デザイン情報概論</a></li>
   <li><a href="/vd/">ビジュアルデザイン</a></li>
   <li><a href="/mm/">マルチメディア技術</a></li>
   <li><a href="/msb/">メディアサイエンス基礎</a></li>
   <li><a href="/mdp/">メディアデザイン演習</a></li>
-  <li><a href="/mdp/">情報メディア総合演習</a></li>
   <li><a href="/seminar1/">メディアデザインセミナーI</a></li>
   <li><a href="/seminar2/">メディアデザインセミナーII</a></li>
   <li><a href="/shori1/">情報処理I</a></li>
