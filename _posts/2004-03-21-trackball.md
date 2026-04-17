@@ -76,7 +76,7 @@ static double rt[16];
 ```cpp
 void init (void)
 {
-  ...
+  <span class="gray">...</span>
 
   /* 回転行列の初期化 */
   qrot(rt, cq);
@@ -148,7 +148,7 @@ void resize(int w, int h)
   sx = 1.0 / (double)w;
   sy = 1.0 / (double)h;
 
-  ...
+  <span class="gray">...</span>
 }
   
 ...
@@ -182,7 +182,7 @@ void motion(int x, int y)
 ```cpp
 void display(void)
 {
-...
+  <span class="gray">...</span>
   
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -192,19 +192,19 @@ void display(void)
   /* 視点の移動 */
   gluLookAt(ex, ey, ez, tx, ty, tz, 0.0, 1.0, 0.0);
 
-  ...
+  <span class="gray">...</span>
 
   /* 回転 */
   glMultMatrixd(rt);
 
-  ...
+  <span class="gray">...</span>
 
   /* 描画 */
-  glBegin(...);
-  ...
+  glBegin(<span class="gray">...</span>);
+  <span class="gray">...</span>
   glEnd();
 
-  ...
+  <span class="gray">...</span>
 }
 ```
 

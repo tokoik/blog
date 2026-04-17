@@ -50,7 +50,7 @@ static GLuint texName0, texName1;
 
 void display(void)
 {
-  ...
+  <span class="gray">...</span>
 
   /* テクスチャ０をアクティブにする */
   glActiveTextureARB(GL_TEXTURE0_ARB);
@@ -81,7 +81,7 @@ void display(void)
   glVertex3d(-1.0,  1.0, 0.0);
   glEnd();
 
-  ...
+  <span class="gray">...</span>
 }
 ```
 
