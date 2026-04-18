@@ -274,9 +274,9 @@ footer {
 */
 div.footnotes {
 	font-size: small;
-	border: dashed 1px #ada;
-	margin: 0.5em 4em 0.5em 4em;
-	padding: 0.5em;
+	border-top: dashed 1px #ada;
+	margin-top: 0.5em;
+	padding-top: 0.2em 0;
 }
 
 /*
@@ -443,7 +443,7 @@ div.sidebar li {
 		margin-left: 0;
 		margin-right: 0;
 	}
-	main pre, main blockquote, div.footnotes {
+	main pre, main blockquote {
 		padding: 2px;
 	}
 	iframe {
