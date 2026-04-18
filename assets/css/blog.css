@@ -258,6 +258,16 @@ hr {
 }
 
 /*
+脚注
+*/
+div.footnotes {
+	font-size: small;
+	border-top: dashed 1px #ada;
+	margin: 0.5em 1.3em 0.5em 1.3em;
+	padding-top: 0;
+}
+
+/*
 フッタ
 */
 footer {
@@ -267,16 +277,6 @@ footer {
 	border-top: solid 1px #ada;
 	margin-top: 0.5em;
 	padding-top: 0.5em;
-}
-
-/*
-脚注
-*/
-div.footnotes {
-	font-size: small;
-	border-top: dashed 1px #ada;
-	margin-top: 0.5em;
-	padding-top: 0.2em 0;
 }
 
 /*
