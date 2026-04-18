@@ -34,7 +34,7 @@ published: true
   <li><a href="/shori2/">情報処理II</a></li>
   <li><a href="/kiso2/">情報基礎演習II</a></li>
   <li><a href="/kpro2/">基礎プログラミングII</a></li>
-  <li><a href="/opengl/libglut.html">手抜き OpenGL 入門</a></li>
+  <li><a href="/opengl/libglut.html">GLUT による「手抜き」OpenGL 入門</a></li>
   <li><a href="/GLFWdraft.pdf">GLFW による OpenGL 入門 (PDF)</a></li>
   <li><a href="/mpe2020.pdf">メディアプログラミング演習資料 (PDF)</a></li>
   <li><a href="/ray/">安直レイトレーシング入門</a></li>
