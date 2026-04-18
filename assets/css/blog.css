@@ -263,8 +263,8 @@ hr {
 div.footnotes {
 	font-size: small;
 	border-top: dashed 1px #ada;
-	margin: 0.5em 1.3em 0.5em 1.3em;
-	padding-top: 0;
+	margin: 0.5em 0 0.2em 1.3em;
+	padding: 0;
 }
 
 /*
