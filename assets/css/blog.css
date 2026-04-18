@@ -272,21 +272,11 @@ footer {
 /*
 脚注
 */
-main span.footnote {
-	vertical-align: super;
-	font-size: x-small;
-}
-main div.footnote {
+div.footnotes {
 	font-size: small;
-	border-style: solid;
-	border-color: #ada;
-	border-width: 1px 0px 0px 0px;
-	margin: 2em 0 2em 2em;
-	padding: 0;
-}
-main p.footnote {
-	margin: 0.5em;
-	padding: 0;
+	border: dashed 1px #ada;
+	margin: 0.5em 4em 0.5em 4em;
+	padding: 0.5em;
 }
 
 /*
@@ -449,22 +439,11 @@ div.sidebar li {
 レスポンシブデザイン
 */
 @media screen and (max-width: 480px) {
-	main {
+	main, main p, main pre, main blockquote, div.footnotes, footer {
 		margin-left: 0;
 		margin-right: 0;
 	}
-	main p {
-		margin-left: 0;
-		margin-right: 0;
-	}
-	main pre {
-		margin-left: 0;
-		margin-right: 0;
-		padding: 2px;
-	}
-	main blockquote {
-		margin-left: 0;
-		margin-right: 0;
+	main pre, main blockquote, div.footnotes {
 		padding: 2px;
 	}
 	iframe {
