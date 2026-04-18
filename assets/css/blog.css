@@ -13,7 +13,7 @@ body {
 /*
 等幅フォント
 */
-pre, code, var, samp, kbd, .mono {
+pre, code, var, samp, kbd, .mono
 	font-family: "Consolas", "Menlo", "Courier New", Courier, Monaco, "MS Gothic", "Osaka-Mono", monospace;
 }
 
@@ -170,7 +170,7 @@ main ul, main ol {
 main ul ul, main ol ol, main ul ol, main ol ul {
 	margin: 0.5em 2em 0.5em 1.7em;
 }
-main ol li {
+main ol li, main ul li {
 	line-height: 150%;
 	margin-bottom: 0.5em;
 }
@@ -265,6 +265,9 @@ div.footnotes {
 	border-top: dashed 1px #ada;
 	margin: 2em 0 0 1.3em;
 	padding: 0;
+}
+div.footnotes p {
+	margin: 0;
 }
 
 /*
