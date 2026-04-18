@@ -37,7 +37,7 @@
     <header>
       <h1><a href="{{ '/' | relative_url }}">床井研究室</a></h1>
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h2>{% if page.title %}■ {{ page.title }}{% endif %}</h2>
+        <h2>{% if page.title %}■ {{ page.date | date: "%Y年%m月%d日" }} {{ page.title }}{% endif %}</h2>
         <div>
           <button {% if page.previous %}onclick="location.href='{{ page.previous | relative_url }}'"{% else %}disabled{% endif %}>前</button>
           <button {% if page.next %}onclick="location.href='{{ page.next | relative_url }}'"{% else %}disabled{% endif %}>次</button>
@@ -50,7 +50,10 @@
     </main>
 
     <footer>
-      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" width="80" height="15"></a>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p>最終更新: {{ page.last_modified_at | date: "%Y年%m月%d日" }}</p>
+        <p><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" width="80" height="15"></a></p>
+      </div>
     </footer>
   </body>
 </html>
