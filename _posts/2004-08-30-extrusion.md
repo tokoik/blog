@@ -69,7 +69,7 @@ for (i = 1; i < nc; ++i) {
 
 ![変換行列]({{ '/assets/images/extrusion4.gif' | relative_url }})
 
-これより，ある単位ベクトル ${\bf u}$ の方向を，別の単位ベクトル ${\bf v}$ の方向に回転する変換は，${\bf M}_r = {\bf M}_u^{-1}{\bf M}_v = {\bf M}_u^T{\bf M}_v$ となります．
+これより，ある単位ベクトル ${\bf u}$ の方向を，別の単位ベクトル ${\bf v}$ の方向に回転する変換は，${\bf M}_r = {\bf M}_u^{-1}{\bf M}_v = {\bf M}_u^\top{\bf M}_v$ となります．
 
 ```c
 /*
