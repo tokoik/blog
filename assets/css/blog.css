@@ -349,11 +349,11 @@ div.sidebar {
     div.main {
       float: none;
       width: 100%;
-      border: none;
     }
     div.sidebar {
       float: none;
       width: 100%;
+      border: none;
     }
     p, ol, ul, dl, dt, dd, pre, blockquote, div.footnotes, footer {
       margin-left: 0;
