@@ -345,26 +345,23 @@ div.sidebar {
     div.main {
       float: none;
       width: 100%;
-      padding-left: 0.5em;
+      padding: 0;
     }
     div.sidebar {
       float: none;
       width: 100%;
+      padding: 0;
       border: none;
     }
-    p, h2, h3, h4, dl, dt, ol, ul, pre, blockquote, div.footnotes, footer {
-      margin-left: 0;
-    }
-    p, h2, h3, h4, dl, dt {
+    h2, h3, h4, p, dl, dt, dd, ol, ul, pre, blockquote, div.footnotes, footer {
+      margin-left: 0.5em;
       margin-right: 0.5em;
+    }
+    h2, h3, h4, p, dl, dt, dd, div.footnotes, footer {
       padding: 0;
     }
-    dd {
-      margin-left: 0.5em;
-    }
     ol, ul {
-      margin-left: 0.5em;
-      padding-left: 0.5em;
+      padding: 0 0 0 1.0em;
     }
     pre, blockquote {
       padding: 0.2em;
