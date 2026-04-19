@@ -104,7 +104,6 @@ header {
   ボタン
   */
   button {
-    font-size: small;
     background-color: #ada;
     border: none;
     cursor: pointer;
@@ -186,7 +185,7 @@ main {
   ul ul, ol ol, ul ol, ol ul {
     margin: 0.2em;
   }
-  ol li, ul li {
+  li {
     line-height: 1.5;
     margin-bottom: 0.2em;
   }
@@ -195,7 +194,7 @@ main {
   項目リスト
   */
   dl {
-    margin-left: 2em;
+    margin: 0.5em 2em 0.5em 1.7em;
   }
   dt {
     margin-bottom: 0.2em;
@@ -268,7 +267,6 @@ main {
   脚注
   */
   div.footnotes {
-    font-size: small;
     border-top: dashed 1px #ada;
     margin: 2em 0 0 1.3em;
     padding: 0;
@@ -287,7 +285,6 @@ main {
 */
 footer {
 	clear: both;
-	font-size: small;
 	text-align: right;
 	border-top: solid 1px #ada;
 	margin-top: 2em;
@@ -310,7 +307,6 @@ div.sidebar {
   margin: 0;
   padding-left: 0.5em;
   border-left: solid 1px #ada;
-  font-size: small;
   float: right;
   position: relative;
   width: 22%;
@@ -349,23 +345,25 @@ div.sidebar {
     div.main {
       float: none;
       width: 100%;
+      padding-left: 0.5em;
+      border: none;
     }
     div.sidebar {
       float: none;
       width: 100%;
-      border: none;
     }
     p, h2, h3, h4, dl, dt, ol, ul, pre, blockquote, div.footnotes, footer {
       margin-left: 0;
-      margin-right: 0;
     }
     p, h2, h3, h4, dl, dt {
+      margin-right: 0.5em;
       padding: 0;
     }
     dd {
       margin-left: 0.5em;
     }
     ol, ul {
+      margin-left: 0.5em;
       padding-left: 0.5em;
     }
     pre, blockquote {
