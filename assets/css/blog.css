@@ -444,6 +444,14 @@ div.sidebar li {
 レスポンシブデザイン
 */
 @media screen and (max-width: 480px) {
+  div.main {
+    float: none;
+    width: 100%;
+  }
+  div.sidebar {
+    float: none;
+    width: 100%;
+  }
 	main, main p, main ol, main ul, main dl, main dt, main dd, main pre, main blockquote, div.footnotes, footer {
 		margin-left: 0;
 		margin-right: 0;
@@ -452,7 +460,7 @@ div.sidebar li {
     padding: 0;
 	}
   main h2, main h3, main h4 {
-    margin-left: 0.5em;
+    /*margin-left: 0.5em;*/
   }
 	main pre, main blockquote {
 		padding: 0.2em;
