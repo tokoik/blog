@@ -315,12 +315,12 @@ div.sidebar h2 {
 div.sidebar ul {
 	list-style-type: square;
 	margin: 0 0 0.5em 1.2em;
-	padding: 1em;
+	padding: 0;
 }
 div.sidebar li {
 	line-height: 1.2;
 	margin: 0.3em 0.1em;
-	padding: 1.3em;
+	padding: 1.0;
 }
 
 /*
@@ -444,10 +444,13 @@ div.sidebar li {
 レスポンシブデザイン
 */
 @media screen and (max-width: 480px) {
-	main, main h2, main h3, main p, main ol, main ul, main dl, main dt, main dd, main pre, main blockquote, div.footnotes, footer {
-		margin-left: 0.5em;
+	main, main p, main ol, main ul, main dl, main dt, main dd, main pre, main blockquote, div.footnotes, footer {
+		margin-left: 0;
 		margin-right: 0;
 	}
+  main h2, main h3, main h4 {
+    margin-left: 0.5em;
+  }
 	main pre, main blockquote {
 		padding: 0.2em;
 	}
