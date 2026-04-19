@@ -460,7 +460,8 @@ div.sidebar li {
     padding: 0;
 	}
   main h2, main h3, main h4 {
-    /*margin-left: 0.5em;*/
+    margin-left: 0.5em;
+    text-indent: 0;
   }
 	main pre, main blockquote {
 		padding: 0.2em;
