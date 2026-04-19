@@ -13,4 +13,4 @@ published: true
 
 最近，[MovableType](http://www.movabletype.org/) の話を良く聞くのですが，ここでは [tDiary](http://www.tdiary.org/) を使うことにしました．これは Blog というより「Web日記」システムのようですが，Blog スタイルでも使えるみたいですね．ただ，tDiary は EUC-JP を吐くようなので，今まで作ってきた iso-2022-jp なページも EUC-JP に揃えるべきかどうか，少し考え中．
 
-> この記事の内容は {{ page.date | date: "%Y 年 %m 月" }}のものです．現在は GitHub Pages 上で公開しています．
+> この記事の内容は {{ page.date | date: "%Y 年 %m 月" }}のものです．現在は GitHub Pages 上で公開しており，文字コードは utf-8 にしています．

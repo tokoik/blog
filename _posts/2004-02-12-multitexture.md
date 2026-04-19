@@ -9,9 +9,9 @@ published: true
 
 Windows 上でマルチテクスチャを使う方法を質問されたので，[OpenGL FAQ の Q23](http://www.opengl.org/resources/faq/technical/extensions.htm) を見ながら，とりあえず[サンプルプログラム](https://github.com/tokoik/multitexture)を作ってみました．うーん，修行が足りんなぁ（恥）．それにしても，GeForce 4600 に同梱されていたドライバでマルチテクスチャ（の一部の機能）が使えんとは思わなんだ．うーん，修行が足りん．
 
-## wglGetProcAddress()
+## `wglGetProcAddress()`
 
-マルチテクスチャなどの OpenGL の拡張機能は，Linux の Mesa や Mac OS X だと何も気にせずに使えていた気がしてました．でも Windows では，wglGetProcAddress() を使って API のエントリポイント引っぱってこないといけないんですね．そのために，まず [OpenGL SDK](https://www.opengl.org/sdk/) に含まれる [glext.h](https://registry.khronos.org/OpenGL/api/GL/glext.h) を持ってきて #include します．そして使用する拡張機能の API，例えば glActiveTextureARB や glMultiTexCoord2fARB などの関数ポインタを用意し，それぞれに [wglGetProcAddress()](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイントを格納してやります．このとき wglGetProcAddress() の戻り値が NULL なら，その拡張機能がサポートされていないことになります．
+マルチテクスチャなどの OpenGL の拡張機能は，Linux の Mesa や Mac OS X だと何も気にせずに使えていた気がしてました．でも Windows では，[`wglGetProcAddress()`](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイント引っぱってこないといけないんですね．そのために，まず [OpenGL SDK](https://www.opengl.org/sdk/) に含まれる [glext.h](https://registry.khronos.org/OpenGL/api/GL/glext.h) を持ってきて #include します．そして使用する拡張機能の API，例えば `glActiveTextureARB()` や `glMultiTexCoord2fARB()` などの関数ポインタを用意し，それぞれに [`wglGetProcAddress()`](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイントを格納してやります．このとき `wglGetProcAddress()` の戻り値が `NULL` なら，その拡張機能がサポートされていないことになります．
 
 ```cpp
 #include <windows.h>
@@ -38,7 +38,7 @@ int initMultiTexture(void)
 
 Windows の場合は，これを OpenGL の初期化の時点で実行しておく必要があります．それで，めでたく API がサポートされていれば，これらの拡張機能を使います．
 
-マルチテクスチャの使い方は通常のテクスチャマッピングとあんまり変わりませんが，glBindTexture() でテクスチャを指定する前に，glActiveTextureARB() を使ってそのテクスチャを割り当てるテクスチャユニットを指定しておきます．また，テクスチャ座標の指定には glTexCoord*() の代わりに glMultiTexCoord*ARB() を用いて，テクスチャ座標とともにテクスチャユニットも指定します．
+マルチテクスチャの使い方は通常のテクスチャマッピングとあんまり変わりませんが，`glBindTexture()` でテクスチャを指定する前に，`glActiveTextureARB()` を使ってそのテクスチャを割り当てるテクスチャユニットを指定しておきます．また，テクスチャ座標の指定には glTexCoord*() の代わりに glMultiTexCoord*ARB() を用いて，テクスチャ座標とともにテクスチャユニットも指定します．
 
 ```cpp
 /* 拡張機能 API のエントリポイント */
