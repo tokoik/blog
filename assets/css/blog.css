@@ -180,10 +180,12 @@ main {
   箇条書き
   */
   ul, ol {
-    margin: 0.5em 2em 0.5em 1.7em;
+    margin: 0.5em 0.5em;
+    padding: 0 0 0 0.5em;
   }
   ul ul, ol ol, ul ol, ol ul {
     margin: 0.2em;
+    padding: 0 0 0 0.5em;
   }
   li {
     line-height: 1.5;
@@ -194,14 +196,14 @@ main {
   項目リスト
   */
   dl {
-    margin: 0.5em 2em 0.5em 1.7em;
+    margin: 0.5em 0.5em;
   }
   dt {
-    margin-bottom: 0.2em;
+    margin: 0 1em 0.2em 0;
     font-weight: bold;
   }
   dd {
-    margin: 0 3em 0.5em 1em;
+    margin: 0 1em 0.2em 2em;
   }
 
   /*
@@ -345,15 +347,15 @@ div.sidebar {
     div.main {
       float: none;
       width: 100%;
-      margin-left: 0.5em;
-      margin-right: 0.5em;
     }
     div.sidebar {
       float: none;
       width: 100%;
+      border: none;
+    }
+    h2, h3, h4, p, dl, dt, dd, ol, ul, pre, blockquote, div.footnotes, footer {
       margin-left: 0.5em;
       margin-right: 0.5em;
-      border: none;
     }
     h2, h3, h4, p, dl, dt, dd, div.footnotes, footer {
       padding: 0;
