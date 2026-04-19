@@ -446,7 +446,7 @@ div.sidebar li {
 レスポンシブデザイン
 */
 @media screen and (max-width: 480px) {
-	main, main p, main pre, main blockquote, div.footnotes, footer {
+	main, main h2, main h3, main p, main ol, main ul, main dl, main dt, main dd, main pre, main blockquote, div.footnotes, footer {
 		margin-left: 0;
 		margin-right: 0;
 	}
