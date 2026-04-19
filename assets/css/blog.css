@@ -354,7 +354,7 @@ div.sidebar {
       margin-left: 1em;
       margin-right: 0;
     }
-    p, dl, dt, dd, ol, ul, pre, blockquote, div.footnotes, footer {
+    p, dl, dt, dd, pre, blockquote, div.footnotes, footer {
       margin-left: 0;
       margin-right: 0;
     }
@@ -362,6 +362,8 @@ div.sidebar {
       padding: 0;
     }
     ol, ul {
+      margin-left: 1em;
+      margin-right: 0;
       padding: 0 0 0 0.5em;
     }
     pre, blockquote {
