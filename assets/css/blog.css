@@ -447,6 +447,7 @@ div.sidebar li {
   div.main {
     float: none;
     width: 100%;
+    border-left: none;
   }
   div.sidebar {
     float: none;
