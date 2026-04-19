@@ -122,8 +122,9 @@ main {
   見出し
   */
   h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
-    margin: 0.5em 0;
+    margin: 0.5em 0 0.2em 0;
     font-size: medium;
+    font-weight: bold;
   }
 
   /*
@@ -131,7 +132,7 @@ main {
   */
   h3, h3 a:link, h3 a:visited, h3 a:focus, h3 a:hover, h3 a:active {
     margin: 0.5em 0 0.2em 0;
-    font-size: medium;
+    font-size: small;
     font-weight: bold;
   }
 
@@ -140,8 +141,7 @@ main {
   */
   h4, h4 a:link, h4 a:visited, h4 a:focus, h4 a:hover, h4 a:active {
     margin: 0.5em 0 0.2em 0;
-    font-size: medium;
-    font-weight: bold;
+    font-size: small;
   }
 
   /*
@@ -356,7 +356,12 @@ div.sidebar {
     h2, h3, h4, p, dl, dt, dd, ol, ul, pre, blockquote, div.footnotes, footer {
       margin-left: 0.5em;
       margin-right: 0.5em;
+    }
+    h2, h3, h4, p, dl, dt, dd, div.footnotes, footer {
       padding: 0;
+    }
+    ol, ul {
+      padding: 0 0 0 0.5em;
     }
     pre, blockquote {
       padding: 0.2em;
