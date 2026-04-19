@@ -346,11 +346,11 @@ div.sidebar {
       float: none;
       width: 100%;
       padding-left: 0.5em;
-      border: none;
     }
     div.sidebar {
       float: none;
       width: 100%;
+      border: none;
     }
     p, h2, h3, h4, dl, dt, ol, ul, pre, blockquote, div.footnotes, footer {
       margin-left: 0;
