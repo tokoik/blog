@@ -61,11 +61,11 @@ for (i = 1; i < nc; ++i) {
 
 ## ベクトルの方向転換
 
-次に，この断面を経路の方向に回転する方法について考えます．ある単位ベクトル ${\bf u}$ の方向を，別の単位ベクトル ${\bf v}$ の方向に回転する場合，この回転の軸の方向単位ベクトルは ${\bf n} = {\bf u}\times{\bf v}/\left|{\bf u}\times{\bf v}\right|$ になります．
+次に，この断面を経路の方向に回転する方法について考えます．ある単位ベクトル ${\bf u}$ の方向を，別の単位ベクトル ${\bf v}$ の方向に回転する場合，この回転の軸の方向単位ベクトルは ${\bf n} = {\bf u} \times {\bf v} / \left\vert {\bf u} \times {\bf v} \right\vert$ になります．
 
 ![ベクトルの方向転換]({{ '/assets/images/extrusion5.gif' | relative_url }})
 
-そこで，まず ${\bf u}$ と ${\bf n}$ に直交するベクトル ${\bf l} = {\bf u}\times{\bf n}/\left|{\bf u}\times{\bf n}\right|$ を求めます．このとき ${\bf x} = \left(1, 0, 0\right)$, ${\bf y} = \left(0, 1, 0\right)$, ${\bf z} = \left(0, 0, 1\right)$ をそれぞれ ${\bf u}$, ${\bf n}$, ${\bf l}$ に移す変換は，${\bf M}_u = ({\bf u} {\bf n} {\bf l})^\top$ となります．同様に， ${\bf v}$ と ${\bf n}$ に直交するベクトル ${\bf m} = {\bf v}\times{\bf n}/\left|{\bf v}\times{\bf n}\right|$ を求めます．このとき ${\bf x}$, ${\bf y}$, ${\bf z}$ をそれぞれ ${\bf v}$, ${\bf n}$, ${\bf m}$ に移す変換は，${\bf M}_v = ({\bf v} {\bf n} {\bf m})^\top$ となります．
+そこで，まず ${\bf u}$ と ${\bf n}$ に直交するベクトル ${\bf l} = {\bf u} \times {\bf n} / \left\vert{\bf u} \times {\bf n}   \right\vert$ を求めます．このとき ${\bf x} = \left( 1, 0, 0 \right)$, ${\bf y} = \left( 0, 1, 0 \right)$, ${\bf z} = \left( 0, 0, 1 \right)$ をそれぞれ ${\bf u}$, ${\bf n}$, ${\bf l}$ に移す変換は，${\bf M}_u = ({\bf u} {\bf n} {\bf l})^\top$ となります．同様にして，${\bf v}$ と ${\bf n}$ に直交するベクトル ${\bf m} = {\bf v} \times {\bf n} / \left\vert {\bf v} \times {\bf n} \right\vert$ を求めます．このとき ${\bf x}$, ${\bf y}$, ${\bf z}$ をそれぞれ ${\bf v}$, ${\bf n}$, ${\bf m}$ に移す変換は，${\bf M}_v = \left( {\bf v} {\bf n} {\bf m} \right)^\top$ となります．
 
 ![変換行列]({{ '/assets/images/extrusion4.gif' | relative_url }})
 
