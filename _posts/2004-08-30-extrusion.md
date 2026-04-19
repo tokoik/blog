@@ -65,7 +65,7 @@ for (i = 1; i < nc; ++i) {
 
 ![ベクトルの方向転換]({{ '/assets/images/extrusion5.gif' | relative_url }})
 
-そこで，
+そこで，まず ${\bf u}$ と ${\bf n}$ に直交するベクトル
 
 ![変換行列]({{ '/assets/images/extrusion4.gif' | relative_url }})
 
