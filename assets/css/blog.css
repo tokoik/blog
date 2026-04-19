@@ -172,7 +172,7 @@ main {
   blockquote {
     border-style: none;
     background-color: #dfd;
-    margin: 1em 4em 1em 4em;
+    margin: 1em 4em;
     padding: 0.5em;
   }
 
@@ -345,6 +345,7 @@ div.sidebar {
       width: 100%;
     }
     div.sidebar {
+      padding-left: 0;
       float: none;
       width: 100%;
       border: none;
