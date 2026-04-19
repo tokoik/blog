@@ -303,7 +303,7 @@ div.sidebar {
 	font-size: small;
 	float: right;
 	position: relative;
-	width: 22%;
+	width: 25%;
 }
 div.sidebar h2 {
 	margin: 1em 0 0.5em 0;
@@ -315,10 +315,12 @@ div.sidebar h2 {
 div.sidebar ul {
 	list-style-type: square;
 	margin: 0 0 0.5em 1.2em;
+	padding: 1em;
 }
 div.sidebar li {
 	line-height: 1.2;
 	margin: 0.3em 0.1em;
+	padding: 1.3em;
 }
 
 /*
@@ -443,11 +445,11 @@ div.sidebar li {
 */
 @media screen and (max-width: 480px) {
 	main, main h2, main h3, main p, main ol, main ul, main dl, main dt, main dd, main pre, main blockquote, div.footnotes, footer {
-		margin-left: 0;
+		margin-left: 0.5em;
 		margin-right: 0;
 	}
 	main pre, main blockquote {
-		padding: 2px;
+		padding: 0.2em;
 	}
 	iframe {
 		max-width: 100%;
