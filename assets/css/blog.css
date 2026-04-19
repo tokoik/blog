@@ -355,14 +355,14 @@ div.sidebar {
       width: 100%;
       border: none;
     }
-    p, ol, ul, dl, dt, dd, pre, blockquote, div.footnotes, footer {
+    p, h2, h3, h4, dl, dt, ol, ul, pre, blockquote, div.footnotes, footer {
       margin-left: 0;
       margin-right: 0;
     }
-    p, h2, h3, h4 {
+    p, h2, h3, h4, dl, dt {
       padding: 0;
     }
-    h2, h3, h4 {
+    dd {
       margin-left: 0.5em;
     }
     ol, ul {
