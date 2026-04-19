@@ -350,8 +350,12 @@ div.sidebar {
       width: 100%;
       border: none;
     }
-    h2, h3, h4, p, dl, dt, dd, ol, ul, pre, blockquote, div.footnotes, footer {
+    h2, h3, h4 {
       margin-left: 1em;
+      margin-right: 0;
+    }
+    p, dl, dt, dd, ol, ul, pre, blockquote, div.footnotes, footer {
+      margin-left: 0;
       margin-right: 0;
     }
     h2, h3, h4, p, dl, dt, dd, div.footnotes, footer {
