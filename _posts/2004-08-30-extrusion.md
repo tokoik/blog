@@ -65,7 +65,7 @@ for (i = 1; i < nc; ++i) {
 
 ![ベクトルの方向転換]({{ '/assets/images/extrusion5.gif' | relative_url }})
 
-そこで，まず ${\bf u}$ と ${\bf n}$ に直交するベクトル ${\bf l} = {\bf u} \times {\bf n} / \left\vert{\bf u} \times {\bf n}   \right\vert$ を求めます．このとき ${\bf x} = \left( 1, 0, 0 \right)$, ${\bf y} = \left( 0, 1, 0 \right)$, ${\bf z} = \left( 0, 0, 1 \right)$ をそれぞれ ${\bf u}$, ${\bf n}$, ${\bf l}$ に移す変換は，${\bf M}_u = ({\bf u} {\bf n} {\bf l})^\top$ となります．同様にして，${\bf v}$ と ${\bf n}$ に直交するベクトル ${\bf m} = {\bf v} \times {\bf n} / \left\vert {\bf v} \times {\bf n} \right\vert$ を求めます．このとき ${\bf x}$, ${\bf y}$, ${\bf z}$ をそれぞれ ${\bf v}$, ${\bf n}$, ${\bf m}$ に移す変換は，${\bf M}_v = \left( {\bf v} {\bf n} {\bf m} \right)^\top$ となります．
+そこで，まず ${\bf u}$ と ${\bf n}$ に直交するベクトル ${\bf l} = {\bf u} \times {\bf n} / \left\vert{\bf u} \times {\bf n} \right\vert$ を求めます．このとき ${\bf x} = \left( 1, 0, 0 \right)$, ${\bf y} = \left( 0, 1, 0 \right)$, ${\bf z} = \left( 0, 0, 1 \right)$ をそれぞれ ${\bf u}$, ${\bf n}$, ${\bf l}$ に移す変換は，${\bf M}_u = ({\bf u} {\bf n} {\bf l})^\top$ となります．同様にして，${\bf v}$ と ${\bf n}$ に直交するベクトル ${\bf m} = {\bf v} \times {\bf n} / \left\vert {\bf v} \times {\bf n} \right\vert$ を求めます．このとき ${\bf x}$, ${\bf y}$, ${\bf z}$ をそれぞれ ${\bf v}$, ${\bf n}$, ${\bf m}$ に移す変換は，${\bf M}_v = \left( {\bf v} {\bf n} {\bf m} \right)^\top$ となります．
 
 ![変換行列]({{ '/assets/images/extrusion4.gif' | relative_url }})
 
