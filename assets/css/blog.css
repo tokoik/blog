@@ -180,7 +180,7 @@ main {
   箇条書き
   */
   ul, ol {
-    margin: 0.5em 1.5em;
+    margin: 0.5em 0 0.5m 2em;
     padding: 0 0 0 0.5em;
   }
   li {
