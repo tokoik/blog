@@ -102,7 +102,7 @@ h3, h3 a:link, h3 a:visited, h3 a:focus, h3 a:hover, h3 a:active {
 その他の見出し
 */
 h4, h4 a:link, h4 a:visited, h4 a:focus, h4 a:hover, h4 a:active {
-	margin: 0.5em 0 0.2em 1em;
+	margin: 0.5em 0 0.2em 0;
 	font-size: medium;
 	font-weight: bold;
 }
@@ -163,12 +163,10 @@ main blockquote {
 箇条書き
 */
 main ul, main ol {
-	margin-left: 4em;
-	margin-right: 2em;
-	padding-left: 0px;
+	margin: 0.5em 2em 0.5em 1.7em;
 }
 main ul ul, main ol ol, main ul ol, main ol ul {
-	margin: 0.5em 2em 0.5em 1.7em;
+	margin: 0.2em;
 }
 main ol li, main ul li {
 	line-height: 1.5;
@@ -179,7 +177,7 @@ main ol li, main ul li {
 項目リスト
 */
 main dl {
-	margin-left: 4em;
+	margin-left: 2em;
 }
 main dt {
 	margin-bottom: 0.2em;
@@ -200,7 +198,7 @@ main table {
 	border-collapse: collapse;
 }
 main th, main td {
-	padding: 5px;
+	padding: 0.3em;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #ada;
@@ -309,7 +307,7 @@ div.sidebar {
 }
 div.sidebar h2 {
 	margin: 1em 0 0.5em 0;
-	padding: 2px;
+	padding: 0.2em;
 	font-size: medium;
 	background-color: #ada;
 	text-align: center;
@@ -317,12 +315,10 @@ div.sidebar h2 {
 div.sidebar ul {
 	list-style-type: square;
 	margin: 0 0 0.5em 1.2em;
-	padding: 0;
 }
 div.sidebar li {
 	line-height: 1.2;
-	margin: 4px 2px 4px 2px;
-	padding: 0;
+	margin: 0.3em 0.1em;
 }
 
 /*
