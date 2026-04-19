@@ -303,7 +303,7 @@ div.sidebar {
 	font-size: small;
 	float: right;
 	position: relative;
-	width: 25%;
+	width: 22%;
 }
 div.sidebar h2 {
 	margin: 1em 0 0.5em 0;
@@ -320,7 +320,7 @@ div.sidebar ul {
 div.sidebar li {
 	line-height: 1.2;
 	margin: 0.3em 0.1em;
-	padding: 1.0;
+	padding: 0;
 }
 
 /*
@@ -447,6 +447,9 @@ div.sidebar li {
 	main, main p, main ol, main ul, main dl, main dt, main dd, main pre, main blockquote, div.footnotes, footer {
 		margin-left: 0;
 		margin-right: 0;
+	}
+	main p, main h2, main h3, main h4 {
+    padding: 0;
 	}
   main h2, main h3, main h4 {
     margin-left: 0.5em;
