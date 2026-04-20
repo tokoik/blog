@@ -92,6 +92,15 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    /*
+    * ナビゲーションボタン
+    */
+    div.navigation {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.1em;
+    }
   }
   h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
     margin: 0.5em 0.5em 0.2em 1em;
