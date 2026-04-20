@@ -51,7 +51,7 @@ published: true
       <a href="/cg2.pdf">第 2 回</a>
     </li>
   </ul>
-  <h2>書籍</h2>
+  <h2>著書</h2>
   <ul>
     <li><a href="https://www.kyoritsu-pub.co.jp/book/b10006873.html">マルチメディアコミュニケーション</a></li>
     <li><a href="https://www.amazon.co.jp/dp/4542701344">デザイン情報学入門</a></li>
