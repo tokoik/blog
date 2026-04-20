@@ -99,7 +99,7 @@ header {
     div.navigation {
       display: flex;
       flex-wrap: nowrap;
-      gap: 0.1em;
+      gap: 0.2em;
     }
   }
   h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
