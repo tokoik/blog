@@ -71,14 +71,14 @@ for (i = 1; i < nc; ++i) {
 \\mathbf{M}_u =
 \\begin{pmatrix} \\mathbf{u} \\\\ \\mathbf{n} \\\\ \\mathbf{l} \\end{pmatrix} =
 \\begin{pmatrix} \\mathbf{u} \\\\ \\displaystyle \\frac{\\mathbf{u} \\times \\mathbf{v}}{|\\mathbf{u} \\times \\mathbf{v}|} \\\\ \\displaystyle \\frac{\\mathbf{u} \\times (\\mathbf{u} \\times \\mathbf{v})}{|\\mathbf{u} \\times (\\mathbf{u} \\times \\mathbf{v})|} \\end{pmatrix} =
-\\begin{pmatrix} u_x & u_y & u_z \\\\ n_x & n_y & n_z \\\\ l_x & l_y & l_z \\end{pmatrix}
+\\begin{pmatrix} u_x \& u_y \& u_z \\\\ n_x \& n_y \& n_z \\\\ l_x \& l_y \& l_z \\end{pmatrix}
 \\]
 
 \\[
 \\mathbf{M}_v = 
 \\begin{pmatrix} \\mathbf{v} \\\\ \\mathbf{n} \\\\ \\mathbf{m} \\end{pmatrix} = 
 \\begin{pmatrix} \\mathbf{v} \\\\ \\displaystyle \\frac{\\mathbf{u} \\times \\mathbf{v}}{|\\mathbf{u} \\times \\mathbf{v}|} \\\\ \\displaystyle \\frac{\\mathbf{v} \\times (\\mathbf{u} \\times \\mathbf{v})}{|\\mathbf{v} \\times (\\mathbf{u} \\times \\mathbf{v})|} \\end{pmatrix} = 
-\\begin{pmatrix} v_x & v_y & v_z \\\\ n_x & n_y & n_z \\\\ m_x & m_y & m_z \\end{pmatrix}
+\\begin{pmatrix} v_x \& v_y \& v_z \\\\ n_x \& n_y \& n_z \\\\ m_x \& m_y \& m_z \\end{pmatrix}
 \\]
 
 これより，ある単位ベクトル \\( \\mathbf{u}\\) の方向を，別の単位ベクトル \\( \\mathbf{v}\\) の方向に回転する変換は，\\( \\mathbf{M}_r = \\mathbf{M}_u^{-1}\\mathbf{M}_v = \\mathbf{M}_u^\\top\\mathbf{M}_v\\) となります．
@@ -166,9 +166,9 @@ static void turn(const double u[], const double v[], double r[])
 \\[
 \\mathbf{M}_s =
 \\begin{pmatrix}
-1 & 0 & -a/c \\\\
-0 & 1 & -b/c \\\\
-0 & 0 & 1
+1 \& 0 \& -a/c \\\\
+0 \& 1 \& -b/c \\\\
+0 \& 0 \& 1
 \\end{pmatrix}
 \\]
 
