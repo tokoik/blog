@@ -6,7 +6,7 @@ published: true
 
 <!-- メインコンテンツは記事一覧 -->
 <div class="main">
-  <p>ここは「床井研究室」のアーカイブです。退職に伴い、研究室のサーバで運用したものを、ここに移しました。[tDiary](https://tdiary.org/) から GitHub Pages に変更したので、頂いたコメントは失われているほか、内容も一部変更しています。</p>
+  <p>ここは「床井研究室」のアーカイブです。退職に伴い、研究室のサーバで運用したものを、ここに移しました。<a href="https://tdiary.org/">tDiary</a> から <a href="https://docs.github.com/ja/pages/getting-started-with-github-pages/what-is-github-pages">GitHub Pages</a> に変更したので、頂いたコメントは失われています。また、内容も一部変更しています。</p>
   <h2>記事一覧</h2>
   <ul>
     {% for post in site.posts %}
