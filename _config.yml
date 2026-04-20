@@ -1,12 +1,29 @@
 lang: ja
-layout: default
-source: .
+title: "床井研究室"
+description: 和歌山大学システム工学部 床井研究室の学生向けのブログのアーカイブです。
+author: "床井浩平"
+
+url: "https://tokoik.github.io"
+baseurl: "/blog"
+
 lsi: false
-safe: true
-incremental: false
 highlighter: rouge
-gist:
-  noscript: false
+
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
+
+sass:
+  style: :compressed
+
+gist:
+  noscript: false
+
+github:
+  private: false
+  license:
+    name: MIT
+  source:
+    branch: "main"
+    path: "/"
+  repository_url: "https://github.com/tokoik/blog"
