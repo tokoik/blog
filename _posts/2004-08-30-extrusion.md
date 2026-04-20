@@ -61,15 +61,27 @@ for (i = 1; i < nc; ++i) {
 
 ## ベクトルの方向転換
 
-次に，この断面を経路の方向に回転する方法について考えます．ある単位ベクトル \\( {\bf u}\\) の方向を，別の単位ベクトル \\( {\bf v}\\) の方向に回転する場合，この回転の軸の方向単位ベクトルは \\( {\bf n} = {\bf u} \times {\bf v} / \left\vert {\bf u} \times {\bf v} \right\vert\\) になります．
+次に，この断面を経路の方向に回転する方法について考えます．ある単位ベクトル \\( \mathbf{u}\\) の方向を，別の単位ベクトル \\( \mathbf{v}\\) の方向に回転する場合，この回転の軸の方向単位ベクトルは \\( \mathbf{n} = \mathbf{u} \times \mathbf{v} / \left\vert \mathbf{u} \times \mathbf{v} \right\vert\\) になります．
 
 ![ベクトルの方向転換]({{ '/assets/images/extrusion5.gif' | relative_url }})
 
-そこで，まず \\( {\bf u}\\) と \\( {\bf n}\\) に直交するベクトル \\( {\bf l} = {\bf u} \times {\bf n} / \left\vert{\bf u} \times {\bf n} \right\vert\\) を求めます．このとき \\( {\bf x} = \left( 1, 0, 0 \right)\\), \\( {\bf y} = \left( 0, 1, 0 \right)\\), \\( {\bf z} = \left( 0, 0, 1 \right)\\) をそれぞれ \\( {\bf u}\\), \\( {\bf n}\\), \\( {\bf l}\\) に移す変換は，\\( {\bf M}_u = ({\bf u} {\bf n} {\bf l})^\top\\) となります．同様にして，\\( {\bf v}\\) と \\( {\bf n}\\) に直交するベクトル \\( {\bf m} = {\bf v} \times {\bf n} / \left\vert {\bf v} \times {\bf n} \right\vert\\) を求めます．このとき \\( {\bf x}\\), \\( {\bf y}\\), \\( {\bf z}\\) をそれぞれ \\( {\bf v}\\), \\( {\bf n}\\), \\( {\bf m}\\) に移す変換は，\\( {\bf M}_v = \left( {\bf v} {\bf n} {\bf m} \right)^\top\\) となります．
+そこで，まず \\( \mathbf{u}\\) と \\( \mathbf{n}\\) に直交するベクトル \\( \mathbf{l} = \mathbf{u} \times \mathbf{n} / \left\vert\mathbf{u} \times \mathbf{n} \right\vert\\) を求めます．このとき \\( \mathbf{x} = \left( 1, 0, 0 \right)\\), \\( \mathbf{y} = \left( 0, 1, 0 \right)\\), \\( \mathbf{z} = \left( 0, 0, 1 \right)\\) をそれぞれ \\( \mathbf{u}\\), \\( \mathbf{n}\\), \\( \mathbf{l}\\) に移す変換は，\\( \mathbf{M}_u = (\mathbf{u} \mathbf{n} \mathbf{l})^\top\\) となります．同様にして，\\( \mathbf{v}\\) と \\( \mathbf{n}\\) に直交するベクトル \\( \mathbf{m} = \mathbf{v} \times \mathbf{n} / \left\vert \mathbf{v} \times \mathbf{n} \right\vert\\) を求めます．このとき \\( \mathbf{x}\\), \\( \mathbf{y}\\), \\( \mathbf{z}\\) をそれぞれ \\( \mathbf{v}\\), \\( \mathbf{n}\\), \\( \mathbf{m}\\) に移す変換は，\\( \mathbf{M}_v = \left( \mathbf{v} \mathbf{n} \mathbf{m} \right)^\top\\) となります．
 
-![変換行列]({{ '/assets/images/extrusion4.gif' | relative_url }})
+\\[
+\mathbf{M}_u =
+\begin{pmatrix} \mathbf{u} \\ \mathbf{n} \\ \mathbf{l} \end{pmatrix} =
+\begin{pmatrix} \mathbf{u} \\ \displaystyle \frac{\mathbf{u} \times \mathbf{v}}{|\mathbf{u} \times \mathbf{v}|} \\ \displaystyle \frac{\mathbf{u} \times (\mathbf{u} \times \mathbf{v})}{|\mathbf{u} \times (\mathbf{u} \times \mathbf{v})|} \end{pmatrix} =
+\begin{pmatrix} u_x & u_y & u_z \\ n_x & n_y & n_z \\ l_x & l_y & l_z \end{pmatrix}
+\\]
 
-これより，ある単位ベクトル \\( {\bf u}\\) の方向を，別の単位ベクトル \\( {\bf v}\\) の方向に回転する変換は，\\( {\bf M}_r = {\bf M}_u^{-1}{\bf M}_v = {\bf M}_u^\top{\bf M}_v\\) となります．
+\\[
+\mathbf{M}_v = 
+\begin{pmatrix} \mathbf{v} \\ \mathbf{n} \\ \mathbf{m} \end{pmatrix} = 
+\begin{pmatrix} \mathbf{v} \\ \displaystyle \frac{\mathbf{u} \times \mathbf{v}}{|\mathbf{u} \times \mathbf{v}|} \\ \displaystyle \frac{\mathbf{v} \times (\mathbf{u} \times \mathbf{v})}{|\mathbf{v} \times (\mathbf{u} \times \mathbf{v})|} \end{pmatrix} = 
+\begin{pmatrix} v_x & v_y & v_z \\ n_x & n_y & n_z \\ m_x & m_y & m_z \end{pmatrix}
+\\]
+
+これより，ある単位ベクトル \\( \mathbf{u}\\) の方向を，別の単位ベクトル \\( \mathbf{v}\\) の方向に回転する変換は，\\( \mathbf{M}_r = \mathbf{M}_u^{-1}\mathbf{M}_v = \mathbf{M}_u^\top\mathbf{M}_v\\) となります．
 
 ```c
 /*
@@ -143,17 +155,24 @@ static void turn(const double u[], const double v[], double r[])
 
 なお，この変換は押し出しに限らず，視点の移動や，ある軌跡に沿って向きを変えながら物体を移動させる場合など，様々なところで利用できます．
 
-![変換行列]({{ '/assets/images/extrusion3.gif' | relative_url }})
-
 ## 断面のせん断変形
 
 断面を経路の方向に回転する変換を求めたら，これを用いて経路の節点における断面形状を求めます．節点の断面は，節点の進入側の経路と退出側の経路の中間ベクトルを法線ベクトルにもつ平面上にあり，その形状はもとの断面形状をせん断変形したものになります．
 
-まず，この中間ベクトル \\( {\bf h}\\) を最初の断面の空間に移します．このベクトル \\( {\bf h}'\\) は，断面を進入側の経路の向きに回転する変換を \\( {\bf M}_r\\) とすれば，\\( {\bf h}' = {\bf h} {\bf M}_r^\top\\) で求めることができます．ここで \\( {\bf h}' = \left(a, b, c\right)\\) とおけば，原点を通り \\( {\bf h}'\\) を法線ベクトルとする平面の方程式は \\( ax + by + cz = 0\\) になります．この平面に xy 平面上の図形を投影する変換は \\( \left(x, y, z - \left(ax + by\right) / c\right)\\) になります．この変換は，次のような行列で表すことができます．
+![経路の節点の中間ベクトル]({{ '/assets/images/extrusion3.gif' | relative_url }})
 
-![せん断変形]({{ '/assets/images/extrusion6.gif' | relative_url }})
+まず，この中間ベクトル \\( \mathbf{h}\\) を最初の断面の空間に移します．このベクトル \\( \mathbf{h}'\\) は，断面を進入側の経路の向きに回転する変換を \\( \mathbf{M}_r\\) とすれば，\\( \mathbf{h}' = \mathbf{M}_r^\top\mathbf{h}\\) で求めることができます．ここで \\( \mathbf{h}' = \left(a, b, c\right)\\) とおけば，原点を通り \\( \mathbf{h}'\\) を法線ベクトルとする平面の方程式は \\( ax + by + cz = 0\\) になります．この平面に xy 平面上の図形を投影する変換は \\( \left(x, y, z - \left(ax + by\right) / c\right)\\) になります．この変換は，次のような行列で表すことができます．
 
-したがって，xy 平面上の断面形状を \\( {\bf M}_s\\) で変形し，それを \\( {\bf M}_r\\) で経路の向きに向けた後，節点の位置に平行移動すれば，節点における断面形状を得ることができます．
+\\[
+\mathbf{M}_s = 
+\begin{pmatrix}
+1 & 0 & -a/c \\
+0 & 1 & -b/c \\
+0 & 0 & 1
+\end{pmatrix}
+\\]
+
+したがって，xy 平面上の断面形状を \\( \mathbf{M}_s\\) で変形し，それを \\( \mathbf{M}_r\\) で経路の向きに向けた後，節点の位置に平行移動すれば，節点における断面形状を得ることができます．
 
 ```c
 /*
