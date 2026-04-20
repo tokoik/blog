@@ -274,6 +274,7 @@ main {
   脚注
   */
   div.footnotes {
+    font-size: 90%;
     border-top: dashed 1px #ada;
     margin: 2em 0 0 1.3em;
     padding: 0;
