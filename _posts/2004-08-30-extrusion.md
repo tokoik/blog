@@ -277,6 +277,6 @@ void extrusion(const double cs[][2], int nc, const double sp[][3], int ns)
 }
 ```
 
-うーん，なんだか完備した説明にならないなぁ．これではわかりにくいだろうなぁ．多分，後で自分で読んでもわからん気がする．やっぱり[ソース](extrusion/extrusion.c)を読んでください．
+うーん，なんだか完備した説明にならないなぁ．これではわかりにくいだろうなぁ．多分，後で自分で読んでもわからん気がする．やっぱり[ソース](https://github.com/tokoik/extrusion/blob/master/main.cpp)を読んでください．
 
 - [押し出しのサンプルプログラムを使ったデモプログラム](https://github.com/tokoik/extrusion)
