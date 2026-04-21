@@ -60,10 +60,10 @@ published: true
     <li><a href="https://link.springer.com/book/10.1007/978-94-017-1689-5">Geometric Modeling</a></li>
     <li><a href="https://www.kohgakusha.co.jp/books/detail/4-7775-1134-0">GLUT による OpenGL 入門</a></li>
     <li><a href="https://www.kohgakusha.co.jp/books/detail/978-4-7775-1332-1">GLUT による OpenGL 入門テクスチャマッピング編</a></li>
-    <li><a href="https://www.cgarts.or.jp/books_detail/ecc_1/">ディジタル映像表現</a> (名前は載ってた)</li>
     <li><a href="https://www.kohgakusha.co.jp/books/detail/978-4-7775-1917-0">GLUT/freeglut による OpenGL 入門</a></li>
     <li><a href="https://www.kohgakusha.co.jp/books/detail/978-4-7775-2056-5">「グラフィックス・アプリ」制作のための OpenGL 入門</a></li>
     <li><a href="https://www.ohmsha.co.jp/book/9784274225574/">IT Text コンピュータグラフィックスの基礎</a></li>
+    <li><a href="https://www.cgarts.or.jp/books_detail/ecc_1/">ディジタル映像表現</a> (名前は載ってた)</li>
   </ul>
   <h2>その他</h2>
   <ul>
