@@ -75,8 +75,8 @@ $$
 $$
 
 $$
-\mathbf{M}_v = 
-\begin{pmatrix} \mathbf{v} \\ \mathbf{n} \\ \mathbf{m} \end{pmatrix} = 
+\mathbf{M}_v =
+\begin{pmatrix} \mathbf{v} \\ \mathbf{n} \\ \mathbf{m} \end{pmatrix} =
 \begin{pmatrix} \mathbf{v} \\ \displaystyle \frac{\mathbf{u} \times \mathbf{v}}{|\mathbf{u} \times \mathbf{v}|} \\ \displaystyle \frac{\mathbf{v} \times (\mathbf{u} \times \mathbf{v})}{|\mathbf{v} \times (\mathbf{u} \times \mathbf{v})|} \end{pmatrix} =
 \begin{pmatrix} v_x & v_y & v_z \\ n_x & n_y & n_z \\ m_x & m_y & m_z \end{pmatrix}
 $$
