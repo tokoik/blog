@@ -1,0 +1,1519 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="author" content="床井 浩平">
+	<link rev="made" href="mailto:tokoi@sys.wakayama-u.ac.jp">
+	<title>OpenGL Benchmark</title>
+</head>
+
+<body>
+
+<table>
+ <tr>
+  <td colspan="5"># OpenGL Benchmark version 1.6.2</td>
+ </tr>
+ <tr>
+  <td colspan="5">#function auto check mode</td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>CPU</td>
+  <td>Pentium 4 2.4GHz</td>
+  <td>Pentium 4 3.0GHz</td>
+  <td>Pentium 4 2.4GHz</td>
+  <td>Pentium 4 2.6GHz</td>
+ </tr>
+ <tr>
+  <td>Vendor</td>
+  <td>ATI Technologies Inc.</td>
+  <td>NVIDIA Corporation</td>
+  <td>NVIDIA Corporation</td>
+  <td>NVIDIA Corporation</td>
+ </tr>
+ <tr>
+  <td>Renderer</td>
+  <td>RADEON 9600 XT x86/SSE2</td>
+  <td>GeForce4 Ti 4600/AGP/SSE2</td>
+  <td>Quadro4 900 XGL/AGP/SSE2</td>
+  <td>GeForce FX 5900XT/AGP/SSE2</td>
+ </tr>
+ <tr>
+  <td>Version</td>
+  <td>1.5.4707 Win2000 Release</td>
+  <td>1.5.2</td>
+  <td>1.2</td>
+  <td>1.5.1</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_depth_texture</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_fragment_program</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_fragment_program_shadow</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_fragment_shader</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_imaging</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_multisample</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_multitexture</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_occlusion_query</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_point_parameters</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_point_sprite</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_shader_objects</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_shading_language_100</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_shadow</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_shadow_ambient</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_border_clamp</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_compression</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_cube_map</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_env_add</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_env_combine</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_env_crossbar</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_env_dot3</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_mirrored_repeat</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_texture_rectangle</td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ARB_transpose_matrix</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_vertex_blend</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ARB_vertex_buffer_object</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_vertex_program</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_vertex_shader</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_ARB_window_pos</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_Autodesk_valid_back_buffer_hint</td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_draw_buffers</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_element_array</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_envmap_bumpmap</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_fragment_shader</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_map_object_buffer</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_separate_stencil</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_texture_env_combine3</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_texture_float</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_texture_mirror_once</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_vertex_array_object</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_vertex_attrib_array_object</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATI_vertex_streams</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATIX_texture_env_combine3</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATIX_texture_env_route</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_ATIX_vertex_shader_output_point_size</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_EXT_abgr</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_bgra</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_blend_color</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_blend_func_separate</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_blend_minmax</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_blend_subtract</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_Cg_shader</td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_clip_volume_hint</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_EXT_compiled_vertex_array</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_depth_bounds_test</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_draw_range_elements</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_fog_coord</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_multi_draw_arrays</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_packed_pixels</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_paletted_texture</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_pixel_buffer_object</td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_point_parameters</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_rescale_normal</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_secondary_color</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_separate_specular_color</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_shadow_funcs</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_shared_texture_palette</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_stencil_two_side</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_stencil_wrap</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texgen_reflection</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_compression_s3tc</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_cube_map</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_edge_clamp</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_env_add</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_env_combine</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_env_dot3</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_filter_anisotropic</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_lod</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_lod_bias</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_mirror_clamp</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_object</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture_rectangle</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_EXT_texture3D</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_vertex_array</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_EXT_vertex_shader</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_EXT_vertex_weighting</td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_HP_occlusion_test</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_IBM_rasterpos_clip</td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_IBM_texture_mirrored_repeat</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_KTX_buffer_region</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_blend_square</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_copy_depth_to_color</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_depth_clamp</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_fence</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_float_buffer</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_fog_distance</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_fragment_program</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_fragment_program_option</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_half_float</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_light_max_exponent</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_multisample_filter_hint</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_occlusion_query</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_packed_depth_stencil</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_pixel_data_range</td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_point_sprite</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_primitive_restart</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_register_combiners</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_register_combiners2</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texgen_reflection</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texture_compression_vtc</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texture_env_combine4</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texture_expand_normal</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texture_rectangle</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texture_shader</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texture_shader2</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_texture_shader3</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_vertex_array_range</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_vertex_array_range2</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_vertex_program</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_vertex_program1_1</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_vertex_program2</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_NV_vertex_program2_option</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_S3_s3tc</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_SGI_color_matrix</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_SGIS_generate_mipmap</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_SGIS_multitexture</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_SGIS_texture_border_clamp</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_SGIS_texture_edge_clamp</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_SGIS_texture_lod</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_SGIX_depth_texture</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_SGIX_shadow</td>
+  <td></td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_SUN_multi_draw_arrays</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>GL_SUN_slice_accum</td>
+  <td></td>
+  <td>○</td>
+  <td></td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>GL_WIN_swap_hint</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td>WGL_EXT_extensions_string</td>
+  <td>○</td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>WGL_EXT_swap_control</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+  <td>○</td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td colspan="5"># 3D testing environment (double buffer)</td>
+ </tr>
+ <tr>
+  <td>RED Bits</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+ </tr>
+ <tr>
+  <td>GREEN Bits</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+ </tr>
+ <tr>
+  <td>BLUE Bits</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+ </tr>
+ <tr>
+  <td>DEPTH Bits</td>
+  <td>24</td>
+  <td>24</td>
+  <td>24</td>
+  <td>24</td>
+ </tr>
+ <tr>
+  <td>STENCIL Bits</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+ </tr>
+ <tr>
+  <td>ACCUM_RED Bits</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+ </tr>
+ <tr>
+  <td>ACCUM_GREEN Bits</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+ </tr>
+ <tr>
+  <td>ACCUM_BLUE Bits</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+ </tr>
+ <tr>
+  <td>ACCUM_ALPHA Bits</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+  <td>16</td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td colspan="5"># 2D testing environment (single buffer)</td>
+ </tr>
+ <tr>
+  <td>RED Bits</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+ </tr>
+ <tr>
+  <td>GREEN Bits</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+ </tr>
+ <tr>
+  <td>BLUE Bits</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+  <td>8</td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td colspan="5"># result : 100.0 or higher is best</td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>3D swap_buffer</td>
+  <td>7539.9 </td>
+  <td>7591.6 </td>
+  <td>7104.9 </td>
+  <td>10106.7 </td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>3D lines</td>
+  <td>1523.6 </td>
+  <td>1948.8 </td>
+  <td>1764.2 </td>
+  <td>1948.8 </td>
+ </tr>
+ <tr>
+  <td>3D lines fog</td>
+  <td>1443.6 </td>
+  <td>1773.8 </td>
+  <td>1701.4 </td>
+  <td>1938.8 </td>
+ </tr>
+ <tr>
+  <td>3D lines smooth</td>
+  <td>1282.6 </td>
+  <td>712.5 </td>
+  <td>998.4 </td>
+  <td>666.9 </td>
+ </tr>
+ <tr>
+  <td>3D points</td>
+  <td>1517.1 </td>
+  <td>1245.1 </td>
+  <td>2740.5 </td>
+  <td>1576.8 </td>
+ </tr>
+ <tr>
+  <td>3D points fog</td>
+  <td>1495.4 </td>
+  <td>1252.2 </td>
+  <td>2739.5 </td>
+  <td>1577.0 </td>
+ </tr>
+ <tr>
+  <td>3D wire</td>
+  <td>1517.1 </td>
+  <td>1259.8 </td>
+  <td>2729.3 </td>
+  <td>1565.7 </td>
+ </tr>
+ <tr>
+  <td>3D wire fog</td>
+  <td>1516.9 </td>
+  <td>1259.6 </td>
+  <td>2726.7 </td>
+  <td>1565.5 </td>
+ </tr>
+ <tr>
+  <td>3D polygon color smooth</td>
+  <td>1516.9 </td>
+  <td>2999.5 </td>
+  <td>2713.3 </td>
+  <td>4842.0 </td>
+ </tr>
+ <tr>
+  <td>3D polygon color</td>
+  <td>1523.8 </td>
+  <td>3868.0 </td>
+  <td>2850.5 </td>
+  <td>6252.8 </td>
+ </tr>
+ <tr>
+  <td>3D polygon color fog</td>
+  <td>1509.9 </td>
+  <td>3941.0 </td>
+  <td>2852.7 </td>
+  <td>6264.1 </td>
+ </tr>
+ <tr>
+  <td>3D vertex color</td>
+  <td>2579.2 </td>
+  <td>4530.4 </td>
+  <td>2870.5 </td>
+  <td>6453.1 </td>
+ </tr>
+ <tr>
+  <td>3D vertex color fog</td>
+  <td>2536.7 </td>
+  <td>4534.3 </td>
+  <td>2879.0 </td>
+  <td>6267.7 </td>
+ </tr>
+ <tr>
+  <td>3D stencil buffer</td>
+  <td>2557.2 </td>
+  <td>4536.1 </td>
+  <td>2905.3 </td>
+  <td>6465.0 </td>
+ </tr>
+ <tr>
+  <td>3D accumlation buffer</td>
+  <td>1778.7 </td>
+  <td>19.2 </td>
+  <td>16.2 </td>
+  <td>4541.4 </td>
+ </tr>
+ <tr>
+  <td>3D blur</td>
+  <td>1425.1 </td>
+  <td>13.4 </td>
+  <td>11.5 </td>
+  <td>2863.2 </td>
+ </tr>
+ <tr>
+  <td>3D flat shading</td>
+  <td>1440.1 </td>
+  <td>2600.3 </td>
+  <td>2580.2 </td>
+  <td>4441.4 </td>
+ </tr>
+ <tr>
+  <td>3D smooth shading</td>
+  <td>1441.8 </td>
+  <td>3883.8 </td>
+  <td>2584.2 </td>
+  <td>6271.1 </td>
+ </tr>
+ <tr>
+  <td>3D spot light</td>
+  <td>1432.0 </td>
+  <td>3608.0 </td>
+  <td>2297.4 </td>
+  <td>5609.8 </td>
+ </tr>
+ <tr>
+  <td>3D T-Map GL_CLAMP fast</td>
+  <td>1424.9 </td>
+  <td>3995.5 </td>
+  <td>2778.5 </td>
+  <td>5327.4 </td>
+ </tr>
+ <tr>
+  <td>3D T-Map GL_CLAMP real</td>
+  <td>1423.8 </td>
+  <td>4265.3 </td>
+  <td>2776.3 </td>
+  <td>5544.8 </td>
+ </tr>
+ <tr>
+  <td>3D T-Map GL_REPEAT fast</td>
+  <td>1424.1 </td>
+  <td>3993.2 </td>
+  <td>2788.6 </td>
+  <td>5324.3 </td>
+ </tr>
+ <tr>
+  <td>3D T-Map GL_REPEAT real</td>
+  <td>1436.5 </td>
+  <td>4263.5 </td>
+  <td>2777.2 </td>
+  <td>5569.9 </td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>2D put GL_COPY half tone</td>
+  <td>1662.7 </td>
+  <td>5.6 </td>
+  <td>121.8 </td>
+  <td>4.5 </td>
+ </tr>
+ <tr>
+  <td>2D put GL_COPY</td>
+  <td>562.2 </td>
+  <td>1149.2 </td>
+  <td>912.0 </td>
+  <td>1022.4 </td>
+ </tr>
+ <tr>
+  <td>2D put GL_COPY_INVERTED</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_AND_REVERSE</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_OR_REVERSE</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_AND</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_OR</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_NAND</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_NOR</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_XOR</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_EQUIV</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_AND_INVERTED</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D put GL_OR_INVERTED</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_COPY</td>
+  <td>1743.1 </td>
+  <td>13073.6 </td>
+  <td>17431.4 </td>
+  <td>13073.6 </td>
+ </tr>
+ <tr>
+  <td>2D copy GL_COPY_INVERTED</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_AND_REVERSE</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_OR_REVERSE</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_AND</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_OR</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_NAND</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_NOR</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_XOR</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_EQUIV</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_AND_INVERTED<</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D copy GL_OR_INVERTED</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+  <td>skipped</td>
+ </tr>
+ <tr>
+  <td>2D scaling</td>
+  <td>5621.6 </td>
+  <td>4854.2 </td>
+  <td>4034.8 </td>
+  <td>4441.1 </td>
+ </tr>
+ <tr>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  <td colspan="5"># 3D average without swap_buffer</td>
+ </tr>
+ <tr>
+  <td>3D total</td>
+  <td>1624.9 </td>
+  <td>2750.2 </td>
+  <td>2321.9 </td>
+  <td>4221.7 </td>
+ </tr>
+ <tr>
+  <td>2D total</td>
+  <td>-----</td>
+  <td>-----</td>
+  <td>-----</td>
+  <td>-----</td>
+ </tr>
+ <tr>
+  <td>2D implemented</td>
+  <td>2397.4 </td>
+  <td>4770.6 </td>
+  <td>5625.0 </td>
+  <td>4635.4 </td>
+ </tr>
+</table>
+
+</body>
+
+</html>
