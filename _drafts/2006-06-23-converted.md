@@ -1,0 +1,32 @@
+---
+title: "3D テクスチャ"
+date: 2006-06-23
+categories: [OpenGL,テクスチャ]
+published: true
+---
+
+## コメントスパム
+
+6月18日の深夜にコメントスパムにさらされました．なぜか RDF ファイルも壊されてしまいました．ちくちく手で復旧したのですが，そのせいで記事の更新日時が変わってしまいました．その後，[tdiary](http://www.tdiary.org/) にコメントスパム対策のプラグインを追加しました．このブログではトラックバックスパムやリファラのスパムを嫌ってこれらを表示しないようにしているのですが，コメントを通じてはとても重要な情報を頂いていますので，今後もこのスタイルでいくつもりです．
+
+## ソリッドテクスチャ
+
+授業でデモしようと思ってソリッドテクスチャのサンプルプログラムを作ろうと思ってたんですけど，テクスチャに使おうと思ったノイズの関数がなかなかうまく書けず，結局間に合いませんでした．ノイズを生成する関数はとりあえず自分が書きやすい方法で書いたのですけど，こんな書き方してりゃ遅いだろうなぁと思った通り遅いです．
+プログラムは以前に質問された「[視点を移動するのではなく，物体をぐるぐる回す方法は？](http://www.wakayama-u.ac.jp/~tokoi/opengl/faq.html#Q5)」の回答のおまけで作った[キャッピングのプログラム](http://www.wakayama-u.ac.jp/~tokoi/opengl/cap.c)をベースにしました．これはユーザ定義のクリップ面を使って物体を切り取り，ステンシルバッファを使って切り口にふたをする手法を使っています．細かい解説は，また後日，気力があれば書きたいと思います．テクスチャを変更する時は，PATTERN という記号定数を変更してコンパイルし直してください．
+
+<div class="figure">
+![チェッカーボード]({{ '/assets/images/3dtexture1.jpg' | relative_url }})
+![ノイズ]({{ '/assets/images/3dtexture2.jpg' | relative_url }})
+</div>
+<div class="figure">
+![Perlin ノイズ]({{ '/assets/images/3dtexture3.jpg' | relative_url }})
+![Turbulence]({{ '/assets/images/3dtexture4.jpg' | relative_url }})
+</div>
+
+## マウスをドラッグすると，断面を動かせます．glTexImage3D() を使っているので，OpenGL 1.2 以降であれば動くと思いますが，ビデオカードによってはソフトウェアエミュレーションになって，とても遅いかもしれません．
+
+<ul>
+<li>[Linux 版](texture/3dtexture.tar.gz)</li>
+<li>[Mac OS X 版](texture/3dtexture.zip)</li>
+<li>[Windows 版](texture/3dtexture.lzh)</li>
+</ul>

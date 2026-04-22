@@ -1,0 +1,22 @@
+#version 120
+//
+// cylinder.vert
+//
+invariant gl_Position;
+attribute vec2 texture;
+uniform mat4 projectionMatrix;
+varying vec3 diffuseColor;
+uniform vec3 lightDirection;
+uniform vec3 lightColor;
+varying vec2 t;
+ 
+void main(void)
+{
+  float th = 6.283185 * texture.s;
+  vec3 position = vec3(cos(th), texture.t * 2.0 - 1.0, sin(th));
+  vec3 normal = vec3(position.x, 0, position.z);
+
+  t = texture * 16.0;
+  diffuseColor = vec3(dot(lightDirection, normal)) * lightColor;
+  gl_Position = projectionMatrix * vec4(position, 1.0);
+}

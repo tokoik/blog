@@ -1,0 +1,259 @@
+---
+title: "第２１回 フレネル反射"
+date: 2005-06-20
+categories: [OpenGL,テクスチャ]
+published: true
+---
+
+## 反射率は入射角に依存する
+
+[前回](20050616)，非金属の物体への映り込みの実現を実現するために，環境の映り込み（鏡面反射光）と拡散反射光を比例配分する手法を示しました．この方法では物体の表面に環境の映り込みが「乗っている」ような結果が得られますが，どうもこう，物体表面に光沢のあるフィルムが貼られているような不自然さがあります．これは映り込みと拡散反射光の配分比を固定していることが原因になっています．
+
+## 映り込みと拡散反射光の配分比を固定していると，物体のどの面にも同じように環境が映り込んでしまいます．しかし実際には，鏡面反射光強度は光の入射角によって変化します．光の入射角が浅いほど鏡面反射光強度は強まり，全反射に近づいてゆきます．この現象はフレネル (Fresnel) 反射と呼ばれます．
+
+## フレネルの式
+
+フレネル反射を考慮した映り込みを実装するには，視線ベクトルと物体表面の法線ベクトルから次のフレネルの式により反射率 F を求め，これを鏡面反射率に反映します．
+
+![フレネルの式]({{ '/assets/images/fresnel.gif' | relative_url }})
+
+## この <i>c</i> は視線 <`em`>v と法線ベクトル <`em`>h の内積であり，<i>n</i> は境界面（物体表面）の両側の媒質における屈折率の比です．ここで視線を (0, 0, 1) に固定してしまえば，<i>c</i> に <`em`>h の Z 成分をそのまま使えば良いことになります．そこで，あらかじめ c に対する F の表を作成しておきます．そしてこれを１次元のテクスチャとして割り当てて，面の法線ベクトルの Z 成分を使ってサンプリングします．こうして得たテクスチャの値を，環境の映り込みと拡散反射光の配分比に使用すれば，フレネル反射が実現できます．
+
+## フレネル反射の実装
+
+[前回](20050616)のプログラムを雛形にして，フレネル反射の実装を行ってみます．まず，c から F を求めるフレネルの式の関数を定義します．
+
+<ul>
+<li>[Linux 版](texture/texture16.tar.gz)</li>
+<li>[Mac OS X 版](texture/texture16.zip)</li>
+<li>[Windows 版](texture/texture16.lzh)</li>
+</ul>
+
+```c
+...
+
+/*
+** テクスチャ
+*/
+#define TEXWIDTH  256                      /* テクスチャの幅　　　 */
+#define TEXHEIGHT 256                      /* テクスチャの高さ　　 */
+static const char texture1[] = "dot.raw";  /* テクスチャファイル名 */
+
+/*
+** フレネル関数
+*/
+static float fresnel(float c)
+{
+const float n = 1.5; /* 屈折率の比 */
+const float g = sqrt(n * n + c * c - 1.0);
+const float gpc = g + c;
+const float gmc = g - c;
+const float gpc1 = c * gpc - 1.0;
+const float gmc1 = c * gmc + 1.0;
+const float gc = gmc / gpc;
+const float gc1 = gpc1 / gmc1;
+return 0.5 * gc * gc * (1.0 + gc1 * gc1);
+}
+```
+
+## テクスチャ名を生成する数を２に増して，`texname`[1] というテクスチャオブジェクトが使えるようにしておきます．そして関数 `fresnel`() を使ってフレネル関数のテーブル `table` を作成し，１次元テクスチャとしてマッピングします．使用するのはアルファチャンネルだけなので，ターゲットには `GL_ALPHA` を指定します．
+
+```c
+/*
+** 初期化
+*/
+static void init(void)
+{
+...
+
+/* テクスチャユニット１・２用のテクスチャオブジェクトを作成する */
+
+GLuint texname[2];
+glGenTextures(2, texname);
+
+#if defined(WIN32)
+
+glActiveTexture =
+(PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");
+#endif
+
+/* テクスチャユニット１に切り替える */
+
+glActiveTexture(GL_TEXTURE1);
+glBindTexture(GL_TEXTURE_1D, texname[1]);
+
+/* フレネル関数のテーブル */
+GLfloat table[128];
+
+/* フレネル関数のテーブル作成 */
+for (int c = 0; c < 128; ++c) {
+table[c] = fresnel((float)c / 127.0f);
+}
+
+/* フレネル関数のテーブルを一次元テクスチャとして割り当て */
+glTexImage1D(GL_TEXTURE_1D, 0, GL_ALPHA, 128, 0,
+GL_ALPHA, GL_FLOAT, table);
+```
+
+## フレネル関数の値はなだらかな曲線ですが，このテクスチャをサンプリングするときは一応線形補間することにしておきます．また，このテクスチャの両端の値が境界色とブレンドされてしまっては困るので，テクスチャの繰り返し方法には `GL_CLAMP_TO_EDGE` を指定します．
+
+```c
+/* テクスチャを拡大・縮小する方法の指定 */
+glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+/* テクスチャの繰り返し方法の指定 */
+glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+```
+
+## 下地のアルファ値（この場合はグロスマッピング用のテクスチャ）にフレネル関数のテーブルの値を合成するために，このテクスチャユニットのテクスチャ環境に `GL_MODULATE` を指定します．
+
+```c
+/* テクスチャユニット１のテクスチャ環境 */
+glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+```
+
+## 面の法線ベクトルの Z 値をテクスチャ座標に使うので，テクスチャ座標の自動生成機能を使って，頂点の法線ベクトルを補間した値を反射点における法線ベクトルに用います．ここで使用するのは Z 値だけなので，Z 値のみ自動生成を行います．
+
+```c
+/* 法線ベクトルのｚ成分をテクスチャ座標として補間する */
+glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_NORMAL_MAP);
+
+/* テクスチャ座標の自動生成を有効にする */
+glEnable(GL_TEXTURE_GEN_R);
+```
+
+## しかし，このままでは自動生成された法線ベクトルの Z 値がテクスチャ座標 (s, t, r, q) の r に格納されます．一次元テクスチャでは，s をテクスチャ座標として用いるので，r を s に移す必要があります．このために，r と s を交換するようテクスチャ座標の変換行列を設定します．
+
+```c
+/* テクスチャのパラメータ r を s と交換する */
+glMatrixMode(GL_TEXTURE);
+static const GLdouble mat[] = {
+0.0, 0.0, 1.0, 0.0,
+0.0, 1.0, 0.0, 0.0,
+1.0, 0.0, 0.0, 0.0,
+0.0, 0.0, 0.0, 1.0,
+};
+glLoadMatrixd(mat);
+glMatrixMode(GL_MODELVIEW);
+```
+
+## 環境のマッピングはテクスチャユニット２（三つ目のテクスチャユニット）で行います．ローエンドのビデオカードでは，テクスチャユニットが２個しか使えないものがあるので（てゆーか，演習室のマシンがそうだった），ビデオカードによっては正しくマッピングされなくなるかもしれません．また，３個以上のテクスチャユニットが使えても，実際に３個以上のテクスチャユニットを使うと，パフォーマンスが悪化する場合があります．
+
+```c
+/* テクスチャユニット２に切り替える */
+glActiveTexture(GL_TEXTURE2);
+glBindTexture(GL_TEXTURE_CUBE_MAP, texname[0]);
+```
+
+## そして，描画時にテクスチャユニット１とテクスチャユニット２を有効にします．
+
+```c
+...
+
+/*
+** シーンの描画
+*/
+static void scene(void)
+{
+static const GLfloat color[] = { 1.0, 1.0, 1.0, 1.0 };  /* 材質 (色) */
+
+/* 材質の設定 */
+
+glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
+
+/* テクスチャマッピング開始 */
+
+glEnable(GL_TEXTURE_2D);
+
+/* テクスチャユニット１に切り替える */
+
+glActiveTexture(GL_TEXTURE1);
+
+/* １次元テクスチャマッピング開始 */
+glEnable(GL_TEXTURE_1D);
+
+/* テクスチャユニット２に切り替える */
+glActiveTexture(GL_TEXTURE2);
+
+/* キューブマッピング開始 */
+
+glEnable(GL_TEXTURE_CUBE_MAP);
+glEnable(GL_TEXTURE_GEN_S);
+glEnable(GL_TEXTURE_GEN_T);
+glEnable(GL_TEXTURE_GEN_R);
+
+/* トラックボール処理による回転 */
+
+glMultMatrixd(trackballRotation());
+
+/* 箱を描く */
+
+box(1.0, 1.0, 1.0);
+
+/* キューブマッピング終了 */
+
+glDisable(GL_TEXTURE_GEN_S);
+glDisable(GL_TEXTURE_GEN_T);
+glDisable(GL_TEXTURE_GEN_R);
+glDisable(GL_TEXTURE_CUBE_MAP);
+
+/* テクスチャユニット１に切り替える */
+glActiveTexture(GL_TEXTURE1);
+
+/* １次元テクスチャマッピング終了 */
+glDisable(GL_TEXTURE_1D);
+
+/* テクスチャユニット０に戻す */
+
+glActiveTexture(GL_TEXTURE0);
+
+/* テクスチャマッピング終了 */
+
+glDisable(GL_TEXTURE_2D);
+}
+```
+
+## この結果は次のようになります．右側は図形をティーポットに変え，カメラや照明のパラメータを多少変更したものです．この図ではあまり映り込みがはっきり見えないのですが，これは自分でプログラムを実行して，物体をぐるぐる回してみると，それらしく見えます（多分）．
+
+<div class="figure">
+![フレネル反射のある物体]({{ '/assets/images/dot12.jpg' | relative_url }})
+![物体をティーポットに変更]({{ '/assets/images/dot13.jpg' | relative_url }})
+</div>
+
+<ul>
+<li>[Linux 版](texture/texture17.tar.gz)</li>
+<li>[Mac OS X 版](texture/texture17.zip)</li>
+<li>[Windows 版](texture/texture17.lzh)</li>
+</ul>
+
+## このプログラムにおいて視線の入射角が浅い場合でも映り込みがあまりはっきりと現れていないのは，環境のテクスチャが明るくない割に下地のテクスチャが明るいことが一番大きな原因だと思うのですが，視線ベクトルを (0, 0, 1) に固定していることも原因の一つになっている気がします．もし，正確な視線ベクトルを用いることができれば，より物体の「内側」に視線の入射角が浅い面が現れるはずです．
+
+![視線のモデルによる入射角の違い]({{ '/assets/images/eyeray.gif' | relative_url }})
+
+## グロスマッピングをやめてみる
+
+グロスマッピングをやめてしまうことで，環境の映り込みが多少わかりやすくなります．グロスマッピングのテクスチャ（下地のテクスチャのアルファ値）にフレネル関数のテーブルを合成しないで，フレネル関数のテーブルの値をそのまま映り込みと拡散反射光の配分比に使います．
+
+```c
+...
+
+/* テクスチャの繰り返し方法の指定 */
+
+glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+
+/* テクスチャユニット１のテクスチャ環境 */
+
+glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+/* 法線ベクトルのｚ成分をテクスチャ座標として補間する */
+
+glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_NORMAL_MAP);
+```
+
+<div class="figure">
+![グロスマッピングをオフにした場合]({{ '/assets/images/dot14.jpg' | relative_url }})
+![物体をティーポットに変更]({{ '/assets/images/dot15.jpg' | relative_url }})
+</div>
+
+## うーん，やっぱりあまりよくわかりませんね．白い車よりは黒い車の方が映り込みがはっきり見えたりするので，そのうちモデルなり色なりを変えていろいろ試してみたいと思います．ここではとにかくプログラムを動かして，自分で眺めてください．なお，なぜか Windows では，マルチテクスチャを使うと glutSolidTeapot() がエラーになります．Vine Linux 3.1 や Mac OS X 10.3 では問題ありませんでした．

@@ -1,0 +1,200 @@
+---
+title: "第１２回 模様を付ける"
+date: 2009-09-20
+categories: [OpenGL,GLSL,ゼミ]
+published: true
+---
+
+<[877.fm](http://877.fm/)
+実は今日知ったんですけど, 和歌山市内にある "バナナ FM" (877.fm, エフエム和歌山) は, 株式会社ではなく NPO 法人なんですね. この放送局は空中線電力が 20W しかなく, サービスエリアが和歌山市とその周辺くらいしかありません. 番組内容も独自のもので, メジャーなタレントを呼ぶとかそういうこともなく, 時には高校のブラスバンドの演奏を流したりして, それはもう地味というか, 地元に密着した内容になってます. どこかのテンションがやたら高い放送局と違って DJ も日常会話のように自然にしゃべっていて,　気負いがありません. いいです. 日々の生活に実にフィットします. CM にも「近所のあの店が CM してる!」という親しみやすさがあります. 私はこの放送局と縁もゆかりもありませんが, 永く続いて欲しいと思ってるので, 皆さん応援してあげてください.
+
+## 縞模様を付ける
+
+材質の情報をシェーダプログラムに組み込めるということは, 材質をシェーダプログラム側でなんとでもできるということでもあります. そこで, シェーダプログラムを使って物体の表面に模様を付けることを考えてみます. 物体の表面に模様を付けるには, 色を物体表面上の位置に応じて変化させます. ここでは頂点の y 座標値 (`position`.y) に応じて, その頂点の色を変化させてみます.
+`position`.y は [-1, 1] の範囲をもちますから, これを 2π 倍します. これを GLSL の組み込み関数 `cos`() の引数に指定して, その戻り値を 0.5 倍した後 0.5 を足します. これにより [0, 1] の範囲の値が得られますから, これを使って二つの色を比例配分します. 配分には GLSL の組み込み関数 `mix`() を使います.
+
+```c
+#version 120
+//
+// simple.vert
+//
+invariant gl_Position;
+attribute vec3 position;
+uniform mat4 projectionMatrix;
+varying vec3 diffuseColor;
+uniform vec3 lightDirection;
+uniform vec3 lightColor;
+const vec3 diffuseMaterial = vec3(0.0, 1.0, 1.0);
+
+void main(void)
+
+{
+float a = cos(6.283185 * position.y) * 0.5 + 0.5;
+diffuseColor = vec3(dot(lightDirection, position)) * lightColor * mix(diffuseMaterial, vec3(1.0, 0.0, 0.0), a);
+gl_Position = projectionMatrix * vec4(position, 1.0);
+}
+```
+
+## これで, こういう縞模様を y 方向に付けることができます. 
+
+![y 軸方向に縞模様を付ける]({{ '/assets/images/texture00_result.jpg' | relative_url }})
+
+## フラグメントシェーダで色を切り替える
+
+前の方法では, バーテックスシェーダで頂点の色を変化させていました. 物体表面上の色は頂点における色を補間して求めるので, はっきりとした色の変化を付けることができません. そこで, バーテックスシェーダでは陰影の計算だけを行っておき, 物体の色はバーテックスシェーダ側で変化させることにします.
+まず, バーテックスシェーダで定義している拡散反射係数 `diffuseMaterial` を削除します. そのかわり, 色を変化させる基準に使っている `position`.y をフラグメントシェーダに送るために使う `varying` 変数 y を宣言し, これに `position`.y を代入します. 一方 `varying` 変数 `diffuseColor` には, 法線ベクトル $\mathbf{n}$ と光線ベクトル $\mathbf{l}$ の内積値と光源の色の積だけを代入しておきます.
+
+```c
+#version 120
+//
+// simple.vert
+//
+invariant gl_Position;
+attribute vec3 position;
+uniform mat4 projectionMatrix;
+varying vec3 diffuseColor;
+uniform vec3 lightDirection;
+uniform vec3 lightColor;
+varying float y;
+
+void main(void)
+
+{
+y = position.y;
+diffuseColor = vec3(dot(lightDirection, position)) * lightColor;
+gl_Position = projectionMatrix * vec4(position, 1.0);
+}
+```
+
+## フラグメントシェーダでは `varying` 変数 y を宣言し, 二つの色 (`c1`, `c2`) を定義しておきます. バーテックスシェーダで行っていたように, この y をもとに二つの色の配分比 a を求めます. これを使って `c1`, `c2` を配分し, `diffuseColor` に掛け合わせます.
+
+```c
+#version 120
+//
+// simple.frag
+//
+varying vec3 diffuseColor;
+varying float y;
+const vec3 c1 = vec3(1.0, 0.0, 0.0);
+const vec3 c2 = vec3(0.0, 0.0, 1.0);
+
+void main(void)
+
+{
+float a = cos(6.283185 * y) * 0.5 + 0.5;
+gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
+}
+```
+
+## これでこういう縞模様になります.
+
+![フラグメントシェーダで色を決定する]({{ '/assets/images/texture01_result.jpg' | relative_url }})
+
+## くっきりとした縞模様
+
+フラグメントシェーダで色を決定しているので, バーテックスシェーダで頂点の色を決定して補間したものより色の変化が滑らかになっていると思います. でも, あまり差がないという気もしますので，`cos`() の代わりに矩形関数を使って色の配分比を変化させてみます. GLSL の組み込み関数には矩形関数がないので, これを実数の少数部を求める組み込み関数 `fract`() としきい値にもとづいて値を二値化する `step`() を使って表現します.
+
+![矩形関数の作り方]({{ '/assets/images/rectangular.gif' | relative_url }})
+
+```c
+#version 120
+//
+// simple.frag
+//
+varying vec3 diffuseColor;
+varying float y;
+const vec3 c1 = vec3(1.0, 0.0, 0.0);
+const vec3 c2 = vec3(0.0, 0.0, 1.0);
+
+void main(void)
+
+{
+float a = step(0.5, fract(3.0 * y));
+gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
+}
+```
+
+## ただ，`step`() を使うと色の変化が急峻になるので, エリアシング (ギザギザ) が目立ちます. これを GLSL の組み込み関数 smoothstep() をつかって軽減する方法があるようなので, 後日気力があればまとめてみたいと思います.
+
+![くっきりとした縞を付ける]({{ '/assets/images/texture02_result.jpg' | relative_url }})
+
+## ついでに, x 座標も `varying` 変数でフラグメントシェーダに送ってみます. バーテックスシェーダで float 型の y の代わりに `vec2` 型の t という `varying` 変数を宣言し, それに x, y 座標を４倍したものを代入します. 
+
+```c
+#version 120
+//
+// simple.vert
+//
+invariant gl_Position;
+attribute vec3 position;
+uniform mat4 projectionMatrix;
+varying vec3 diffuseColor;
+uniform vec3 lightDirection;
+uniform vec3 lightColor;
+varying vec2 t;
+
+void main(void)
+
+{
+t = position.xy * 4.0;
+diffuseColor = vec3(dot(lightDirection, position)) * lightColor;
+gl_Position = projectionMatrix * vec4(position, 1.0);
+}
+```
+
+## 格子模様
+
+フラグメントシェーダでは GLSL の組み込み関数 `floor`() を使って x と y の整数部を取り出します. 隣り合うマス目の色を変えるには, これらの和が偶数か奇数かを判断すれば良いので, これらを足して２で割った余りを求めます. `mod`() は余りを求める GLSL の組み込み関数です.
+
+![格子模様の作り方]({{ '/assets/images/checkerboard.gif' | relative_url }})
+
+```c
+#version 120
+//
+// simple.frag
+//
+varying vec3 diffuseColor;
+varying float y;
+const vec3 c1 = vec3(1.0, 0.0, 0.0);
+const vec3 c2 = vec3(0.0, 0.0, 1.0);
+
+void main(void)
+
+{
+float a = mod(floor(t.x) + floor(t.y), 2.0);
+gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
+}
+```
+
+## これだと, こういう模様が付きます. こういうのは, ちょっと考えればいくらでも思いつくと思いますので, 自分でも何か考えてみてください.
+
+![格子模様]({{ '/assets/images/texture03_result.jpg' | relative_url }})
+
+## さらに, 色を切り替えるかわりに <`em`>`discard` を実行すれば, 型を抜くこともできます.
+
+```c
+#version 120
+//
+// simple.frag
+//
+varying vec3 diffuseColor;
+varying vec2 t;
+const vec3 c1 = vec3(1.0, 0.0, 0.0);
+
+void main(void)
+
+{
+if (mod(floor(t.x) + floor(t.y), 2.0) == 0.0) discard;
+gl_FragColor = vec4(diffuseColor * c1, 1.0);
+}
+```
+
+## こういうことができるので, [アルファテスト](20040916)も昔の機能になってしまいました.
+
+![格子模様で型抜き]({{ '/assets/images/texture04_result.jpg' | relative_url }})
+
+<ul>
+<li>[Linux 版](summer/summer09.tar.gz)</li>
+<li>[Mac OS X 版](summer/summer09.zip)</li>
+<li>[Windows 版](summer/summer09.lzh)</li>
+</ul>

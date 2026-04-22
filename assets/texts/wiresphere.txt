@@ -1,0 +1,124 @@
+GLuint wireSphere(int slices, int stacks, const GLuint *buffer)
+{
+  Position *position;
+  Edge *edge;
+
+  GLuint vertices = slices * (stacks - 1) + 2;
+  GLuint edges = slices * (stacks - 1) * 2 + slices;
+
+  int count;
+
+  /* 頂点バッファオブジェクトを有効にする */
+  glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
+
+  /* 頂点バッファオブジェクトにメモリ領域を確保する */
+  glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * vertices, NULL, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (Edge) * edges, NULL, GL_STATIC_DRAW);
+
+  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
+  position = (Position *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+  edge = (Edge *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+
+  /* 北極点の位置 */
+  (*position)[0] =  0.0f;
+  (*position)[1] =  1.0f;
+  (*position)[2] =  0.0f;
+  ++position;
+
+  /* 中間部分の頂点の位置 */
+  for (int j = 1; j < stacks; ++j) {
+    float ph = 3.141593f * (float)j / (float)stacks;
+    float y = cosf(ph);
+    float r = sinf(ph);
+
+    for (int i = 0; i < slices; ++i) {
+      float th = 2.0f * 3.141593f * (float)i / (float)slices;
+      float x = r * cosf(th);
+      float z = r * sinf(th);
+
+      (*position)[0] = x;
+      (*position)[1] = y;
+      (*position)[2] = z;
+      ++position;
+    }
+  }
+
+  /* 南極点の位置 */
+  (*position)[0] =  0.0f;
+  (*position)[1] = -1.0f;
+  (*position)[2] =  0.0f;
+
+  /* 北極点周りの稜線 */
+  for (int i = 1; i <= slices; ++i) {
+    (*edge)[0] = 0;
+    (*edge)[1] = i;
+    ++edge;
+  }
+
+  /* 中間部分の稜線 */
+  count = 1;
+  for (int j = 2; j < stacks; ++j) {
+    for (int i = 1; i < slices; ++i) {
+
+      /* 右方向 */
+      (*edge)[0] = count;
+      (*edge)[1] = count + 1;
+      ++edge;
+
+      /* 下方向 */
+      (*edge)[0] = count;
+      (*edge)[1] = count + slices;
+      ++edge;
+
+      ++count;
+    }
+
+    /* 右端の右方向の稜線は左端の頂点に接続する */
+    (*edge)[0] = count;
+    (*edge)[1] = count - slices + 1;
+    ++edge;
+
+    /* 下方向 */
+    (*edge)[0] = count;
+    (*edge)[1] = count + slices;
+    ++edge;
+
+    ++count;
+  }
+
+  /* 最下段の稜線 */
+  for (int i = 1; i < slices; ++i) {
+
+    /* 右方向 */
+    (*edge)[0] = count;
+    (*edge)[1] = count + 1;
+    ++edge;
+
+    /* 下方向の稜線は南極点に接続する */
+    (*edge)[0] = count;
+    (*edge)[1] = vertices - 1;
+    ++edge;
+
+    ++count;
+  }
+
+  /* 右端の右方向の稜線は左端の頂点に接続する */
+  (*edge)[0] = count;
+  (*edge)[1] = count - slices + 1;
+  ++edge;
+
+  /* 下方向の稜線は南極点に接続する */
+  (*edge)[0] = count;
+  (*edge)[1] = vertices - 1;
+
+  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
+  glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+  glUnmapBuffer(GL_ARRAY_BUFFER);
+
+  /* 頂点バッファオブジェクトを解放する */
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  return edges * 2;
+}

@@ -1,0 +1,213 @@
+---
+title: "第１０回 球を三角形で描く"
+date: 2009-09-12
+categories: [OpenGL,GLSL,ゼミ]
+published: true
+---
+
+## 球を三角形で描く
+
+本題のシェーダプログラミングになかなか戻れませんが，あと少し付き合ってください. 線画に引き続いて, 今度は三角形を並べて球を描いてみたいと思います.
+
+![球を三角形で描く]({{ '/assets/images/solidsphere0.gif' | relative_url }})
+
+## ここでは下図の左のように三角形を矩形状に並べて, それを丸めるようにして球を作ることにします. こうすると北極点や南極点, および, この矩形の両端で複数の頂点が重なってしまいますが, 実はこうしないと後で都合の悪いことになります.
+
+![矩形を丸めて球を作る]({{ '/assets/images/solidsphere1.gif' | relative_url }})
+
+## 三角形をこのように並べるので, 頂点数は (`slices` + 1) × (`stacks` +1), 三角形数は `slices` × `stacks` × 2 になります. 下図左の例では `slices` = 3, `stacks` = 2 であり, 頂点数は 12, 三角形数は 12 となります. この形状をもとに, 下図右のようなデータを作成します.
+
+![三角形の配置と形状データ]({{ '/assets/images/solidsphere2.gif' | relative_url }})
+
+## それでは[前回](20090910)と同様に, この形状のデータを頂点バッファオブジェクトに設定する関数 `solidSphere`() を作成してください. 三角形を描くので, 指標の要素数は 3 になります. これを表すデータ型 `Face` の宣言を, `wireCube`() を定義しているファイルに追加します.
+
+```c
+...
+
+/* 頂点バッファオブジェクトのメモリを参照するポインタのデータ型 */
+
+typedef GLfloat Position[3];
+typedef GLuint Edge[2];
+typedef GLuint Face[3];
+
+...
+```
+
+## そして, 関数 `solidSphere`() の定義を, 同じファイルに追加してください. 引数 `slices` と `stacks` は, それぞれ球の経度方向の分割数と緯度方向の分割数です. 引数 `buffer` にはデータを設定する頂点バッファオブジェクトの名前を格納した配列を指定します. `buffer`[0] には頂点位置, `buffer`[1] には指標を格納します.
+
+```c
+GLuint solidSphere(int slices, int stacks, const GLuint *buffer)
+{
+Position *position;
+Face *face;
+
+GLuint vertices = (slices + 1) * (stacks + 1);
+
+GLuint faces = slices * stacks * 2;
+
+/* 頂点バッファオブジェクトを有効にする */
+
+glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
+
+/* 頂点バッファオブジェクトにメモリ領域を確保する */
+
+glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * vertices, NULL, GL_STATIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (Face) * faces, NULL, GL_STATIC_DRAW);
+
+/* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
+
+position = (Position *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+face = (Face *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+
+/*
+** 頂点バッファオブジェクトのメモリにデータを書き込むプログラムを,
+** この部分に作成してください. 変数 position および face に値を設
+** 定してください.
+*/
+
+/* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
+
+glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+glUnmapBuffer(GL_ARRAY_BUFFER);
+
+/* 頂点バッファオブジェクトを解放する */
+
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+return faces * 3;
+
+}
+```
+
+## 変数 `position` および `face` が指している (頂点バッファオブジェクトの) メモリに値を設定するプログラムを考えてください. データの並び方が規則的なので, `wireSphere`() よりは簡単になると思います.
+
+<ul>
+<li>[【解答例】](summer/solidsphere.txt)</li>
+</ul>
+
+## これができたら, メインプログラムに `solidSphere`() の宣言を追加し, `wireSphere`() を呼び出している部分を `solidSphere`() に置き換えてください. `slices` と `stacks` には, ともに 3 以上の整数を設定してください. ここでは 16 と 8 を設定しています.
+
+```c
+...
+
+/*
+** 図形
+*/
+static GLuint points;
+extern GLuint wireCube(const GLuint *buffer);
+extern GLuint wireSphere(int slices, int stacks, const GLuint *buffer);
+extern GLuint solidSphere(int slices, int stacks, const GLuint *buffer);
+
+...
+
+/*
+** 初期化
+*/
+static void init(void)
+{
+...
+
+/* 頂点バッファオブジェクトを２つ作る */
+
+glGenBuffers(2, buffer);
+
+/* 図形をバッファオブジェクトに登録する */
+
+points = solidSphere(16, 8, buffer);
+}
+
+...
+```
+
+## あと, もう一カ所変更があります. 三角形を描くので, [`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) の第１引数に指定している `GL_LINES` を `GL_TRIANGLES` に書き換えてください.
+
+```c
+...
+
+/*
+** 画面表示
+*/
+static void display(void)
+{
+...
+
+/* 図形を描く */
+
+glDrawElements(GL_TRIANGLES, points, GL_UNSIGNED_INT, 0);
+
+...
+
+}
+
+...
+```
+
+## これで下のような図形が表示されれば OK です.
+
+![球を三角形で描いた結果]({{ '/assets/images/solidsphere_result0.gif' | relative_url }})
+
+## 隠面消去処理の追加
+
+フラグメントシェーダで固定した色 (赤) を出力しているので, 出力画像には陰影が付いていません. このため, 隠面消去処理をしようがしまいが, 出力画像に変化はありません．しかし, この後に陰影付け処理を行う予定なので, ここで隠面消去処理を有効にしておきます. まず `main`() で `glutInitDisplayMode`() に `GLUT_DEPTH` を追加して, デプスバッファを有効にしてください.
+
+```c
+...
+
+/*
+** メインプログラム
+*/
+int main(int argc, char *argv[])
+{
+glutInit(&argc, argv);
+glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH);
+glutCreateWindow(argv[0]);
+glutDisplayFunc(display);
+init();
+glutMainLoop();
+
+return 0;
+
+}
+```
+
+## 次に, 描画を行う関数 `display`() において, 画面の消去を行う [`glClear()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClear.xhtml) に `GL_DEPTH_BUFFER_BIT` を追加します. そして図形を描画する前に `glEnable`(`GL_DEPTH_TEST`); を実行し, 図形の描画が終わったら `glDisable`(`GL_DEPTH_TEST`); を実行します.
+
+```c
+...
+
+/*
+** 画面表示
+*/
+static void display(void)
+{
+/* 画面クリア */
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+/* 隠面消去処理を有効にする */
+glEnable(GL_DEPTH_TEST);
+
+...
+
+/* 図形を描く */
+
+glDrawElements(GL_TRIANGLES, points, GL_UNSIGNED_INT, 0);
+
+...
+
+/* 隠面消去処理を無効にする */
+glDisable(GL_DEPTH_TEST);
+
+glFlush();
+
+}
+```
+
+## もちろん, 初期化の関数 `init`() で `glEnable`(`GL_DEPTH_TEST`) だけを実行する, というのでも構いません. プログラムの実行結果は, 先ほどと変わらないはずです.
+
+<ul>
+<li>[Linux 版](summer/summer07.tar.gz)</li>
+<li>[Mac OS X 版](summer/summer07.zip)</li>
+<li>[Windows 版](summer/summer07.lzh)</li>
+</ul>

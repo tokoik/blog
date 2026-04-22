@@ -1,0 +1,27 @@
+/*
+** 平行投影変換行列を求める
+*/
+void orthogonalMatrix(float left, float right,
+                      float bottom, float top,
+                      float near, float far,
+                      GLfloat *matrix)
+{
+  float dx = right - left;
+  float dy = top - bottom;
+  float dz = far - near;
+  
+  /*
+  ** dx, dy, dz は 0 になる可能性があるけど,
+  ** ここでエラー処理をするかどうかはご自由に.
+  */
+
+  matrix[ 0] =  2.0f / dx;
+  matrix[ 5] =  2.0f / dy;
+  matrix[10] = -2.0f / dz;
+  matrix[12] = -(right + left) / dx;
+  matrix[13] = -(top + bottom) / dy;
+  matrix[14] = -(far + near) / dz;
+  matrix[15] =  1.0f;
+  matrix[ 1] = matrix[ 2] = matrix[ 3] = matrix[ 4] =
+  matrix[ 6] = matrix[ 7] = matrix[ 8] = matrix[ 9] = matrix[11] = 0.0f;
+}

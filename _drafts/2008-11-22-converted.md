@@ -1,0 +1,146 @@
+---
+title: "半透明処理"
+date: 2008-11-22
+categories: [OpenGL]
+published: true
+---
+
+## 卒研中間発表会
+
+先日，卒業研究の中間発表会がありました．私が所属する「[デザイン情報学科](http://www.sys.wakayama-u.ac.jp/di/)」というところは，デザイン系と情報系の研究室が混在しているので，自分の分野とはかなり離れた分野の発表を聞くことができます．しかし，そのために聞く側が発表を理解するための前提となる知識を持っていない場合があります．ある学生さんの発表がそういう状況を考慮していないものだったため，少しカチンときて，つい，かなり強めに突っ込みを入れてしまいました．
+
+## その学生さんの分野ではそういう研究の進め方が基本であり，説明するまでも無いことなのかも知れません．でもその説明がないと，聞く側は発表内容の意義が理解できません．そういう趣旨の質問をしたつもりだったんですが，それに対する回答は得られなかったため，少し感情的になってしまいました．大人気ないことをしたと思います．学生さんには申し訳なかったですね．それでも発表会が終わった後，エレベータの中でその学生さんは「ありがとうございました」と言ってくれました．学生さんの方が人間ができてますね．
+
+## 半透明処理
+
+OpenGL や Direct3D なんかで使っているデプスバッファ法という隠面消去アルゴリズムは，半透明のオブジェクトを描くのがちょっと苦手で（スパニングスキャンライン法なら簡単なんだけどなー），このブログでもアルファブレンディングの話なんかはあえて避けて通ってきてたりします（単に忘れてただけという気もしますが）．
+これを簡単に済ますなら，ポリゴンを遠くから順に並べ替えてアルファブレンディングしながら重ね描きしていけばいいんですが，これは隠面消去アルゴリズムの一つであるデプスソート法（ペインタアルゴリズム）そのものなので，これにデプスバッファ法を組み合わせる必要がなくなってしまいます．またこの方法は，デプスソート法がもつ問題（ポリゴンの交差や「三すくみ」が処理できないとか，オブジェクト単位にマテリアルやシェーダを設定しているのをポリゴン単位にソートしてごちゃ混ぜにしてしまうとか）も出てきます．
+それで，できればソートしないで半透明処理を行いたいと言う要求が出てくるのですが，私の知る限り（あんまり知らんのですが）なかなか決定版という手法が見つからないように思います．
+例えば，昔使われていた Screen-Door Transparency という手法は，アルファ値に応じた密度のパターンを作り，Polygon Stipple によってマスクをかけるということをやるのですが，アルファ値が変わるとパターンを作り直さなければなりませんから，テクスチャのアルファ値には対応できそうにありません．第一，この方法は見かけがよくありません．
+
+![Screen-Door Transparency]({{ '/assets/images/screendoor.gif' | relative_url }})
+
+## また，[Order-Independent Transparency](http://developer.nvidia.com/object/order_independent_transparency.html)（あるいは [Interactive Order-Independent Transparency](http://developer.nvidia.com/object/Interactive_Order_Transparency.html)）という手法は，重なり合うポリゴンの層を奥行き方向に１枚１枚はがしていく [Depth Peeling](20081123) という手法を用いるため，マルチパスでレンダリングする必要があるほか，パスごとに得られた層の画像を合成するにもひと手間かかります．
+
+このほか，アンチエリアシングのために DirectX 10 で導入された A-Buffer（非常に歴史のある手法ですが，ついにハードウェアで実装されたんですね）を利用する [Stencil Routed A-Buffer](http://developer.download.nvidia.com/presentations/2007/siggraph/stencil_routed_a-Buffer_sigg07.ppt) [PPT] という手法は，ステンシルバッファを使ってアルファ値を A-Buffer に格納する図形の被覆率に置き換えることにより半透明処理を行います．これは高速で使い勝手の良い方法だと思いますが，アンチエリアシングと共存させることは難しそうです．
+
+## `Multisample` Transparency
+
+OpenGL でもマルチサンプリングによるアンチエリアシングを行うことができます．さらに OpenGL では，アルファ値を画素に対する図形の被覆率に置き換えて，半透明処理を行う機能が用意されています．この機能は `Multisample` Transparency と呼ばれます．
+
+## まず，`glutInitDisplayMode`() に `GLUT_MULTISAMPLE` を追加します．
+
+```c
+glutInitDisplayMode( ... | GLUT_MULTISAMPLE);
+```
+
+## マルチサンプリングが使えるかどうかは，次の手順により確認できます．
+
+```c
+GLint buffers, samples;
+
+/* マルチサンプリングの状態の確認 */
+
+glGetIntegerv(GL_SAMPLE_BUFFERS, &buffers);
+glGetIntegerv(GL_SAMPLES, &samples);
+printf("buffers = %d, samples = %d\n", buffers, samples);
+```
+
+## ここで `buffers` が 1 以上，`samples` が 2 以上であれば，マルチサンプリングが使えます．マルチサンプリングが使えるようなら，描画時に `GL_MULTISAMPLE` を有効にします．この時点でマルチサンプリングによるアンチエリアシングが有効になります．なお，`GL_POINT_SMOOTH`，`GL_LINE_SMOOTH`，および `GL_POLYGON_SMOOTH` の状態は無視されます．
+
+```c
+/* マルチサンプリングを有効にする */
+glEnable(GL_MULTISAMPLE);
+```
+
+## 次に，`GL_SAMPLE_ALPHA_TO_COVERAGE` を有効にします．これによってアルファ値が画素の被覆率に置き換えられるようになり，半透明処理が実現されます．
+
+```c
+/* アルファ値をサンプルの被覆率にする */
+glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
+```
+
+## コントロールパネルの設定
+
+実は Windows では，これだけではマルチサンプリングによるアンチエリアシングや半透明処理は有効になりません．多分，`buffers` も `samples` も 0 になっているのではないかと思います．マルチサンプリングを使えるようにするには，コントロールパネルの「画面」のプロパティを変更して，マルチサンプリングによるアンチエリアシングを有効にする必要があります．「設定」のタブを選んで「詳細設定」をクリックしてください．
+
+## AMD (ATI) RADEON の場合
+
+Catalyst Control Center の「3D」のところから「Anti-Aliasing」を選んで「Use application setting」のチェックをはずして，「level」を最大に設定してください．
+
+![Catalyst Control Center]({{ '/assets/images/catalyst.gif' | relative_url }})
+
+## nVIDIA GeForce の場合
+
+NVIDIA コントロールパネルを開いて，「3D設定の管理」から「アンチエイリアシング - モード」を「アプリケーション設定の変更」を選んでください．
+
+![アンチエイリアシング - モード]({{ '/assets/images/nvidia1.gif' | relative_url }})
+
+## すると「アンチエイリアシング - 設定」が変更可能になりますから，これを大きな数値に変更してください．
+
+![アンチエイリアシング - 設定]({{ '/assets/images/nvidia2.gif' | relative_url }})
+
+## この設定の後プログラムを実行すると，半透明処理（とアンチエリアシング）が有効になっていると思います．
+
+![半透明処理]({{ '/assets/images/transparent.gif' | relative_url }})
+
+## （透明が Screen-Door っぽいというかディザっぽいのは，マルチサンプリングのせいなのかな）
+
+<ul>
+<li>[Linux 版](transparent/multisample.tar.gz)</li>
+<li>[Mac OS X 版](transparent/multisample.zip)</li>
+<li>[Windows 版](transparent/multisample.lzh)</li>
+</ul>
+
+## アプリケーションによるコントロール
+
+Windows においてコントロールパネルを使わずにアプリケーション側でマルチサンプリングを使えるようにするには，`wglChoosePixelFormatARB`() で `WGL_SAMPLE_BUFFERS_ARB` に 1 以上，`WGL_SAMPLES_ARB` に 2 以上（いずれもグラフィックスハードウェアの上限値以下）を設定して pixel format を選択します．これは WGL_ARB_multisample がサポートされている必要があります．
+
+```c
+int pixelFormat;
+bool valid;
+UINT numFormats;
+float fAttributes[] = { 0.0f, 0.0f };
+
+int iAttributes[] = {
+
+WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
+WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
+WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB,
+WGL_COLOR_BITS_ARB, 24,
+WGL_ALPHA_BITS_ARB, 8,
+WGL_DEPTH_BITS_ARB, 16,
+WGL_STENCIL_BITS_ARB, 0, /* ここではステンシルバッファを使わない */
+WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
+WGL_SAMPLE_BUFFERS_ARB, 1,
+WGL_SAMPLES_ARB, 4, /* 2, 4, 6, 8, … と変えてみる */
+0, 0
+}; 
+
+...
+
+valid = wglChoosePixelFormatARB(hDC, iAttributes, fAttributes, 1, &pixelFormat, &numFormats); 
+
+if (valid == true && numFormats >= 1)  {
+/* 得られた pixelFormat を使う */
+}
+```
+
+## この後，`GL_SAMPLE_BUFFERS` や `GL_SAMPLES` を調べます．
+
+```c
+GLint buffers, samples;
+
+glGetIntegerv(GL_SAMPLE_BUFFERS, &buffers);
+
+glGetIntegerv(GL_SAMPLES, &samples);
+if (buffers > 0 && samples > 1) {
+/* Multisample が使える */
+}
+```
+
+## 残念ながら，GLUT を使う場合はこの設定ができません．また，この設定を行っている [CodeSampler.com](http://www.codesampler.com/) の[サンプル](http://www.codesampler.com/oglsrc/oglsrc_14.htm#ogl_multisample_transparency) でも，なぜかコントロールパネルで設定を変更しなければマルチサンプリングが使えませんでした（どうやらこのサンプルにはバグがあるそうですが）．
+
+## Linux と Mac OS X
+
+Linux (X Window System) の場合は，サーバとクライアントの両方で GLX_SGIS_multisample 拡張機能がサポートされていれば，多分使えます（GLUT がコンパイルされたときの環境に依存します）．これは glxinfo コマンドで確認できます．しかし手元の Linux マシン (Vine Linux 4.2, GeForce FX 5200) では，GLX_ARB_multisample 機能拡張はサポートされていましたが，GLX_SGIS_multisample はサポートされていませんでした．この場合は GLUT に頼らずに，glXChooseVisual() で visual を選択する際に GLX_SAMPLE_BUFFERS_ARB と GLX_SAMPLES_ARB を指定すればよいのではないかと思います（試していません）．Mac OS X の場合は，Mac mini (Tiger, Radeon 9200) で試したところデフォルトで有効になっていたみたいで，`buffers` = 1，`samples` = 2 が返ってきました（`samples` = 2 ではほとんど意味無いと思いますが）．これもアプリケーションで制御したければ，[Technical Q & A QA1268](http://developer.apple.com/qa/qa2001/qa1268.html) に解説があります．

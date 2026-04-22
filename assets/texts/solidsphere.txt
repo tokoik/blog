@@ -1,0 +1,64 @@
+GLuint solidSphere(int slices, int stacks, const GLuint *buffer)
+{
+  GLuint vertices = (slices + 1) * (stacks + 1);
+  GLuint faces = slices * stacks * 2;
+
+  /* 頂点バッファオブジェクトを有効にする */
+  glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
+
+  /* 頂点バッファオブジェクトにメモリ領域を確保する */
+  glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * vertices, NULL, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (Face) * faces, NULL, GL_STATIC_DRAW);
+
+  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
+  Position *position = (Position *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+  Face *face = (Face *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+
+  /* 頂点の位置 */
+  for (int j = 0; j <= stacks; ++j) {
+    float ph = 3.141593f * (float)j / (float)stacks;
+    float y = cosf(ph);
+    float r = sinf(ph);
+
+    for (int i = 0; i <= slices; ++i) {
+      float th = 2.0f * 3.141593f * (float)i / (float)slices;
+      float x = r * cosf(th);
+      float z = r * sinf(th);
+
+      (*position)[0] = x;
+      (*position)[1] = y;
+      (*position)[2] = z;
+      ++position;
+    }
+  }
+
+  /* 面の指標 */
+  for (int j = 0; j < stacks; ++j) {
+    for (int i = 0; i < slices; ++i) {
+      int count = (slices + 1) * j + i;
+
+      /* 上半分 */
+      (*face)[0] = count;
+      (*face)[1] = count + 1;
+      (*face)[2] = count + slices + 2;
+      ++face;
+
+      /* 下半分 */
+      (*face)[0] = count;
+      (*face)[1] = count + slices + 2;
+      (*face)[2] = count + slices + 1;
+      ++face;
+    }
+  }
+
+  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
+  glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+  glUnmapBuffer(GL_ARRAY_BUFFER);
+
+  /* 頂点バッファオブジェクトを解放する */
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  return faces * 3;
+}

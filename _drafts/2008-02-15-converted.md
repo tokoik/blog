@@ -1,0 +1,36 @@
+---
+title: "fink の dvipdfmx"
+date: 2008-02-15
+categories: [メモ]
+published: true
+---
+
+## `dvipdfmx` のエラー
+
+[fink](http://www.finkproject.org/index.php?phpLang=ja) の `dvipdfmx` で日本語を含む `dvi` ファイルを変換しようとすると，エラーになってしまいます．
+
+```c
+% dvipdfmx test.dvi
+
+test.dvi -> test.pdf
+
+[1
+** ERROR ** Could not find encoding file: H
+
+Output file removed.
+```
+
+## CMap ファイルをコピー
+
+<%= a "ftp://ftp.oreilly.com/pub/examples/nutshell/cjkv/adobe/aj16.tar.Z" %> をダウンロードして CMap ディレクトリを/sw/share/texmf/dvipdfm の下に置き，
+
+```c
+% sudo mktexlsr
+```
+
+## したら通るようになりました．
+
+## 参考
+
+<p><%= a "http://www.mgsoft.org/jikanbae/blog/2005/12/finklatex.html" %></p>
+<p><%= a "http://www.sodan.ecc.u-tokyo.ac.jp/BTS/2004/Fink/86.html" %></p>

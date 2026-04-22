@@ -1,0 +1,14 @@
+/*
+** 行列 m0 と m1 の積を求める
+*/
+void multiplyMatrix(const GLfloat *m0, const GLfloat *m1, GLfloat *matrix)
+{
+  for (int i = 0; i < 16; ++i) {
+    int j = i & ~3, k = i & 3;
+
+    matrix[i] = m0[j + 0] * m1[ 0 + k]
+              + m0[j + 1] * m1[ 4 + k]
+              + m0[j + 2] * m1[ 8 + k]
+              + m0[j + 3] * m1[12 + k];
+  }
+}
