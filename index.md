@@ -77,7 +77,7 @@ published: true
   <ul>
     <li><a href="https://www.kyoritsu-pub.co.jp/book/b10006873.html">マルチメディアコミュニケーション</a></li>
     <li><a href="https://www.amazon.co.jp/dp/4542701344">デザイン情報学入門</a></li>
-    <li><a href="https://link.springer.com/book/10.1007/978-94-017-1689-5">Geometric Modeling</a></li>
+    <li><a href="https://link.springer.com/book/10.1007/978-94-017-1689-5">Geometric Modeling: Techniques, Applications, Systems and Tools</a></li>
     <li><a href="https://www.kohgakusha.co.jp/books/detail/4-7775-1134-0">GLUT による OpenGL 入門</a></li>
     <li><a href="https://www.kohgakusha.co.jp/books/detail/978-4-7775-1332-1">GLUT による OpenGL 入門テクスチャマッピング編</a></li>
     <li><a href="https://www.kohgakusha.co.jp/books/detail/978-4-7775-1917-0">GLUT/freeglut による OpenGL 入門</a></li>

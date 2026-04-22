@@ -304,7 +304,7 @@ footer {
 */
 div.main {
   float: left;
-  width: 60%;
+  width: 64%;
   padding: 0;
 }
 
@@ -317,7 +317,7 @@ div.sidebar {
   border-left: solid 1px #ada;
   float: right;
   position: relative;
-  width: 38%;
+  width: 32%;
 
   /*
   サイドバーの見出し
