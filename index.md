@@ -16,7 +16,7 @@ published: true
       </li>
     {% endfor %}
   </ul>
-　<h2>カテゴリ別記事一覧</h2>
+　<h2>記事カテゴリ別一覧</h2>
   {% for category in site.categories %}
     {% capture category_name %}{{ category | first }}{% endcapture %}
     <h3 id="{{ category_name | slugize }}">{{ category_name }}</h3>
@@ -33,7 +33,7 @@ published: true
 
 <!-- サイドバーはリンク -->
 <div class="sidebar">
-  <h2>カテゴリ</h2>
+  <h2>記事カテゴリ</h2>
   <ul>
     {% for category in site.categories %}
       {% capture category_name %}{{ category | first }}{% endcapture %}
