@@ -11,7 +11,7 @@ M2 が二人売れ残ってます. 他の二人がさっさと決めてくれた
 
 ## 似非 SSS (Subsurface Scattering)
 
-先日 [SSAO](20101122) のサンプルを作っているときに[久保尋之氏](http://www.mlab.phys.waseda.ac.jp/member/j-site/kubo_j.html)からメッセージを頂いたのをきっかけに, 久保氏のご研究をヒントに, もしかしたらこういう方法でも SSS (Subsurface Scattering, 表面下散乱) っぽい表現ができるかも, と考えてやってみました.
+先日 [SSAO]({% post-url 2010-11-22-post %}) のサンプルを作っているときに[久保尋之氏](http://www.mlab.phys.waseda.ac.jp/member/j-site/kubo_j.html)からメッセージを頂いたのをきっかけに, 久保氏のご研究をヒントに, もしかしたらこういう方法でも SSS (Subsurface Scattering, 表面下散乱) っぽい表現ができるかも, と考えてやってみました.
 この方法は理論的な裏付けもサーベイもしてませんし, 速くもなければ品質が良い訳でもないのですが, SSAO のプログラムをわずかにいじるだけで実現できます. いじったのは下記のところです.
 
 <ul>

@@ -19,7 +19,7 @@ published: true
 
 ![画角から表示領域の大きさを求める]({{ '/assets/images/cameramatrix0.gif' | relative_url }})
 
-## これを視野錐台にもとづく[透視投影変換行列](20090829)に代入します.
+## これを視野錐台にもとづく[透視投影変換行列]({% post-url 2009-08-29-post %})に代入します.
 
 ![投影変換行列の要素に代入]({{ '/assets/images/cameramatrix1.gif' | relative_url }})
 
@@ -52,7 +52,7 @@ GLfloat *matrix)
 
 ![画角を指定して描画]({{ '/assets/images/camera_result.gif' | relative_url }})
 
-## 時間が余ったら立方体を描いてみて. あと[前回](20090902)の lookAt() が間違っていたから, これも修正しといてくんろ.
+## 時間が余ったら立方体を描いてみて. あと[前回]({% post-url 2009-09-02-post %})の lookAt() が間違っていたから, これも修正しといてくんろ.
 
 <ul>
 <li>[Linux 版](summer/summer04.tar.gz)</li>

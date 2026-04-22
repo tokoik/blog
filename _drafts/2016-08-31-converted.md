@@ -74,7 +74,7 @@ void main(void)
 
 ## メッシュを描く
 
-同様にして，[前回](20160629)の最後に示したようなメッシュは，次のようにして描くことができます．まず，メッシュの幅 slices と高さ stacks から，メッシュの１段分の `GL_TRIANGLE_STRIP` の頂点数 vertexCount と，その繰り返し回数（段数）primitiveCount を求めます．
+同様にして，[前回]({% post-url 2016-06-29-post %})の最後に示したようなメッシュは，次のようにして描くことができます．まず，メッシュの幅 slices と高さ stacks から，メッシュの１段分の `GL_TRIANGLE_STRIP` の頂点数 vertexCount と，その繰り返し回数（段数）primitiveCount を求めます．
 
 ```cpp
   const GLuint vertexCount(slices * 2 + 2);

@@ -13,7 +13,7 @@ published: true
 
 そんなこんなで、ここんとこ学生さんの面倒を全然見られていません。ごめんなさい。進捗を発表してもらうとプレゼンはとても良くできていたりして、うっかり騙されてしまいます。本当のところはどうなのかはポーリングしないとわからないことが多いのですが、それはコストが高いので、学生さんの方からシグナルを発生してくれた方が他の仕事と非同期に処理できて助かります。よろしくお願いします。
 代わりに、進捗状況をもとに必要になりそうなことをここに書いておきます。これは以前からやっていたことですが、今年は本当に忙しくてこっちも滞っていました。にもかかわらず、学生さんが取り組んでるテーマが実は結構難しい話だったりして、解説を書くこと自体に難儀しています。
-ということで、今日は大晦日ではありますが、[偽ポールマッカートニー氏](http://reo.hatenablog.jp/)に「年内に書く」と約束していた、2013 年に発表した「[天空画像を用いたスクリーンスペース表面下散乱](http://www.vc.media.yamanashi.ac.jp/nicograph2013/Program.html)」(この論文本体はネット上にないのね… [発表スライド](http://www.slideshare.net/tokoik/ss-40188035), [改良版のモデルの解説ポスター](http://www.slideshare.net/tokoik/ss-42562624), [会場で内職して作ってた発表デモプログラム](https://github.com/tokoik/imsss)) で使っている手法について解説します。ただし、元の研究のキモは表面下散乱ですけど、今回は光源環境に [RICOH THETA S などの全方位カメラ](20160629)のライブストリーミング映像を使えるようにしたかわりに、サンプリングに使う確率分布を cosine lobe にしてしまったので、表面下散乱は実現していません。嫌がらせなみに長いですけど偽ポールマッカートニー氏これでいいですか。
+ということで、今日は大晦日ではありますが、[偽ポールマッカートニー氏](http://reo.hatenablog.jp/)に「年内に書く」と約束していた、2013 年に発表した「[天空画像を用いたスクリーンスペース表面下散乱](http://www.vc.media.yamanashi.ac.jp/nicograph2013/Program.html)」(この論文本体はネット上にないのね… [発表スライド](http://www.slideshare.net/tokoik/ss-40188035), [改良版のモデルの解説ポスター](http://www.slideshare.net/tokoik/ss-42562624), [会場で内職して作ってた発表デモプログラム](https://github.com/tokoik/imsss)) で使っている手法について解説します。ただし、元の研究のキモは表面下散乱ですけど、今回は光源環境に [RICOH THETA S などの全方位カメラ]({% post-url 2016-06-29-post %})のライブストリーミング映像を使えるようにしたかわりに、サンプリングに使う確率分布を cosine lobe にしてしまったので、表面下散乱は実現していません。嫌がらせなみに長いですけど偽ポールマッカートニー氏これでいいですか。
 
 ## 頂点単位の陰影付けを画素単位の陰影付けに変更する
 
@@ -25,7 +25,7 @@ published: true
 <li>[頂点単位の陰影付けを行うプログラム](https://github.com/tokoik/irmap/tree/pervertex)</li>
 </ul>
 
-## この手法は処理をスクリーン空間で行いますので、このプログラムを[画素単位の陰影付け](20051007)に変更します。上のプログラムのバーテックスシェーダのソースプログラム ([pass1.vert](https://github.com/tokoik/irmap/blob/pervertex/irmap/pass1.vert)) は次にようになっています。
+## この手法は処理をスクリーン空間で行いますので、このプログラムを[画素単位の陰影付け]({% post-url 2005-10-07-post %})に変更します。上のプログラムのバーテックスシェーダのソースプログラム ([pass1.vert](https://github.com/tokoik/irmap/blob/pervertex/irmap/pass1.vert)) は次にようになっています。
 
 ```cpp
 #extension GL_ARB_explicit_attrib_location : enable
@@ -193,7 +193,7 @@ void main(void)
 
 ## フレームバッファオブジェクトを組み込む
 
-処理をスクリーン空間で行うために、レンダリング結果を一旦[フレームバッファオブジェクト (FBO)](20101207) に格納します。このように画面に表示されないところに描くことを、オフスクリーンレンダリング (Off-screen Rendering) と呼んだりします。まず、フレームバッファオブジェクトのサイズを決めます。最終的なアウトプット以外の補助的なバッファの解像度は、パフォーマンスを稼ぐために実際の表示解像度より低くするのが一般的ですが、メンタルの具合が悪いとそういうことを決めるのがめんどくさいので、ここではデフォルトのウィンドウサイズと同じにしておきます。また、フレームバッファオブジェクトに使用するテクスチャの境界色も決めておきます。
+処理をスクリーン空間で行うために、レンダリング結果を一旦[フレームバッファオブジェクト (FBO)]({% post-url 2010-12-07-post %}) に格納します。このように画面に表示されないところに描くことを、オフスクリーンレンダリング (Off-screen Rendering) と呼んだりします。まず、フレームバッファオブジェクトのサイズを決めます。最終的なアウトプット以外の補助的なバッファの解像度は、パフォーマンスを稼ぐために実際の表示解像度より低くするのが一般的ですが、メンタルの具合が悪いとそういうことを決めるのがめんどくさいので、ここではデフォルトのウィンドウサイズと同じにしておきます。また、フレームバッファオブジェクトに使用するテクスチャの境界色も決めておきます。
 
 ```cpp
 #include <iostream>
@@ -296,7 +296,7 @@ GLuint createTexture(GLenum internalFormat, GLsizei width, GLsizei height)
 ## 遅延レンダリング
 
 フレームバッファオブジェクトに描画すると通常のフレームバッファには描かれなくなるので、画面には表示されません。フレームバッファオブジェクトに描画した内容は、フレームバッファオブジェクトのカラーバッファに取り付けたテクスチャに格納されているので、これをマッピングしたポリゴンを描いて画面に表示します。つまり、一つのフレームを二回に分けてレンダリングするわけです。このような手法をマルチパスレンダリングと言います。また、マルチパスレンダリングにおいて最初に完全なレンダリングを行わず、後のパスで最終的な画像を完成させる手法を遅延レンダリング (Deffered Rendering) とか遅延シェーディング (Deffered Shading) とか言います。
-まず、二回目のパスで使用するポリゴンを準備します。これに最初のパスでフレームバッファオブジェクトにレンダリングした内容をテクスチャとしてマッピングします。このポリゴンの描画に用いる頂点配列オブジェクト (Vertex Array Object, VAO) には、「[矩形の書き方](20160831)」で説明した手法を使って頂点バッファオブジェクト (Vertex Buffer Object, VBO) を組み込まず、バーテックスシェーダで頂点位置を生成することにします。
+まず、二回目のパスで使用するポリゴンを準備します。これに最初のパスでフレームバッファオブジェクトにレンダリングした内容をテクスチャとしてマッピングします。このポリゴンの描画に用いる頂点配列オブジェクト (Vertex Array Object, VAO) には、「[矩形の書き方]({% post-url 2016-08-31-post %})」で説明した手法を使って頂点バッファオブジェクト (Vertex Buffer Object, VBO) を組み込まず、バーテックスシェーダで頂点位置を生成することにします。
 
 ```cpp
   const auto fbo([] { GLuint f; glGenFramebuffers(1, &f); return f; } ());
@@ -428,7 +428,7 @@ void main(void)
 
 ## マルチプルレンダーターゲットにレンダリングする
 
-前のプログラムではフレームバッファオブジェクトに色のデータを書き込んで、それをそのままポリゴンにマッピングしてレンダリングしました。(本当の) 遅延レンダリングでは、最初のパスで陰影計算まで行ってしまわずに、レンダリングに使う中間的なデータをフレームバッファオブジェクトに格納します。そして二回目のパスでそのデータを使って陰影を求めて、本来のフレームバッファに出力します。この中間的なデータには物体表面の色などの反射特性に加えて位置や法線など複数のものがあるため、フレームバッファオブジェクトに複数のカラーバッファを取り付ける必要があります。これを[マルチプルレンダーターゲット](20101208)と言います。
+前のプログラムではフレームバッファオブジェクトに色のデータを書き込んで、それをそのままポリゴンにマッピングしてレンダリングしました。(本当の) 遅延レンダリングでは、最初のパスで陰影計算まで行ってしまわずに、レンダリングに使う中間的なデータをフレームバッファオブジェクトに格納します。そして二回目のパスでそのデータを使って陰影を求めて、本来のフレームバッファに出力します。この中間的なデータには物体表面の色などの反射特性に加えて位置や法線など複数のものがあるため、フレームバッファオブジェクトに複数のカラーバッファを取り付ける必要があります。これを[マルチプルレンダーターゲット]({% post-url 2010-12-08-post %})と言います。
 
 ## ![マルチプルレンダーターゲット](/images/20161231_17.jpg)
 
@@ -743,7 +743,7 @@ uniform sampler2D color[4];
 // 環境のテクスチャ
 ```
 
-## 環境のテクスチャのサンプリング方法は、「[魚眼レンズ画像の平面展開](20160629)」および「[魚眼レンズ画像の平面展開のサンプルプログラム](20161203)」の手法に準じています。
+## 環境のテクスチャのサンプリング方法は、「[魚眼レンズ画像の平面展開]({% post-url 2016-06-29-post %})」および「[魚眼レンズ画像の平面展開のサンプルプログラム]({% post-url 2016-12-03-post %})」の手法に準じています。
 
 ```cpp
 vec2 size = textureSize(image, 0);
@@ -872,7 +872,7 @@ void main(void)
 
 ## $$E=\frac{1}{\pi}\int_{\Omega}L_i({\bf l})\cos\theta_id\omega_i$$
 
-## ただ、この積分をまともに計算するとすごく時間がかかるので、先に天球のすべての方向からの放射照度を求めてテクスチャに格納しておく[放射照度マッピング](20150826)や、天球の明度分布 (光源環境) を球面調和解析し畳み込み演算を周波数空間で行う [Precomputed radiance transfer (PRT)](http://dl.acm.org/citation.cfm?id=566612) ([PDF](http://cseweb.ucsd.edu/~ravir/6998/papers/p527-sloan.pdf)) をはじめ、様々な手法が提案されています。後者は物体表面上の一点 (頂点) から見える天空の状況 (伝達関数) についても球面調和解析し、光源環境と伝達関数の畳み込み演算を周波数空間の低次の項の内積によって求めることにより、局所的な影や相互反射、半透明などの照明効果をリアルタイムに実現することができます。これは Direct3D のバージョン 9 に[実装](https://msdn.microsoft.com/en-us/library/windows/desktop/bb147287(v=vs.85).aspx)されています。
+## ただ、この積分をまともに計算するとすごく時間がかかるので、先に天球のすべての方向からの放射照度を求めてテクスチャに格納しておく[放射照度マッピング]({% post-url 2015-08-26-post %})や、天球の明度分布 (光源環境) を球面調和解析し畳み込み演算を周波数空間で行う [Precomputed radiance transfer (PRT)](http://dl.acm.org/citation.cfm?id=566612) ([PDF](http://cseweb.ucsd.edu/~ravir/6998/papers/p527-sloan.pdf)) をはじめ、様々な手法が提案されています。後者は物体表面上の一点 (頂点) から見える天空の状況 (伝達関数) についても球面調和解析し、光源環境と伝達関数の畳み込み演算を周波数空間の低次の項の内積によって求めることにより、局所的な影や相互反射、半透明などの照明効果をリアルタイムに実現することができます。これは Direct3D のバージョン 9 に[実装](https://msdn.microsoft.com/en-us/library/windows/desktop/bb147287(v=vs.85).aspx)されています。
 
 <blockquote>この話とは全然関係ないし昔のことで記憶があいまいなんですけど、かつて購読していた (今は研究費がもったいなくて購読していない) IEEE CG&A という雑誌で、記事を書いていた有名な CG 研究者 (に限らんのですけど) のメールアドレスがどんどん[マイクロソフトリサーチ](https://www.microsoft.com/en-us/research/)に変わっていった時期があったように思います。んで、それと前後して Direct3D みたいなものが出てきてマイクロソフトが (リアルタイム) CG の世界でもイニシアチブを取るようになっちゃったっていう印象を私は持ってます。上記の PRT の開発者の Sloan 氏も、この研究のときはマイクロソフトリサーチの人でした。でも、今は[ディズニーリサーチ](https://www.disneyresearch.com/)にいらっしゃるんですよね。ちょっと前は有名な CG 研究者がディズニーリサーチに吸い寄せられていったような気がしてたんですけど、こういうのは時代の流れっちゅーもんですかね。今は [AI 関係者](http://wired.jp/2017/01/03/giant-worlds-ai-talent/)なんでしょうか。</blockquote>
 
@@ -890,7 +890,7 @@ void main(void)
 
 ## ここで <span style="font-weight: bold;">l</span>(<span style="font-style: italic;">θ<sub>i</sub></span>) は法線に対して <span style="font-style: italic;">θ<sub>i</sub></span> の角度を持つ任意のベクトルです。このベクトルを前述の確率密度関数 <span style="font-style: italic;">p</span>(<span style="font-style: italic;">θ<sub>i</sub></span>) に従って発生させれば、この式により放射照度 <span style="font-style: italic;">E</span> の近似値が得られます。
 
-## 以前に説明した[放射照度マッピング](20150826)は、放射照度、すなわち受光面の1点に入射する単位面積当たりの光の強さ (エネルギー) に着目したもので、受光面を入射光がすべての方向に均等に反射する完全拡散反射面とし、鏡面反射は考慮していませんでした。ここでは鏡面反射成分についても前述と同様の手法で強度を求めます。この手法については後述しますが、鏡面反射のモデルには古典とも言える Phong のモデルを採用します。
+## 以前に説明した[放射照度マッピング]({% post-url 2015-08-26-post %})は、放射照度、すなわち受光面の1点に入射する単位面積当たりの光の強さ (エネルギー) に着目したもので、受光面を入射光がすべての方向に均等に反射する完全拡散反射面とし、鏡面反射は考慮していませんでした。ここでは鏡面反射成分についても前述と同様の手法で強度を求めます。この手法については後述しますが、鏡面反射のモデルには古典とも言える Phong のモデルを採用します。
 
 <blockquote> Phong のモデルを採用したのは、この確率密度関数の累積分布関数がとても簡単になるからです。より複雑なモデルに対しては重点サンプリング (インポータンスサンプリング) の手法が用いられます。[Ward の異方性モデル](http://dl.acm.org/citation.cfm?id=134078) ([PDF](http://testcis.cis.rit.edu/~cnspci/references/ward1992.pdf)) については、[shikihuiku](https://shikihuiku.wordpress.com/) さまが[レンダリングにおける importance sampling の基礎](https://shikihuiku.wordpress.com/2016/06/14/%e3%83%ac%e3%83%b3%e3%83%80%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8bimportancesampling%e3%81%ae%e5%9f%ba%e7%a4%8e/), [(2)](https://shikihuiku.wordpress.com/2016/08/01/%e3%83%ac%e3%83%b3%e3%83%80%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8bimportance-sampling%e3%81%ae%e5%9f%ba%e7%a4%8e2/), [(3)](https://shikihuiku.wordpress.com/2016/08/23/%e3%83%ac%e3%83%b3%e3%83%80%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8bimportance-sampling%e3%81%ae%e5%9f%ba%e7%a4%8e3/), [(4)](https://shikihuiku.wordpress.com/2016/09/11/%e3%83%ac%e3%83%b3%e3%83%80%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8bimportance-sampling%e3%81%ae%e5%9f%ba%e7%a4%8e4/) で 詳しく解説なさっています。また関係ない話なんですけど、重点サンプリングは AI 研究の機械学習の話にもよく出てきます ([人工知能に関する断創録](http://aidiary.hatenablog.com/)さまの[重点サンプリング (1)](http://aidiary.hatenablog.com/entry/20140920/1411207305), [(2)](http://aidiary.hatenablog.com/entry/20140921/1411292913) とか)。自分は学生時代は AI とか CV とかやっている研究室で逆らって CG やってたので、それらの領域には足を踏み入れるまいと心に誓っているのですが、基盤となる知識がめっちゃ被ってるのでしょっちゅう驚かされます。基礎はなんでも疎かにはできませんね。そういや、自分の最初に査読論文を書いたプログラムでも、当時の電総研 (今の産総研) で開発していた Valid っていう Lisp のシンタックスシュガーの説明を友達に聞いて思いついたテクニックを使ってました。</blockquote>
 
@@ -920,7 +920,7 @@ void main(void)
 
 ## $$\int_0^{\frac{\pi}{2}} p(\theta)d\theta=1\ (n \geq 0)$$
 
-## この分布に従う乱数を生成して、<span style="font-style: italic;">θ<sub>i</sub></span> として使います。これには[逆関数法](20091225)を使います。まず、この確率密度関数の累積分布関数 (Cumulative Distribution Function, CDF) を求め、それを <span style="font-style: italic;">u</span> とします。
+## この分布に従う乱数を生成して、<span style="font-style: italic;">θ<sub>i</sub></span> として使います。これには[逆関数法]({% post-url 2009-12-25-post %})を使います。まず、この確率密度関数の累積分布関数 (Cumulative Distribution Function, CDF) を求め、それを <span style="font-style: italic;">u</span> とします。
 
 ## $$F(t)=\int_0^t p(\theta)d\theta=1-\cos^{n+1}t=u$$
 
@@ -1432,7 +1432,7 @@ uniform int specularSamples;
 
 ## 環境遮蔽 (Ambient Occlusion) と反射遮蔽 (Reflection Occlusion)
 
-環境遮蔽を実現します。また映り込みに対しても occlusion を考慮します。 [SSAO (Screen Space Ambient Occlusion)](20101122) は環境光が物体表面の局所形状によって遮られることによって発生する陰影をスクリーン空間上で再現する手法です。以前は CryEngine 2 の手法<%=fn "Mittring, M. (2007, August). Finding next gen: Cryengine 2. In ACM SIGGRAPH 2007 courses (pp. 97-121). ACM." %> ([PDF](https://developer.amd.com/wordpress/media/2013/02/Chapter8-Mittring-Finding_NextGen_CryEngine2.pdf), [PPT](http://crytek.com/cryengine/presentations/finding-next-gen-cryengine--2)) について解説しましたが、今回は StarCraft II の方法<%=fn "Filion, D., & McNaughton, R. (2008, August). Effects & techniques. In ACM SIGGRAPH 2008 Games (pp. 133-164). ACM." %> ([PDF](https://developer.amd.com/wordpress/media/2013/01/Chapter05-Filion-StarCraftII.pdf)), [PPT](http://amd-dev.wpengine.netdna-cdn.com/wordpress/media/2012/10/S2008-Filion-McNaughton-StarCraftII.pdf)) を使いました。でも、たぶん他の方法を使った方がいいと思います。これついては [アンビエントオクルージョンちゃん](http://ambientocclusion.hatenablog.com/)が[詳しく説明](http://ambientocclusion.hatenablog.com/entry/2013/11/07/152755)してくれています。
+環境遮蔽を実現します。また映り込みに対しても occlusion を考慮します。 [SSAO (Screen Space Ambient Occlusion)]({% post-url 2010-11-22-post %}) は環境光が物体表面の局所形状によって遮られることによって発生する陰影をスクリーン空間上で再現する手法です。以前は CryEngine 2 の手法<%=fn "Mittring, M. (2007, August). Finding next gen: Cryengine 2. In ACM SIGGRAPH 2007 courses (pp. 97-121). ACM." %> ([PDF](https://developer.amd.com/wordpress/media/2013/02/Chapter8-Mittring-Finding_NextGen_CryEngine2.pdf), [PPT](http://crytek.com/cryengine/presentations/finding-next-gen-cryengine--2)) について解説しましたが、今回は StarCraft II の方法<%=fn "Filion, D., & McNaughton, R. (2008, August). Effects & techniques. In ACM SIGGRAPH 2008 Games (pp. 133-164). ACM." %> ([PDF](https://developer.amd.com/wordpress/media/2013/01/Chapter05-Filion-StarCraftII.pdf)), [PPT](http://amd-dev.wpengine.netdna-cdn.com/wordpress/media/2012/10/S2008-Filion-McNaughton-StarCraftII.pdf)) を使いました。でも、たぶん他の方法を使った方がいいと思います。これついては [アンビエントオクルージョンちゃん](http://ambientocclusion.hatenablog.com/)が[詳しく説明](http://ambientocclusion.hatenablog.com/entry/2013/11/07/152755)してくれています。
 Ambient Occulusion は物体表面の局所形状の環境光に対する影響を見積もりますが、今回は天空光による放射照度への影響を求めます。放射照度の算出に用いたサンプル点を、局所形状による遮蔽の検出にも使います。サンプル点は単位球の表面上に散布していますが、その中心からの距離も変化させます。([main.cpp](https://github.com/tokoik/irmap/blob/ssao/irmap/main.cpp)) では、まず、その最大値 (散布半径) を決めておきます。これは物体のスケールや表面形状の複雑さにもとづいて適当に決定します。
 
 ```cpp
