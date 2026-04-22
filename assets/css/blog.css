@@ -182,7 +182,7 @@ main {
     border-style: none;
     background-color: #dfd;
     margin: 1em 4em;
-    padding: 0.5em;
+    padding: 1em;
   }
 
   /*
@@ -377,7 +377,7 @@ div.sidebar {
       padding: 0 0 0 0.5em;
     }
     pre, blockquote {
-      padding: 0.2em;
+      padding: 0.5em;
     }
     iframe {
       max-width: 100%;
