@@ -6,7 +6,7 @@ published: true
 
 <!-- メインコンテンツは記事一覧 -->
 <div class="main">
-  <p>ここは「床井研究室」のアーカイブです。管理人の退職に伴い、職場のサーバで運用したものを、ここに移しました。<a href="https://tdiary.org/">tDiary</a> から <a href="https://docs.github.com/ja/pages/getting-started-with-github-pages/what-is-github-pages">GitHub Pages</a> に変更したので、頂いたコメントは失われています。また、内容も一部変更しています。</p>
+  <p>ここは「床井研究室」のアーカイブです。管理人の退職に伴い、職場のサーバで運用したものを、ここに移しました。<a href="https://tdiary.org/">tDiary</a> から <a href="https://docs.github.com/ja/pages/getting-started-with-github-pages/what-is-github-pages">GitHub Pages</a> に変更したので、頂いたコメントは失われています。また、内容も一部変更しています。修正等がありましたら <a href="https://github.com/tokoik/blog">PR</a> でお願いします。</p>
   <h2>記事一覧</h2>
   <ul>
     {% for post in site.posts %}
