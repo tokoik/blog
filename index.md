@@ -16,6 +16,28 @@ published: true
       </li>
     {% endfor %}
   </ul>
+
+  <h2>カテゴリ一覧</h2>
+  <ul>
+    {% for category in site.categories %}
+      {% capture category_name %}{{ category | first }}{% endcapture %}
+      <li><a href="#{{ category_name | slugize }}">{{ category_name }}</a></li>
+    {% endfor %}
+  </ul>
+
+　<h2>カテゴリー別記事一覧</h2>
+  {% for category in site.categories %}
+    {% capture category_name %}{{ category | first }}{% endcapture %}
+    <h3 id="{{ category_name | slugize }}">{{ category_name }}</h3>
+    <ul>
+      {% for post in site.categories[category_name] %}
+        <li>
+          <span class="date">{{ post.date | date: "%Y/%m/%d" }}</span> — 
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
 </div>
 
 <!-- サイドバーはリンク -->
