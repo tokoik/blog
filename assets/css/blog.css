@@ -79,43 +79,48 @@ header {
   ブログのタイトル
   */
   h1, h1 a:link, h1 a:visited, h1 a:focus, h1 a:hover, h1 a:active {
-    background-color: #073;
-    color: #fff;
+    font-size: large;
     margin: 0.2em 0;
     padding: 0.3em 0.5em 0.3em 0.5em;
+    color: #fff;
+    background-color: #073;
   }
 
   /*
-  記事のタイトル
+  タイトルバー
   */
   div.title {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: medium;
 
     /*
-    * ナビゲーションボタン
+    記事のタイトル
+    */
+    h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
+      margin: 0.5em 0.5em 0.2em 1em;
+      text-indent: -1.0em;
+      font-weight: bold;
+    }
+
+    /*
+    * ナビゲーション
     */
     div.navigation {
       display: flex;
       flex-wrap: nowrap;
       gap: 0.2em;
-    }
-  }
-  h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
-    margin: 0.5em 0.5em 0.2em 1em;
-    text-indent: -1.0em;
-    font-size: large;
-    font-weight: bold;
-  }
 
-  /*
-  ボタン
-  */
-  button {
-    background-color: #ada;
-    border: none;
-    cursor: pointer;
+      /*
+      ボタン
+      */
+      button {
+        border: none;
+        cursor: pointer;
+        background-color: #ada;
+      }
+    }
   }
 }
 
@@ -365,6 +370,7 @@ div.sidebar {
       margin-right: 0;
     }
     p, dl, dt, dd, pre, blockquote, div.footnotes, footer {
+      font-size: small;
       margin-left: 0;
       margin-right: 0;
     }
