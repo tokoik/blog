@@ -71,9 +71,9 @@ hr {
 }
 
 /*
-記事のヘッダ
+記事のヘッダとフッタ
 */
-header {
+header, footer {
 
   /*
   ブログのタイトル
@@ -86,9 +86,9 @@ header {
   }
 
   /*
-  タイトルバー
+  ナビゲーションバー
   */
-  div.title {
+  div.navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -103,9 +103,19 @@ header {
     }
 
     /*
-    * ナビゲーション
+    ライセンス
     */
-    div.navigation {
+    div.license {
+      margin: 0;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    /*
+    ボタン領域
+    */
+    div.buttons {
       display: flex;
       flex-wrap: nowrap;
       gap: 0.2em;
@@ -162,7 +172,6 @@ main {
   p {
     margin: 0.3em 0.5em 0.2em 0;
     line-height: 1.5;
-    font-size: small;
   }
 
   /*
@@ -297,7 +306,6 @@ main {
 */
 footer {
 	clear: both;
-	text-align: right;
 	border-top: solid 1px #ada;
 	margin-top: 2em;
 	padding-top: 0.5em;
