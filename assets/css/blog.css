@@ -41,11 +41,11 @@ strong {
 リンク文字列
 */
 a:link {
-	color: #060;
+	color: #360;
 	text-decoration: none;
 }
 a:visited {
-	color: #040;
+	color: #240;
 	text-decoration: none;
 }
 a:focus {
