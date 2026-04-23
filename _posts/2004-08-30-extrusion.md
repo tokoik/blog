@@ -16,7 +16,7 @@ published: true
 
 押し出し (extrusion) は平面図形を移動したときの軌跡によって立体形状を表現するものです．掃引 (sweep) ともいい，たいていの CG ソフトに用意されている基本的な形状定義手法です．OpenGL では，[GLE Tubing and Extrusion Library](http://linas.org/gle/index.html) を使えばこのような形状を描くことができます．また VRML にもExtrusion というノードが用意されています．３次元の曲線や折れ線に対して太さをもたせたパイプのようなものも，この押し出しによって作成することができます．
 
-![押し出し](/blog/assets/images/extrusion1.gif)
+![押し出し]({{ site.baseurl }}/assets/images/extrusion1.gif)
 
 ここでは，VRML の Extrusion ノードのサブセットを実現する，押し出しの実装を考えてみます．GLE があるので自分で作る意味はないのですが，この実装の中に学生さんに押さえておいてほしいなぁと思うポイントがいくつかあったので，恥を忍んで？書いてみます．
 
@@ -35,7 +35,7 @@ void extrusion(const double cs[][2], int nc, const double sp[][3], int ns)
 
 ここで断面形状は xy 平面上に置くものとします．したがって断面の頂点座標値は，Z 値を省略して (z = 0) ２次元座標で表すことにします．
 
-![断面](/blog/assets/images/extrusion2.gif)
+![断面]({{ site.baseurl }}/assets/images/extrusion2.gif)
 
 また，断面の各辺の法線単位ベクトルを求めておきます．これはこの断面を Z 軸方向に押し出したときの，側面の法線ベクトルになります．
 
@@ -63,7 +63,7 @@ for (i = 1; i < nc; ++i) {
 
 次に，この断面を経路の方向に回転する方法について考えます．ある単位ベクトル $\mathbf{u}$ の方向を，別の単位ベクトル $\mathbf{v}$ の方向に回転する場合，この回転の軸の方向単位ベクトルは $\mathbf{n} = \mathbf{u} \times \mathbf{v} / \left\vert \mathbf{u} \times \mathbf{v} \right\vert$ になります．
 
-![ベクトルの方向転換](/blog/assets/images/extrusion5.gif)
+![ベクトルの方向転換]({{ site.baseurl }}/assets/images/extrusion5.gif)
 
 そこで，まず $\mathbf{u}$ と $\mathbf{n}$ に直交するベクトル $\mathbf{l} = \mathbf{u} \times \mathbf{n} / \left\vert\mathbf{u} \times \mathbf{n} \right\vert$ を求めます．このとき $\mathbf{x} = \left( 1, 0, 0 \right)$, $\mathbf{y} = \left( 0, 1, 0 \right)$, $\mathbf{z} = \left( 0, 0, 1 \right)$ をそれぞれ $\mathbf{u}$, $\mathbf{n}$, $\mathbf{l}$ に移す変換は，$\mathbf{M}_u = (\mathbf{u} \mathbf{n} \mathbf{l})^\top$ となります．同様にして，$\mathbf{v}$ と $\mathbf{n}$ に直交するベクトル $\mathbf{m} = \mathbf{v} \times \mathbf{n} / \left\vert \mathbf{v} \times \mathbf{n} \right\vert$ を求めます．このとき $\mathbf{x}$, $\mathbf{y}$, $\mathbf{z}$ をそれぞれ $\mathbf{v}$, $\mathbf{n}$, $\mathbf{m}$ に移す変換は，$\mathbf{M}_v = \left( \mathbf{v} \mathbf{n} \mathbf{m} \right)^\top$ となります．
 
@@ -159,7 +159,7 @@ static void turn(const double u[], const double v[], double r[])
 
 断面を経路の方向に回転する変換を求めたら，これを用いて経路の節点における断面形状を求めます．節点の断面は，節点の進入側の経路と退出側の経路の中間ベクトルを法線ベクトルにもつ平面上にあり，その形状はもとの断面形状をせん断変形したものになります．
 
-![経路の節点の中間ベクトル](/blog/assets/images/extrusion3.gif)
+![経路の節点の中間ベクトル]({{ site.baseurl }}/assets/images/extrusion3.gif)
 
 まず，この中間ベクトル $\mathbf{h}$ を最初の断面の空間に移します．このベクトル $\mathbf{h}'$ は，断面を進入側の経路の向きに回転する変換を $\mathbf{M}_r$ とすれば，$\mathbf{h}' = \mathbf{M}_r^\top\mathbf{h}$ で求めることができます．ここで $\mathbf{h}' = \left(a, b, c\right)$ とおけば，原点を通り $\mathbf{h}'$ を法線ベクトルとする平面の方程式は $ ax + by + cz = 0$ になります．この平面に xy 平面上の図形を投影する変換は $\left(x, y, z - \left(ax + by\right) / c\right)$ になります．この変換は，次のような行列で表すことができます．
 
