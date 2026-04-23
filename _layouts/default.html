@@ -53,7 +53,7 @@
       <div class="title">
         <h2>{% if page.title %}■ {% if page.date %}{{ page.date | date: "%Y年%m月%d日" }} - {% endif %}{{ page.title }}{% endif %}</h2>
         <div class="navigation">
-          <button {% if page.previous %}onclick="location.href='{{ page.previous | relative_url }}'"{% else %}disabled{% endif %}>前</button>
+          <button {% if page.previous %}onclick="location.href='{{ page.previous | relative_url }}'"{% else %}disabled{% endif %}>前</button><br>
           <button {% if page.next %}onclick="location.href='{{ page.next | relative_url }}'"{% else %}disabled{% endif %}>次</button>
         </div>
       </div>

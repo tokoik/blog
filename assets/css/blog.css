@@ -106,9 +106,9 @@ header {
     * ナビゲーション
     */
     div.navigation {
-      display: flex;
+      /*display: flex;
       flex-wrap: nowrap;
-      gap: 0.2em;
+      gap: 0.2em;*/
 
       /*
       ボタン
