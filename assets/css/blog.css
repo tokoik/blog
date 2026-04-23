@@ -136,6 +136,9 @@ header, footer {
 記事の本文
 */
 main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 	border-top: dashed 1px #ada;
 	margin: 0.1em 0.5em;
 	padding: 0;
@@ -315,7 +318,6 @@ footer {
 トップページのメインコンテンツ
 */
 div.main {
-  float: left;
   width: 64%;
   padding: 0;
 }
