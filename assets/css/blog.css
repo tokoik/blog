@@ -4,7 +4,7 @@
 ページ全体の背景色や文字色のなど基本的な設定
 */
 body {
-	font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Noto Sans JP", sans-serif;
+	font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, "Noto Sans JP", sans-serif;
 	font-size: small;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
@@ -18,7 +18,7 @@ body {
 等幅フォント
 */
 pre, code, var, samp, kbd, dl, .mono {
-	font-family: "Consolas", "Menlo", "Courier New", Courier, Monaco, "MS Gothic", "Osaka-Mono", monospace;
+	font-family: ui-monospace, Consolas, Menlo, "BIZ UDGothic", "Noto Sans Mono CJK JP", monospace;
 }
 
 /*
