@@ -221,10 +221,10 @@ main {
   項目リスト
   */
   dl {
-    margin: 0.5em 0.5em;
+    margin: 0.5em 1.5em;
   }
   dt {
-    margin: 0 1em 0.2em 0;
+    margin: 0 0 0.2em 1em;
     font-weight: bold;
   }
   dd {
@@ -391,7 +391,7 @@ footer {
       margin-left: 1em;
       margin-right: 0;
     }
-    p, dl, dt, dd, pre, blockquote, div.footnotes, footer {
+    p, dl, pre, blockquote, div.footnotes, footer {
       margin-left: 0;
       margin-right: 0;
     }
