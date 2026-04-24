@@ -194,8 +194,8 @@ glGenBuffers(1, &buffer);
 ```
 
 <dl>
-<dt>`GLint` `glGetUniformLocation`(`GLuint` program, const GLchar *name);</dt>
-<dd>シェーダプログラムで使われている `uniform` 変数の場所を探します. program にはシェーダプログラムの名前を指定します. name には `uniform` 変数の変数名を指定します. 戻り値は `uniform` 変数の場所です. name に指定した `uniform` 変数が見つからなければ, これは -1 になります.</dd>
+<dt>GLint glGetUniformLocation(GLuint program, const GLchar *name);</dt>
+<dd>シェーダプログラムで使われている uniform 変数の場所を探します. program にはシェーダプログラムの名前を指定します. name には uniform 変数の変数名を指定します. 戻り値は uniform 変数の場所です. name に指定した uniform 変数が見つからなければ, これは -1 になります.</dd>
 </dl>
 
 そして図形の描画時に, 変換行列の内容を `uniform` 変数 projectinMatrix に格納します. ここでは [`glUniformMatrix4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniformMatrix4fv.xhtml) の引数 transpose に `GL_FALSE` を指定して, 配列の内容を転置せずに格納します.
@@ -222,8 +222,8 @@ static void display(void)
 ```
 
 <dl>
-<dt>void `glUniformMatrix4fv`(`GLint` location, GLsizei count, GLboolean transpose, const `GLfloat` *value);</dt>
-<dd>`mat4` 型 (4x4 の行列) の `uniform` 変数に値を格納します. location は [`glGetUniformLocation()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml) で得られた `uniform` 変数の場所を指定します. count はデータの個数です. 格納する `uniform` 変数が配列なら, その要素数までの数が指定できます. 普通の変数なら 1 です. transpose を `GL_TRUE` にすると引数 value に指定した配列の内容を転置して `uniform` 変数に格納します. value は `uniform` 変数に格納するデータの配列です. `mat4` 型の `uniform` 変数の要素数は 16 ですから, この配列の要素数は count * 16 個になります.</dd>
+<dt>void glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);</dt>
+<dd>mat4 型 (4x4 の行列) の uniform 変数に値を格納します. location は [glGetUniformLocation()](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml) で得られた uniform 変数の場所を指定します. count はデータの個数です. 格納する uniform 変数が配列なら, その要素数までの数が指定できます. 普通の変数なら 1 です. transpose を GL_TRUE にすると引数 value に指定した配列の内容を転置して uniform 変数に格納します. value は uniform 変数に格納するデータの配列です. mat4 型の uniform 変数の要素数は 16 ですから, この配列の要素数は count * 16 個になります.</dd>
 </dl>
 
 これで下のような図形が描かれれば OK です.

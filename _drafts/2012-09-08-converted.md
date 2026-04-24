@@ -62,7 +62,7 @@ int main(int argc, const char * argv[])
 <dt>GLFW_OPENGL_VERSION_MINOR</dt>
 <dd>OpenGL のマイナーバージョン番号を hint に指定します. バージョンが 3.2 ならば 2 です. デフォルトは 1 です.</dd>
 <dt>GLFW_OPENGL_FORWARD_COMPAT</dt>
-<dd>OpenGL の Forward Compatible Profile (前方互換プロファイル, 古い機能が使えない) を使う場合は,  hint に `GL_TRUE` を指定します. デフォルトは `GL_FALSE` です.</dd>
+<dd>OpenGL の Forward Compatible Profile (前方互換プロファイル, 古い機能が使えない) を使う場合は,  hint に GL_TRUE を指定します. デフォルトは GL_FALSE です.</dd>
 <dt>GLFW_OPENGL_PROFILE</dt>
 <dd>OpenGL のプロファイルを指定します. Compatible Profile を使う場合は hint に GLFW_OPENGL_COMPAT_PROFILE, Core Profile を使う場合は hint に GLFW_OPENGL_CORE_PROFILE を指定します. デフォルトは 0 で, この場合はシステムの設定に依存します.</dd>
 </dl>

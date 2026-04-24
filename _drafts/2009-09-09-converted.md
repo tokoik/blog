@@ -256,8 +256,8 @@ glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
 ```
 
 <dl>
-<dt>void `glDrawElements`(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices);</dt>
-<dd>指標を介して頂点情報を指定して図形を描画する. mode には描画する基本図形の種類を指定する. count には描画に用いる頂点数を指定する. type には指標のデータ型を指定する. `GL_UNSIGNED_BYTE`, `GL_UNSIGNED_SHORT`, `GL_UNSIGNED_INT` のいずれかが指定できる. indices には指標データが格納されている場所を指定する. 頂点配列の場合は, 配列のポインタを指定する. 頂点バッファオブジェクトの場合はバッファオブジェクトのメモリの先頭からの位置を byte で指定する.</dd>
+<dt>void glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices);</dt>
+<dd>指標を介して頂点情報を指定して図形を描画する. mode には描画する基本図形の種類を指定する. count には描画に用いる頂点数を指定する. type には指標のデータ型を指定する. GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT のいずれかが指定できる. indices には指標データが格納されている場所を指定する. 頂点配列の場合は, 配列のポインタを指定する. 頂点バッファオブジェクトの場合はバッファオブジェクトのメモリの先頭からの位置を byte で指定する.</dd>
 </dl>
 
 ## 最後に, 頂点バッファオブジェクトを２つとも開放します.

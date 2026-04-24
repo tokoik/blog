@@ -200,8 +200,8 @@ target[i].x, target[i].y, TEXWIDTH, TEXHEIGHT);
 ```
 
 <dl>
-<dt>void `glCopyTexSubImage2D`(`GLenum` `target`, `GLint` level, `GLint` xoffset, `GLint` yoffset, `GLint` x, `GLint` y, GLsizei `width`, GLsizei `height`)</dt>
-<dd>描画対象になっているフレームバッファの内容の一部をテクスチャメモリにコピーします．`target` には `GL_TEXTURE_2D` を指定します．level はミップマップの解像度レベルで，0 がベースの（最も解像度の高い）レベルで，ミップマップを使用しない時は 0 を指定しておきます．xoffset と yoffset はコピー先のテクスチャ上の位置を指定します．x と y はコピー元のフレームバッファ上の位置です．`width` と `height` はコピーする領域の幅と高さです．</dd>
+<dt>void glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)</dt>
+<dd>描画対象になっているフレームバッファの内容の一部をテクスチャメモリにコピーします．target には GL_TEXTURE_2D を指定します．level はミップマップの解像度レベルで，0 がベースの（最も解像度の高い）レベルで，ミップマップを使用しない時は 0 を指定しておきます．xoffset と yoffset はコピー先のテクスチャ上の位置を指定します．x と y はコピー元のフレームバッファ上の位置です．width と height はコピーする領域の幅と高さです．</dd>
 </dl>
 
 ## なお，こうして得られたテクスチャは，キューブマッピング用のテクスチャとして使うには裏返しにする必要があります．そこでテクスチャ変換行列にテクスチャ座標の x 座標値と y 座標値を反転する設定をして，テクスチャを裏側からサンプリングするようにします．

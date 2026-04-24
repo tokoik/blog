@@ -115,7 +115,7 @@ int main(int argc, const char * argv[])
 
 <dl>
 <dt>void glClear(GLbitfield mask)</dt>
-<dd>ウィンドウ全体を以前に実行した glClearColor() や glClearDepth(),  glClearStencil(), glClearAccum() で設定した値で塗りつぶします. mask には, カラーバッファを塗りつぶす場合には `GL_COLOR_BUFFER_BIT`, デプスバッファを塗りつぶす場合には `GL_DEPTH_BUFFER_BIT`, ステンシルバッファを塗りつぶす場合には `GL_STENCIL_BUFFER_BIT` を指定します. これらはビット OR "|"" を使って複数指定でき, その場合は複数のバッファが同時に塗りつぶされます. またカラーバッファの塗りつぶしでは, Multiple Render Target に指定したすべてのカラーバッファが同時に塗りつぶされます.</dd>
+<dd>ウィンドウ全体を以前に実行した glClearColor() や glClearDepth(),  glClearStencil(), glClearAccum() で設定した値で塗りつぶします. mask には, カラーバッファを塗りつぶす場合には GL_COLOR_BUFFER_BIT, デプスバッファを塗りつぶす場合には GL_DEPTH_BUFFER_BIT, ステンシルバッファを塗りつぶす場合には GL_STENCIL_BUFFER_BIT を指定します. これらはビット OR "|"" を使って複数指定でき, その場合は複数のバッファが同時に塗りつぶされます. またカラーバッファの塗りつぶしでは, Multiple Render Target に指定したすべてのカラーバッファが同時に塗りつぶされます.</dd>
 </dl>
 
 ## 初期設定

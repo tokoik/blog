@@ -102,8 +102,8 @@ GL_RGBA, GL_UNSIGNED_BYTE, texture);
 ```
 
 <dl>
-<dt>void `glTexSubImage2D`(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)</dt>
-<dd>現在のテクスチャの一部を別の画像で置き換えます．引数 target は `GL_TEXTURE_2D` でないといけません．level には MIPMAP を行う場合のテクスチャの解像度レベルを指定します．MIPMAP を行わない場合は 0 にしておいてください．xoffset と yoffset には，テクスチャを置き換える先のテクスチャ上の位置を指定します．width と height には置き換えるテクスチャの幅と高さを指定します．format は引数 pixels に指定したメモリ上の画像の形式です．`GL_RGB` のほか，`GL_RGBA`, `GL_COLOR_INDEX`, `GL_RED`, `GL_GREEN`, `GL_BLUE`, `GL_ALPHA`, `GL_LUMINANCE`, `GL_LUMINANCE_ALPHA` が指定できます．type には引数 pixel の要素のデータ型を指定します．`GL_UNSIGNED_BYTE` は *pixels が `GLubyte`（unsigned char と等価）であることを示します．他に `GL_BYTE`, `GL_SHORT`, `GL_UNSIGNED_SHORT`, `GL_INT`, `GL_UNSIGNED_INT`, `GL_FLOAT`, `GL_BITMAP` が指定できます．pixels にはテクスチャの画像を格納したメモリ（配列）のポインタを指定します．</dd>
+<dt>void glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)</dt>
+<dd>現在のテクスチャの一部を別の画像で置き換えます．引数 target は GL_TEXTURE_2D でないといけません．level には MIPMAP を行う場合のテクスチャの解像度レベルを指定します．MIPMAP を行わない場合は 0 にしておいてください．xoffset と yoffset には，テクスチャを置き換える先のテクスチャ上の位置を指定します．width と height には置き換えるテクスチャの幅と高さを指定します．format は引数 pixels に指定したメモリ上の画像の形式です．GL_RGB のほか，GL_RGBA, GL_COLOR_INDEX, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, GL_LUMINANCE, GL_LUMINANCE_ALPHA が指定できます．type には引数 pixel の要素のデータ型を指定します．GL_UNSIGNED_BYTE は *pixels が GLubyte（unsigned char と等価）であることを示します．他に GL_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_BITMAP が指定できます．pixels にはテクスチャの画像を格納したメモリ（配列）のポインタを指定します．</dd>
 </dl>
 
 ![テクスチャの一部分を置き換えたとき]({{ '/assets/images/dice4.jpg' | relative_url }})

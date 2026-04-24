@@ -118,8 +118,8 @@ glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 ```
 
 <dl>
-<dt>void `glGenTextures`(GLsizei n, `GLuint` *`textures`)</dt>
-<dd>テクスチャ名を n 個生成します．生成したテクスチャ名は，引数 `textures` に指定した配列の各要素に格納されます．</dd>
+<dt>void glGenTextures(GLsizei n, GLuint *textures)</dt>
+<dd>テクスチャ名を n 個生成します．生成したテクスチャ名は，引数 textures に指定した配列の各要素に格納されます．</dd>
 </dl>
 
 ## テクスチャオブジェクトを選択する
@@ -171,8 +171,8 @@ glBindTexture(GL_TEXTURE_2D, 0);
 ```
 
 <dl>
-<dt>void `glBindTexture`(GLenum `target`, `GLuint` `texture`)</dt>
-<dd>`target` に対して `texture` というテクスチャ名のテクスチャオブジェクトを結合します．テクスチャオブジェクトは，テクスチャ名に対して最初にこの呼び出しが行われたときに生成されます．これ以降，テクスチャに対する設定は `texture` に指定したテクスチャオブジェクトに対して行われます．`target` には `GL_TEXTURE_1D`, `GL_TEXTURE_2D`, および OpenGL 1.2 以降では `GL_TEXTURE_3D`，OpenGL 1.3 以降では `GL_TEXTURE_CUBE_MAP` が指定できます．テクスチャ名 0 はデフォルトのテクスチャを示します．</dd>
+<dt>void glBindTexture(GLenum target, GLuint texture)</dt>
+<dd>target に対して texture というテクスチャ名のテクスチャオブジェクトを結合します．テクスチャオブジェクトは，テクスチャ名に対して最初にこの呼び出しが行われたときに生成されます．これ以降，テクスチャに対する設定は texture に指定したテクスチャオブジェクトに対して行われます．target には GL_TEXTURE_1D, GL_TEXTURE_2D, および OpenGL 1.2 以降では GL_TEXTURE_3D，OpenGL 1.3 以降では GL_TEXTURE_CUBE_MAP が指定できます．テクスチャ名 0 はデフォルトのテクスチャを示します．</dd>
 </dl>
 
 ## `texname`[0] のテクスチャに対する，そのほかの設定も行いましょう．この部分もやはり `glBindTexture`(`GL_TEXTURE_CUBE_MAP`, `texname`[0]) と `glBindTexture`(`GL_TEXTURE_2D`, 0) ではさみます．

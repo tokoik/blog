@@ -94,7 +94,7 @@ glGenBuffers(1, &buffer);
 ```
 
 <dl>
-<dt>void `glGenBuffers`(GLsizei n, `GLuint` *buffers);</dt>
+<dt>void glGenBuffers(GLsizei n, GLuint *buffers);</dt>
 <dd>バッファオブジェクトを作成します. n に作成するバッファオブジェクトの数を指定します. 作成されたバッファオブジェクトの名前 (番号) が buffers に指定した配列に n 個入ります.</dd>
 </dl>
 
@@ -107,9 +107,9 @@ glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * 4, NULL, GL_STATIC_DRAW);
 ```
 
 <dl>
-<dt>void `glBindBuffer`(GLenum target, `GLuint` `buffer`);</dt>
-<dd>バッファオブジェクトを有効にします. 頂点バッファオブジェクトの場合, target には `GL_ARRAY_BUFFER` を指定します. glDrawElements() で指定する頂点のインデックスの場合は `GL_ELEMENT_ARRAY_BUFFER` を指定します. `buffer` には有効にするバッファオブジェクトの名前を指定します. 0 を指定した場合は, 現在有効になっているバッファオブジェクトを無効にします.</dt>
-<dt>void `glBufferData`(GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage);</dt>
+<dt>void glBindBuffer(GLenum target, GLuint buffer);</dt>
+<dd>バッファオブジェクトを有効にします. 頂点バッファオブジェクトの場合, target には GL_ARRAY_BUFFER を指定します. glDrawElements() で指定する頂点のインデックスの場合は GL_ELEMENT_ARRAY_BUFFER を指定します. buffer には有効にするバッファオブジェクトの名前を指定します. 0 を指定した場合は, 現在有効になっているバッファオブジェクトを無効にします.</dt>
+<dt>void glBufferData(GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage);</dt>
 <dd>バッファオブジェクトのメモリを確保し, そこにデータを転送します. target には [`glBindBuffer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml) と同じものを指定します. size には確保するメモリのサイズを byte で指定します. data は転送元のデータの配列を指定します. ここに NULL を指定するとメモリの確保だけが行われ, データの転送は行ないません. usage にはバッファオブジェクトのメモリの使われ方のヒントを指定します. これは `GL_XXXX_YYYY` という形式の記号定数であり, XXXX と YYYY には, それぞれ以下のものが指定できます.
 <ul>
 <li>XXXX = STREAM: メモリには一度しか書き込まれず, 使われる回数も少ない.</li>
@@ -143,8 +143,8 @@ position[3][1] = -0.9;
 ```
 
 <dl>
-<dt>void *`glMapBuffer`(GLenum target, GLenum access);</dt>
-<dd>バッファオブジェクトのメモリをアプリケーションプログラムのメモリ空間にマップします. 戻り値はマップされたメモリ空間の先頭のポインタです. target には [`glBindBuffer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml) と同じものを指定します. access には `GL_READ_ONLY`, `GL_WRITE_ONLY`, または `GL_READ_WRITE` が指定できます.</dd>
+<dt>void *glMapBuffer(GLenum target, GLenum access);</dt>
+<dd>バッファオブジェクトのメモリをアプリケーションプログラムのメモリ空間にマップします. 戻り値はマップされたメモリ空間の先頭のポインタです. target には [glBindBuffer()](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml) と同じものを指定します. access には GL_READ_ONLY, GL_WRITE_ONLY, または GL_READ_WRITE が指定できます.</dd>
 </dl>
 
 ## 頂点情報の設定 (データの転送) が終わったら, 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離し, 頂点バッファオブジェクトを解放します.
@@ -162,8 +162,8 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 ```
 
 <dl>
-<dt>GLboolean `glUnmapBuffer`(GLenum target);</dt>
-<dd>バッファオブジェクトのメモリをプログラムのメモリ空間から切り離します. バッファオブジェクトのメモリの内容がマップされている間に破壊されていなければ, 戻り値は `GL_TRUE` になります. target には [`glBindBuffer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml) と同じものを指定します.</dd>
+<dt>GLboolean glUnmapBuffer(GLenum target);</dt>
+<dd>バッファオブジェクトのメモリをプログラムのメモリ空間から切り離します. バッファオブジェクトのメモリの内容がマップされている間に破壊されていなければ, 戻り値は GL_TRUE になります. target には [glBindBuffer()](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml) と同じものを指定します.</dd>
 </dl>
 
 ## 図形の描画
@@ -186,7 +186,7 @@ glUseProgram(gl2Program);
 ```
 
 <dl>
-<dt>void `glUseProgram`(`GLuint` program);</dt>
+<dt>void glUseProgram(GLuint program);</dt>
 <dd>シェーダプログラムを適用します. program にはシェーダプログラムの名前を指定します.</dd>
 </dl>
 
@@ -202,8 +202,8 @@ glBindBuffer(GL_ARRAY_BUFFER, buffer);
 ```
 
 <dl>
-<dt>void `glEnableVertexAttribArray`(`GLuint` `index`);</dt>
-<dd>頂点情報を `attribute` 変数に対応付ける. `index` には対応付ける `attribute` 変数に割り当てられた `index` を指定する.</dd>
+<dt>void glEnableVertexAttribArray(GLuint index);</dt>
+<dd>頂点情報を attribute 変数に対応付ける. index には対応付ける attribute 変数に割り当てられた index を指定する.</dd>
 </dl>
 
 ## 頂点バッファオブジェクトのメモリには, 2x4 要素の `GLfloat` 型の配列が格納されています. これを `attribute` 変数 `position` に割り当てるので, [`glVertexAttribPointer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml) の第１引数には `position` の `index` である 0 を指定します. 第２引数は, `position` のデータ型が vec2 (２要素) なので, 2 を指定します. vec2 は `GLfloat` 型のベクトルなので, 第３引数には `GL_FLOAT` を指定します. 第４引数は, データ型が整数型であったときに, それを [0,1] または [-1,1] の範囲に正規化するか否かを指定します. ここでは正規化しないので, `GL_FALSE` を指定します. 第５引数には頂点情報と頂点情報の間隔を指定します. 頂点情報が密に (隙間無く) 格納されていれば, 0 を指定します. そして第６引数には, 頂点情報を格納している領域の先頭の位置を指定します. ここでは頂点情報は頂点バッファオブジェクトの先頭から格納されているので, 0 を指定します.
@@ -214,8 +214,8 @@ glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 ```
 
 <dl>
-<dt>void `glVertexAttribPointer`(`GLuint` `index`, `GLint` size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);</dt>
-<dd>頂点情報の格納場所と書式を指定する. `index` には `attribute` 変数に割り当てられた `index` を指定する. size はデータの１頂点あたりの要素の数で, 1〜4 を指定する. ２次元座標なら 2. type には格納されているデータの形式を指定する. `GL_BYTE`, `GL_UNSIGNED_BYTE`, `GL_SHORT`, `GL_UNSIGNED_SHORT`, `GL_INT`, `GL_UNSIGNED_INT`, `GL_FLOAT`, `GL_DOUBLE` が指定できる. stride には格納されているデータの間隔を byte で指定する. 0 を指定したときは, データは密に並んでいるとみなされる. pointer にデータが格納されている場所を指定する. 頂点配列の場合は, 配列のポインタを指定する. 頂点バッファオブジェクトの場合はバッファオブジェクトのメモリの先頭からの位置を byte で指定する.</dd>
+<dt>void glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer);</dt>
+<dd>頂点情報の格納場所と書式を指定する. index には attribute 変数に割り当てられた index を指定する. size はデータの１頂点あたりの要素の数で, 1〜4 を指定する. ２次元座標なら 2. type には格納されているデータの形式を指定する. GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_DOUBLE が指定できる. stride には格納されているデータの間隔を byte で指定する. 0 を指定したときは, データは密に並んでいるとみなされる. pointer にデータが格納されている場所を指定する. 頂点配列の場合は, 配列のポインタを指定する. 頂点バッファオブジェクトの場合はバッファオブジェクトのメモリの先頭からの位置を byte で指定する.</dd>
 </dl>
 
 ## そして図形を描画します. 描く図形は `GL_LINE_LOOP` です. 頂点バッファオブジェクトに格納されている頂点情報の, 0 番目から 4 個の頂点を描きます.
@@ -226,7 +226,7 @@ glDrawArrays(GL_LINE_LOOP, 0, 4);
 ```
 
 <dl>
-<dt>void `glDrawArrays`(GLenum mode, `GLint` first, GLsizei count);</dt>
+<dt>void glDrawArrays(GLenum mode, GLint first, GLsizei count);</dt>
 <dd>頂点情報を転送して, 図形を描画する. mode には描画する基本図形の種類を指定する. first には描画するデータの, 格納場所の先頭からの位置を指定する. count には描画するデータの数を指定する.</dd>
 </dl>
 
@@ -246,8 +246,8 @@ glFlush();
 ```
 
 <dl>
-<dt>void `glDisableVertexAttribArray`(`GLuint` `index`);</dt>
-<dd>`attribute` 変数と頂点情報の対応付けを解除する. `index` には対応付けを行った `attribute` 変数に割り当てられた `index` を指定する.</dd>
+<dt>void glDisableVertexAttribArray(GLuint index);</dt>
+<dd>attribute 変数と頂点情報の対応付けを解除する. index には対応付けを行った attribute 変数に割り当てられた index を指定する.</dd>
 </dl>
 
 ## これで下のような図形が描かれれば OK です.

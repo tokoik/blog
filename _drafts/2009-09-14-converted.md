@@ -304,8 +304,8 @@ glEnableVertexAttribArray(0);
 ```
 
 <dl>
-<dt>void `glUniform3fv`(`GLint` location, GLsizei count, const `GLfloat` *value);</dt>
-<dd>`vec3` 型の `uniform` 変数に値を格納します. location は [`glGetUniformLocation()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml) で得られた `uniform` 変数の場所を指定します. count はデータの個数です. 格納する `uniform` 変数が配列なら, その要素数までの数が指定できます. 普通の変数なら 1 です. value は `uniform` 変数に格納するデータの配列です. `vec3` 型の `uniform` 変数の要素数は 3 ですから, この配列の要素数は count * 3 個になります.</dd>
+<dt>void glUniform3fv(GLint location, GLsizei count, const GLfloat *value);</dt>
+<dd>vec3 型の uniform 変数に値を格納します. location は [glGetUniformLocation()](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml) で得られた uniform 変数の場所を指定します. count はデータの個数です. 格納する uniform 変数が配列なら, その要素数までの数が指定できます. 普通の変数なら 1 です. value は uniform 変数に格納するデータの配列です. vec3 型の uniform 変数の要素数は 3 ですから, この配列の要素数は count * 3 個になります.</dd>
 </dl>
 
 ## ここらでとりあえずひと区切り付けます.

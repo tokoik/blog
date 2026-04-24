@@ -132,12 +132,12 @@ glTexCoordPointer(2, GL_FLOAT, 0, texc);
 ```
 
 <dl>
-<dt>void `glVertexPointer`(GLint size, GLenum type, GLsizei stride, const GLvoid *ptr)</dt>
+<dt>void glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *ptr)</dt>
 <dd> 頂点データの格納場所を指定します．size は１つの頂点に与えるデータの数で，この場合３次元データなので 3 を指定しています．type はデータの型です．stride は頂点データの間隔で，データが詰まって配置されていれば 0 を指定します．ptr はデータの格納場所です．</dd>
-<dt>void `glNormalPointer`(GLenum type, GLsizei stride, const GLvoid *ptr)</dt>
-<dd>法線データの格納場所を指定します．type，stride，ptr は `glVertexPointer` と同じです．法線データは１つの頂点に対して必ず３つのデータを持っているので，size を指定する必要はありません．</dd>
-<dt>void `glTexCoordPointer`(GLint size, GLenum type, GLsizei stride, const GLvoid *ptr)</dt>
-<dd>テクスチャ座標の格納場所を指定します．size，type，stride，および ptr は [`glVertexPointer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexPointer.xhtml) と同じです．ここではテクスチャ座標を２次元で指定しているので，size に 2 を指定しています．</dd>
+<dt>void glNormalPointer(GLenum type, GLsizei stride, const GLvoid *ptr)</dt>
+<dd>法線データの格納場所を指定します．type，stride，ptr は glVertexPointer と同じです．法線データは１つの頂点に対して必ず３つのデータを持っているので，size を指定する必要はありません．</dd>
+<dt>void glTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *ptr)</dt>
+<dd>テクスチャ座標の格納場所を指定します．size，type，stride，および ptr は [glVertexPointer()](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexPointer.xhtml) と同じです．ここではテクスチャ座標を２次元で指定しているので，size に 2 を指定しています．</dd>
 </dl>
 
 ## そして，テクスチャマッピングを有効にして，このデータを描画します．
@@ -150,8 +150,8 @@ glDisable(GL_TEXTURE_2D);
 ```
 
 <dl>
-<dt>void `glDrawElements`(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)</dt>
-<dd>頂点配列で与えられた図形を描画します．mode は [`glBegin()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBegin.xhtml) に指定するのと同じ図形のタイプです．count は描画する要素（この場合は頂点）の数です．この場合，三角形が `nf` 個あるので，与える頂点の数（`face` の要素の数）は `nf` * 3 個になります．type は引数 indices の型です．indices はインデックスデータの格納場所です．</dd>
+<dt>void glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)</dt>
+<dd>頂点配列で与えられた図形を描画します．mode は [glBegin()](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBegin.xhtml) に指定するのと同じ図形のタイプです．count は描画する要素（この場合は頂点）の数です．この場合，三角形が nf 個あるので，与える頂点の数（face の要素の数）は nf * 3 個になります．type は引数 indices の型です．indices はインデックスデータの格納場所です．</dd>
 </dl>
 
 ## 最後にクライアント側に置いた頂点，法線，およびテクスチャ座標の配列を無効にします．
