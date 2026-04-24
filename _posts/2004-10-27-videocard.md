@@ -13,7 +13,7 @@ published: true
 
 その学生さんが調べてくれたのですが，GeForce FX 5900XT 使ったビデオカードって過去にも発火事故があったようですね．知らなかった．慌てて購入した代替品も同じ GeForce FX 5900XT だったのでちょっと焦ったのですが，その学生さんが「この Leadtek のものは対策品だから大丈夫のようです」と言ってくれたので，ひと安心．しかし，何が起こるかわかんないもんだなぁ．
 
-![GeForce FX 5900XT]({{ site.baseurl }}/assets/images/5900XT.jpg)
+![GeForce FX 5900XT]({{ '/assets/images/5900XT.jpg' | relative_url }})
 
 ## 新潟県中越地震
 
