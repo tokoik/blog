@@ -136,9 +136,6 @@ header, footer {
 記事の本文
 */
 main {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
 	border-top: dashed 1px #ada;
 	margin: 0.1em 0.5em;
 	padding: 0;
@@ -302,6 +299,58 @@ main {
   div.footnotes ol li {
     line-height: 1.2;
   }
+
+  /*
+  トップページ
+  */
+  div.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  /*
+  トップページのメインコンテンツ
+  */
+  div.main {
+    width: 64%;
+    padding: 0;
+  }
+
+  /*
+  トップページのサイドバー
+  */
+  div.sidebar {
+    margin: 0;
+    padding-left: 0.5em;
+    border-left: solid 1px #ada;
+    width: 32%;
+
+    /*
+    サイドバーの見出し
+    */
+    h2 {
+      margin: 1em 0 0.5em 0;
+      padding: 0.2em;
+      font-size: medium;
+      background-color: #ada;
+      text-align: center;
+    }
+
+    /*
+    サイドバーのリスト
+    */
+    ul {
+      list-style-type: square;
+      margin: 0 0 0.5em 1.2em;
+      padding: 0;
+    }
+    li {
+      line-height: 1.2;
+      margin: 0.3em 0.1em;
+      padding: 0;
+    }
+  }
 }
 
 /*
@@ -315,71 +364,26 @@ footer {
 }
 
 /*
-トップページのメインコンテンツ
-*/
-div.main {
-  width: 64%;
-  padding: 0;
-}
-
-/*
-トップページのサイドバー
-*/
-div.sidebar {
-  margin: 0;
-  padding-left: 0.5em;
-  border-left: solid 1px #ada;
-  float: right;
-  position: relative;
-  width: 32%;
-
-  /*
-  サイドバーの見出し
-  */
-  h2 {
-    margin: 1em 0 0.5em 0;
-    padding: 0.2em;
-    font-size: medium;
-    background-color: #ada;
-    text-align: center;
-  }
-
-  /*
-  サイドバーのリスト
-  */
-  ul {
-    list-style-type: square;
-    margin: 0 0 0.5em 1.2em;
-    padding: 0;
-  }
-  li {
-    line-height: 1.2;
-    margin: 0.3em 0.1em;
-    padding: 0;
-  }
-}
-
-/*
 レスポンシブデザイン
 */
 @media screen and (max-width: 480px) {
   main {
-    div.main {
-      float: none;
-      width: 100%;
-    }
-    div.sidebar {
-      padding-left: 0;
-      float: none;
-      width: 100%;
-      border: none;
+    div.top {
+      display: block;
+      div.main {
+        width: 100%;
+      }
+      div.sidebar {
+        padding-left: 0;
+        width: 100%;
+        border: none;
+      }
     }
     h2, h3, h4 {
       margin-left: 1em;
       margin-right: 0;
     }
     p, dl, dt, dd, pre, blockquote, div.footnotes, footer {
-      font-size: small;
       margin-left: 0;
       margin-right: 0;
     }
