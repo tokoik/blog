@@ -113,6 +113,7 @@ header, footer {
     ライセンス
     */
     div.license {
+      flex: 1;
       margin: 0;
       padding: 0;
       border: none;
@@ -123,6 +124,7 @@ header, footer {
     ボタン領域
     */
     div.buttons {
+      flex: 1;
       display: flex;
       flex-wrap: nowrap;
       gap: 0.2em;
