@@ -6,8 +6,9 @@
 body {
 	font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Noto Sans JP", sans-serif;
 	font-size: small;
-	background-color: #ffe;
+  text-size-adjust: 100%;
 	color: #030;
+	background-color: #ffe;
 }
 
 /*
@@ -21,11 +22,11 @@ pre, code, var, samp, kbd, .mono {
 文字の修飾
 */
 em {
-	font-style: normal;
+  font-style: normal;
 	font-weight: bold;
 }
 strong {
-	font-style: normal;
+  font-style: normal;
 	font-weight: bold;
 	color: #ff0000;
 }
@@ -90,8 +91,9 @@ header, footer {
   */
   div.navigation {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 
     /*
     記事のタイトル
@@ -305,6 +307,7 @@ main {
   */
   div.top {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
   }
