@@ -504,8 +504,14 @@ footer {
   color: #f6f8fa;
   background-color: #82071e;
 }
-.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cp, .highlight .cpf, .highlight .c1, .highlight .cs {
-  color: #999988;
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #55aa66;
+}
+.highlight .cp {
+  color: #555555;
+}
+.highlight .cpf {
+  color: #336688;
 }
 .highlight .gl {
   color: #6e7781;
