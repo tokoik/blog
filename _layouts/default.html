@@ -27,10 +27,10 @@
     <meta property="og:locale" content="ja_JP">
 
     <!-- Favocon -->
-    <link rel="shortcut icon" href="{{ '/assets/images/favocon.ico' | relative_url }}">
+    <link rel="shortcut icon" href="{{ site.baseurl }}/assets/images/favocon.ico">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/blog.css">
 
     <!-- MathJax 4 -->
     {% if page.math %}
@@ -49,7 +49,7 @@
   <body>
 
     <header>
-      <h1><a href="{{ '/' | relative_url }}">床井研究室</a></h1>
+      <h1><a href="{{ site.baseurl }}/">床井研究室</a></h1>
       <div class="navigation">
         <h2>{% if page.title %}■ {% if page.date %}{{ page.date | date: "%Y年%m月%d日" }} - {% endif %}{{ page.title }}{% endif %}</h2>
         <div class="buttons">

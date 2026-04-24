@@ -51,7 +51,7 @@ glDisable(GL_TEXTURE_2D);
 }
 ```
 
-![箱を大きくして箱の中に入ってみた]({{ '/assets/images/dice6.jpg' | relative_url }})
+![箱を大きくして箱の中に入ってみた]({{ site.baseurl }}/assets/images/dice6.jpg)
 
 ## なんだか暗いので，テクスチャが陰影に影響されないように，テクスチャ環境を `GL_MODULATE` から `GL_REPLACE` に変更します．
 
@@ -80,7 +80,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 ```
 
-![テクスチャに対する陰影を影響を無効にした]({{ '/assets/images/dice7.jpg' | relative_url }})
+![テクスチャに対する陰影を影響を無効にした]({{ site.baseurl }}/assets/images/dice7.jpg)
 
 ## 箱の中心から見てみる
 
@@ -110,7 +110,7 @@ glTranslated(0.0, 0.0, -5.0);
 #endif
 ```
 
-![視点を部屋の中心に移動した]({{ '/assets/images/dice8.jpg' | relative_url }})
+![視点を部屋の中心に移動した]({{ site.baseurl }}/assets/images/dice8.jpg)
 
 ## マウスをドラッグしてこの箱をぐるぐる回すと，部屋を内側から見回すことができます．テクスチャの境界が目立っているのは，テクスチャ自体の作り方が悪くて，最外周の画素の色が変化しているからです．
 

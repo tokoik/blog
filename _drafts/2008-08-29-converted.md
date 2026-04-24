@@ -9,7 +9,7 @@ published: true
 
 大学の周辺の山で大規模な宅地造成が行われています．みるみるうちにいろんな建物が建っていくのですが，少し前に，大学からこういう建物が見えることに気づきました．
 
-![神殿]({{ '/assets/images/parthenon.jpg' | relative_url }})
+![神殿]({{ site.baseurl }}/assets/images/parthenon.jpg)
 
 ## パルテノン神殿 (@_@;)
 

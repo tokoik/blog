@@ -13,7 +13,7 @@ published: true
 
 テクスチャを切り分けて使うには，あらかじめ複数のテクスチャをつなぎ合わせて１枚の画像ファイルに書き込んでおく必要があります．たとえば立方体の６面に異なる画像を貼り付けてサイコロのような図形を表示したい場合，次のような画像を用意します（実際のサイズは 1024×128 画素）．
 
-![サイコロのテクスチャ]({{ '/assets/images/dice.jpg' | relative_url }})
+![サイコロのテクスチャ]({{ site.baseurl }}/assets/images/dice.jpg)
 
 ## 画像ファイルの縦横のサイズは，例によって 2<sup>n</sup> 画素にしておきます．使わないところは，もったいないですが，余らしておきましょう．これをこの[第２回]({% post_url 2004-09-14-post %})でやったように，四角形の全面に貼り付けてみます．
 
@@ -26,13 +26,13 @@ published: true
 ## すると，こんな具合になります．
 
  
-![テクスチャ全体を全面に貼り付けたとき]({{ '/assets/images/dice1.jpg' | relative_url }})
+![テクスチャ全体を全面に貼り付けたとき]({{ site.baseurl }}/assets/images/dice1.jpg)
 
 ## 各面にテクスチャの異なる部分を貼り付ける
 
 画像の大きさが正方形でなくても，テクスチャ座標は縦横とも 0〜1 の範囲になるので，画像は長辺方向に圧縮されてしまいます．そこで，立方体の各面に異なるテクスチャを貼り付けるために，各面に対応したテクスチャの範囲をテクスチャから切り出すようにテクスチャ座標を取ります．
 
-![テクスチャの切り出し]({{ '/assets/images/dice2.gif' | relative_url }})
+![テクスチャの切り出し]({{ site.baseurl }}/assets/images/dice2.gif)
 
 ## これを各面の頂点のテクスチャ座標に割り当てます．box.cpp で定義している変数 `texcoord` の初期値を次のように変更してください．
 
@@ -53,7 +53,7 @@ static const GLdouble texcoord[][4][2] = {
 
 ## すると，ちゃんと６面に異なるテクスチャが貼り付けられ，サイコロらしくなります．
 
-![テクスチャを分割して貼り付けたとき]({{ '/assets/images/dice3.jpg' | relative_url }})
+![テクスチャを分割して貼り付けたとき]({{ site.baseurl }}/assets/images/dice3.jpg)
 
 ## 複数の画像ファイルを使う
 
@@ -106,7 +106,7 @@ GL_RGBA, GL_UNSIGNED_BYTE, texture);
 <dd>現在のテクスチャの一部を別の画像で置き換えます．引数 target は GL_TEXTURE_2D でないといけません．level には MIPMAP を行う場合のテクスチャの解像度レベルを指定します．MIPMAP を行わない場合は 0 にしておいてください．xoffset と yoffset には，テクスチャを置き換える先のテクスチャ上の位置を指定します．width と height には置き換えるテクスチャの幅と高さを指定します．format は引数 pixels に指定したメモリ上の画像の形式です．GL_RGB のほか，GL_RGBA, GL_COLOR_INDEX, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, GL_LUMINANCE, GL_LUMINANCE_ALPHA が指定できます．type には引数 pixel の要素のデータ型を指定します．GL_UNSIGNED_BYTE は *pixels が GLubyte（unsigned char と等価）であることを示します．他に GL_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_BITMAP が指定できます．pixels にはテクスチャの画像を格納したメモリ（配列）のポインタを指定します．</dd>
 </dl>
 
-![テクスチャの一部分を置き換えたとき]({{ '/assets/images/dice4.jpg' | relative_url }})
+![テクスチャの一部分を置き換えたとき]({{ site.baseurl }}/assets/images/dice4.jpg)
 
 ## [`glTexSubImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexSubImage2D.xhtml) は，[`glTexImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml) でテクスチャを割り当てた後，そのテクスチャの一部を別の画像で置き換えます．この際，置き換える画像のサイズは 2<sup>n</sup> である必要はありません．つまり，最初に [`glTexImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml) で（2<sup>n</sup> のサイズの）テクスチャを割り当てておけば，[`glTexSubImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexSubImage2D.xhtml) を使って（割り当てたテクスチャより小さな）任意のサイズの画像をテクスチャとして利用できます．
 
@@ -168,7 +168,7 @@ static const char *textures[] = {
 
 ## [`glTexSubImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexSubImage2D.xhtml) は実行時に動的にテクスチャを置き換えることができるので，これを使ってテクスチャのアニメーションなども実現できます．
 
-![６面全部のテクスチャを置き換えたとき]({{ '/assets/images/dice5.jpg' | relative_url }})
+![６面全部のテクスチャを置き換えたとき]({{ site.baseurl }}/assets/images/dice5.jpg)
 
 <ul>
 <li>[Linux 版](`texture`/texture11.tar.gz)</li>

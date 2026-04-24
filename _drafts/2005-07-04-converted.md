@@ -131,7 +131,7 @@ glEnd();
 }
 ```
 
-![放物面マッピングによる映り込みの合成]({{ '/assets/images/paraboloid12.jpg' | relative_url }})
+![放物面マッピングによる映り込みの合成]({{ site.baseurl }}/assets/images/paraboloid12.jpg)
 
 ## もちろん，テクスチャ環境の `GL_MODULATE` を `GL_COMBINE` に置き換えて，線形補間によるテクスチャの合成を行うこともできます．
 
@@ -152,7 +152,7 @@ glEnable(GL_DEPTH_TEST);
 glDisable(GL_CULL_FACE);
 ```
 
-![放物面マッピングによる映り込みの線形補間による合成]({{ '/assets/images/paraboloid13.jpg' | relative_url }})
+![放物面マッピングによる映り込みの線形補間による合成]({{ site.baseurl }}/assets/images/paraboloid13.jpg)
 
 <ul>
 <li>[Linux 版](texture/texture19.tar.gz)</li>

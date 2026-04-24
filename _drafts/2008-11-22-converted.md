@@ -18,7 +18,7 @@ OpenGL や Direct3D なんかで使っているデプスバッファ法という
 それで，できればソートしないで半透明処理を行いたいと言う要求が出てくるのですが，私の知る限り（あんまり知らんのですが）なかなか決定版という手法が見つからないように思います．
 例えば，昔使われていた Screen-Door Transparency という手法は，アルファ値に応じた密度のパターンを作り，Polygon Stipple によってマスクをかけるということをやるのですが，アルファ値が変わるとパターンを作り直さなければなりませんから，テクスチャのアルファ値には対応できそうにありません．第一，この方法は見かけがよくありません．
 
-![Screen-Door Transparency]({{ '/assets/images/screendoor.gif' | relative_url }})
+![Screen-Door Transparency]({{ site.baseurl }}/assets/images/screendoor.gif)
 
 ## また，[Order-Independent Transparency](http://developer.nvidia.com/object/order_independent_transparency.html)（あるいは [Interactive Order-Independent Transparency](http://developer.nvidia.com/object/Interactive_Order_Transparency.html)）という手法は，重なり合うポリゴンの層を奥行き方向に１枚１枚はがしていく [Depth Peeling]({% post_url 2008-11-23-post %}) という手法を用いるため，マルチパスでレンダリングする必要があるほか，パスごとに得られた層の画像を合成するにもひと手間かかります．
 
@@ -68,21 +68,21 @@ glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
 
 Catalyst Control Center の「3D」のところから「Anti-Aliasing」を選んで「Use application setting」のチェックをはずして，「level」を最大に設定してください．
 
-![Catalyst Control Center]({{ '/assets/images/catalyst.gif' | relative_url }})
+![Catalyst Control Center]({{ site.baseurl }}/assets/images/catalyst.gif)
 
 ## nVIDIA GeForce の場合
 
 NVIDIA コントロールパネルを開いて，「3D設定の管理」から「アンチエイリアシング - モード」を「アプリケーション設定の変更」を選んでください．
 
-![アンチエイリアシング - モード]({{ '/assets/images/nvidia1.gif' | relative_url }})
+![アンチエイリアシング - モード]({{ site.baseurl }}/assets/images/nvidia1.gif)
 
 ## すると「アンチエイリアシング - 設定」が変更可能になりますから，これを大きな数値に変更してください．
 
-![アンチエイリアシング - 設定]({{ '/assets/images/nvidia2.gif' | relative_url }})
+![アンチエイリアシング - 設定]({{ site.baseurl }}/assets/images/nvidia2.gif)
 
 ## この設定の後プログラムを実行すると，半透明処理（とアンチエリアシング）が有効になっていると思います．
 
-![半透明処理]({{ '/assets/images/transparent.gif' | relative_url }})
+![半透明処理]({{ site.baseurl }}/assets/images/transparent.gif)
 
 ## （透明が Screen-Door っぽいというかディザっぽいのは，マルチサンプリングのせいなのかな）
 

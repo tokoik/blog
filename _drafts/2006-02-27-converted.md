@@ -28,7 +28,7 @@ published: true
 
 ## このプログラムをコンパイルして実行すると，こういう噴水のようなアニメーションが表示されます．マウスをドラッグすれば，視点を移動できます．
 
-![点の噴出]({{ '/assets/images/sprite0.gif' | relative_url }})
+![点の噴出]({{ site.baseurl }}/assets/images/sprite0.gif)
 
 ## ただ，これだと点が小さすぎて見えにくいので，[`glPointSize()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPointSize.xhtml) を使って点の大きさを指定します．
 
@@ -61,13 +61,13 @@ glEnd();
 }
 ```
 
-![点の大きさを指定する]({{ '/assets/images/sprite1.gif' | relative_url }})
+![点の大きさを指定する]({{ site.baseurl }}/assets/images/sprite1.gif)
 
 ## 点にテクスチャをマッピングする
 
 それでは，この点にテクスチャをマッピングしてみましょう．マッピングするテクスチャには，次のような球をレンダリングした画像を用います．
 
-![点にマッピングするテクスチャ]({{ '/assets/images/sprite2.gif' | relative_url }})
+![点にマッピングするテクスチャ]({{ site.baseurl }}/assets/images/sprite2.gif)
 
 ## まず，プログラムの初期化部分で，テクスチャマッピングの設定を行います．今回はファイルの入出力に `iostream` / `fstream` を使いますので，プログラムの先頭部分に以下の２行を追加してください．
 
@@ -183,7 +183,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## しかし，このままだとテクスチャ中の１画素の色が点（正方形）全体に適用されてしまいます．
 
-![テクスチャ中の１画素の色が四角形全体に適用される]({{ '/assets/images/sprite3.gif' | relative_url }})
+![テクスチャ中の１画素の色が四角形全体に適用される]({{ site.baseurl }}/assets/images/sprite3.gif)
 
 ## そこで，`Point` `Sprite` を有効にします．まず，この点に対してテクスチャ座標を生成するようにテクスチャ環境を設定します．
 
@@ -253,7 +253,7 @@ glDisable(GL_TEXTURE_2D);
 }
 ```
 
-![`Point` `Sprite` を有効にした結果]({{ '/assets/images/sprite4.gif' | relative_url }})
+![`Point` `Sprite` を有効にした結果]({{ site.baseurl }}/assets/images/sprite4.gif)
 
 ## ただ，これだとテクスチャの全面が点に貼られてしまいます．テクスチャの必要な部分だけを貼り付けるには，テクスチャにアルファチャンネルを付けておいて，アルファテストを有効にします．まず，アルファテストの判別関数を設定します．
 
@@ -336,7 +336,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## これで点を１個描くだけで球を描くようになりました．
 
-![アルファテストを有効にした結果]({{ '/assets/images/sprite5.gif' | relative_url }})
+![アルファテストを有効にした結果]({{ site.baseurl }}/assets/images/sprite5.gif)
 
 ## ウィンドウの大きさに合わせて点の大きさを変更する
 
@@ -389,7 +389,7 @@ glPointSize(psize);
 glBegin(GL_POINTS);
 ```
 
-![点の大きさをウィンドウの大きさに合わせた結果]({{ '/assets/images/sprite6.gif' | relative_url }})
+![点の大きさをウィンドウの大きさに合わせた結果]({{ site.baseurl }}/assets/images/sprite6.gif)
 
 ## 視点からの距離に応じて点の大きさを変更する
 
@@ -459,11 +459,11 @@ glAlphaFunc(GL_GREATER, 0.5);
 glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, distance);
 ```
 
-![点の大きさを視点からの距離に反比例させた結果]({{ '/assets/images/sprite7.gif' | relative_url }})
+![点の大きさを視点からの距離に反比例させた結果]({{ site.baseurl }}/assets/images/sprite7.gif)
 
 ## [OpenGL 2.0 の仕様書](http://www.opengl.org/documentation/specs/version2.0/glspec20.pdf)によれば，実際に描かれる点の大きさは次式により求められるそうです．`size` は [`glPointSize()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPointSize.xhtml) で指定した点の大きさです．
 
-![点の大きさの計算式]({{ '/assets/images/sprite8.gif' | relative_url }})
+![点の大きさの計算式]({{ site.baseurl }}/assets/images/sprite8.gif)
 
 ## `GL_POINT_DISTANCE_ATTENUATION` に指定した配列変数の各要素は，この式の a, b, c に相当します．また d は視点からの距離です．したがって，a, b を 0 に，c に 1 を設定すれば，点の大きさが視点からの距離 d に反比例するようになります．
 

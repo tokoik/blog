@@ -104,7 +104,7 @@ glutSwapBuffers();
 
 ## これをコンパイルして実行すると，次のようが図形が表示されます．マウスをドラッグして物体を回転しても，テクスチャは静止しているように見えると思います．
 
-![視点マッピング]({{ '/assets/images/texture4a.gif' | relative_url }})
+![視点マッピング]({{ site.baseurl }}/assets/images/texture4a.gif)
 
 <ul>
 <li>[Linux 版](texture/texture5.tar.gz)</li>

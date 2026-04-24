@@ -254,7 +254,7 @@ static void display(void)
 
 それでは, 点の位置をマウスで動かした結果をもとに, 点の位置を修正するようにシェーダプログラムを書き換えてみましょう. 点と点を結ぶ線分をゴムやバネだと考えれば, フックの法則 (Hooke's law) により, 点の移動に伴って線分が伸びた長さに比例した力が, 移動した点に伸びと反対方向にかかるものとします. もちろん, ある点が動くことにより, その点につながっている近傍の点にも向きが反対で同じ強さの力がかかります.
 
-![移動した頂点にかかる力]({{ '/assets/images/physics03.gif' | relative_url }})
+![移動した頂点にかかる力]({{ site.baseurl }}/assets/images/physics03.gif)
 
 ## これをシェーダプログラムで計算します. いま, ゴムの自然長を l, ゴムのバネ定数を k とします. これらにはとりあえず適当な値を設定しておきます.
 
@@ -449,15 +449,15 @@ static void keyboard(unsigned char key, int x, int y)
 
 ## こういう風に頂点を移動したとします.
 
-![頂点の移動]({{ '/assets/images/physics04.gif' | relative_url }})
+![頂点の移動]({{ site.baseurl }}/assets/images/physics04.gif)
 
 ## スペースバーをタイプすると力の計算を始めます.
 
-![力の計算の結果]({{ '/assets/images/physics05.gif' | relative_url }})
+![力の計算の結果]({{ site.baseurl }}/assets/images/physics05.gif)
 
 ## 力の計算 (画面表示の常時更新) をしながら点を移動することもできます.
 
-![画面表示を常時更新しながら点を移動する]({{ '/assets/images/physics06.gif' | relative_url }})
+![画面表示を常時更新しながら点を移動する]({{ site.baseurl }}/assets/images/physics06.gif)
 
 ## 重力の追加
 
@@ -493,4 +493,4 @@ void main(void)
 
 ## バネ定数はもっと大きくしたほうがいいかもしれません.
 
-![懸垂線]({{ '/assets/images/physics07.gif' | relative_url }})
+![懸垂線]({{ site.baseurl }}/assets/images/physics07.gif)

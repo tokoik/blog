@@ -21,7 +21,7 @@ published: true
 
 まず, `GL_POINTS` を使って点を描画するプログラムを書いたとします.
 
-![点の描画]({{ '/assets/images/sprite10.jpg' | relative_url }})
+![点の描画]({{ site.baseurl }}/assets/images/sprite10.jpg)
 
 ## この点をシェーダを使って書くとき, バーテックスシェーダとフラグメントシェーダのプログラムは, 例えばそれぞれ次のようになります. Point Sprite 自体ジオメトリシェーダ (テッセレータ) で置き換えられるべき機能だと思いますし, いい加減 OpenGL 3.0 以降に移行しろという感じですけど, この記事の本質ではないので許してください. Mac OS X Lion の OpenGL のバージョンはいくつになるんでしょうね?
 
@@ -87,7 +87,7 @@ gl_PointSize = size;  // 点の大きさを変更する
 
 ## ここでは大きさ `size` を `uniform` 変数で与えています. これを CPU 側のプログラムで表示領域のサイズ (ウィンドウの h など) に比例した値を設定すれば，ウィンドウをリサイズした時に点の大きさが追従するようになります.
 
-![点の大きさを変更する]({{ '/assets/images/sprite11.jpg' | relative_url }})
+![点の大きさを変更する]({{ site.baseurl }}/assets/images/sprite11.jpg)
 
 ## なお, 点の大きさを投影変換後の w 要素で割れば, 点の大きさを視点からの距離に反比例させることができます.
 
@@ -107,7 +107,7 @@ gl_PointSize = size / gl_Position.w;  // 点の大きさを変更する
 
 ## なかなかいい感じではないでしょうか.
 
-![点の大きさを視点からの距離に反比例させる]({{ '/assets/images/sprite12.jpg' | relative_url }})
+![点の大きさを視点からの距離に反比例させる]({{ site.baseurl }}/assets/images/sprite12.jpg)
 
 ## 点を丸くする
 
@@ -152,7 +152,7 @@ gl_FragColor = vec4(1.0);  // 白色を描くだけ
 
 ## これで点が丸くなります.
 
-![点を丸くする]({{ '/assets/images/sprite13.jpg' | relative_url }})
+![点を丸くする]({{ site.baseurl }}/assets/images/sprite13.jpg)
 
 ## 点に陰影を付ける
 
@@ -204,11 +204,11 @@ gl_FragColor.a = 1.0;
 
 ## この計算は<`em`>スクリーン空間で行っているので<`em`>正確ではないのですが, なんだかそれらしく見えます (ほんまか?).
 
-![点に陰影を付ける]({{ '/assets/images/sprite14.jpg' | relative_url }})
+![点に陰影を付ける]({{ site.baseurl }}/assets/images/sprite14.jpg)
 
 ## 視線の向きを変えると陰影も変化します.
 
-![視線の向きを変える]({{ '/assets/images/sprite15.jpg' | relative_url }})
+![視線の向きを変える]({{ site.baseurl }}/assets/images/sprite15.jpg)
 
 ## 鏡面反射光も加えてみます.
 
@@ -240,7 +240,7 @@ gl_FragColor.a = 1.0;
 
 ## めんどくさいので色はつけてませんが. こんな感じになります.
 
-![点の陰影に鏡面反射光を追加する]({{ '/assets/images/sprite16.jpg' | relative_url }})
+![点の陰影に鏡面反射光を追加する]({{ site.baseurl }}/assets/images/sprite16.jpg)
 
 ## 半透明にする
 
@@ -276,7 +276,7 @@ gl_FragColor.a = 1.0;
 
 ## こんな具合になります.
 
-![点を半透明にする]({{ '/assets/images/sprite17.jpg' | relative_url }})
+![点を半透明にする]({{ site.baseurl }}/assets/images/sprite17.jpg)
 
 ## 屈折させてみる
 
@@ -313,7 +313,7 @@ gl_FragColor.a = 1.0;
 
 ## やっぱりめんどくさいので, 視線ベクトルは (0, 0, -1) にしています. 0.2 は背景との距離みたいなものです.
 
-![屈折させてみる]({{ '/assets/images/sprite18.jpg' | relative_url }})
+![屈折させてみる]({{ site.baseurl }}/assets/images/sprite18.jpg)
 
 ## 透明なのに diffuse 見えるのはおかしいので, d の代わりに視線と法線の内積 (n.z) を用います. こうすると球の周辺部が暗くなるので, 多少立体感が出ます. これに環境光も加えて, 全体的に明るくします.
 
@@ -348,4 +348,4 @@ gl_FragColor.a = 1.0;
 
 ## ということで, こういうのはエフェクトとしてはアリでしょうか? ムリでしょうか?
 
-![環境光を加える]({{ '/assets/images/sprite19.jpg' | relative_url }})
+![環境光を加える]({{ site.baseurl }}/assets/images/sprite19.jpg)

@@ -710,4 +710,4 @@ static GLuint createProgram(const char *vsrc, const char *pv, const char *fsrc, 
 
 ## 実行結果
 
-![実行結果]({{ '/assets/images/glfw00.png' | relative_url }})
+![実行結果]({{ site.baseurl }}/assets/images/glfw00.png)

@@ -37,7 +37,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ## これで, こういう縞模様を y 方向に付けることができます. 
 
-![y 軸方向に縞模様を付ける]({{ '/assets/images/texture00_result.jpg' | relative_url }})
+![y 軸方向に縞模様を付ける]({{ site.baseurl }}/assets/images/texture00_result.jpg)
 
 ## フラグメントシェーダで色を切り替える
 
@@ -88,13 +88,13 @@ gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
 
 ## これでこういう縞模様になります.
 
-![フラグメントシェーダで色を決定する]({{ '/assets/images/texture01_result.jpg' | relative_url }})
+![フラグメントシェーダで色を決定する]({{ site.baseurl }}/assets/images/texture01_result.jpg)
 
 ## くっきりとした縞模様
 
 フラグメントシェーダで色を決定しているので, バーテックスシェーダで頂点の色を決定して補間したものより色の変化が滑らかになっていると思います. でも, あまり差がないという気もしますので，`cos`() の代わりに矩形関数を使って色の配分比を変化させてみます. GLSL の組み込み関数には矩形関数がないので, これを実数の少数部を求める組み込み関数 `fract`() としきい値にもとづいて値を二値化する `step`() を使って表現します.
 
-![矩形関数の作り方]({{ '/assets/images/rectangular.gif' | relative_url }})
+![矩形関数の作り方]({{ site.baseurl }}/assets/images/rectangular.gif)
 
 ```c
 #version 120
@@ -116,7 +116,7 @@ gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
 
 ## ただ，`step`() を使うと色の変化が急峻になるので, エリアシング (ギザギザ) が目立ちます. これを GLSL の組み込み関数 smoothstep() をつかって軽減する方法があるようなので, 後日気力があればまとめてみたいと思います.
 
-![くっきりとした縞を付ける]({{ '/assets/images/texture02_result.jpg' | relative_url }})
+![くっきりとした縞を付ける]({{ site.baseurl }}/assets/images/texture02_result.jpg)
 
 ## ついでに, x 座標も `varying` 変数でフラグメントシェーダに送ってみます. バーテックスシェーダで float 型の y の代わりに `vec2` 型の t という `varying` 変数を宣言し, それに x, y 座標を４倍したものを代入します. 
 
@@ -146,7 +146,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 フラグメントシェーダでは GLSL の組み込み関数 `floor`() を使って x と y の整数部を取り出します. 隣り合うマス目の色を変えるには, これらの和が偶数か奇数かを判断すれば良いので, これらを足して２で割った余りを求めます. `mod`() は余りを求める GLSL の組み込み関数です.
 
-![格子模様の作り方]({{ '/assets/images/checkerboard.gif' | relative_url }})
+![格子模様の作り方]({{ site.baseurl }}/assets/images/checkerboard.gif)
 
 ```c
 #version 120
@@ -168,7 +168,7 @@ gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
 
 ## これだと, こういう模様が付きます. こういうのは, ちょっと考えればいくらでも思いつくと思いますので, 自分でも何か考えてみてください.
 
-![格子模様]({{ '/assets/images/texture03_result.jpg' | relative_url }})
+![格子模様]({{ site.baseurl }}/assets/images/texture03_result.jpg)
 
 ## さらに, 色を切り替えるかわりに <`em`>`discard` を実行すれば, 型を抜くこともできます.
 
@@ -191,7 +191,7 @@ gl_FragColor = vec4(diffuseColor * c1, 1.0);
 
 ## こういうことができるので, [アルファテスト]({% post_url 2004-09-16-post %})も昔の機能になってしまいました.
 
-![格子模様で型抜き]({{ '/assets/images/texture04_result.jpg' | relative_url }})
+![格子模様で型抜き]({{ site.baseurl }}/assets/images/texture04_result.jpg)
 
 <ul>
 <li>[Linux 版](summer/summer09.tar.gz)</li>

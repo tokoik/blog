@@ -84,8 +84,8 @@ glutSwapBuffers();
 ## これだけです．もちろん，#if 0 〜 #`endif` の行は削除してしまっても構いません．
 
 <div class="figure">
-![部屋の正面が映っている]({{ '/assets/images/cubemap4.jpg' | relative_url }})
-![部屋の左側が映っている]({{ '/assets/images/cubemap5.jpg' | relative_url }})
+![部屋の正面が映っている]({{ site.baseurl }}/assets/images/cubemap4.jpg)
+![部屋の左側が映っている]({{ site.baseurl }}/assets/images/cubemap5.jpg)
 </div>
 
 <ul>

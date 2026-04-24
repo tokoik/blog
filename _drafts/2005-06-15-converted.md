@@ -20,8 +20,8 @@ published: true
 雛形として，とりあえず下の左のようなテクスチャをマッピングした箱を描くプログラムを使うことにします．
 
 <div class="figure">
-![箱にマッピングするテクスチャ]({{ '/assets/images/dot.jpg' | relative_url }})
-![テクスチャをマッピングした箱]({{ '/assets/images/dot1.jpg' | relative_url }})
+![箱にマッピングするテクスチャ]({{ site.baseurl }}/assets/images/dot.jpg)
+![テクスチャをマッピングした箱]({{ site.baseurl }}/assets/images/dot1.jpg)
 </div>
 
 <ul>
@@ -247,7 +247,7 @@ glDisable(GL_TEXTURE_2D);
 }
 ```
 
-![マルチテクスチャにより環境をマッピングした結果]({{ '/assets/images/dot2.jpg' | relative_url }})
+![マルチテクスチャにより環境をマッピングした結果]({{ site.baseurl }}/assets/images/dot2.jpg)
 
 ## 環境をマッピングする際のテクスチャ環境に `GL_MODULATE` を使っているので，模様の付いたメタリックな表面に環境が映り込んでいるような結果になります．非金属のつややかな表面への映り込みの場合は，もとのテクスチャに環境のテクスチャを加算する必要がありますが，これに関しては次回をお楽しみに．
 

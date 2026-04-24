@@ -82,7 +82,7 @@ glTranslated(0.0, 0.0, -5.0);
 
 ## これをコンパイルして実行すると，次のような図形が表示されると思います．
 
-![二つの立方体に `GL_OBJECT_LINEAR` でマッピング]({{ '/assets/images/texture3c.gif' | relative_url }})
+![二つの立方体に `GL_OBJECT_LINEAR` でマッピング]({{ site.baseurl }}/assets/images/texture3c.gif)
 
 ## glTexGen*() の引数 param に `GL_OBJECT_LINEAR` を指定した場合は，オブジェクト空間における座標値，すなわちモデルビュー変換前の座標値を用いてテクスチャ座標が生成されます．このため同じテクスチャ座標を設定したオブジェクトが二つあれば，そのそれぞれに同じテクスチャがマッピングされることになります．
 
@@ -178,11 +178,11 @@ glutSwapBuffers();
 
 ## すると，こんな図形が表示されます．
 
-![二つの立方体に `GL_EYE_LINEAR` でマッピング]({{ '/assets/images/texture3d.gif' | relative_url }})
+![二つの立方体に `GL_EYE_LINEAR` でマッピング]({{ site.baseurl }}/assets/images/texture3d.gif)
 
 ## 少しわかりにくいので，アルファテストをオフにして物体を回転してみると，こんな具合になります．
 
-![二つの立方体に `GL_EYE_LINEAR` でマッピング]({{ '/assets/images/texture3e.gif' | relative_url }})
+![二つの立方体に `GL_EYE_LINEAR` でマッピング]({{ site.baseurl }}/assets/images/texture3e.gif)
 
 ## `GL_EYE_LINEAR` の場合は，視野空間における座標値，すなわちモデルビュー変換後の座標値を用いてテクスチャ座標が生成されます．このため，すべての物体を含む空間全体に対して，単一のテクスチャをマッピングすることが容易に行えます．したがって投影マッピングを使ってスポットライトを表現するような場合は，こちらの方が便利でしょう．なお，`GL_EYE_PLANE` の設定を「トラックボール処理による回転」の前に置けば，テクスチャの投影方向を固定した状態で，物体だけを回すことができます．
 
@@ -274,7 +274,7 @@ glutSwapBuffers();
 
 テクスチャの投影方向を変更するもうひとつの方法は，テクスチャ座標 (s, t, r, q) を生成する際に用いるパラメータ自体に回転の行列を設定する方法です．
 
-![テクスチャ座標生成関数のパラメータ]({{ '/assets/images/texgenfunc.gif' | relative_url }})
+![テクスチャ座標生成関数のパラメータ]({{ site.baseurl }}/assets/images/texgenfunc.gif)
 
 ## 先ほどテクスチャ変換の設定のところに追加した「トラックボール処理による回転」を，#if 0 〜 #`endif` ではさんで無効にしてください．そして関数 `trackballRotation`() で得られるトラックボール用の回転を行う行列を使って `GL_EYE_PLANE` を設定します．
 

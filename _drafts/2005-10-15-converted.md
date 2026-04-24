@@ -103,7 +103,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 ## 以上の変更で，バンプマッピングの陰影計算を視点座標系で行うようになります．プログラムをコンパイル・実行すると，前回と同じような画像が得られるはずです．
 
-![バンプマッピングの陰影計算を視点座標系で行った結果]({{ '/assets/images/glsl22.jpg' | relative_url }})
+![バンプマッピングの陰影計算を視点座標系で行った結果]({{ site.baseurl }}/assets/images/glsl22.jpg)
 
 ## 環境のテクスチャを追加する
 
@@ -267,7 +267,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 ## これでこういう結果が得られます．
 
-![環境マップバンプマッピングの結果]({{ '/assets/images/glsl23.jpg' | relative_url }})
+![環境マップバンプマッピングの結果]({{ site.baseurl }}/assets/images/glsl23.jpg)
 
 <ul>
 <li>[Linux 版](glsl/glsl5.tar.gz)</li>
@@ -276,4 +276,4 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 ## ちなみに，鏡への映り込みじゃないと環境マッピングのありがたみを感じないというなら，フラグメントシェーダの最後のところで，`gl_FragColor` に直接 `envcolor` を代入してください．
 
-![環境のテクスチャをサンプリングした色をそのままフラグメントの色に使った結果]({{ '/assets/images/glsl24.jpg' | relative_url }})
+![環境のテクスチャをサンプリングした色をそのままフラグメントの色に使った結果]({{ site.baseurl }}/assets/images/glsl24.jpg)

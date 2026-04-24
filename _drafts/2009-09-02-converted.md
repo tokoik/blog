@@ -17,27 +17,27 @@ OpenGL の解説には, しばしば「初期状態では, 視線は Z 軸の負
 
 ## クリッピング空間では, 視点は原点にあり, 視線は z 軸の負の方向を向いています (^_^;) これを任意の位置から任意の方向を見ることができるようにします. このような変換を<`em`>視野変換 (viewing transform) と呼びます. いま, 視点が $\mathbf{e}$ = (<i>`ex`</i>, <i>`ey`</i>, <i>`ez`</i>) の位置にあり, 目標点 $\mathbf{t}$ = (<i>`tx`</i>, <i>`ty`</i>, <i>`tz`</i>) の方向を向いているとします. また視点の「上方向」は $\mathbf{u}$ = (<i>`ux`</i>, <i>`uy`</i>, <i>`uz`</i>) とします.
 
-![視点の位置と方向]({{ '/assets/images/viewing0.gif' | relative_url }})
+![視点の位置と方向]({{ site.baseurl }}/assets/images/viewing0.gif)
 
 ## 変換行列 **T** を用いて, この視点が原点になるように平行移動します. $\mathbf{e}$, $\mathbf{t}$ は位置なので, これらを同次座標で表せば, それぞれ (<i>`ex`</i> <i>`ey`</i> <i>`ez`</i> 1)<sup><i>T</i></sup>, (<i>`tx`</i> <i>`ty`</i> <i>`tz`</i> 1)<sup><i>T</i></sup> となります. これに対して $\mathbf{u}$ はベクトルなので, 同次座標は (<i>`ux`</i> <i>`uy`</i> <i>`uz`</i> 0)<sup><i>T</i></sup> になり, **T** をかけても変化しません.
 
-![視点の平行移動]({{ '/assets/images/viewingmatrix0.gif' | relative_url }})
+![視点の平行移動]({{ site.baseurl }}/assets/images/viewingmatrix0.gif)
 
 ## また, 視点座標系の基底ベクトル (軸ベクトル) **x'**, **y'**, **z'** を求めます. **z'** は視線の逆ベクトルを正規化して **z'** = ($\mathbf{e}$ - $\mathbf{t}$) / |$\mathbf{e}$ - $\mathbf{t}$|, **x'** は $\mathbf{u}$ と **z'** に対して垂直なので **x'** = ($\mathbf{u}$ × **z'**) / |$\mathbf{u}$ × **z'**|, **y'** は **z'** と **x'** に垂直なので **y'** = **z'** × **x'** となります.
 
-![視点座標系の基底ベクトル]({{ '/assets/images/viewing1.gif' | relative_url }})
+![視点座標系の基底ベクトル]({{ site.baseurl }}/assets/images/viewing1.gif)
 
 ## この視点座標系の基底ベクトルが, x, y, z 軸と一致するように回転します.
 
-![視点座標系の基底ベクトルを x, y, z 軸と一致させる]({{ '/assets/images/viewing2.gif' | relative_url }})
+![視点座標系の基底ベクトルを x, y, z 軸と一致させる]({{ site.baseurl }}/assets/images/viewing2.gif)
 
 ## この変換行列 **R** は, 次のようになります (ううう, 式を間違えた - 9月8日修正). なんでそうなるかは, たとえば x, y, z の各軸ベクトル (1, 0, 0), (0, 1, 0), (0, 0, 1) を, それぞれ (x'<sub>x</sub>, x'<sub>y</sub>, x'<sub>z</sub>), (y'<sub>x</sub>, y'<sub>y</sub>, y'<sub>z</sub>), (z'<sub>x</sub>, z'<sub>y</sub>, z'<sub>z</sub>) に変換する行列を考えてみるとわかります.
 
-![視点の回転]({{ '/assets/images/viewingmatrix1.gif' | relative_url }})
+![視点の回転]({{ site.baseurl }}/assets/images/viewingmatrix1.gif)
 
 ## したがって視野変換行列 **RT** は, 次式により求められます．
 
-![視野変換行列]({{ '/assets/images/viewingmatrix2.gif' | relative_url }})
+![視野変換行列]({{ site.baseurl }}/assets/images/viewingmatrix2.gif)
 
 ## それでは, 視点位置 `ex`, `ey`, `ez`, 目標点位置 `tx`, `ty`, `tz`, 上方向のベクトル `ux`, `uy`, `uz` として視野変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `lookAt`() を作成してください.
 
@@ -64,7 +64,7 @@ GLfloat *matrix)
 
 視点の移動を行うには, 頂点の座標値に `orthogonalMatrix`() で作った投影変換行列をかけたものに, `lookAt`() で作った視野変換行列をかける必要があります. この計算はバーテックスシェーダで行うこともできますが, 先に投影変換行列と視野変換行列の積を求めておけば, バーテックスシェーダの負担を減らすことができます. ４行４列の行列の積は, 次式により求められます.
 
-![配列の積]({{ '/assets/images/multiply.gif' | relative_url }})
+![配列の積]({{ site.baseurl }}/assets/images/multiply.gif)
 
 ## それでは, 引数 `m0` に指定された配列に格納されている行列と引数 `m1` に指定された配列に格納されている行列の積を求め, 引数 `matrix` に与えられた配列に格納する関数 `multiplyMatrix`() を作成してください.
 
@@ -182,7 +182,7 @@ projectionMatrixLocation = glGetUniformLocation(gl2Program, "projectionMatrix");
 
 ## これで下のような図形が描かれれば OK です.
 
-![視点を移動して描画]({{ '/assets/images/lookat_result.gif' | relative_url }})
+![視点を移動して描画]({{ site.baseurl }}/assets/images/lookat_result.gif)
 
 ## 透視投影変換による描画
 
@@ -244,7 +244,7 @@ projectionMatrixLocation = glGetUniformLocation(gl2Program, "projectionMatrix");
 
 ## これで透視投影変換による描画が行われるはずです. 下のような図形が描かれれば OK です.
 
-![透視投影変換による描画]({{ '/assets/images/perspective_result.gif' | relative_url }})
+![透視投影変換による描画]({{ site.baseurl }}/assets/images/perspective_result.gif)
 
 ## 一応, ここまでのプログラムをまとめたものを, 以下に用意しておきます.
 

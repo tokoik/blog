@@ -16,7 +16,7 @@ published: true
 Phong の陰影付けモデルでは，鏡面反射強度の算出にべき乗を用いる必要があります．しかし，C や C++ に用意されているべき乗を求める関数 pow() は，例えば一旦対数をとってから掛け算し，その指数をとるといった，結構回りくどい実装になっていたりします．だから，計算を速くしたいときには，pow() ってのはできるだけ使いたくない関数なんです．
 そこで今回は，この pow() の代わりに Schlick の近似と呼ばれる関数を使ってみたいと思います．Schlick の近似をユーザ定義関数として定義して，前回の似非異方性反射の計算に応用します．
 
-![Phong のモデルと Schlick の近似]({{ '/assets/images/shlick.gif' | relative_url }})
+![Phong のモデルと Schlick の近似]({{ site.baseurl }}/assets/images/shlick.gif)
 
 ## ユーザ定義関数
 
@@ -72,7 +72,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 ## 一応，これでも前回と同じようなハイライトが出ます．比較すると，明るい部分が少し広がっているようです．時間を計ったわけではないので，速くなったかどうかはわかりません．GPU の pow() はかなり高速にできているようですし．
 
-![Shlick の近似によるハイライト]({{ '/assets/images/glsl28.jpg' | relative_url }})
+![Shlick の近似によるハイライト]({{ site.baseurl }}/assets/images/glsl28.jpg)
 
 <ul>
 <li>[Linux 版](glsl/glsl7.tar.gz)</li>
@@ -83,7 +83,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 実は私も，以前 pow() の代わりに使える関数はないかなぁと考えたことがあります．それで，鏡面反射成分のローブを回転楕円面に見立てて，こういう式を導いてこっそり？使ってました．
 
-![回転楕円体による近似]({{ '/assets/images/ellipsoid.gif' | relative_url }})
+![回転楕円体による近似]({{ site.baseurl }}/assets/images/ellipsoid.gif)
 
 ## 見てのとおり，Schlick の近似に似てます．でも，Schlick の近似の方が掛け算が１個少なくてすみます．それと，Schlick の近似が <i>K<sub>shi</sub></i> = 0 の時に Phong のモデルと同様に <i>r<sub>s</sub></i> = 1 になるのに対して，この式は回転楕円面から出発しているので <i>r<sub>s</sub></i> = <i>t</i> (= cosφ) になってしまうあたりが違います．Schlick の近似がどうやって導き出されたのか知りたかったんですが，Graphic Gems IV の Schlick の論文にはいきなり最後の式が出てました．
 

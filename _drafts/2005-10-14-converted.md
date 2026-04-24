@@ -19,7 +19,7 @@ published: true
 
 ## このプログラムは高さマップ dotbump.raw から作成した法線マップを，そのままテクスチャとして球に貼り付けたものを表示します．材質には赤色を設定していますが，テクスチャ環境を `GL_REPLACE` に設定しているので，法線マップがそのまま色として貼り付けられます．
 
-![法線マップをそのまま色のテクスチャとして貼り付けた球]({{ '/assets/images/glsl16.jpg' | relative_url }})
+![法線マップをそのまま色のテクスチャとして貼り付けた球]({{ site.baseurl }}/assets/images/glsl16.jpg)
 
 ## シェーダプログラムの読み込み
 
@@ -186,7 +186,7 @@ gl_FragColor = color * (gl_LightSource[0].diffuse * diffuse + gl_LightSource[0].
 
 ## ちゃんとハイライトも付いています．
 
-![法線マップをそのまま色のテクスチャとして貼り付けて陰影をつけた球]({{ '/assets/images/glsl17.jpg' | relative_url }})
+![法線マップをそのまま色のテクスチャとして貼り付けて陰影をつけた球]({{ site.baseurl }}/assets/images/glsl17.jpg)
 
 ## 球の描画手続きの変更
 
@@ -439,8 +439,8 @@ gl_FragColor = gl_FrontLightProduct[0].diffuse * diffuse + gl_FrontLightProduct[
 }
 ```
 
-![シェーダプログラムを使って球にバンプマッピング]({{ '/assets/images/glsl18.jpg' | relative_url }})
+![シェーダプログラムを使って球にバンプマッピング]({{ site.baseurl }}/assets/images/glsl18.jpg)
 
 ## 接線ベクトルをバーテックスシェーダ内ででっち上げてやれば，ティーポットにバンプマッピングするなんてこともできなくはありません．ただし glutSolidTeapot() は面の表裏が反転しているので，凹凸も逆になってしまいます．
 
-![シェーダプログラムを使ってティーポットにバンプマッピング]({{ '/assets/images/glsl21.jpg' | relative_url }})
+![シェーダプログラムを使ってティーポットにバンプマッピング]({{ site.baseurl }}/assets/images/glsl21.jpg)

@@ -29,41 +29,41 @@ published: true
 
 一階線形常微分方程式の基本形は次のようになります．関数 <i>f</i> が現象のある瞬間 <i>x</i> における傾向を表します．
 
-![常微分方程式]({{ '/assets/images/ex00.png' | relative_url }})
+![常微分方程式]({{ site.baseurl }}/assets/images/ex00.png)
 
 ## いま，<i>x</i> における <i>y</i>(<i>x</i>) が既知なら，<i>x</i> + <i>h</i> における <i>y</i>(<i>x</i> + <i>h</i>) は，次のようにして求めることができます．
 
-![常微分方程式の解]({{ '/assets/images/ex01.png' | relative_url }})
+![常微分方程式の解]({{ site.baseurl }}/assets/images/ex01.png)
 
 ## 運動方程式
 
 よく知られる <i>F</i> = <i>ma</i> という運動方程式も，運動をモデル化した微分方程式です．空気抵抗を考慮する場合，力を <i>F</i>(<i>t</i>)，質量を <i>m</i>，加速度を <i>a</i>，そして速度を <i>v</i>，空気抵抗係数を <i>k</i> とすると，運動方程式は次のようになります．
 
-![運動方程式]({{ '/assets/images/ex02.png' | relative_url }})
+![運動方程式]({{ site.baseurl }}/assets/images/ex02.png)
 
 ## この力を時刻 <i>t</i> の関数 <i>F</i>(<i>t</i>) とすると，加速度 <i>a</i>(<i>t</i>, <i>v</i>) は次式により求めることができます．
 
-![加速度]({{ '/assets/images/ex03.png' | relative_url }})
+![加速度]({{ site.baseurl }}/assets/images/ex03.png)
 
 ## 一方，加速度は速度 <i>v</i>(<i>t</i>) を時刻 <i>t</i> について微分して得ることができます．
 
-![速度の微分方程式]({{ '/assets/images/ex04.png' | relative_url }})
+![速度の微分方程式]({{ site.baseurl }}/assets/images/ex04.png)
 
 ## もし力 <i>F</i>(<i>t</i>) が重力のように時刻 <i>t</i> に関わりなく一定なら，この常備分方程式は解析的に解くことができます．しかし，ここで扱っている「ゴムシミュレータ」では，<i>F</i>(<i>t</i>) が質点の移動に伴って刻々と変化します．<i>F</i>(<i>t</i>) は質点とその近傍との関係で決まるので，これを解析的に解くのは不可能に思えます．そこで，ここではこの微分方程式を数値的に解くことを考えます．現在時刻 <i>t</i> における速度が <i>v</i>(<i>t</i>) であり，時刻 <i>t</i> における加速度が <i>a</i>(<i>t</i>, <i>v</i>) で与えられるとき，Δ<i>t</i> 後の速度 <i>v</i>(<i>t</i> + Δ<i>t</i>) は次式により求めることができます．
 
-![速度]({{ '/assets/images/ex05.png' | relative_url }})
+![速度]({{ site.baseurl }}/assets/images/ex05.png)
 
 ## 同様に，位置 <i>p</i>(<i>t</i>) と速度 <i>v</i>(<i>t</i>) との関係は次のようになります．加速度と違って，速度は位置の影響を受けないとします．
 
-![位置の微分方程式]({{ '/assets/images/ex06.png' | relative_url }})
+![位置の微分方程式]({{ site.baseurl }}/assets/images/ex06.png)
 
 ## したがって，現在時刻 <i>t</i> から Δ<i>t</i> 後の位置 <i>p</i>(<i>t</i> + Δ<i>t</i>) は，現在位置を <i>p</i>(<i>t</i>) として次式で求めることができます．
 
-![位置]({{ '/assets/images/ex07.png' | relative_url }})
+![位置]({{ site.baseurl }}/assets/images/ex07.png)
 
 ## これを図で表すと，次のようになります．
 
-![一階線形常微分方程式の解法]({{ '/assets/images/euler0.png' | relative_url }})
+![一階線形常微分方程式の解法]({{ site.baseurl }}/assets/images/euler0.png)
 
 ## 陰解法と陽解法
 
@@ -75,28 +75,28 @@ published: true
 
 4 段の Runge-Kutta 法は <i>y</i>(<i>x</i> + <i>h</i>) のテイラー展開を 4 次の項までで打ち切って近似するものですが，オイラー法はこれを 1 次の項まで，すなわち <i>y</i>(<i>t</i>) と区間の前端 <i>t</i> における微係数だけを使って <i>y</i>(<i>x</i> + <i>h</i>) を予測（近似）するものです．この方法では，Δ<i>t</i> 後の速度 <i>v</i>(<i>t</i> + Δ<i>t</i>) は次式で求めることができます．
 
-![オイラー法で速度を求める]({{ '/assets/images/ex08.png' | relative_url }})
+![オイラー法で速度を求める]({{ site.baseurl }}/assets/images/ex08.png)
 
 <i>t</i> において <i>v</i>(<i>t</i>) は既知ですから，これをそのまま前出の運動方程式に代入すれば，<i>v</i>(<i>t</i> + Δ<i>t</i>) を求めることができます．同様に位置 <i>p</i>(<i>t</i> + Δ<i>t</i>) は次式で求めることができます．
 
-![オイラー法で位置を求める]({{ '/assets/images/ex09.png' | relative_url }})
+![オイラー法で位置を求める]({{ site.baseurl }}/assets/images/ex09.png)
 
 ## この式は <i>t</i> + Δ<i>t</i> の予測値を <i>t</i> における微係数（傾き）を使って線形予測するものです．それで，この図から見てもわかる通り，この予測は結構外れます．また，外れないように Δ<i>t</i> を小さくしても，誤差はそれに比例する程度でしか小さくなりません．
 
-![オイラー法]({{ '/assets/images/euler1.png' | relative_url }})
+![オイラー法]({{ site.baseurl }}/assets/images/euler1.png)
 
 ## 改良オイラー法
 
 線形予測ではちょっと外れがでかいので，テイラー展開の 2 次の項までを使って予測（近似）することにします．これには区間の中央の予測値を使う方法と，区間の前端の値と後端の予測値の平均値を使う方法があります．実はどっちがどっちなのかよくわかってないんですけど，多分，前者は改良オイラー法，後者は修正オイラー法と呼ばれているんじゃないかと思います．いずれも 2 段の Runge-Kutta 法に相当するみたいです．
 区間の中央値を使う場合，<i>v</i>(<i>t</i> + Δ<i>t</i>) は次式により求めます．問題になるのは右辺の <i>v</i>(<i>t</i> + Δ<i>t</i> / 2) の求め方です．これはこの微分方程式そのものの Δ<i>t</i> / 2 後の解ですから，当然未知の値です．
 
-![改良オイラー法で速度を求める]({{ '/assets/images/ex10.png' | relative_url }})
+![改良オイラー法で速度を求める]({{ site.baseurl }}/assets/images/ex10.png)
 
 ## そこで，この <i>v</i>(<i>t</i> + Δ<i>t</i> / 2) をオイラー法で予測します．区間が半分になっているので，その分，この予測値の誤差は小さくなります．
 
-![改良オイラー法で位置を求める]({{ '/assets/images/ex11.png' | relative_url }})
+![改良オイラー法で位置を求める]({{ site.baseurl }}/assets/images/ex11.png)
 
-![改良オイラー法]({{ '/assets/images/euler2.png' | relative_url }})
+![改良オイラー法]({{ site.baseurl }}/assets/images/euler2.png)
 
 ## 改良オイラー法の誤差の大きさは区間の長さの二乗に比例しますから，区間を半分にすれば誤差は四分の一になります．
 
@@ -104,10 +104,10 @@ published: true
 
 区間の前端の値と後端の予測値の平均値を使う方法があります．
 
-![修正オイラー法で速度を求める]({{ '/assets/images/ex12.png' | relative_url }})
+![修正オイラー法で速度を求める]({{ site.baseurl }}/assets/images/ex12.png)
 
-![修正オイラー法で位置を求める]({{ '/assets/images/ex13.png' | relative_url }})
+![修正オイラー法で位置を求める]({{ site.baseurl }}/assets/images/ex13.png)
 
-![修正オイラー法]({{ '/assets/images/euler3.png' | relative_url }})
+![修正オイラー法]({{ site.baseurl }}/assets/images/euler3.png)
 
 ## 修正オイラー法も誤差の大きさは区間の長さの二乗に比例しますから，区間を半分にすれば誤差は四分の一になります．

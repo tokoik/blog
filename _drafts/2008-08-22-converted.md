@@ -29,21 +29,21 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
 ## こういうテクスチャ
 
-![マッピングするテクスチャ]({{ '/assets/images/clamp0.gif' | relative_url }})
+![マッピングするテクスチャ]({{ site.baseurl }}/assets/images/clamp0.gif)
 
 ## をこういうポリゴン
 
-![マッピングするポリゴン]({{ '/assets/images/clamp1.gif' | relative_url }})
+![マッピングするポリゴン]({{ site.baseurl }}/assets/images/clamp1.gif)
 
 ## の中央部分に周囲を余らせてマッピングすると，こういうことになってしまいます．
 
-![`GL_CLAMP` でマッピングした結果]({{ '/assets/images/clamp2.gif' | relative_url }})
+![`GL_CLAMP` でマッピングした結果]({{ site.baseurl }}/assets/images/clamp2.gif)
 
 ## `GL_CLAMP` ではテクスチャの範囲外をサンプリングしたとき，テクスチャの最外周の色を拡張して用います．テクスチャの拡大縮小に最近傍法（`GL_NEAREST`）を用いているときは，テクスチャ画像の最外周の画素の色がそのまま用いられるため，その色が拡張されてマッピングされます．
 
 ところがテクスチャの拡大縮小に線形補間（`GL_LINEAR` 等）を用いた場合には，テクスチャの最外周の色が，テクスチャ画像の最外周の画素の色と，テクスチャの境界色とを混合したものになります．このため，この場合は拡張された部分の色が，テクスチャ画像の最外周の画素の色と異なってしまいます．
 
-![`GL_CLAMP` によるサンプリング範囲]({{ '/assets/images/clamp3.gif' | relative_url }})
+![`GL_CLAMP` によるサンプリング範囲]({{ site.baseurl }}/assets/images/clamp3.gif)
 
 ## `GL_CLAMP_TO_EDGE`
 
@@ -55,11 +55,11 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 ```
 
-![`GL_CLAMP_TO_EDGE` によるサンプリング範囲]({{ '/assets/images/clamp4.gif' | relative_url }})
+![`GL_CLAMP_TO_EDGE` によるサンプリング範囲]({{ site.baseurl }}/assets/images/clamp4.gif)
 
 ## こうすることでサンプリングされるテクスチャの範囲が `GL_CLAMP` の範囲より 1/2 画素分内側になって，最外周の色が境界色の影響を受けなくなります．
 
-![`GL_CLAMP_TO_EDGE` でマッピングした結果]({{ '/assets/images/clamp5.gif' | relative_url }})
+![`GL_CLAMP_TO_EDGE` でマッピングした結果]({{ site.baseurl }}/assets/images/clamp5.gif)
 
 ## `GL_CLAMP_TO_BORDER`
 
@@ -71,11 +71,11 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 ```
 
-![`GL_CLAMP_TO_EDGE` によるサンプリング範囲]({{ '/assets/images/clamp6.gif' | relative_url }})
+![`GL_CLAMP_TO_EDGE` によるサンプリング範囲]({{ site.baseurl }}/assets/images/clamp6.gif)
 
 ## こうすることでサンプリングされるテクスチャの範囲が `GL_CLAMP` の範囲より 1/2 画素分外側になって，最外周の色が境界色そのものになります．
 
-![`GL_CLAMP_TO_EDGE` でマッピングした結果]({{ '/assets/images/clamp7.gif' | relative_url }})
+![`GL_CLAMP_TO_EDGE` でマッピングした結果]({{ site.baseurl }}/assets/images/clamp7.gif)
 
 ## 境界色の指定
 
@@ -94,4 +94,4 @@ glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
 
 ## この場合，境界色は次のようになります．
 
-![`GL_TEXTURE_BORDER_COLOR` で境界色を指定した場合]({{ '/assets/images/clamp8.gif' | relative_url }})
+![`GL_TEXTURE_BORDER_COLOR` で境界色を指定した場合]({{ site.baseurl }}/assets/images/clamp8.gif)

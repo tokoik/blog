@@ -46,7 +46,7 @@ glutSolidTeapot(1.0);
 glPopMatrix();
 ```
 
-![部屋の中のティーポット]({{ '/assets/images/texobj1.jpg' | relative_url }})
+![部屋の中のティーポット]({{ site.baseurl }}/assets/images/texobj1.jpg)
 
 ## ティーポットにキューブマッピングしてみる
 
@@ -266,7 +266,7 @@ glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 ## これで普通のテクスチャマッピングとキューブマッピングを両方実装できました．
 
-![ティーポットにキューブマッピング]({{ '/assets/images/texobj2.jpg' | relative_url }})
+![ティーポットにキューブマッピング]({{ site.baseurl }}/assets/images/texobj2.jpg)
 
 ## 部屋の回転にあわせて映り込みも回転させよう
 
@@ -379,7 +379,7 @@ glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 ## テクスチャ変換行列はテクスチャオブジェクトと関連していないので，他の図形を描画するときはテクスチャ変換行列を元に戻しておく必要があります．
 
-![ティーポットへの映り込みも回転する]({{ '/assets/images/texobj3.jpg' | relative_url }})
+![ティーポットへの映り込みも回転する]({{ site.baseurl }}/assets/images/texobj3.jpg)
 
 ## これで周囲の情景にあわせてティーポットへの映り込みも回転するので，レイトレーシングっぽい表現が可能になります．映り込みのテクスチャにレンダリングした画像を用いれば，擬似的なレイトレーシングがリアルタイムに可能になります．図形をテクスチャとしてレンダリングする方法については，また後日．
 

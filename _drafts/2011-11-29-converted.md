@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 
 最初に, こういう点を描く手続きを追加します.
 
-![点を描く]({{ '/assets/images/physics00.gif' | relative_url }})
+![点を描く]({{ site.baseurl }}/assets/images/physics00.gif)
 
 ## とりあえず点の数は 20 個, 点の大きさは 5 くらいにします. またクリッピング空間の大きさが -1≤x,y,z≤1 なので, 両端の点の位置を (-0.9, 0, 0), (0.9, 0. 0) として, この区間に等間隔に点を描くことにします.
 
@@ -375,7 +375,7 @@ static void display(void)
   glutSwapBuffers();
 ```
 
-![点と線分を描く]({{ '/assets/images/physics01.gif' | relative_url }})
+![点と線分を描く]({{ site.baseurl }}/assets/images/physics01.gif)
 
 ## 点の位置をマウスで動かす
 
@@ -502,4 +502,4 @@ static void motion(int x, int y)
 
 ## 点をドラッグして移動できるでしょうか.
 
-![点をドラッグして移動する]({{ '/assets/images/physics02.gif' | relative_url }})
+![点をドラッグして移動する]({{ site.baseurl }}/assets/images/physics02.gif)

@@ -13,7 +13,7 @@ published: true
 
 次に，奥さんのたっての希望で，四つ橋線で肥後橋へ．そして 30 分ほど行列に並んだ後，ついに，
 
-![堂島ロール]({{ '/assets/images/doujima.jpg' | relative_url }})
+![堂島ロール]({{ site.baseurl }}/assets/images/doujima.jpg)
 
 ## [Mon chou chou](http://www.mon-chouchou.com/) の<`em`>堂島ロールゲット！，Get!，げっとぉぉぉ！！！！
 
@@ -32,8 +32,8 @@ published: true
 ## 単に書き換えるだけでなく，いろいろ細工しています（マウスの左ボタンでオブジェクト，右ボタンで背景を回転できるようになっています）．
 
 <div class="figure">
-![反射マッピング]({{ '/assets/images/refract1.jpg' | relative_url }})
-![反射マッピングでオブジェクトと環境を回転]({{ '/assets/images/refract2.jpg' | relative_url }})
+![反射マッピング]({{ site.baseurl }}/assets/images/refract1.jpg)
+![反射マッピングでオブジェクトと環境を回転]({{ site.baseurl }}/assets/images/refract2.jpg)
 </div>
 
 ## このバーテックスシェーダプログラム `reflect`.`vert` は次のようになっています．
@@ -120,7 +120,7 @@ gl_FragColor = textureCube(cubemap, s);
 
 ## この変更で，次のようが画像が得られます．
 
-![屈折マッピング]({{ '/assets/images/refract3.jpg' | relative_url }})
+![屈折マッピング]({{ site.baseurl }}/assets/images/refract3.jpg)
 
 ## 反射と屈折の合成
 
@@ -142,13 +142,13 @@ gl_FragColor = mix(textureCube(cubemap, s), textureCube(cubemap, r), 0.5);
 }
 ```
 
-![反射方向の色と屈折方向の色の合成]({{ '/assets/images/refract4.jpg' | relative_url }})
+![反射方向の色と屈折方向の色の合成]({{ site.baseurl }}/assets/images/refract4.jpg)
 
 ## フレネル反射
 
 前の例では，反射方向にあるテクスチャのサンプル値と屈折方向にあるテクスチャのサンプル値の配分を 0.5 に固定していましたが，この配分は，実際には視線の入射角と屈折率の比 (`eta`) で決まります．この関係は[フレネルの式]({% post_url 2005-06-20-post %})で求めることができます．以前，シェーダを使わずにこれを実装するために，この式の値を[１次元テクスチャに格納しておく手法]({% post_url 2005-06-20-post %})を用いましたが，シェーダが使えればこれをシェーダで計算することができます．ただし，フレネルの式は少し複雑なので，シェーダでは Shlick による近似（この人は [Phong の陰影付けモデル]({% post_url 2005-10-20-post %})を始め，いろんな式の近似式を提案している人ですね）が用いられるようです．
 
-![Fresnel の式の Shlick による近似]({{ '/assets/images/shlick-fresnel.gif' | relative_url }})
+![Fresnel の式の Shlick による近似]({{ site.baseurl }}/assets/images/shlick-fresnel.gif)
 
 ## ここで f は視線が境界面に垂直に入射するときの反射率で，これは[フレネルの式]({% post_url 2005-06-20-post %})において入射角θ= 0 (c = $\mathbf{v}$·$\mathbf{h}$ = 1) として求めることができます．**V** は視線ベクトルですが，ここでは参照点から視点に向かう単位ベクトルです．**N** は参照点における単位法線ベクトルです．これらをもとに参照点における反射率を求め，`varying` 変数 t に格納します．これをバーテックスシェーダプログラムに組み込むと，次のようになります．
 
@@ -198,7 +198,7 @@ gl_FragColor = mix(textureCube(cubemap, s), textureCube(cubemap, r), t);
 
 ## これで，こういう結果が得られます．
 
-![フレネルの式による合成]({{ '/assets/images/refract5.jpg' | relative_url }})
+![フレネルの式による合成]({{ site.baseurl }}/assets/images/refract5.jpg)
 
 ## なんだかちょっと分かりづらいですね．環境のテクスチャが暗いせいかも知れません．そのうち環境のテクスチャを作り直して試してみたいと思います．
 

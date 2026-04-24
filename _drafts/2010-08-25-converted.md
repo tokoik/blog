@@ -11,7 +11,7 @@ published: true
 
 ## 今回はこういうものを作ります.
 
-![実行結果]({{ '/assets/images/mfc68.gif' | relative_url }})
+![実行結果]({{ site.baseurl }}/assets/images/mfc68.gif)
 
 ## 以下は[【 G.Ishihara流 】Visual C++ (MFC)超入門](http://www.g-ishihara.com/) 様に非常にお世話になりました. ありがとうございました.
 
@@ -19,20 +19,20 @@ published: true
 
 Picture Control に結びつけた `OpenGL` の描画領域に描くシーンのクラスを作成します. 「クラスの追加」を選びます. 別にクラスにする必要はなんにもない気がするんですけど.
 
-![クラスの追加]({{ '/assets/images/mfc33.gif' | relative_url }})
+![クラスの追加]({{ site.baseurl }}/assets/images/mfc33.gif)
 
 ## 「カテゴリ」から「C++」を選び, 「C++クラス」のテンプレート鵜を選んで「追加」をクリックします. `OpenGL` のクラスなので, MFC なんかの流儀は気にしないことにします.
 
-![C++クラスのテンプレート]({{ '/assets/images/mfc34.gif' | relative_url }})
+![C++クラスのテンプレート]({{ site.baseurl }}/assets/images/mfc34.gif)
 
 ## クラス名は「`Scene`」とします. 「仮想デストラクタ」にするのはデフォだという話ですが, これについてはいろいろ議論もあるようです. でも, ここでは日和ります.
 
  
-![クラス名の設定]({{ '/assets/images/mfc35.gif' | relative_url }})
+![クラス名の設定]({{ site.baseurl }}/assets/images/mfc35.gif)
 
 ## `Scene` クラスの宣言を行います. `Scene`.h を開きます.
 
-![`Scene` クラスの宣言]({{ '/assets/images/mfc36.gif' | relative_url }})
+![`Scene` クラスの宣言]({{ site.baseurl }}/assets/images/mfc36.gif)
 
 ## ユーザインタフェース機能はクラス変数として `GLfloat` 型の `rotateZ` を１個だけ宣言します. クラス変数って, メンバ関数にとってのグローバル変数なんだなって MFC を使ってると意識させられます. コンストラクタとデストラクタは, ここではあまり仕事がないので, インラインで定義してしまいます. あと, コンストラクタで `rotateZ` を初期化するようにします. メンバ関数には `rotateZ` に値を設定する `setRotateZ`() とシーンを描画する `draw`() を用意することにします.
 
@@ -55,7 +55,7 @@ void draw(void);
 
 ## `Scene`.cpp を開いて `Scene` クラスの実装を行います. コンストラクタとデストラクタは自動生成されていますが, `Scene`.h でインラインにしちゃったので消してしまいます. ここでは `draw`() の実装だけを行います．
 
-![`Scene` クラスの実装]({{ '/assets/images/mfc37.gif' | relative_url }})
+![`Scene` クラスの実装]({{ site.baseurl }}/assets/images/mfc37.gif)
 
 ## 描画する図形はなんでもいいんですけど, GLUT も AUX も使ってないので (GLU は使えますけど) 自分で定義することにします. もうちょっとこだわってシーングラフっぽくしたくなるのですが, そんなことをしていたら終わらないので我慢します.
 
@@ -94,7 +94,7 @@ glPopMatrix();
 
 `Scene` クラスをダイアログウィンドウで使うので, クラスビューで Cプロジェクト名Dlg クラス (ここでは `CGLsampleDlg`) をダブルクリックして定義を開きます.
 
-![ダイアログクラスの修正]({{ '/assets/images/mfc38.gif' | relative_url }})
+![ダイアログクラスの修正]({{ site.baseurl }}/assets/images/mfc38.gif)
 
 ## `Scene`.h を #`include` します.
 
@@ -117,15 +117,15 @@ class CGLsampleDlg : public CDialog
 
 ## クラスビューで Cプロジェクト名Dlg クラス (ここでは `CGLsampleDlg`) を右クリックして「追加」から「変数の追加」を選びます.
 
-![クラス変数の追加]({{ '/assets/images/mfc39.gif' | relative_url }})
+![クラス変数の追加]({{ site.baseurl }}/assets/images/mfc39.gif)
 
 ## 「アクセス」は "private", 変数の種類は "`Scene` *"として, "`m_pScene`" という変数を追加します. "m_" はメンバ変数, "p" はポインタを表すそうです. このように変数名で変数の「立場」を表しておくことを「ハンガリアン記法」というそうです. これもいろいろ議論があるみたいですが, MFC の流儀に従うことにします. 最後に「完了」をクリックします.
 
-![追加する変数]({{ '/assets/images/mfc40.gif' | relative_url }})
+![追加する変数]({{ site.baseurl }}/assets/images/mfc40.gif)
 
 ## クラスビューで `OnInitDialog`(void) をダブルクリックして, その定義を変更します.
 
-![インスタンスの生成]({{ '/assets/images/mfc41.gif' | relative_url }})
+![インスタンスの生成]({{ site.baseurl }}/assets/images/mfc41.gif)
 
 ## `OpenGL` の初期化が終わった後で `Scene` クラスのインスタンスを生成して, `m_pScene` に代入します. `Scene` のコンストラクタは `OpenGL` 的な処理を何もしていないので, 実はこのインスタンスはどこで生成しても構わないのですが, 気分的な問題と将来の拡張 (あるのか) に備えて, ここで生成することにします.
 
@@ -175,7 +175,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 <blockquote>2014 年 6 月 3 日修正：`OnInitDialog`() で `m_pDC`->`m_hDC` = `m_glView`.GetDC()->GetSafeHdc(); という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
 
-![シーンの描画]({{ '/assets/images/mfc42.gif' | relative_url }})
+![シーンの描画]({{ site.baseurl }}/assets/images/mfc42.gif)
 
 ## 画面クリアの後でシーンを描画する `draw`() メソッドを呼び出します.
 
@@ -206,7 +206,7 @@ SwapBuffers(m_pDC->m_hDC);
 
 ## クラスビューで `OnDestroy`(void) をダブルクリックして, その定義を変更します.
 
-![インスタンスの削除]({{ '/assets/images/mfc43.gif' | relative_url }})
+![インスタンスの削除]({{ site.baseurl }}/assets/images/mfc43.gif)
 
 ## `OnDestroy`() はウィンドウを閉じるときに呼び出されるので, `OnInitDialog`() で生成したインスタンスをここで削除します.
 
@@ -226,51 +226,51 @@ delete m_pDC;
 
 ## ここでプロジェクトを一旦ビルドして, プログラムが正常に動作するか確認します.
 
-![プログラムのビルド]({{ '/assets/images/mfc44.gif' | relative_url }})
+![プログラムのビルド]({{ site.baseurl }}/assets/images/mfc44.gif)
 
 ## Picture Contol 上の `OpenGL` の描画領域に図形が表示されると思います.
 
-![プログラムの実行]({{ '/assets/images/mfc45.gif' | relative_url }})
+![プログラムの実行]({{ site.baseurl }}/assets/images/mfc45.gif)
 
 ## 「Slider Control」を追加する
 
 ダイアログエディタに切り替えます.
 
-![ダイアログエディタに切り替え]({{ '/assets/images/mfc46.gif' | relative_url }})
+![ダイアログエディタに切り替え]({{ site.baseurl }}/assets/images/mfc46.gif)
 
 ## 「ツールボックス」のウィンドウから「Slider Control」を選びます．
 
-![Slider Control の選択]({{ '/assets/images/mfc47.gif' | relative_url }})
+![Slider Control の選択]({{ site.baseurl }}/assets/images/mfc47.gif)
 
 ## マウスを使って「Slider Control」を配置します. ちなみに, 縦方向の「Slider Control」を配置するには, 「プロパティ」の "Orientation" に「垂直方向」を設定します.
 
-![Slider Control の配置]({{ '/assets/images/mfc48.gif' | relative_url }})
+![Slider Control の配置]({{ site.baseurl }}/assets/images/mfc48.gif)
 
 ## 配置した「Slider Control」を右クリックして，「変数の追加」を選びます.
 
-![Slider Control に変数を追加]({{ '/assets/images/mfc49.gif' | relative_url }})
+![Slider Control に変数を追加]({{ site.baseurl }}/assets/images/mfc49.gif)
 
 ## 「アクセス」は "private", 「変数の種類」は最初から設定されている "CSliderCtrl" として, `m_xcRotateZ` という変数を追加します. コントロールと変数とのデータのやり取りに DDX というメカニズムを使うので, 変数名に "x" を付けています. また "c" はこの変数のカテゴリが「Control」であることを示すんじゃないかと思います. 最後に「完了」をクリックします.
 
-![変数 `m_xcRotateZ` の設定]({{ '/assets/images/mfc50.gif' | relative_url }})
+![変数 `m_xcRotateZ` の設定]({{ site.baseurl }}/assets/images/mfc50.gif)
 
 ## 再び「Slider Control」を右クリックして，「変数の追加」を選びます.
 
-![変数の追加]({{ '/assets/images/mfc51.gif' | relative_url }})
+![変数の追加]({{ site.baseurl }}/assets/images/mfc51.gif)
 
 ## 最初に「カテゴリ」から "Value" を選択します. そのあと「アクセス」に "private", 変数の種類に "int" を選びます. この変数を使って「Slider Control」と値をやり取りします. 変数名は "`m_xvRotateZ`" とします. "v" は変数のカテゴリが "Value" ということを表すんじゃないかと思います. なお, この変数には -180 度〜 180 度の「角度」を入れるつもりなので, 最大値と最小値をそれに設定します. が, 意味あるのかな？
 
-![変数 `m_xvRotateZ` の追加]({{ '/assets/images/mfc52.gif' | relative_url }})
+![変数 `m_xvRotateZ` の追加]({{ site.baseurl }}/assets/images/mfc52.gif)
 
 ## 「Slider Control」を使って図形を回転する
 
 水平の「Slider Control」のツマミを動かすと WM_HSCROLL イベントが発生するので (垂直の「Slider Control」では WM_VSCROLL イベントが発生します), それを処理するハンドラを用意します. クラスビューで Cプロジェクト名Dlg クラス (ここでは `CGLsampleDlg`) を選択して, プロパティで WM_HSCROLL に `OnHScroll` を追加します.
 
-![WM_HSCROLL イベントに対するハンドラの追加]({{ '/assets/images/mfc53.gif' | relative_url }})
+![WM_HSCROLL イベントに対するハンドラの追加]({{ site.baseurl }}/assets/images/mfc53.gif)
 
 ## `OnHScroll`() を実装します.
 
-![関数 `OnHScroll`() の実装]({{ '/assets/images/mfc54.gif' | relative_url }})
+![関数 `OnHScroll`() の実装]({{ site.baseurl }}/assets/images/mfc54.gif)
 
 ## ウィンドウ上に (水平方向の)「Slider Control」や「Scroll Bar」が複数存在するとき, そのどれを動かしてもこの `OnHScroll`() が呼ばれます (Vista 以降であればコントロールごとにハンドラを指定できるみたいですけど). したがって, `OnHScroll`() ではどのコントロールが操作されたのかを判断する必要があります. `pScrollBar` にコントロール変数のポインタが入っているので, これを使ってコントロールを識別します.
 
@@ -316,7 +316,7 @@ CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 
 ## `OnInitDialog`(void) をダブルクリックして, その定義を変更します. ここでは `m_xcRotateZ` と `m_xvRotateZ` の初期設定を行います.
 
-![関数 `OnInitDialog`() の変更]({{ '/assets/images/mfc55.gif' | relative_url }})
+![関数 `OnInitDialog`() の変更]({{ site.baseurl }}/assets/images/mfc55.gif)
 
 ## `SetRange`() メソッドはツマミの上限値と下限値を設定します. `OnHScroll`() の引数 `nPos` で得られる値はこの範囲を変化します.
 
@@ -369,7 +369,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## `OnPaint`(void) をダブルクリックして, その定義を変更します.
 
-![関数 `OnPaint`() の変更]({{ '/assets/images/mfc56.gif' | relative_url }})
+![関数 `OnPaint`() の変更]({{ site.baseurl }}/assets/images/mfc56.gif)
 
 ## ここでは `m_xvRotateZ` の値を `setRotateZ`() メソッドの引数に与えて. シーンの回転角を設定します.
 
@@ -401,33 +401,33 @@ SwapBuffers(m_pDC->m_hDC);
 
 ## ここまでできたら一旦ビルドして, プログラムを実行します. 「Slider Control」のツマミを動かすと, 図形が回転するでしょうか.
 
-![プログラムを実行してスライダを動かす]({{ '/assets/images/mfc57.gif' | relative_url }})
+![プログラムを実行してスライダを動かす]({{ site.baseurl }}/assets/images/mfc57.gif)
 
 ## 「Edit Control」を追加する
 
 またダイアログエディタに切り替えます.
 
-![ダイアログエディタに切り替え]({{ '/assets/images/mfc58.gif' | relative_url }})
+![ダイアログエディタに切り替え]({{ site.baseurl }}/assets/images/mfc58.gif)
 
 ## ツールボックスから, 今度は「Edit Control」を選択します. 「Edit Control」は文字の表示や入力を行います.
 
-![Edit Control の選択]({{ '/assets/images/mfc59.gif' | relative_url }})
+![Edit Control の選択]({{ site.baseurl }}/assets/images/mfc59.gif)
 
 ## マウスを使って「Edit Control」を配置します. 
 
-![Edit Control の配置]({{ '/assets/images/mfc60.gif' | relative_url }})
+![Edit Control の配置]({{ site.baseurl }}/assets/images/mfc60.gif)
 
 ## 配置した「Edit Control」を右クリックして，「変数の追加」を選びます.
 
-![Edit Control に変数を追加]({{ '/assets/images/mfc61.gif' | relative_url }})
+![Edit Control に変数を追加]({{ site.baseurl }}/assets/images/mfc61.gif)
 
 ## 最初に「カテゴリ」から "Value" を選択します. そのあと「アクセス」に "private", 「変数の種類」に "CString" を設定して, `m_xvEditZ` という変数を追加します. この変数を使って「Edit Control」に文字列を表示したり文字列を取得したりします. 最後に「完了」をクリックします.
 
-![変数 `m_xvEditZ` の設定]({{ '/assets/images/mfc62.gif' | relative_url }})
+![変数 `m_xvEditZ` の設定]({{ site.baseurl }}/assets/images/mfc62.gif)
 
 ## `OnInitDialog`(void) をダブルクリックして, その定義を変更します. ここでは `m_xvEditZ` の初期設定を行います.
 
-![変数 `m_xvEditZ` の初期化]({{ '/assets/images/mfc63.gif' | relative_url }})
+![変数 `m_xvEditZ` の初期化]({{ site.baseurl }}/assets/images/mfc63.gif)
 
 ## `m_xvEditZ` は CString 型すなわち文字列なので, 角度を保持している `m_xvRotateZ` を文字列に変換してこれに格納します. `Format`() メソッドの第１引数は printf() と同様の書式文字列です. このプロジェクトは文字集合として (デフォルトの)  Unicode を使用する設定になっているので, `_T`() を使って変換しています.
 
@@ -483,7 +483,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 `OnHScroll`(`UINT` `nSBCode`, `UINT` `nPos`, `CScrollBar`* `pScrollBar`) をダブルクリックして, その定義を変更します.
 
-![関数 `OnHScroll`() の変更]({{ '/assets/images/mfc64.gif' | relative_url }})
+![関数 `OnHScroll`() の変更]({{ site.baseurl }}/assets/images/mfc64.gif)
 
 ## 「Slider Control」のツマミを動かした位置 `m_xvRotateZ` を文字列に直して `m_xvEditZ` に設定します. これでツマミを動かしたときに, その値が「Edit Control」に表示されます.
 
@@ -526,18 +526,18 @@ CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 
 ## プログラムをビルドして, 「Slider Control」のツマミを動かしてみます. 図形が回転すると同時に, 「Edit Control」の数値が変化すると思います. 【8月26日追記】`Invalidate`(`FALSE`); の後で UpdateWindow(); を実行すれば, ツマミの操作がすぐに「Edit Control」に反映されます. 処理が重くなる気がしますけど.
 
-![実行結果]({{ '/assets/images/mfc65.gif' | relative_url }})
+![実行結果]({{ site.baseurl }}/assets/images/mfc65.gif)
 
 ## 「Edit Control」に数値を入力する
 
 逆に, 「Edit Control」に入力した数値が「Slider Control」や表示されている図形に反映されるようにします. ここで重要な問題があります. ダイアログアプリケーションの場合, リターン (Enter) キーや `ESC` キー, Tab キーなどは, フォーカスされている (操作の対象となっている) コントロールがどれであっても, そのキーに割り当てられた操作が実行されてしまいます. リターンキーには「`OK`」ボタンのクリック, `ESC` キーには「キャンセル」ボタンのクリック, Tab キーにはフォーカスの移動が割り当てられています. このため, 特定のコントロールでリターンキーの入力を検出することができなかったり, `ESC` をタイプするといつでもダイアログウィンドウが閉じてしまったりします.
 そこで, キー入力がコントロールで処理される前に呼び出される `PreTranslateMessage`() をオーバーライドして, キー入力を補足するようにします. まずクラスビューで Cプロジェクト名Dlg クラス (ここでは `CGLsampleDlg`) を選択して, プロパティの左から５つ目のボタンをクリックし, PreTranslateMassage を選択して右の▼から `PreTranslateMessage` を追加してください.
 
-![関数 `PreTranslateMessage`() のオーバーライド]({{ '/assets/images/mfc66.gif' | relative_url }})
+![関数 `PreTranslateMessage`() のオーバーライド]({{ site.baseurl }}/assets/images/mfc66.gif)
 
 ## `PreTranslateMessage`() を実装します.
 
-![関数 `PreTranslateMessage`() の実装]({{ '/assets/images/mfc67.gif' | relative_url }})
+![関数 `PreTranslateMessage`() の実装]({{ site.baseurl }}/assets/images/mfc67.gif)
 
 ## `PreTranslateMessage`(`MSG`* pMessage) がキータイプにより呼び出された場合は, `pMsg`->`message` が `WM_KEYDOWN` になっています. このとき `pMsg`->`wParam` にタイプされたキーが格納され, `pMsg`->`hwnd` にフォーカスされているコントロールの Window ハンドルが格納されています.
 
@@ -586,7 +586,7 @@ return CDialog::PreTranslateMessage(pMsg);
 
 ## これでプログラムをビルドして実行します. 「Edit Control」に数値を入力してリターンキーをタイプすれば, 「Slider Control」と表示図形が変化するでしょうか.
 
-![実行結果]({{ '/assets/images/mfc68.gif' | relative_url }})
+![実行結果]({{ site.baseurl }}/assets/images/mfc68.gif)
 
 ## もう嫌になってきたので, 続きを書くかどうかわかりません. 多分, 書かないと思います. 他にもやらないといけないことがたくさん会あるので. ファイルオープンのダイアログくらいは書くつもりだったんだけど, 渡したソースに書いてあるから自分で考えてちょんまげ＞某君.
 

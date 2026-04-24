@@ -13,15 +13,15 @@ published: true
 
 いま，次のようなへこみのある四角形を描くことを考えます．
 
-![へこみのある四角形]({{ '/assets/images/bump1.gif' | relative_url }})
+![へこみのある四角形]({{ site.baseurl }}/assets/images/bump1.gif)
 
 ## このへこみをバンプマッピングで表現しているとき，この四角形を斜めから平行投影すると，次のような表示が得られます．
 
-![バンプマッピングによるへこみの表現]({{ '/assets/images/bump2.gif' | relative_url }})
+![バンプマッピングによるへこみの表現]({{ site.baseurl }}/assets/images/bump2.gif)
 
 ## しかし，このへこみが実際にへこんだ形をしていれば，この四角形は次のように表示されるはずです．
 
-![実際のへこみの表現]({{ '/assets/images/bump3.gif' | relative_url }})
+![実際のへこみの表現]({{ site.baseurl }}/assets/images/bump3.gif)
 
 ## つまり実際にへこんだ形状では，視点からの距離がへこんだ部分と周囲とで異なるために，斜めから見たときにこのようなずれが生じます．ところがバンプマッピングでは，陰影の変化のみによってへこみの表現を行っているために，このずれを表現することができません．視差マッピングではこのずれを再現することによって，よりリアルな凹凸を表現することができます．
 
@@ -231,7 +231,7 @@ gl_FragColor += dcolor * gl_LightSource[0].diffuse * diffuse
 
 ## これでディフューズテクスチャがマッピングされます．
 
-![ディフューズマッピング]({{ '/assets/images/glsl29.jpg' | relative_url }})
+![ディフューズマッピング]({{ site.baseurl }}/assets/images/glsl29.jpg)
 
 ## 高さマップの読み込み
 
@@ -274,7 +274,7 @@ free(map);
 
 ようやくここから本題です．物体表面に高さマップを重ねたと考えると，それによる注視点位置のずれは下図の様になります．ただし，これは高さマップが十分なだらかであると仮定した場合の近似です．
 
-![注視点のずれ]({{ '/assets/images/parallax.gif' | relative_url }})
+![注視点のずれ]({{ site.baseurl }}/assets/images/parallax.gif)
 
 ## したがってフラグメントシェーダ内で高さマップを参照し，それに視線の方向ベクトルを掛けて，テクスチャ座標をずらす量を決定します．そのために，先に視線の方向単位ベクトル `fview` を求めます．
 
@@ -329,15 +329,15 @@ gl_FragColor += dcolor * gl_LightSource[0].diffuse * diffuse
 ## バンプマッピングと視差マッピングを見比べてみます．左がバンプマッピングで，右が視差マッピングです．視差マッピングのほうがバンプが強く出るというか，全体的に盛り上がったような感じになっています．また視点の移動によって盛り上がり部分のずれが変化するため，実際にへこみがあるように感じられます（よくわからないという人は，前述の係数 0.02 を 0.05 くらいにしてみてください）．
 
 <div class="figure">
-![バンプマッピング]({{ '/assets/images/glsl30.jpg' | relative_url }})
-![視差マッピング]({{ '/assets/images/glsl31.jpg' | relative_url }})
+![バンプマッピング]({{ site.baseurl }}/assets/images/glsl30.jpg)
+![視差マッピング]({{ site.baseurl }}/assets/images/glsl31.jpg)
 </div>
 
 ## 視差マッピングの問題点
 
 視差マッピングの問題点は，前述のとおりバンプ自体の隠面消去処理を行っていないために，バンプを強くしたり浅い角度から眺めたりしたときに，膨らんだところに隠されて見えないはずの部分が見えてしまうところにあります．また，高さマップが急激に変化するような場合は，得られる注視点のずれの誤差が大きくなってしまうという問題もあります．
 
-![注視点のずれの誤差]({{ '/assets/images/error.gif' | relative_url }})
+![注視点のずれの誤差]({{ site.baseurl }}/assets/images/error.gif)
 
 ## これらを解消するには，視線が高さマップと交差する位置を正確に求める，いわゆるディスプレースメントマッピングを用いる必要があります．ただ，実際にこれを実現している[レリーフマッピング](http://fabio.policarpo.nom.br/relief/)や輪講で取り上げた [Per-Pixel Displacement Mapping with Distance Functions](http://download.nvidia.com/developer/GPU_Gems_2/GPU_Gems2_ch08.pdf) は，いずれも視線と高さマップの交点をもとめるためにレイトレーシング的な手法を用いています．
 

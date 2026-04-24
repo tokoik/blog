@@ -245,15 +245,15 @@ glDrawElements(GL_LINES, points, GL_UNSIGNED_INT, 0);
 
 それでは, 今度は球を描いてみましょう. と言っても, OpenGL では曲線は描けませんから, 線分で近似することになります.
 
-![線画の球]({{ '/assets/images/wiresphere0.gif' | relative_url }})
+![線画の球]({{ site.baseurl }}/assets/images/wiresphere0.gif)
 
 ## 球は経度方向と緯度方向に分割します. 経度方向の分割数を `slices`, 緯度方向の分割数を `stacks` とします. また半径は 1 とします. この図形の頂点の数は `slices` × (`stacks` - 1) + 2 になります. 一番上 (北極点) の頂点の位置は (0, 1, 0), 一番下 (南極点) の頂点の位置は (0, -1, 0) になります. 各頂点の位置は, 以下のように定めます.
 
-![頂点の位置]({{ '/assets/images/wiresphere1.gif' | relative_url }})
+![頂点の位置]({{ site.baseurl }}/assets/images/wiresphere1.gif)
 
 ## また稜線の数は, `slices` × (`stacks` - 1) × 2 + `slices` になります. 各稜線の両端の頂点の指標 (番号) は, 以下のように定めます.
 
-![頂点の指標]({{ '/assets/images/wiresphere2.gif' | relative_url }})
+![頂点の指標]({{ site.baseurl }}/assets/images/wiresphere2.gif)
 
 ## この形状のデータを頂点バッファオブジェクトに設定する関数 `wireSphere`() を作成してください. 引数 `slices` と `stacks` は, それぞれ球の経度方向の分割数と緯度方向の分割数です. 引数 `buffer` にはデータを設定する頂点バッファオブジェクトの名前を格納した配列を指定します. `buffer`[0] には頂点位置, `buffer`[1] には指標を格納します. なお, このプログラムは `wireCube`() と同じファイルに書いてください.
 
@@ -344,7 +344,7 @@ points = wireSphere(16, 8, buffer);
 
 ## これで下のような図形が描かれれば OK です.
 
-![球を線で描いた結果]({{ '/assets/images/wiresphere_result.gif' | relative_url }})
+![球を線で描いた結果]({{ site.baseurl }}/assets/images/wiresphere_result.gif)
 
 ## こんなところです.
 

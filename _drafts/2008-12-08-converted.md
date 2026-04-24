@@ -63,7 +63,7 @@ gl_FragColor = vec4(vec3(d), 1.0);
 
 ## なんか，泥臭いプログラムですね．もっとうまく書けそうな気がするのですが，とりあえずこの辺で許してください．定数の 0.001953125 というのは 1 / 512，すなわちテクスチャ座標における画素の間隔です．この値を変えると線の太さが変わります．これは，こういう結果になります．
 
-![Sobel オペレータ]({{ '/assets/images/showdepth2.gif' | relative_url }})
+![Sobel オペレータ]({{ site.baseurl }}/assets/images/showdepth2.gif)
 
 ## この最後の部分を次のように書き換えると，この結果を２値化できます．
 
@@ -76,7 +76,7 @@ gl_FragColor = vec4(vec3(d), 1.0);
 
 ## こんな感じになります．
 
-![Sobel オペレータの結果を２値化]({{ '/assets/images/showdepth3.gif' | relative_url }})
+![Sobel オペレータの結果を２値化]({{ site.baseurl }}/assets/images/showdepth3.gif)
 
 ## 微分してみる
 
@@ -111,7 +111,7 @@ gl_FragColor = vec4(vec3(1.0 - d), 1.0);
 
 ## これは，こういう結果になります．
 
-![微分オペレータ]({{ '/assets/images/showdepth4.gif' | relative_url }})
+![微分オペレータ]({{ site.baseurl }}/assets/images/showdepth4.gif)
 
 ## Roberts もやってみる
 
@@ -145,7 +145,7 @@ gl_FragColor = vec4(vec3(1.0 - d), 1.0);
 
 ## こういう結果が得られました．
 
-![Roberts オペレータ]({{ '/assets/images/showdepth5.gif' | relative_url }})
+![Roberts オペレータ]({{ site.baseurl }}/assets/images/showdepth5.gif)
 
 ## いろいろやってみたい
 

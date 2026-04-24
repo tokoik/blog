@@ -55,17 +55,17 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 ## ハイライトが接線方向に広がるようにするには，中間ベクトルが従法線ベクトルの垂直方向に近づくほど，`shininess` が小さくなるようにします．そこで，中間ベクトルと従法線ベクトルとの内積の絶対値を，`shininess` に乗じます．ここでは接空間の従法線ベクトルを (0, 1, 0) に固定していますから，中間ベクトル `halfway` との内積は，`halfway`.y になります．ここでは絶対値を求める代わりに，これを２乗しています．これだけで，「天使の輪」っぽいハイライトが現れます．
 
-![似非異方性反射]({{ '/assets/images/glsl25.jpg' | relative_url }})
+![似非異方性反射]({{ site.baseurl }}/assets/images/glsl25.jpg)
 
 ## 筋状の高さマップを使う
 
 もともとのバンプだと静止画では効果がよくわからない（動かしてみるとそれらしく見えます）ので，バンプマッピングに使う高さマップのテクスチャを[筋状のもの](glsl/hairbump.raw.gz)に変えてみます．これはノイズの画像をぼかして縦方向に引き伸ばしたものです．
 
-![線状の高さマップ]({{ '/assets/images/hairbump.jpg' | relative_url }})
+![線状の高さマップ]({{ site.baseurl }}/assets/images/hairbump.jpg)
 
 ## こうすると，髪の毛っぽっくなったと思いません？
 
-![髪の毛っぽい似非異方性反射]({{ '/assets/images/glsl26.jpg' | relative_url }})
+![髪の毛っぽい似非異方性反射]({{ site.baseurl }}/assets/images/glsl26.jpg)
 
 ## 線状のハイライトの幅は，`shininess` で制御できます．ただし，glMaterialf() では `GL_SHININESS` に 128 を超える値を指定できないので，これを超える値を指定する場合はフラグメントシェーダ内で直接指定するか，別に `uniform` 変数を用意する必要があります．
 
@@ -101,7 +101,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 ## `shininess` を 1000 くらいにすると，こういう絵になります．
 
-![髪の毛っぽい似非異方性反射その２]({{ '/assets/images/glsl27.jpg' | relative_url }})
+![髪の毛っぽい似非異方性反射その２]({{ site.baseurl }}/assets/images/glsl27.jpg)
 
 ## よくよく考えるとおかしなところがいっぱいあるんですけど，「似非」ということで．
 

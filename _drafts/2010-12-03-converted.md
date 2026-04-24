@@ -91,4 +91,4 @@ vec4 color = diffspec + texture2D(unit[1], texcoord) * a;
 
 材質や光源は SSS っぽく見えるようにトライアンドエラーでアドホックに設定しています.
 
-![似非 SSS (Subsurface Scattering)]({{ '/assets/images/sss.jpg' | relative_url }})
+![似非 SSS (Subsurface Scattering)]({{ site.baseurl }}/assets/images/sss.jpg)

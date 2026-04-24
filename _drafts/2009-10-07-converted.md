@@ -19,7 +19,7 @@ published: true
 
 とりあえず, 対象形状を平行投影で表示するプログラムを作ります. 2 点 P<sub>min</sub>, P<sub>max</sub> を対向する頂点とする直方体の空間 (境界箱) に含まれる図形を画面に表示します.
 
-![物体と境界箱]({{ '/assets/images/voxelize00.gif' | relative_url }})
+![物体と境界箱]({{ site.baseurl }}/assets/images/voxelize00.gif)
 
 ## [`glOrtho()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glOrtho.xhtml) を使って, 境界箱を視野空間に設定します. ただし, そのままでは視点が原点にありますから, これを境界箱の前方面の位置に移動します (実際には図形を反対方向に移動します). 透視投影だと視点を前方面上に置けませんが, 平行投影では問題ありません.
 
@@ -105,7 +105,7 @@ return 0;
 
 ## これで, とりあえず図形を描くことができます.
 
-![平行投影で図形を描く]({{ '/assets/images/voxelize01.gif' | relative_url }})
+![平行投影で図形を描く]({{ site.baseurl }}/assets/images/voxelize01.gif)
 
 ## 視野空間をずらす
 
@@ -132,11 +132,11 @@ glOrtho(pmin[0], pmax[0], pmin[1], pmax[1], offset, pmax[2] - pmin[2]);
 
 ## すると前方面で図形がクリップされて, 中が見えてしまいます.
 
-![前方面でクリップされた図形]({{ '/assets/images/voxelize02.gif' | relative_url }})
+![前方面でクリップされた図形]({{ site.baseurl }}/assets/images/voxelize02.gif)
 
 ## クリップされた部分に見えているのは, 向こう側のポリゴンの裏側です. もし, この部分だけを描くことができれば, 図形の断面形状を得ることができそうです. そこで, この部分を横から見てみます.
 
-![断面を横から見る]({{ '/assets/images/voxelize03.gif' | relative_url }})
+![断面を横から見る]({{ site.baseurl }}/assets/images/voxelize03.gif)
 
 ## このように, クリップされていない部分ではポリゴンが偶数回描かれるのに対し, クリップされた部分では奇数回描かれています. そこで, ポリゴンを描くときにポリゴンの色を表示するのではなく, フレームバッファに保持されている色を反転するようにします. これは [`glLogicOp()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLogicOp.xhtml) で設定できます. こうすると, ポリゴンが偶数回描かれたところ最初の色 (背景色) が描かれ, 奇数回描かれたところでは反転した色が表示されます.
 
@@ -199,11 +199,11 @@ glFlush();
 
 ## これで, 断面形状だけを描くことができます.
 
-![断面形状だけを描く]({{ '/assets/images/voxelize04.gif' | relative_url }})
+![断面形状だけを描く]({{ site.baseurl }}/assets/images/voxelize04.gif)
 
 ## ただし, この方法には欠点 (というか, 仕様上の制限) があります. ポリゴンの重なりが偶数か奇数かだけで判断しているので, 複数の物体が重なっている部分が排他的論理和のように空洞になります. これはこれで「正しい」と思っているのですが, 対象の形状を複数の物体を組み合わせて表現することもよくあります. その場合には, ステンシルバッファを使って重なりの数を勘定するなどの方法をとる必要があると思います.
 
-![重なっている部分が空洞になる]({{ '/assets/images/voxelize05.gif' | relative_url }})
+![重なっている部分が空洞になる]({{ site.baseurl }}/assets/images/voxelize05.gif)
 
 ## ボクセルデータを生成する
 

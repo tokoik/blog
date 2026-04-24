@@ -15,11 +15,11 @@ published: true
 
 CG におけるアニメーションでは, フレームごとに少しずつ形の異なる静止画を表示することによって, 動きを再現します. しかし, その個々の静止画を, 被写体が動いているにもかかわらず静止したものとして生成しているなら, それは被写体を無限のシャッタースピードで撮影したのと同じことになります. その結果, フレームとフレームの間の動きがアニメーションに反映されず, ちらつきを感じたり, 動きが飛んで見えたり, あるいは異なる動きとして知覚されたりします. これは時間的なエリアシングです. 現実の世界では, 速く動く物体を人間の目で見た時には残像が発生しますし, カメラで撮影した場合はシャッタースピードに応じたブレが発生します.
 
-![あるフレームにおけるオブジェクトの静止画]({{ '/assets/images/ssmb01.png' | relative_url }})
+![あるフレームにおけるオブジェクトの静止画]({{ site.baseurl }}/assets/images/ssmb01.png)
 
 ## このエリアシングを抑制するには, 静止画を作成する際に, 動きによる画像の明るさの変化に対してローパスフィルタをかける必要があります<%= fn "Michael Potmesil, Indranil Chakravarty, "Modeling motion blur in computer-generated images," SIGGRAPH '83 Proceedings" %>. 従来, これにはアニメーションのフレームの表示間隔よりも細かく静止画を生成し, それらを合成して１フレームの静止画を作成する手法が用いられてきました.
 
-![フレームとフレームの間の画像]({{ '/assets/images/ssmb02.png' | relative_url }})
+![フレームとフレームの間の画像]({{ site.baseurl }}/assets/images/ssmb02.png)
 
 ## この方法は表示されるフレーム数より多くの静止画を生成するため, 時間がかかってしまいます. CG においてこういうローパスフィルタ, すなわち積分は, 本当にいろんなところで立ちはだかりやがる敵だと思います. 空間的なエリアシングの抑制では, 従来の空間をより細かくサンプリングしてフィルタをかける手法（T-Buffer, A-Buffer, アキュムレーションバッファ [[サンプル](sample/aliasing.lzh)], マルチサンプリング [[半透明処理の記事]({% post_url 2008-11-22-post %})] 等) に対して, [Morphological antialiasing (MLAA)](http://sites.amd.com/jp/game/technology/Pages/morphological-aa.aspx)<%= fn "RESHETOV A., "Morphological antialiasing," Proceedings of the Conference on High Performance Graphics 2009" %> や NVIDIA の FXAA<%= fn "出典が見つけられん" %>, [Enhanced Subpixel Morphological Antialiasing (SMAA)](http://www.iryoku.com/smaa/)<%= fn "Jorge Jimenez, Jose I. Echevarria, Tiago Sousa, Diego Gutierrez, "SMAA: Enhanced Morphological Antialiasing," Computer Graphics Forum (Proc. EUROGRAPHICS 2012)" %> など, 生成された画像に対して後処理 (Post-Processing) により今はやりの「超解像化」みたいなフィルタを適用する手法が提案されています. 時間的なエリアシングの抑制, すなわち Motion Blur においても, 生成された一枚の静止画に対して後処理でフィルタを適用する手法が提案されています. ほんと Post-Processing はブームですねぇ.
 
@@ -268,15 +268,15 @@ t = pv.xy * 0.5 + 0.5;
 
 この処理の最大のキモが２パス目のフラグメントシェーダです. あるフレームにおける一つのフラグメントの色は, 前のフレームから現在のフレームに至るまでの, その位置における色の平均になります.
 
-![フラグメントの色の決定]({{ '/assets/images/ssmb03.png' | relative_url }})
+![フラグメントの色の決定]({{ site.baseurl }}/assets/images/ssmb03.png)
 
 ## このフラグメントの位置をオブジェクトを基準にして考えると次のようになります.
 
-![オブジェクトを基準にしたフラグメントの位置]({{ '/assets/images/ssmb04.png' | relative_url }})
+![オブジェクトを基準にしたフラグメントの位置]({{ site.baseurl }}/assets/images/ssmb04.png)
 
 ## すなわち, あるフラグメントの色は, そのフラグメントの位置における速度方向にあるフラグメントの色を平均したものになります.
 
-![フラグメントをサンプリングする位置]({{ '/assets/images/ssmb05.png' | relative_url }})
+![フラグメントをサンプリングする位置]({{ site.baseurl }}/assets/images/ssmb05.png)
 
 ## したがって, 処理対象のフラグメントがオブジェクトの内部にあるとき, そのフラグメントの位置におけるオブジェクトの速度を速度バッファから取り出して, その速度方向の延長線上にカラーバッファをサンプリングして, そのフラグメントの色を決定します.
 
@@ -350,15 +350,15 @@ gl_FragColor = texture2D(tex0, t);
 
 ## これでも一応ブレは再現されるのですが, オブジェクトのシルエット部分のブレが再現されません.
 
-![シルエット部分がブレていない]({{ '/assets/images/ssmb06.jpg' | relative_url }})
+![シルエット部分がブレていない]({{ site.baseurl }}/assets/images/ssmb06.jpg)
 
 ## この方法では, 当然ながら, 現在のフレームでオブジェクトの内部にないフラグメントでは, 過去にオブジェクトが通過していたとしても, それを見落としてしまいます.
 
-![ブレの発生を見落とす場合]({{ '/assets/images/ssmb07.png' | relative_url }})
+![ブレの発生を見落とす場合]({{ site.baseurl }}/assets/images/ssmb07.png)
 
 ## そこで, オブジェクトが存在しないフラグメントでは, その周囲の速度バッファをランダムにサンプリングします. そしてオブジェクトが存在するところが見つかったら, その位置の速度でフラグメントを通過したオブジェクトの速度を近似することにして, カラーバッファをサンプリングします.
 
-![フラグメントの周囲のランダムサンプリング]({{ '/assets/images/ssmb08.png' | relative_url }})
+![フラグメントの周囲のランダムサンプリング]({{ site.baseurl }}/assets/images/ssmb08.png)
 
 ## ランダムサンプリングに使う乱数はメインプログラム側で生成し, uniform 変数の配列を使ってフラグメントシェーダに渡します.
 
@@ -413,7 +413,7 @@ gl_FragColor = d / float(count);
 
 ## しかし, この方法では周囲にゴミが出てしまいました.
 
-![ゴミが発生してしまった場合]({{ '/assets/images/ssmb09.jpg' | relative_url }})
+![ゴミが発生してしまった場合]({{ site.baseurl }}/assets/images/ssmb09.jpg)
 
 ## そこで, ランダムサンプリングした先の速度をそのまま使うのではなく, 現在のフラグメントの位置にその速度を加えることによって, そのフラグメントを通過したオブジェクトの位置を推定し, その位置における速度を使うようにしてみました.
 
@@ -471,7 +471,7 @@ gl_FragColor = d / float(count);
 
 ## ゴミは幾分少なくなりましたが, それでも出ます.
 
-![まだゴミが発生してしまう]({{ '/assets/images/ssmb10.jpg' | relative_url }})
+![まだゴミが発生してしまう]({{ site.baseurl }}/assets/images/ssmb10.jpg)
 
 ## 多分, どこかに考え違いか見落としがあると思うので, 誰か教えてください. なお, 後で説明するジオメトリシェーダを使う方法では, このゴミは発生しませんでした.
 
@@ -631,11 +631,11 @@ glutSwapBuffers();
 
 もう気力が尽きてきたので, 簡単に書きます. また時間と気力のある時に追加するかもしれません. 前述の Multiple Render Target を使う方法では, オブジェクトのないところの処理にいろいろ問題が発生します. これは速度バッファにオブジェクトの移動によって得られる掃引図形, すなわちオブジェクトの軌跡を描くことができれば解決します.
 
-![速度バッファに書き込む掃引図形]({{ '/assets/images/ssmb11.png' | relative_url }})
+![速度バッファに書き込む掃引図形]({{ site.baseurl }}/assets/images/ssmb11.png)
 
 ## そこで Multiple Render Target の代わりにフレームバッファオブジェクトを二つ用意し, 一つ目にカラーバッファ, 二つ目に速度バッファを組み込みます. １パス目の処理ではカラーバッファへの書き込みと頂点位置のフィードバックバッファへの保存を行います. ２パス目ではジオメトリシェーダを使ってバッファオブジェクトに保存されている現在のフレームと前のフレームの頂点位置を結ぶ掃引図形を生成し, 速度バッファに書き込みます. ３パス目ではこの速度バッファを使ってカラーバッファの内容をぼかします.
 
-![ジオメトリシェーダを使う方法]({{ '/assets/images/ssmb12.jpg' | relative_url }})
+![ジオメトリシェーダを使う方法]({{ site.baseurl }}/assets/images/ssmb12.jpg)
 
 ## この方法では複数のオブジェクトが交差する場合に手前のオブジェクトのブレしか再現されません (速度バッファの内容も隠面消去処理されるので). しかしこれは半透明処理と同じ性質の問題であり, 対応を考えるのはややこしすぎるので目をつぶります. どうせブレてるんだし.
 
@@ -648,11 +648,11 @@ glutSwapBuffers();
 これをやってるうちに, 以前うちの卒業生も卒研で実装していた Cartoon Blur<%= fn "川岸祐也, 初山和秀, 近藤邦雄, "カートゥンブラー : セルアニメーションのための非写実的モーションブラー," 情報処理学会研究報告. グラフィクスとCAD研究会報告 2002(33)" %> のうち, ［歪みの効果」はバーテックスシェーダで簡単に実装できるじゃね？って思ったのでやってみました.
 平行移動だと, こんな風にゆがみます.
 
-![Cartoon Blur による平行移動の歪み]({{ '/assets/images/ssmb13.jpg' | relative_url }})
+![Cartoon Blur による平行移動の歪み]({{ site.baseurl }}/assets/images/ssmb13.jpg)
 
 ## ぐるぐる回転させると, こんな風に歪みます.
 
-![Cartoon Blur による回転の歪み]({{ '/assets/images/ssmb14.jpg' | relative_url }})
+![Cartoon Blur による回転の歪み]({{ site.baseurl }}/assets/images/ssmb14.jpg)
 <ul>
 <li>[サンプルプログラム](https://github.com/tokoik/blur/tree/cartoon)</li>
 </ul>

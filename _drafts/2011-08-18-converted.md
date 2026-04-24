@@ -201,7 +201,7 @@ gl_FragColor = vec4(1.0);
 
 ## これで次のような図形が表示されたとします．
 
-![`GL_POINTS` による図形表示]({{ '/assets/images/tfb0.gif' | relative_url }})
+![`GL_POINTS` による図形表示]({{ site.baseurl }}/assets/images/tfb0.gif)
 
 ## 二つ目の頂点バッファオブジェクト
 

@@ -9,7 +9,7 @@ published: true
 
 バンプマッピングは，陰影計算に用いる物体表面の法線ベクトルをテクスチャによって「揺らす」ことによって，物体表面に凹凸が付いたような陰影を得る手法です．
 
-![バンプマッピング]({{ '/assets/images/bump01.gif' | relative_url }})
+![バンプマッピング]({{ site.baseurl }}/assets/images/bump01.gif)
 
 ## この処理を実現するためには，画素単位に陰影計算を実行する必要があります．ところが OpenGL では，基本的には陰影を頂点単位に求め，面内部の個々の画素の陰影は頂点の陰影を補間して求める手法（グーローシェーディング）が用いられています．このため，この方法ではバンプマッピングを実装できません．
 
@@ -27,7 +27,7 @@ published: true
 内積はベクトル間の演算ですから，テクスチャ間で内積計算を行うには，テクスチャメモリの内容を色ではなくベクトルとして取り扱う必要があります．つまり，テクスチャの R, G, B の各要素を，それぞれベクトルの要素 x, y, z として扱います．その際，単位ベクトルの各要素は -1〜1 の値の範囲を取り得るので，これをテクスチャメモリに格納できる 0〜1 の値の範囲に収める必要があります．このため，単位ベクトルの一つの要素の値 v に対して 0.5v + 0.5 という変換を，あらかじめ行っておきます．
 `GL_DOT3_RGB` あるいは `GL_DOT3_RGBA` による内積計算は，テクスチャメモリに格納されている単位ベクトルに対して，この変換が行われていることを考慮します．したがって，これらによる画素の内積計算は，２つのテクスチャ <i>a</i><sub>0{<i>r</i>,<i>g</i>,<i>b</i>}</sub> と <i>a</i><sub>1{<i>r</i>,<i>g</i>,<i>b</i>}</sub> に対して，次式により行われます．
 
-![`GL_DOT3_RGB` / `GL_DOT3_RGBA` による画素演算]({{ '/assets/images/bump02.gif' | relative_url }})
+![`GL_DOT3_RGB` / `GL_DOT3_RGBA` による画素演算]({{ site.baseurl }}/assets/images/bump02.gif)
 
 ## この結果の <i>c</i> は，`GL_DOT3_RGB` の場合は RGB の各要素の値として出力され，`GL_DOT3_RGBA` の場合は RGBA の各要素の値として出力されます（したがって結果はモノクロ画像として得られます）．
 
@@ -46,7 +46,7 @@ glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_RGB, GL_TEXTURE);
 
 ## これにより下地のテクスチャ（`GL_PREVIOUS`, テクスチャユニット０の出力）と現在のテクスチャ（`GL_TEXTURE`, テクスチャユニット１が保持するテクスチャ）の内積計算の結果が，テクスチャユニット１の出力になります．下図にこの処理の概略を示します．「高さマップ」，「法線マップ」，および「正規化マップ」については後述します．
 
-![バンプマッピングの手順]({{ '/assets/images/dot3bump.gif' | relative_url }})
+![バンプマッピングの手順]({{ site.baseurl }}/assets/images/dot3bump.gif)
 
 ## 法線マップの作成
 
@@ -353,19 +353,19 @@ glEnd();
 左が高さマップ，右がレンダリング結果です．
 
 <div class="figure">
-![高さマップ（１）]({{ '/assets/images/bump03.gif' | relative_url }})
-![レンダリング結果（１）]({{ '/assets/images/bump04.gif' | relative_url }})
+![高さマップ（１）]({{ site.baseurl }}/assets/images/bump03.gif)
+![レンダリング結果（１）]({{ site.baseurl }}/assets/images/bump04.gif)
 </div>
 <div class="figure">
-![高さマップ（２）]({{ '/assets/images/bump05.jpg' | relative_url }})
-![レンダリング結果（２）]({{ '/assets/images/bump06.jpg' | relative_url }})
+![高さマップ（２）]({{ site.baseurl }}/assets/images/bump05.jpg)
+![レンダリング結果（２）]({{ site.baseurl }}/assets/images/bump06.jpg)
 </div>
 
 ## 拡散反射率のテクスチャを合成する（main.cpp を main1.cpp に，`rectangle`.cpp を `rectangle`1.cpp に置き換える）と，こんな感じになります．これを実行するには，テクスチャユニットがもう一つ（合計三つ）必要になります．
 
 <div class="figure">
-![レンダリング結果（３）]({{ '/assets/images/bump07.gif' | relative_url }})
-![レンダリング結果（４）]({{ '/assets/images/bump08.jpg' | relative_url }})
+![レンダリング結果（３）]({{ site.baseurl }}/assets/images/bump07.gif)
+![レンダリング結果（４）]({{ site.baseurl }}/assets/images/bump08.jpg)
 </div>
 
 ## dot3 バンプマッピングって実は面倒？

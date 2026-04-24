@@ -15,12 +15,12 @@ published: true
 プログラムは以前に質問された「[視点を移動するのではなく，物体をぐるぐる回す方法は？](http://www.wakayama-u.ac.jp/~tokoi/opengl/faq.html#Q5)」の回答のおまけで作った[キャッピングのプログラム](http://www.wakayama-u.ac.jp/~tokoi/opengl/cap.c)をベースにしました．これはユーザ定義のクリップ面を使って物体を切り取り，ステンシルバッファを使って切り口にふたをする手法を使っています．細かい解説は，また後日，気力があれば書きたいと思います．テクスチャを変更する時は，PATTERN という記号定数を変更してコンパイルし直してください．
 
 <div class="figure">
-![チェッカーボード]({{ '/assets/images/3dtexture1.jpg' | relative_url }})
-![ノイズ]({{ '/assets/images/3dtexture2.jpg' | relative_url }})
+![チェッカーボード]({{ site.baseurl }}/assets/images/3dtexture1.jpg)
+![ノイズ]({{ site.baseurl }}/assets/images/3dtexture2.jpg)
 </div>
 <div class="figure">
-![Perlin ノイズ]({{ '/assets/images/3dtexture3.jpg' | relative_url }})
-![Turbulence]({{ '/assets/images/3dtexture4.jpg' | relative_url }})
+![Perlin ノイズ]({{ site.baseurl }}/assets/images/3dtexture3.jpg)
+![Turbulence]({{ site.baseurl }}/assets/images/3dtexture4.jpg)
 </div>
 
 ## マウスをドラッグすると，断面を動かせます．glTexImage3D() を使っているので，OpenGL 1.2 以降であれば動くと思いますが，ビデオカードによってはソフトウェアエミュレーションになって，とても遅いかもしれません．

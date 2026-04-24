@@ -262,7 +262,7 @@ perror(texture1);
 </ul>
 
 <div class="figure">
-![Phong シェーディングによるテクスチャを貼った四角形]({{ '/assets/images/glsl13.jpg' | relative_url }})
-![Phong ーシェーディングによるテクスチャを貼った四角形を斜めから見たところ]({{ '/assets/images/glsl14.jpg' | relative_url }})
+![Phong シェーディングによるテクスチャを貼った四角形]({{ site.baseurl }}/assets/images/glsl13.jpg)
+![Phong ーシェーディングによるテクスチャを貼った四角形を斜めから見たところ]({{ site.baseurl }}/assets/images/glsl14.jpg)
 </div>
-![Phong シェーディングによるテクスチャを貼ったティーポット]({{ '/assets/images/glsl15.jpg' | relative_url }})
+![Phong シェーディングによるテクスチャを貼ったティーポット]({{ site.baseurl }}/assets/images/glsl15.jpg)

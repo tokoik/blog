@@ -18,12 +18,12 @@ published: true
 ## こんな感じです．
 
 <div class="figure">
-![球にバンプマッピング（１）]({{ '/assets/images/bumpsphere01.gif' | relative_url }})
-![球にバンプマッピング（２）]({{ '/assets/images/bumpsphere02.gif' | relative_url }})
+![球にバンプマッピング（１）]({{ site.baseurl }}/assets/images/bumpsphere01.gif)
+![球にバンプマッピング（２）]({{ site.baseurl }}/assets/images/bumpsphere02.gif)
 </div>
 <div class="figure">
-![球にバンプマッピング（３）]({{ '/assets/images/bumpsphere03.gif' | relative_url }})
-![球にバンプマッピング（４）]({{ '/assets/images/bumpsphere04.gif' | relative_url }})
+![球にバンプマッピング（３）]({{ site.baseurl }}/assets/images/bumpsphere03.gif)
+![球にバンプマッピング（４）]({{ site.baseurl }}/assets/images/bumpsphere04.gif)
 </div>
 
 ## 接空間の設定
@@ -31,14 +31,14 @@ published: true
 [前回]({% post_url 2005-08-26-post %})は単一のポリゴンに対して dot3 バンプマッピングを行ったので，ポリゴンをローカル座標系の xy 平面上に置いて，法線マップの座標系をポリゴンの接空間と一致させました．しかし，複数のポリゴンで構成された物体に対して dot3 バンプマッピングを施す場合は，そういう手抜きができません．
 そこで今回は，ポリゴンの一つ一つの頂点に，法線マップの貼付け方に合わせて接空間を設定する方法について説明します．例として，ここでは球に対して下図のように法線マップを貼り付ける場合について考えます．この貼り付け方では極点部分がつぶれてしまいますが，そのあたりは大目に見てください．
 
-![法線マップの貼り付け方]({{ '/assets/images/tangent1.gif' | relative_url }})
+![法線マップの貼り付け方]({{ site.baseurl }}/assets/images/tangent1.gif)
 
 ## この球面上の一点における接空間は，次のようにして設定します．まず，この点における法線単位ベクトル $\mathbf{n}$ を求めます．これをこの接空間の基底ベクトル（軸ベクトル）の z 軸 ( $\mathbf{z}$<sub><i>t</i></sub> ) に用います．
 
 次に物体の中心軸を y 軸 とし，これと $\mathbf{z}$<sub><i>t</i></sub> との外積を求め，正規化します．このベクトルはこの点における接線ベクトルになります．これを接空間の基底ベクトルの x 軸 ( $\mathbf{x}$<sub><i>t</i></sub> ) とします．
 最後に $\mathbf{z}$<sub><i>t</i></sub> と $\mathbf{x}$<sub><i>t</i></sub> の外積を求めて正規化し，この点における従法線ベクトルを求めます．これを接空間の基底ベクトルの y 軸 ( $\mathbf{y}$<sub><i>t</i></sub> ) とします．
 
-![接空間の設定]({{ '/assets/images/tangent2.gif' | relative_url }})
+![接空間の設定]({{ site.baseurl }}/assets/images/tangent2.gif)
 
 ## この手順をプログラムにすると，こんな具合になります（ファイル `sphere`.cpp）．このプログラムでは光源位置の変換に使う行列（後述）の算出まで行っています．
 
@@ -103,7 +103,7 @@ t[15] = 1.0;
 
 接空間の基底ベクトルが求められたら，それから接空間における光源の位置を求める変換行列 **T** を算出します．これは次式で求められます．前述のプログラムはこの計算も含んでいます．
 
-![接空間における光源位置を求める変換行列]({{ '/assets/images/tangent3.gif' | relative_url }})
+![接空間における光源位置を求める変換行列]({{ site.baseurl }}/assets/images/tangent3.gif)
 
 ## 関数 `normalizeTexCoord`() は，この **T** を使って接空間における光源位置を求め，それを正規化マップのテクスチャ座標に設定します．
 

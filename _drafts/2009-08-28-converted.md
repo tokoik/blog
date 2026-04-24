@@ -26,13 +26,13 @@ OpenGL では, 描画する基本図形 (primitive) の種類を指定した後,
 
 OpenGL 3.0 以降では, 基本図形にも変更が加えられています. `GL_QUADS`, `GL_QUAD_STRIP`, および `GL_POLYGONS` は使えなくなりました. `GL_QUADS` は, 実際には直方体を書くときくらいしか使い道がない？気がしますし, `GL_QUAD_STRIP` は `GL_TRIANGLE_STRIP` と, `GL_POLYGONS` は `GL_TRIANGLE_FAN` と全然変わらないので, これらが無くなっても, それほど支障はないと思います. 代わりに, ジオメトリシェーダを使う場合に使用できる `GL_LINES_ADJACENCY`, `GL_LINE_STRIP_ADJACENCY`, `GL_TRIANGLES_ADJACENCY`, および `GL_TRIANGLE_STRIP_ADJACENCY` が追加されました (このゼミでは, これらについては触れません).
 
-![OpenGL の基本図形]({{ '/assets/images/primitives.gif' | relative_url }})
+![OpenGL の基本図形]({{ site.baseurl }}/assets/images/primitives.gif)
 
 ## 頂点情報の頂点バッファオブジェクトへの転送
 
 それでは, とりあえず始点と終点がつながった折れ線を描いてみましょう. これは基本図形に `GL_LINE_LOOP` を指定して, (0.9, 0.9), (-0.9, 0.9), (-0.9, -0.9), (0.9, -0.9) の４つの頂点を指定します.
 
-![折れ線図形]({{ '/assets/images/line_loop.gif' | relative_url }})
+![折れ線図形]({{ site.baseurl }}/assets/images/line_loop.gif)
 
 ## 描画には頂点バッファオブジェクトを使います. 最初に, 頂点バッファオブジェクトの名前を格納する変数 `buffer` を用意します.
 
@@ -252,7 +252,7 @@ glFlush();
 
 ## これで下のような図形が描かれれば OK です.
 
-![クリッピング空間への描画]({{ '/assets/images/canonical_result.gif' | relative_url }})
+![クリッピング空間への描画]({{ site.baseurl }}/assets/images/canonical_result.gif)
 
 ## 一応, ここまでのプログラムをまとめたものを, 以下に用意しておきます.
 

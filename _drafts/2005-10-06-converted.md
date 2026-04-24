@@ -46,8 +46,8 @@ published: true
 </ul>
 
 <div class="figure">
-![オリジナルプログラムの生成画像１]({{ '/assets/images/glsl0.jpg' | relative_url }})
-![オリジナルプログラムの生成画像２]({{ '/assets/images/glsl1.jpg' | relative_url }})
+![オリジナルプログラムの生成画像１]({{ site.baseurl }}/assets/images/glsl0.jpg)
+![オリジナルプログラムの生成画像２]({{ site.baseurl }}/assets/images/glsl1.jpg)
 </div>
 
 ## プログラムはテクスチャマッピング入門の[第１回]({% post_url 2004-09-13-post %})で使ったのと同じ，１枚の四角形をくるくる回すものです．ただし，材質や光源の設定を変えてあります．
@@ -230,8 +230,8 @@ gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 ## このプログラムではフラグメント（画素）の色を赤色の定数 (1,0,0,1) にしているので，描画される四角形は陰影のない赤になってしまいます．
 
 <div class="figure">
-![シェーダを使った生成画像１]({{ '/assets/images/glsl2.jpg' | relative_url }})
-![シェーダを使った生成画像２]({{ '/assets/images/glsl3.jpg' | relative_url }})
+![シェーダを使った生成画像１]({{ site.baseurl }}/assets/images/glsl2.jpg)
+![シェーダを使った生成画像２]({{ site.baseurl }}/assets/images/glsl3.jpg)
 </div>
 
 <ul>

@@ -22,7 +22,7 @@ published: true
 
 ## このアーカイブには `main`() を含んだソースプログラムが三つ含まれていますが，ここではその中の `main`1.cpp を使います．これは次のような真っ黒い影を作ります．
 
-![影をつけたシーン]({{ '/assets/images/shadowmap2.jpg' | relative_url }})
+![影をつけたシーン]({{ site.baseurl }}/assets/images/shadowmap2.jpg)
 
 ## テクスチャ座標の自動生成は不要
 
@@ -354,7 +354,7 @@ void main (void)
 gl_FragColor = shadow + (gl_Color - shadow) * shadow2DProj(texture, gl_TexCoord[0]);
 ```
 
-![`GLSL` によるシャドウマッピング]({{ '/assets/images/glsl32.jpg' | relative_url }})
+![`GLSL` によるシャドウマッピング]({{ site.baseurl }}/assets/images/glsl32.jpg)
 
 <ul>
 <li>[Linux 版](glsl/glsl9.tar.gz)</li>

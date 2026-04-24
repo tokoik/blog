@@ -24,12 +24,12 @@ gl_FragColor = vec4(step(0.5, fract(2.0 * r.z / r.y)));
 ## これは平面上に縞模様を貼付けた場合です. 初期値は y 軸と直交した平面ですが, マウスの右ボタンで動かすことができます. 定数の 2.0 は縞模様の密度です. 下図は不要なものを削除しています.
 
 <div class="figure">
-![縞模様を平面に貼付けた場合 (1)]({{ '/assets/images/zebra0.gif' | relative_url }})
-![縞模様を平面に貼付けた場合 (2)]({{ '/assets/images/zebra1.gif' | relative_url }})
+![縞模様を平面に貼付けた場合 (1)]({{ site.baseurl }}/assets/images/zebra0.gif)
+![縞模様を平面に貼付けた場合 (2)]({{ site.baseurl }}/assets/images/zebra1.gif)
 </div>
 <div class="figure">
-![縞模様を平面に貼付けた場合 (3)]({{ '/assets/images/zebra2.gif' | relative_url }})
-![縞模様を平面に貼付けた場合 (4)]({{ '/assets/images/zebra3.gif' | relative_url }})
+![縞模様を平面に貼付けた場合 (3)]({{ site.baseurl }}/assets/images/zebra2.gif)
+![縞模様を平面に貼付けた場合 (4)]({{ site.baseurl }}/assets/images/zebra3.gif)
 </div>
 
 ## ただ, これだと r.y = 0 に近い面の縞模様がぐしゃぐしゃになるので, かわりに次のように書き換えてもいいのではないかと思います.
@@ -49,12 +49,12 @@ gl_FragColor = vec4(step(0.5, fract(2.0 * atan(r.z, r.y))));
 ## この場合は円柱面上に縞模様を貼付けたことになります. 初期値は x 軸を中心軸とする円柱面ですが, これもマウスの右ボタンで動かすことができます. 定数の 2.0 は縞模様の密度です.
 
 <div class="figure">
-![縞模様を円柱面に貼付けた場合 (1)]({{ '/assets/images/zebra4.gif' | relative_url }})
-![縞模様を円柱面に貼付けた場合 (2)]({{ '/assets/images/zebra5.gif' | relative_url }})
+![縞模様を円柱面に貼付けた場合 (1)]({{ site.baseurl }}/assets/images/zebra4.gif)
+![縞模様を円柱面に貼付けた場合 (2)]({{ site.baseurl }}/assets/images/zebra5.gif)
 </div>
 <div class="figure">
-![縞模様を円柱面に貼付けた場合 (3)]({{ '/assets/images/zebra6.gif' | relative_url }})
-![縞模様を円柱面に貼付けた場合 (4)]({{ '/assets/images/zebra7.gif' | relative_url }})
+![縞模様を円柱面に貼付けた場合 (3)]({{ site.baseurl }}/assets/images/zebra6.gif)
+![縞模様を円柱面に貼付けた場合 (4)]({{ site.baseurl }}/assets/images/zebra7.gif)
 </div>
 
 ## 課題

@@ -9,15 +9,15 @@ published: true
 
 本題のシェーダプログラミングになかなか戻れませんが，あと少し付き合ってください. 線画に引き続いて, 今度は三角形を並べて球を描いてみたいと思います.
 
-![球を三角形で描く]({{ '/assets/images/solidsphere0.gif' | relative_url }})
+![球を三角形で描く]({{ site.baseurl }}/assets/images/solidsphere0.gif)
 
 ## ここでは下図の左のように三角形を矩形状に並べて, それを丸めるようにして球を作ることにします. こうすると北極点や南極点, および, この矩形の両端で複数の頂点が重なってしまいますが, 実はこうしないと後で都合の悪いことになります.
 
-![矩形を丸めて球を作る]({{ '/assets/images/solidsphere1.gif' | relative_url }})
+![矩形を丸めて球を作る]({{ site.baseurl }}/assets/images/solidsphere1.gif)
 
 ## 三角形をこのように並べるので, 頂点数は (`slices` + 1) × (`stacks` +1), 三角形数は `slices` × `stacks` × 2 になります. 下図左の例では `slices` = 3, `stacks` = 2 であり, 頂点数は 12, 三角形数は 12 となります. この形状をもとに, 下図右のようなデータを作成します.
 
-![三角形の配置と形状データ]({{ '/assets/images/solidsphere2.gif' | relative_url }})
+![三角形の配置と形状データ]({{ site.baseurl }}/assets/images/solidsphere2.gif)
 
 ## それでは[前回]({% post_url 2009-09-10-post %})と同様に, この形状のデータを頂点バッファオブジェクトに設定する関数 `solidSphere`() を作成してください. 三角形を描くので, 指標の要素数は 3 になります. これを表すデータ型 `Face` の宣言を, `wireCube`() を定義しているファイルに追加します.
 
@@ -146,7 +146,7 @@ glDrawElements(GL_TRIANGLES, points, GL_UNSIGNED_INT, 0);
 
 ## これで下のような図形が表示されれば OK です.
 
-![球を三角形で描いた結果]({{ '/assets/images/solidsphere_result0.gif' | relative_url }})
+![球を三角形で描いた結果]({{ site.baseurl }}/assets/images/solidsphere_result0.gif)
 
 ## 隠面消去処理の追加
 

@@ -118,7 +118,7 @@ else {
 
 ## これで次のようなテクスチャが得られます．
 
-![鏡面反射光分布のテクスチャ]({{ '/assets/images/phong0.jpg' | relative_url }})
+![鏡面反射光分布のテクスチャ]({{ site.baseurl }}/assets/images/phong0.jpg)
 
 ## スフィアマッピングの設定
 
@@ -247,11 +247,11 @@ glDisable(GL_TEXTURE_2D);
 
 この実行結果は次のようになります．左が OpenGL 本来の陰影付けによる結果です．よく見ると，かすかにポリゴンの境界が見えています（この画像はちょっと小さいけど，プログラムのウィンドウを拡大するとよくわかります）．
 
-![実行結果]({{ '/assets/images/phong1.jpg' | relative_url }})
+![実行結果]({{ site.baseurl }}/assets/images/phong1.jpg)
 
 ## 上の図ではあまり区別がつかないので，粗めのポリゴンで作った球で比較してみます．
 
-![球で比較]({{ '/assets/images/phong6.jpg' | relative_url }})
+![球で比較]({{ site.baseurl }}/assets/images/phong6.jpg)
 
 ## ということで，見事に Phong のスムーズシェーディングらしくなっています．また図形を回転させると，Gouraud のスムーズシェーディングの問題の一つである[鏡面反射の消失](http://www.wakayama-u.ac.jp/~tokoi/lecture/cg/cgsample11fig.html)が発生していないことがわかります．
 
@@ -261,19 +261,19 @@ glDisable(GL_TEXTURE_2D);
 
 次に，テクスチャを作成するときに使った陰影付けの関数を変更して，下のようなテクスチャを使ってみます．
 
-![境界のくっきりしたテクスチャ]({{ '/assets/images/phong2.jpg' | relative_url }})
+![境界のくっきりしたテクスチャ]({{ site.baseurl }}/assets/images/phong2.jpg)
 
 ## この場合はこういう画像になります．ライトがくっきり移り込んでいるように見える分，表面がつややかに感じられる（人もいる）と思います．
 
-![よりつややかな質感の実現]({{ '/assets/images/phong3.jpg' | relative_url }})
+![よりつややかな質感の実現]({{ site.baseurl }}/assets/images/phong3.jpg)
 
 ## んで，こういうテクスチャでもやってみました．
 
-![正反射方向の鏡面反射が弱い場合]({{ '/assets/images/phong4.jpg' | relative_url }})
+![正反射方向の鏡面反射が弱い場合]({{ site.baseurl }}/assets/images/phong4.jpg)
 
 ## これはこんな具合になります．
 
-![起毛処理？]({{ '/assets/images/phong5.jpg' | relative_url }})
+![起毛処理？]({{ site.baseurl }}/assets/images/phong5.jpg)
 
 ## これは物体表面の細かな起毛などによって，物体表面（基準面）の正反射方向への鏡面反射が少なく，入射角が浅いときに鏡面反射光が散乱するような場合を模したものです…とか，それらしいことを書いているけど，実は適当です．こういう複雑な表面の場合は幾何減衰（表面の凹凸による自己遮蔽による減衰）とか，いろいろ考える要素があるらしいんですけど，あんまり良く知らないんで（今は）パス．暇があったら[ゴム網シミュレータ]({% post_url 2004-03-25-post %})（本来の研究の方はちゃんと布らしくなってきた）に組み込んで眺めてみようと思います．
 

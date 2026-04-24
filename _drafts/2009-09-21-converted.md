@@ -13,7 +13,7 @@ published: true
 
 このようにシェーダプログラムで細工することによって, 物体表面に模様を付けることができます. ただ, 前の例のように物体表面の<`em`>空間中の座標値を使う方法では, 物体の表面に模様を貼付けるような表現を行うのに少し手間がかかります. そこで図形データを作成する際に, 緯度や経度のような物体の<`em`>表面上の座標値も生成するようにします. ここでは, とりあえずこれを<`em`>テクスチャ座標と呼ぶことにします.
 
-![生成するテクスチャ座標]({{ '/assets/images/texcoord.gif' | relative_url }})
+![生成するテクスチャ座標]({{ site.baseurl }}/assets/images/texcoord.gif)
 
 ## 球の形状データを生成する関数 `solidSphere`() において, 頂点情報に表面上の座標値を追加します. この関数は各自考えてもらっているはずですが, それを当てにして話をするのは非常に困難なので, [【解答例】](summer/solidsphere.txt)をもとにします. この頂点情報を保持するデータ型 `Position` の要素数を 3 から <strong>5</strong> に変更します.
 
@@ -123,7 +123,7 @@ glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
 
 ## 頂点バッファオブジェクトは `Position` 型の配列になっているので, `Position` 型を変更した場合は頂点バッファオブジェクトを参照している部分も変更する必要があります. 頂点情報のデータ型 `Position` は５つの要素を持つ `GLfloat` 型の配列なので, 頂点バッファオブジェクト上に並んだ頂点情報の間隔は sizeof (`GLfloat`) * 5 になります. これを [`glVertexAttribPointer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml) の第５引数 stride に設定します. さらに, `index` が 1 の `attribute` 変数 (`texture`) の要素数は 2 (`vec2`) なので, その第２引数は 2, またその先頭の要素の位置は `GLfloat` 型の３つの要素で表される頂点位置の次にあるので, 第６引数 pointer は `GLfloat` 型のポインタ 0 (NULL) に 3 を足したものになります.
 
-![頂点バッファオブジェクトの stride と pointer]({{ '/assets/images/stridepointer.gif' | relative_url }})
+![頂点バッファオブジェクトの stride と pointer]({{ site.baseurl }}/assets/images/stridepointer.gif)
 
 ```c
 /* 頂点情報の格納場所と書式を指定する */
@@ -186,7 +186,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ## フラグメントシェーダは変更しません. これで模様が図形の表面に貼り付いたような形になります. 下のような図形が描かれれば OK です.
 
-![表面上の位置を使って模様を付ける]({{ '/assets/images/texture05_result.jpg' | relative_url }})
+![表面上の位置を使って模様を付ける]({{ site.baseurl }}/assets/images/texture05_result.jpg)
 
 <ul>
 <li>[Linux 版](summer/summer10.tar.gz)</li>

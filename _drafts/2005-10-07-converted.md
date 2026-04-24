@@ -55,7 +55,7 @@ gl_FragColor = gl_Color;
 
 ## この状態でプログラムを実行すると，黒い四角が表示されます．
 
-![黒い四角形]({{ '/assets/images/glsl4.jpg' | relative_url }})
+![黒い四角形]({{ site.baseurl }}/assets/images/glsl4.jpg)
 
 ## バーテックスシェーダにおいて `gl_FrontColor` に何も設定していないと，`gl_Color` には黒が入っています．そこで，バーテックスシェーダで `varying` 変数の `gl_FrontColor` に色を設定してみます．`vec4`() は () 内の値を４要素の実数からなるベクトルに直します．ついでに，`gl_Position` の値を `ftransform`() という GLSL の組み込み関数の値にします．この関数は OpenGL の固定機能による座標変換を忠実に再現するものです．
 
@@ -74,7 +74,7 @@ gl_Position = ftransform();
 
 ## これを実行すると，先ほどと同じ陰影の付かない赤い四角形が表示されるはずです．これにより，色のデータが `varying` 変数を介してバーテックスシェーダからフラグメントシェーダに送られていることがわかります．
 
-![陰影の付かない赤い四角形]({{ '/assets/images/glsl5.jpg' | relative_url }})
+![陰影の付かない赤い四角形]({{ site.baseurl }}/assets/images/glsl5.jpg)
 
 ## それではここで，拡散反射光の算出を行ってみましょう．０番目の光源位置は uniform 変数 `gl_LightSource`[0].`position` で得られます．また物体表面上の点の視点座標系における位置は，`gl_ModelViewMatrix` * `gl_Vertex` で求めることができます．したがって光線ベクトルは，これらの差から求めることができます．またこの点における法線ベクトルは，`gl_NormalMatrix` * `gl_Normal` で求めることができます．
 
@@ -105,13 +105,13 @@ gl_Position = ftransform();
 
 ## これでポリゴンに暗めの赤の陰影をつけることができます．
 
-![陰影をつけた赤い四角形]({{ '/assets/images/glsl6.jpg' | relative_url }})
+![陰影をつけた赤い四角形]({{ site.baseurl }}/assets/images/glsl6.jpg)
 
 ## 鏡面反射を実装してみる
 
 それでは，これにさらに鏡面反射成分を追加してみましょう．鏡面反射光強度の計算には，視線ベクトル $\mathbf{u}$ と光線ベクトル $\mathbf{l}$ の中間ベクトル $\mathbf{h}$ と，法線ベクトル$\mathbf{n}$' との内積を用いることにします．
 
-![鏡面反射光強度]({{ '/assets/images/specular.gif' | relative_url }})
+![鏡面反射光強度]({{ site.baseurl }}/assets/images/specular.gif)
 
 ## 視点座標系では視点の位置は原点にあるので，視線ベクトル `view` は物体表面上の点の位置ベクトルの逆ベクトルになります．まず，これを正規化します．次に正規化した光線ベクトル `light` と正規化した視線ベクトル `view` の逆ベクトルとの和から中間ベクトル `halfway` を求めます．鏡面反射率 `specular` には，この中間ベクトル `halfway` と法線ベクトル `fnormal` の内積を求め，`max`() 関数を使って負の値が 0 になるようにした後，指数関数 `pow`() を使って輝き係数 `gl_FrontMaterial`.`shininess` によるべき乗したものを用います．
 
@@ -169,13 +169,13 @@ gl_Position = ftransform();
 ## これで通常の OpenGL による陰影付けと同じ，Gouraud シェーディングが実装できました．
 
 <div class="figure">
-![Gouraud シェーディングによる赤い四角形]({{ '/assets/images/glsl7.jpg' | relative_url }})
-![Gouraud シェーディングによる赤い四角形を斜めから見たところ]({{ '/assets/images/glsl8.jpg' | relative_url }})
+![Gouraud シェーディングによる赤い四角形]({{ site.baseurl }}/assets/images/glsl7.jpg)
+![Gouraud シェーディングによる赤い四角形を斜めから見たところ]({{ site.baseurl }}/assets/images/glsl8.jpg)
 </div>
 
 ## ティーポットのような曲面では，ポリゴンの境界がわずかながら見えてしまいます．
 
-![Gouraud シェーディングによる赤いティーポット]({{ '/assets/images/glsl9.jpg' | relative_url }})
+![Gouraud シェーディングによる赤いティーポット]({{ site.baseurl }}/assets/images/glsl9.jpg)
 
 ## Phong シェーディングを実装してみる
 
@@ -252,13 +252,13 @@ gl_FragColor = gl_FrontLightProduct[0].diffuse * diffuse
 ## これで Phong シェーディングが実装できました．正面から光を当てたときに，ハイライトが消失していないことを確認してください．
 
 <div class="figure">
-![Phong シェーディングによる赤い四角形]({{ '/assets/images/glsl10.jpg' | relative_url }})
-![Phong ーシェーディングによる赤い四角形を斜めから見たところ]({{ '/assets/images/glsl11.jpg' | relative_url }})
+![Phong シェーディングによる赤い四角形]({{ site.baseurl }}/assets/images/glsl10.jpg)
+![Phong ーシェーディングによる赤い四角形を斜めから見たところ]({{ site.baseurl }}/assets/images/glsl11.jpg)
 </div>
 
 ## またティーポットにおいても，ポリゴンの境界が現れるようなことはありません．
 
-![Phong シェーディングによる赤いティーポット]({{ '/assets/images/glsl12.jpg' | relative_url }})
+![Phong シェーディングによる赤いティーポット]({{ site.baseurl }}/assets/images/glsl12.jpg)
 
 ## （nVIDIA のビデオカードだと，ティーポットの底の中央部が黒くなるのはどうして？）
 

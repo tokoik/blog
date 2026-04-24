@@ -56,7 +56,7 @@ col[0] = col[1] = col[2] = 0;
 
 この関数 `specular`() を使って鏡面反射光強度分布の画像を作成する関数 `makeTexture`() を，この直後（つまり関数 `init`() との間）で定義します．キューブマッピングなので６枚分の画像を作ります．
 
-![キューブマッピングにおける法線ベクトル]({{ '/assets/images/cubemap8.jpg' | relative_url }})
+![キューブマッピングにおける法線ベクトル]({{ site.baseurl }}/assets/images/cubemap8.jpg)
 
 ```c
 /*
@@ -195,7 +195,7 @@ glEnable(GL_TEXTURE_CUBE_MAP);
 
 ## ここまでできたら一度コンパイルして実行してみてください．
 
-![キューブマッピングで Phong シェーディング]({{ '/assets/images/cubemap9.jpg' | relative_url }})
+![キューブマッピングで Phong シェーディング]({{ site.baseurl }}/assets/images/cubemap9.jpg)
 
 ## 拡散反射光も回そう
 
@@ -219,7 +219,7 @@ glPopMatrix();
 
 ## これでコンパイルして実行すると，多分，面白いことが起こります．
 
-![鏡面反射光成分と拡散反射光成分が逆に動く]({{ '/assets/images/cubemap10.jpg' | relative_url }})
+![鏡面反射光成分と拡散反射光成分が逆に動く]({{ site.baseurl }}/assets/images/cubemap10.jpg)
 
 ## 鏡面反射光成分と拡散反射光成分が逆回転している
 
@@ -296,7 +296,7 @@ glMatrixMode(GL_MODELVIEW);
 glLoadIdentity();
 ```
 
-![鏡面反射光成分と拡散反射光成分を同じ方向に回した場合]({{ '/assets/images/cubemap11.jpg' | relative_url }})
+![鏡面反射光成分と拡散反射光成分を同じ方向に回した場合]({{ site.baseurl }}/assets/images/cubemap11.jpg)
 
 <ul>
 <li>[Linux 版](`texture`/texture9.tar.gz)</li>

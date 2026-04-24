@@ -25,7 +25,7 @@ published: true
 
 私が買ったわけではないんですが，これまでやってきた[液晶シャッタめがね](http://www.elsa-jp.co.jp/product/04acc/3drevelator/index.html)による[立体視の実験](http://www.wakayama-u.ac.jp/~tokoi/opengl/libglut.html#ex2)に加えて，来年度（この４月）から裸眼立体視を使った実験を取り入れようと考えて，学科に無理をお願いして教育経費から [StereoGraphics 社](http://www.stereographics.com/)の [SynthaGram](http://www.stereographics.com/products/synthagram/synthagram.htm) という 20 インチモニタを買ってもらいました．
 
-![Synthagram]({{ '/assets/images/synthagram.jpg' | relative_url }})
+![Synthagram]({{ site.baseurl }}/assets/images/synthagram.jpg)
 
 ## 視差バリア方式の SHARP の 3D LCD パネルと異なり，SynthaGram はレンティキュラレンズを LCD パネルに対してわずかに傾けて貼り付けています．だから，SHARP のもののように 2D と 3D を切り替えたりはできません．それに９視点もあるので（SHARP のものは２視点，SANYO の PDP は４視点），絵作りが大変そうですが，そこはそれ，「大は小を兼ねる」アプローチで何とかやってみようと思います．もちろん，絵作りのためのソフトウェア開発キットもついてました．さらに，ATI RADEON 9800 PRO のビデオカードまで付いてたのはオドロキでした．なんか，得した気分 :-) 元が安くはないけど :-P
 

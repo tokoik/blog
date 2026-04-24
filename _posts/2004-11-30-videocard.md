@@ -29,6 +29,6 @@ oglbench のログをよく見比べてみました．GeForce4 Ti 4600 はもと
 
 （んでも，比較できるほどビデオカードが揃えられるようになったのは最近だし…ぶつぶつ…）
 
-## 再度追記: [GeForce FX 5900XT の結果]({{ '/assets/htmls/oglbench.html' | relative_url }})
+## 再度追記: [GeForce FX 5900XT の結果]({{ site.baseurl }}/assets/htmls/oglbench.html)
 
 oglbench を学生さんのマシンで動かしてみました．GeForce FX 5900XT ではアキュムレーションバッファにハードウェアアクセラレーションが効くようです．RADEON 9600XT の２倍から３倍の速度が出てました．あと某所のマシンが Quadro4 だったので，これでもこっそり oglbench 動かしてみました．こっちはやっぱりアキュムレーションバッファが遅いようです．

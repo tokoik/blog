@@ -9,7 +9,7 @@ published: true
 
 コンピュータグラフィックスでは，照明された物体表面上での反射光を，拡散反射光と鏡面反射光の二つに分けて考えます（二色性反射モデル）．拡散反射光は入射光のうち屈折して物体内に進入し，散乱・吸収を経て再び外部に放出された成分であり，物体の色の影響を受けます．これに対して鏡面反射光は入射光の物体表面における正反射光であり，物体内部に侵入しないために，物体が非金属の場合は物体の色の影響を受けません．したがって，非金属の物体の表面に環境が映り込んでいる場合，物体表面の色は物体の本来の色に映り込みの色が加算されたものになります．
 
-![二色性反射]({{ '/assets/images/reflection.gif' | relative_url }})
+![二色性反射]({{ site.baseurl }}/assets/images/reflection.gif)
 
 ## 加算してみる
 
@@ -55,7 +55,7 @@ glActiveTexture(GL_TEXTURE0);
 
 ## プログラムをコンパイルして実行すると，こういう結果が得られます．
 
-![`GL_ADD` を使ってテクスチャを合成]({{ '/assets/images/dot3.jpg' | relative_url }})
+![`GL_ADD` を使ってテクスチャを合成]({{ site.baseurl }}/assets/images/dot3.jpg)
 
 ## なんだか明るくなりすぎてしまいました．二色性反射モデルでは入射光が拡散反射光と鏡面反射光に分かれるので，拡散反射光強度と鏡面反射光強度の和が入射光強度を超えることはありません．しかし `GL_ADD` を使うと，拡散反射光に対して環境のテクスチャがそのまま加算されてしまいますから，物体表面の色が入射光強度より大きくなってしまう場合があります．
 
@@ -104,19 +104,19 @@ glActiveTexture(GL_TEXTURE0);
 ## この配列変数 `blend` の４つ目の要素 `blend`[3] の値を 0.0, 0.33, 0.67, および 1.0 に設定し，プログラムをコンパイルして実行したら，それぞれ以下のような結果が得られました．
 
 <div class="figure">
-![`GL_INTERPOLATE` で a=0.0 の時]({{ '/assets/images/dot4.jpg' | relative_url }})
-![`GL_INTERPOLATE` で a=0.33 の時]({{ '/assets/images/dot5.jpg' | relative_url }})
+![`GL_INTERPOLATE` で a=0.0 の時]({{ site.baseurl }}/assets/images/dot4.jpg)
+![`GL_INTERPOLATE` で a=0.33 の時]({{ site.baseurl }}/assets/images/dot5.jpg)
 </div>
 <div class="figure">
-![`GL_INTERPOLATE` で a=0.67 の時]({{ '/assets/images/dot6.jpg' | relative_url }})
-![`GL_INTERPOLATE` で a=1.0 の時]({{ '/assets/images/dot7.jpg' | relative_url }})
+![`GL_INTERPOLATE` で a=0.67 の時]({{ site.baseurl }}/assets/images/dot6.jpg)
+![`GL_INTERPOLATE` で a=1.0 の時]({{ site.baseurl }}/assets/images/dot7.jpg)
 </div>
 
 ## グロスマッピング
 
 `GL_COMBINE` では，補間のパラメータ a に定数ではなくテクスチャの値を用いることもできます．つまり，鏡面反射光強度をテクスチャで制御することが可能になります．これにより物体表面上の場所によって輝き方（グロス）を変更することができます．このような手法をグロスマッピングといいます．ここでは物体に貼り付けているテクスチャに合わせて，次のようなテクスチャをグロスマッピングに用います．
 
-![グロスマッピング用のテクスチャ]({{ '/assets/images/dot8.jpg' | relative_url }})
+![グロスマッピング用のテクスチャ]({{ site.baseurl }}/assets/images/dot8.jpg)
 
 ## このテクスチャは，物体に貼り付けるテクスチャのアルファチャンネルに格納することにします．このような画像ファイルは，Photoshop (Elements を含む) において元の画像の白い部分を選択した後，選択範囲を保存して作成することができます．詳しくは[第３回]({% post_url 2004-09-15-post %})を参照してください．
 
@@ -167,8 +167,8 @@ glActiveTexture(GL_TEXTURE0);
 ## a にテクスチャを使っているので，配列変数 `blend` や，`blend` を指定している [`glTexEnvfv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvfv.xhtml) は不要になります．これをコンパイルして実行すると，こういう結果が得られます．マウスで物体をぐるぐる回してみてください．右側は関数 box() を glutSolidTeapot() に変えた場合です（なぜかこれは手元の Windows マシンでは表示されなかった…）．
 
 <div class="figure">
-![グロスマッピング]({{ '/assets/images/dot9.jpg' | relative_url }})
-![ティポットにグロスマッピング]({{ '/assets/images/dot11.jpg' | relative_url }})
+![グロスマッピング]({{ site.baseurl }}/assets/images/dot9.jpg)
+![ティポットにグロスマッピング]({{ site.baseurl }}/assets/images/dot11.jpg)
 </div>
 
 <ul>
@@ -195,10 +195,10 @@ glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND2_RGB, GL_ONE_MINUS_SRC_ALPHA);
 #endif
 ```
 
-![`GL_ONE_MINUS_SRC_ALPHA` に変更した場合]({{ '/assets/images/dot10.jpg' | relative_url }})
+![`GL_ONE_MINUS_SRC_ALPHA` に変更した場合]({{ site.baseurl }}/assets/images/dot10.jpg)
 
 ## [`glTexEnvi()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvi.xhtml) の引数
 
 テクスチャの合成方法と [`glTexEnvi()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvi.xhtml) の引数の関係は，次のようになります（抜粋）．
 
-![テクスチャの結合方法]({{ '/assets/images/combine.gif' | relative_url }})
+![テクスチャの結合方法]({{ site.baseurl }}/assets/images/combine.gif)

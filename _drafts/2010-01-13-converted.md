@@ -14,7 +14,7 @@ published: true
 この冬休みゼミでは, なぜだか過去２回続けて点の描画にこだわってきました. 点を描画するには GPU に点の数だけ頂点情報 (`attribute`) を送ります. この頂点情報には, 普通は座標値やその点における色または法線ベクトル, およびテクスチャ座標などがあります. しかし, 夏休みゼミの[第１３回]({% post_url 2009-09-21-post %})で示したように頂点情報にテクスチャ座標だけを与えて, 座標値や法線ベクトルはバーテックスシェーダで生成するということもできます. 図形の頂点情報として必ずしも座標値を与える必要はなく, 最低限頂点を識別できる情報さえ与えれば, あとはバーテックスシェーダ側で何とでもできたりします.
 そこで今回は, 一つの点 **P** を描くために用いる頂点情報として, 三角形の三つの頂点の座標値 **P**<sub>0</sub>, **P**<sub>1</sub>, **P**<sub>2</sub>と, その頂点における法線ベクトル **V**<sub>0</sub>, **V**<sub>1</sub>, **V**<sub>2</sub> を与えることにします.
 
-![点と三角形の頂点情報]({{ '/assets/images/winter08.gif' | relative_url }})
+![点と三角形の頂点情報]({{ site.baseurl }}/assets/images/winter08.gif)
 
 ## レイキャスティング
 
@@ -35,21 +35,21 @@ published: true
 交差判定には Möller らによる "[Fast, Minimum Storage Ray/Triangle Intersection](http://www.graphics.cornell.edu/pubs/1997/MT97.html)" の方法を使います. これについては以前に[要約]({% post_url 2008-11-29-post %})を書きました. ただし, ここでは都合により三角形の頂点 **V**<sub>0</sub>, **V**<sub>1</sub>, **V**<sub>2</sub> を **P**<sub>0</sub>, **P**<sub>1</sub>, **P**<sub>2</sub> と表します.
 いま, 視線の基点を **O**, 方向を **D** とします. この視線と三角形との交差の有無と, もし交差する場合はその点の位置を求めます. このとき視線上に交差を求める範囲を設定し, その視点に最も近い位置を near, 最も遠い位置を far とします. この範囲の外にある交差は無視するようにします.
 
-![視線と三角形の関係]({{ '/assets/images/winter09.gif' | relative_url }})
+![視線と三角形の関係]({{ site.baseurl }}/assets/images/winter09.gif)
 
 ## ここで **E**<sub>1</sub> = **P**<sub>1</sub> - **P**<sub>0</sub>, **E**<sub>2</sub> = **P**<sub>2</sub> - **P**<sub>0</sub>, **E** = **O** - **P**<sub>0</sub>, および **Q** = **D** × **E**<sub>2</sub>, **R** = **E** × **E**<sub>1</sub> とおいて, 次式により (<i>t</i>, <i>u</i>, <i>v</i>) を求めます.
 
-![視線と三角形の交点の算出]({{ '/assets/images/figure13.gif' | relative_url }})
+![視線と三角形の交点の算出]({{ site.baseurl }}/assets/images/figure13.gif)
 
 ## 得られた <i>t</i> は交点 **P** の視線上の基点 **O** からの距離になります. これが正かつ最も小さい交点が可視点になります. そこでシーン中のすべての三角形に対して交点を求め, それらの点を `GL_POINTS` により画面上の同じ位置に重ねて描きます. このとき <i>t</i> を奥行き値に設定してデプスバッファを有効にしておけば, 最終的に視点に最も近い点が残ります. つまり, 画面上の 1 点を描くのにすべての三角形の数だけ点を重ね描きします. むちゃくちゃですね. こんな方法が速いわけありません.
 
 ところで OpenGL では, -1 ≤ x, y, z ≤ 1 の範囲の[クリッピング空間]({% post_url 2009-08-29-post %})内にある図形しか描かれません. そこで視線上の near の位置が -1, far の位置が 1 となるように **O** と **D** を設定します. 視点の位置を **C** とすれば, |**D**| = (near - far) / 2, **O** = **C** + **D**(1 - near / |**D**|) となります. OpenGL の場合と異なり, 透視投影の場合でも near = 0 として問題ありません.
 
-![視線と三角形の交点]({{ '/assets/images/winter10.gif' | relative_url }})
+![視線と三角形の交点]({{ site.baseurl }}/assets/images/winter10.gif)
 
 ## 一方 <i>u</i>, <i>v</i> は交点 **P** の三角形上における **E**<sub>1</sub>, **E**<sub>2</sub> を軸としたパラメータ座標になります.
 
-![交点のパラメータ座標]({{ '/assets/images/winter11.gif' | relative_url }})
+![交点のパラメータ座標]({{ site.baseurl }}/assets/images/winter11.gif)
 
 <i>u</i>, <i>v</i> ≥ 0 かつ <i>u</i> + <i>v</i> ≤ 1 のとき, 交点は三角形内にあります. この二つ目の式を変形すれば, 条件を <i>u</i>, <i>v</i>, 1 - <i>u</i> - <i>v</i> ≥ 0 とすることができます.
 
@@ -126,7 +126,7 @@ gl_FragColor = vec4(n.z, n.z, n.z, 1.0);
 
 ## (<i>u</i>, <i>v</i>, <i>w</i>) は頂点情報の補間にも使えます. これで頂点の法線ベクトルを補間します. これと (**P** = **O** + <i>t</i>**D** で求まる) 交点の位置を使って陰影を計算します (<i>t</i> は, フラグメントシェーダでは 2.0 * gl_FragDepth - 1.0 で得ることができます). ここでは力尽きたので, 補間した法線ベクトルの z 値をそのまま陰影に使ってます. この補間はワールド座標系上で行われるので, 透視変換を反映したものになります.
 
-![法線ベクトルの補間]({{ '/assets/images/winter12.gif' | relative_url }})
+![法線ベクトルの補間]({{ site.baseurl }}/assets/images/winter12.gif)
 
 ## 最初の視線の生成
 
@@ -138,17 +138,17 @@ gl_FragColor = vec4(n.z, n.z, n.z, 1.0);
 以下は Apple [iMac (Early 2009)](http://support.apple.com/kb/SP507?viewlocale=ja_JP&locale=ja_JP) (2.66GHz, GeForce 9400M, 24inch), 画像サイズ 300 × 300 pixels での処理時間です.
 
 <div class="figure">
-![3472 polygons, 11.348 sec.]({{ '/assets/images/3472-11.348.gif' | relative_url }})
+![3472 polygons, 11.348 sec.]({{ site.baseurl }}/assets/images/3472-11.348.gif)
 3472 ポリゴン, 11.348 秒．
 </div>
 
 <div class="figure">
-![17362 polygons, 52.368 sec.]({{ '/assets/images/17362-52.368.gif' | relative_url }})
+![17362 polygons, 52.368 sec.]({{ site.baseurl }}/assets/images/17362-52.368.gif)
 17362 ポリゴン, 52.368 秒．
 </div>
 
 <div class="figure">
-![69451 polygons, 235.155 sec.]({{ '/assets/images/69451-235.155.gif' | relative_url }})
+![69451 polygons, 235.155 sec.]({{ site.baseurl }}/assets/images/69451-235.155.gif)
 69451 ポリゴン, 235.155 秒．
 </div>
 

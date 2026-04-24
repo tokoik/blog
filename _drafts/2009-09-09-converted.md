@@ -13,7 +13,7 @@ published: true
 
 図のような立方体を線で描くことを考えます. この図形は 8 個の頂点と 12 本の稜線で構成されています.
 
-![線で描かれた立方体]({{ '/assets/images/wirecube.gif' | relative_url }})
+![線で描かれた立方体]({{ site.baseurl }}/assets/images/wirecube.gif)
 
 ## `GL_LINE_STRIP` や `GL_LINE_LOOP` は折れ線を一筆書きの要領で描きますから, このような図形を描くためには, 同じ稜線を 2 回描く必要があります. 一方これを `GL_LINES` で描こうとすれば, 線分ごとに始点と終点を指定する必要がありますから, 頂点が 8 個しかないのにもかかわらず, 24 個の頂点データを用意する必要があります. glDrawArrays() は頂点データだけを使って図形を描画するので, 頂点データを図形を描く順序に合わせて並べておく必要があります.
 
@@ -21,7 +21,7 @@ published: true
 
 CAD などの図形を扱うアプリケーションでは, 図形データを頂点位置などの幾何情報 (計量情報) と, どの頂点を結んで線分や面を描くかといった位相情報の組み合わせで表す場合があります. このとき, 位相情報は座標値データを指す指標 (添え字やポインタ) で構成されます. このようなデータでは, [`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) を用いれば, 頂点のデータ数を減らすことができます.
 
-![データ構造]({{ '/assets/images/datastructure.gif' | relative_url }})
+![データ構造]({{ site.baseurl }}/assets/images/datastructure.gif)
 
 ## これらのデータ量を比較します. 整数・実数ともに 4 バイト使用するとき, glDrawArrays() の方は 4 × 3 × 24 = 288 バイト, [`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) の方は 4 × 3 × 8 + 4 × 2 × 12 = 192 バイトになります. 頂点に法線ベクトルなど位置以外の情報を与えた場合は, この差はもっと大きくなります.
 
@@ -300,7 +300,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ## これで下のような図形が描かれれば OK です.
 
-![[`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) による描画の結果]({{ '/assets/images/elements_result.gif' | relative_url }})
+![[`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) による描画の結果]({{ site.baseurl }}/assets/images/elements_result.gif)
 
 ## 時間がかかりすぎてスケジュール狂いっぱなしでゴメン mOm
 

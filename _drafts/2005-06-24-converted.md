@@ -18,11 +18,11 @@ published: true
 
 放物面鏡の凹面鏡には，入射した平行光線が１点（焦点）に集まるという性質を持っています．これに対して，放物面鏡の凸面鏡（凹面鏡の裏側）に光を当てると，反射光は焦点と反射点を結んだ直線の方向に反射します．
 
-![放物面鏡の反射]({{ '/assets/images/paraboloid1.gif' | relative_url }})
+![放物面鏡の反射]({{ site.baseurl }}/assets/images/paraboloid1.gif)
 
 ## そこで，この放物面鏡を焦点の位置で切断し，２つを切断面で貼り合わせた鏡を考えます．
 
-![二つの放物面鏡の貼り合わせ]({{ '/assets/images/paraboloid2.gif' | relative_url }})
+![二つの放物面鏡の貼り合わせ]({{ site.baseurl }}/assets/images/paraboloid2.gif)
 
 ## そして，反射ベクトルの Z 成分が正の場合は表の鏡に映った画像をテクスチャに用い，Z 成分が負の場合は裏の鏡に映った画像をテクスチャに用いれば，環境全体をくまなくマッピングできることになります．
 
@@ -30,11 +30,11 @@ published: true
 
 それでは，反射ベクトル (r<sub>x</sub>, r<sub>y</sub>, r<sub>z</sub>) からテクスチャ座標 (s, t) を算出してみましょう．今，x<sup>2</sup> + y<sup>2</sup> = z という回転放物面の焦点が原点となるように平行移動して，x<sup>2</sup> + y<sup>2</sup> = z + 0.25 という曲面について考えてみます．
 
-![テクスチャ座標の算出]({{ '/assets/images/paraboloid3.gif' | relative_url }})
+![テクスチャ座標の算出]({{ site.baseurl }}/assets/images/paraboloid3.gif)
 
 ## これは裏側の鏡に映った画像に対するテクスチャ座標です．表側の鏡に対するテクスチャ座標は，単に r<sub>z</sub> の符号を反転するだけで求めることができます．また，このままでは (s, t) は [-0.5, 0.5] の範囲になりますから，[0, 1] のテクスチャ座標の範囲に収まるよう，s, t のそれぞれに 0.5 を足しておきます．
 
-![放物面マッピングのテクスチャ座標]({{ '/assets/images/paraboloid4.gif' | relative_url }})
+![放物面マッピングのテクスチャ座標]({{ site.baseurl }}/assets/images/paraboloid4.gif)
 
 ## 放物面マッピングの実装
 
@@ -291,8 +291,8 @@ glDisable(GL_TEXTURE_2D);
 ## これでプログラムの方は完成です．あとは使用する放物面テクスチャを用意するだけです．ここでは魚眼レンズを使って作成した，次の画像を使用してください．
 
 <div class="figure">
-![裏面の放物面テクスチャ]({{ '/assets/images/paraboloid1.jpg' | relative_url }})
-![表面の放物面テクスチャ]({{ '/assets/images/paraboloid2.jpg' | relative_url }})
+![裏面の放物面テクスチャ]({{ site.baseurl }}/assets/images/paraboloid1.jpg)
+![表面の放物面テクスチャ]({{ site.baseurl }}/assets/images/paraboloid2.jpg)
 </div>
 
 <ul>
@@ -302,15 +302,15 @@ glDisable(GL_TEXTURE_2D);
 
 ## 使用した魚眼レンズは画像の中心からの距離と角度が比例しているもので，放物面鏡とは角度分布が異なります．ただ，放物面鏡の角度分布を調べてみると次のようなグラフになったので，「この程度なら人間の目はごまかされるやろ，環境マッピングやし」ということで，補正することなしにそのまま使っています．
 
-![放物面鏡の角度分布]({{ '/assets/images/paraboloid5.gif' | relative_url }})
+![放物面鏡の角度分布]({{ site.baseurl }}/assets/images/paraboloid5.gif)
 
 ## プログラムの実行結果
 
 これらのテクスチャを使ってプログラムを実際に動かしてみると，次のような実行結果が得られます．右の図は関数 `box`() を glutSolidSphere() に置き換えたものです．
 
 <div class="figure">
-![`GL_ADD` を使って合成した場合（箱）]({{ '/assets/images/paraboloid6.jpg' | relative_url }})
-![`GL_ADD` を使って合成した場合（球）]({{ '/assets/images/paraboloid7.jpg' | relative_url }})
+![`GL_ADD` を使って合成した場合（箱）]({{ site.baseurl }}/assets/images/paraboloid6.jpg)
+![`GL_ADD` を使って合成した場合（球）]({{ site.baseurl }}/assets/images/paraboloid7.jpg)
 </div>
 
 ## 箱にマッピングした場合は，真ん中に「お化け」のような妙なものが写っています．これは裏側のテクスチャが表側の領域に現れているようです．
@@ -354,15 +354,15 @@ glMatrixMode(GL_MODELVIEW);
 ```
 
 <div class="figure">
-![`GL_DECAL` を使って合成した場合（箱）]({{ '/assets/images/paraboloid8.jpg' | relative_url }})
-![`GL_DECAL` を使って合成した場合（球）]({{ '/assets/images/paraboloid9.jpg' | relative_url }})
+![`GL_DECAL` を使って合成した場合（箱）]({{ site.baseurl }}/assets/images/paraboloid8.jpg)
+![`GL_DECAL` を使って合成した場合（球）]({{ site.baseurl }}/assets/images/paraboloid9.jpg)
 </div>
 
 ## 球はまだ少しテクスチャの境界が見えていますが，だいぶましになりました．実はテクスチャ自体にも少し工夫してあります．使用した魚眼レンズは画角が 180°より少しだけ大きいらしく，周囲に若干の余裕がありました．そこで画像は実際に貼り付ける領域よりも少し大きめに切り取り，アルファ値の方は実際に貼り付ける領域の周囲に少しだけグラデーションをつけています．これで表面と裏面のテクスチャが境界部分でブレンドされるようにしています．
 
 <div class="figure">
-![`GL_DECAL` を使って合成した場合（トーラス）]({{ '/assets/images/paraboloid10.jpg' | relative_url }})
-![`GL_DECAL` を使って合成した場合（ティーポット）]({{ '/assets/images/paraboloid11.jpg' | relative_url }})
+![`GL_DECAL` を使って合成した場合（トーラス）]({{ site.baseurl }}/assets/images/paraboloid10.jpg)
+![`GL_DECAL` を使って合成した場合（ティーポット）]({{ site.baseurl }}/assets/images/paraboloid11.jpg)
 </div>
 
 <ul>

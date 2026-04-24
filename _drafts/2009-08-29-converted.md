@@ -13,7 +13,7 @@ published: true
 
 レンダリングパイプラインにおいてビューポート変換 (screen mapping) は, -1 ≤ x ≤ 1, -1 ≤ y ≤ 1, -1 ≤ z ≤ 1 の空間の xy 平面への平行投影像を, ディスプレイ上の描画領域 (ビューポート) に写像します. ラスタライザはビューポートからはみ出た図形を描画できませんから, バーテックスシェーダから出力された図形の, この空間からはみ出た部分は, クリッピングにより削り取られます. この空間を**クリッピング空間** (canonical view volume) と呼び, この座標系をクリッピング座標系と呼びます.
 
-![クリッピング空間]({{ '/assets/images/canonical.gif' | relative_url }})
+![クリッピング空間]({{ site.baseurl }}/assets/images/canonical.gif)
 
 したがってバーテックスシェーダは, 画面に表示しようとする空間がクリッピング空間に収まるように頂点の位置を座標変換して, `gl_Position` に出力する必要があります. この変換には, 一般に**平行投影** (orthogonal projection) 変換と**透視投影** (perspective projection) 変換が用いられます. なお, 平行投影は直交投影とも呼ばれます. また, 透視投影は中心投影とも呼ばれます.
 
@@ -21,15 +21,15 @@ published: true
 
 平行投影変換は, x, y, z のそれぞれの軸に垂直な平面に囲まれた**視野空間** (view volume) をクリッピング空間に写像します.
 
-![平行投影の視野空間]({{ '/assets/images/orthogonal.gif' | relative_url }})
+![平行投影の視野空間]({{ site.baseurl }}/assets/images/orthogonal.gif)
 
 この変換は, x 軸方向について, 視野空間の中心が原点となるように -(`right` + `left`) / 2 だけ平行移動し, その大きさを 2 / (`right` - `left`) 倍します. y, z 軸についても同様に考えれば, 次の変換行列が得られます. 
 
-![平行投影の変換行列]({{ '/assets/images/orthomatrix.gif' | relative_url }})
+![平行投影の変換行列]({{ site.baseurl }}/assets/images/orthomatrix.gif)
 
 この変換行列を OpenGL で使用する場合には, ひとつ**注意点**があります. いま, 行列の各要素 `m0`〜`m15` が次のように並んでいるとします.
 
-![行列の要素の並び]({{ '/assets/images/matrix.gif' | relative_url }})
+![行列の要素の並び]({{ site.baseurl }}/assets/images/matrix.gif)
 
 これを OpenGL の座標変換に使う場合, 行列の各要素を次の順序で配列に格納します. つまり変換行列を配列に格納する際は, 行列の要素 `m0`〜`m15` の順序を (見かけ上) **転置**しなければなりません.
 
@@ -66,7 +66,7 @@ GLfloat *matrix)
 }
 ```
 
-- [【解答例】]({{ '/assets/texts/orthogonal.txt' | relative_url }})←考える前に見るなよ
+- [【解答例】]({{ site.baseurl }}/assets/texts/orthogonal.txt)←考える前に見るなよ
 
 なお, この関数も static 宣言されていない上に最初のほうに `#include` があるということは, **ソースファイルは別にしてくれ**ってことだからね.
 
@@ -74,27 +74,27 @@ GLfloat *matrix)
 
 透視投影の視野空間は, 原点を頂点とした四角錐を z 軸に垂直な二つの平面 (前方面, 後方面) で切り取った錐台になります. これを**視野錐台**あるいは**視錐台** (view frustum) と呼びます. 透視投影変換は, この空間をクリッピング空間に写像します.
 
-![透視投影の視野錐台]({{ '/assets/images/perspective.gif' | relative_url }})
+![透視投影の視野錐台]({{ site.baseurl }}/assets/images/perspective.gif)
 
 この変換は, 以下の手順で求めることができます. 空間中の点の座標を (px, py, pz) とし, その点が視点から z 方向に -`near` の位置にある投影面上に投影された位置を (sx, sy) とすれば, sx = -`near` * px / pz, sy = -`near` * py / pz になります. また, これらの範囲は `left` ≤ sx ≤ `right`, `bottom` ≤ sy ≤ `top` なので, これらを -1 ≤ sx', sy' ≤ 1 の範囲に収めるには, sx' = 2 * (sx - `left`) / (`right` - `left`) - 1, sy' = 2 * (sy - `bottom`) / (`top` - `bottom`) - 1 とします. これを整理すると, 次式が得られます.
 
-![透視投影の式 (1)]({{ '/assets/images/persmatrix0.gif' | relative_url }})
+![透視投影の式 (1)]({{ site.baseurl }}/assets/images/persmatrix0.gif)
 
 z 軸方向については, (上の図が左手系であることを考慮して) z 軸を反転して, [-`near`, -`far`] の範囲を [-1, 1] に写像します. このとき写像後の z 座標値 sz' は, sz の逆数に比例している必要があるので, この関数を sz' = A / sz + B とおきます. sz = -`near` → sz' = -1, sz = -`far` → sz' = 1 なので, -1 = A / (-`near`) + B, 1 = A / (-`far`) + B となります. これを整理すると, 次式が得られます.
 
-![透視投影の式 (2)]({{ '/assets/images/persmatrix1.gif' | relative_url }})
+![透視投影の式 (2)]({{ site.baseurl }}/assets/images/persmatrix1.gif)
 
 これにより sz' は次式で求めることができます.
 
-![透視投影の式 (3)]({{ '/assets/images/persmatrix2.gif' | relative_url }})
+![透視投影の式 (3)]({{ site.baseurl }}/assets/images/persmatrix2.gif)
 
 ここで点 (sx', sy', sz') を w = -pz として同次座標で表せば, (-sx' * px, -sy' * pz, -sz' * pz, -pz) となります.
 
-![透視投影の式 (4)]({{ '/assets/images/persmatrix3.gif' | relative_url }})
+![透視投影の式 (4)]({{ site.baseurl }}/assets/images/persmatrix3.gif)
 
 これを行列で表せば, 次の変換行列が得られます[^1].
 
-![透視投影の式 (5)]({{ '/assets/images/persmatrix4.gif' | relative_url }})
+![透視投影の式 (5)]({{ site.baseurl }}/assets/images/persmatrix4.gif)
 
 [^1] Eric Lengyel 著, 狩野 智英 訳, "ゲームプログラミングのための 3D グラフィックス数学," pp. 97-99, ボーンデジタル
 
@@ -113,7 +113,7 @@ GLfloat *matrix)
 }
 ```
 
-- [【解答例】]({{ '/assets/texts/perspective.txt' | relative_url }})←これも考える前に見るなよ
+- [【解答例】]({{ site.baseurl }}/assets/texts/perspective.txt)←これも考える前に見るなよ
 
 この関数も `orthogonalMatrix()` と同じファイルに書いといてね．
 
@@ -228,7 +228,7 @@ static void display(void)
 
 これで下のような図形が描かれれば OK です.
 
-![視野空間を指定して描画]({{ '/assets/images/orthogonal_result.gif' | relative_url }})
+![視野空間を指定して描画]({{ site.baseurl }}/assets/images/orthogonal_result.gif)
 
 一応, ここまでのプログラムをまとめたものを, 以下に用意しておきます.
 

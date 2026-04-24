@@ -15,7 +15,7 @@ published: true
 
 書き忘れたと思っていたことの二つ目です．`GL_POINT` で描く点の大きさを glPointSize() で指定すると，点の形が正方形になってしまいます．
 
-![正方形の点]({{ '/assets/images/pointsmooth1.gif' | relative_url }})
+![正方形の点]({{ site.baseurl }}/assets/images/pointsmooth1.gif)
 
 ## [Point Sprite を使ってみる]({% post_url 2006-02-27-post %})では，点に丸くくり抜くためのアルファチャンネルを付けたテクスチャを貼り付けて，アルファテストを使って丸くしていましたが，テクスチャを使わない場合は点にアンチエリアシングを設定するだけで丸い点を描くことができます．
 
@@ -26,7 +26,7 @@ glEnable(GL_POINT_SMOOTH);
 
 ## これで点は次のような形になります．
 
-![丸くなったの点]({{ '/assets/images/pointsmooth2.gif' | relative_url }})
+![丸くなったの点]({{ site.baseurl }}/assets/images/pointsmooth2.gif)
 
 ## 本当にアンチエリアシングを有効にする（点の周囲のぎざぎざを取る）には，アルファブレンディングも有効にする必要があります．
 
@@ -42,7 +42,7 @@ glEnable(GL_BLEND);
 
 ## ただし，点同士が重なっている場合，点を奥から順番に描かなければ，このアンチエリアシングは正しい結果が得られません（重なっている部分で境界線が見え隠れします）．
 
-![アンチエリアシング処理をした点]({{ '/assets/images/pointsmooth3.gif' | relative_url }})
+![アンチエリアシング処理をした点]({{ site.baseurl }}/assets/images/pointsmooth3.gif)
 
 <ul>
 <li>[Linux 版](texture/pointsmooth.tar.gz)</li>

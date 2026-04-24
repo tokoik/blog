@@ -298,7 +298,7 @@ gl_FragColor = texture2D(depth, gl_TexCoord[0].xy);
 
 ## デプステクスチャをストレートに拾ってきてますが，結果はちゃんと RGBA 揃ったカラーデータになります．
 
-![デプスバッファの表示]({{ '/assets/images/showdepth1.gif' | relative_url }})
+![デプスバッファの表示]({{ site.baseurl }}/assets/images/showdepth1.gif)
 
 <ul>
 <li>[Linux 版](transparent/showdepth.tar.gz)</li>

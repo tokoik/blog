@@ -28,7 +28,7 @@ published: true
 
 シャドウマッピング法はテクスチャマッピングの機能を使って影付け処理を実現する手法です．
 
-![シャドウマッピング]({{ '/assets/images/shadowmap0.gif' | relative_url }})
+![シャドウマッピング]({{ site.baseurl }}/assets/images/shadowmap0.gif)
 
 ## 以下にこの手順の概略を示します．
 
@@ -40,7 +40,7 @@ published: true
 </ol>
 以降，次のようなシーンに対して影付け処理を追加する方法について説明します（ファイル main1.cpp）．
 
-![元のシーン]({{ '/assets/images/shadowmap1.jpg' | relative_url }})
+![元のシーン]({{ site.baseurl }}/assets/images/shadowmap1.jpg)
 
 ## デプステクスチャ
 
@@ -311,7 +311,7 @@ glutSwapBuffers();
 
 ## これで，次のような影が得られます．
 
-![影をつけたシーン]({{ '/assets/images/shadowmap2.jpg' | relative_url }})
+![影をつけたシーン]({{ site.baseurl }}/assets/images/shadowmap2.jpg)
 
 ## 見てのとおり，この影は真っ黒で，とても不自然です．また，球の光源に対する裏面も，なんだか汚いことになっています．これは物体の光源に対する背面から始まる影の領域と，物体表面が重なっているために起こります．
 
@@ -355,7 +355,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
 
 ## こうしてアルファテストを有効にして描画すると，日向の部分だけを描画することができます．
 
-![日向の部分だけを描画]({{ '/assets/images/shadowmap3.jpg' | relative_url }})
+![日向の部分だけを描画]({{ site.baseurl }}/assets/images/shadowmap3.jpg)
 
 ## そこで，日向の部分を描く前に，光源の明るさを落としてシーン全体を描きます．このとき影の部分にハイライトが発生しないよう，光源強度の鏡面反射成分は０にしておきます．
 
@@ -450,7 +450,7 @@ glutSwapBuffers();
 
 ## これで，次のように影の部分のオブジェクトにも陰影をつけることができます．
 
-![影の部分に陰影をつけて描画]({{ '/assets/images/shadowmap4.jpg' | relative_url }})
+![影の部分に陰影をつけて描画]({{ site.baseurl }}/assets/images/shadowmap4.jpg)
 
 ## なお，影の部分もアルファテストで切り抜いて合成する方法もあります（ファイル main3.cpp）．こっちのほうがプログラムがきれいなんですけど，パフォーマンスは悪いでしょうね．
 
