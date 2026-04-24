@@ -136,6 +136,8 @@ header, footer {
       flex: 1;
       text-align: right;
       display: flex;
+      justify-content: flex-end;
+      align-items: center;
       flex-wrap: nowrap;
       gap: 0.2em;
 
