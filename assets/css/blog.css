@@ -17,7 +17,7 @@ body {
 /*
 等幅フォント
 */
-pre, code, var, samp, kbd, .mono {
+pre, code, var, samp, kbd, dl, .mono {
 	font-family: "Consolas", "Menlo", "Courier New", Courier, Monaco, "MS Gothic", "Osaka-Mono", monospace;
 }
 
