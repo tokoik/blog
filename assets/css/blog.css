@@ -17,7 +17,7 @@ body {
 /*
 等幅フォント
 */
-pre, code, var, samp, kbd, dl, .mono {
+pre, code, var, samp, kbd, dt, .mono {
 	font-family: ui-monospace, Consolas, Menlo, "BIZ UDGothic", "Noto Sans Mono CJK JP", monospace;
 }
 
