@@ -97,7 +97,6 @@ header, footer {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
 
     /*
     記事のタイトル
@@ -120,6 +119,17 @@ header, footer {
       padding: 0;
       border: none;
       cursor: pointer;
+
+      /*
+      ライセンスバナー
+      */
+      img {
+        border: none;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+      }
     }
 
     /*
