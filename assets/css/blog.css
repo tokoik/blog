@@ -96,7 +96,7 @@ header, footer {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 
     /*
     記事のタイトル
