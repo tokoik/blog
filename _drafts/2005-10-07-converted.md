@@ -57,7 +57,7 @@ gl_FragColor = gl_Color;
 
 ![黒い四角形]({{ site.baseurl }}/assets/images/glsl4.jpg)
 
-## バーテックスシェーダにおいて `gl_FrontColor` に何も設定していないと，`gl_Color` には黒が入っています．そこで，バーテックスシェーダで `varying` 変数の `gl_FrontColor` に色を設定してみます．`vec4`() は () 内の値を４要素の実数からなるベクトルに直します．ついでに，`gl_Position` の値を `ftransform`() という GLSL の組み込み関数の値にします．この関数は OpenGL の固定機能による座標変換を忠実に再現するものです．
+## バーテックスシェーダにおいて `gl_FrontColor` に何も設定していないと，`gl_Color` には黒が入っています．そこで，バーテックスシェーダで `varying` 変数の `gl_FrontColor` に色を設定してみます．`vec4()` は () 内の値を４要素の実数からなるベクトルに直します．ついでに，`gl_Position` の値を `ftransform()` という GLSL の組み込み関数の値にします．この関数は OpenGL の固定機能による座標変換を忠実に再現するものです．
 
 ```c
 // simple.vert
@@ -78,7 +78,7 @@ gl_Position = ftransform();
 
 ## それではここで，拡散反射光の算出を行ってみましょう．０番目の光源位置は uniform 変数 `gl_LightSource`[0].`position` で得られます．また物体表面上の点の視点座標系における位置は，`gl_ModelViewMatrix` * `gl_Vertex` で求めることができます．したがって光線ベクトルは，これらの差から求めることができます．またこの点における法線ベクトルは，`gl_NormalMatrix` * `gl_Normal` で求めることができます．
 
-`vec3`, `vec4` はそれぞれ３要素，４要素の実数型のベクトルを表します．`gl_LightSource`[0].`position`.`xyz` の .`xyz` は，ベクトル `gl_LightSource`[0].`position` の４つの要素のうち，`xyz` の３つの成分を（この順で）使用することを示します．`normalize`() はベクトルを正規化する GLSL の組み込み関数です．
+`vec3`, `vec4` はそれぞれ３要素，４要素の実数型のベクトルを表します．`gl_LightSource`[0].`position`.`xyz` の .`xyz` は，ベクトル `gl_LightSource`[0].`position` の４つの要素のうち，`xyz` の３つの成分を（この順で）使用することを示します．`normalize()` はベクトルを正規化する GLSL の組み込み関数です．
 
 ```c
 // simple.vert
@@ -91,7 +91,7 @@ vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
 vec3 light = normalize((gl_LightSource[0].position * position.w - gl_LightSource[0].position.w * position).xyz);
 ```
 
-## 拡散反射率 `diffuse` は光線ベクトル `light` と法線ベクトル `normal` の内積により求めます．これに光源強度の拡散反射光成分 `gl_LightSource`[0].`diffuse` と拡散反射係数 `gl_FrontMaterial`.`diffuse` を乗じて，拡散反射光強度を求めます．`dot`() は内積を求める GLSL の組み込み関数で，その結果が負の時は 0 になるよう GLSL の組み込み関数 `max`() を用いて `dot`() と 0 の大きい方を求めます．
+## 拡散反射率 `diffuse` は光線ベクトル `light` と法線ベクトル `normal` の内積により求めます．これに光源強度の拡散反射光成分 `gl_LightSource`[0].`diffuse` と拡散反射係数 `gl_FrontMaterial`.`diffuse` を乗じて，拡散反射光強度を求めます．`dot()` は内積を求める GLSL の組み込み関数で，その結果が負の時は 0 になるよう GLSL の組み込み関数 `max()` を用いて `dot()` と 0 の大きい方を求めます．
 
 ```c
 float diffuse = max(dot(light, normal), 0.0);
@@ -113,7 +113,7 @@ gl_Position = ftransform();
 
 ![鏡面反射光強度]({{ site.baseurl }}/assets/images/specular.gif)
 
-## 視点座標系では視点の位置は原点にあるので，視線ベクトル `view` は物体表面上の点の位置ベクトルの逆ベクトルになります．まず，これを正規化します．次に正規化した光線ベクトル `light` と正規化した視線ベクトル `view` の逆ベクトルとの和から中間ベクトル `halfway` を求めます．鏡面反射率 `specular` には，この中間ベクトル `halfway` と法線ベクトル `fnormal` の内積を求め，`max`() 関数を使って負の値が 0 になるようにした後，指数関数 `pow`() を使って輝き係数 `gl_FrontMaterial`.`shininess` によるべき乗したものを用います．
+## 視点座標系では視点の位置は原点にあるので，視線ベクトル `view` は物体表面上の点の位置ベクトルの逆ベクトルになります．まず，これを正規化します．次に正規化した光線ベクトル `light` と正規化した視線ベクトル `view` の逆ベクトルとの和から中間ベクトル `halfway` を求めます．鏡面反射率 `specular` には，この中間ベクトル `halfway` と法線ベクトル `fnormal` の内積を求め，`max()` 関数を使って負の値が 0 になるようにした後，指数関数 `pow()` を使って輝き係数 `gl_FrontMaterial`.`shininess` によるべき乗したものを用います．
 
 そして光源強度の鏡面反射光成分 `gl_LightSource`[0].`specular` と鏡面反射係数 `gl_FrontMaterial`.`specular` の積にこの `specular` を乗じて鏡面反射光強度を求め，これと環境光の反射光強度を先ほど求めた拡散反射光強度に加えて `gl_FrontColor` に代入します．
 
@@ -200,7 +200,7 @@ gl_Position = ftransform();
 }
 ```
 
-## バーテックスシェーダで計算した `position` と `normal` の補間値を得るために，フラグメントシェーダでもこれらを `varying` 変数として宣言します．また，バーテックスシェーダから削除した部分は，そっくりそのままフラグメントシェーダの `main`() の中に移します．ただし，この状態ではまだフラグメントシェーダは動作しません（コンパイルできません）．
+## バーテックスシェーダで計算した `position` と `normal` の補間値を得るために，フラグメントシェーダでもこれらを `varying` 変数として宣言します．また，バーテックスシェーダから削除した部分は，そっくりそのままフラグメントシェーダの `main()` の中に移します．ただし，この状態ではまだフラグメントシェーダは動作しません（コンパイルできません）．
 
 ```c
 // simple.frag

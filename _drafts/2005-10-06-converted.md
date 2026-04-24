@@ -120,14 +120,14 @@ glLightfv(GL_LIGHT0, GL_AMBIENT, lightamb);
 glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 ```
 
-## 関数 `glslInit`() は `glsl`.cpp で定義しており，`GLSL` で使用する API のエントリポイントを，関数ポインタ変数に格納します．この作業は Windows でのみ必要です．
+## 関数 `glslInit()` は `glsl`.cpp で定義しており，`GLSL` で使用する API のエントリポイントを，関数ポインタ変数に格納します．この作業は Windows でのみ必要です．
 
 ```c
 /* GLSL の初期化 */
 if (glslInit()) exit(1);
 ```
 
-## まず [`glCreateShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml) を使ってシェーダオブジェクトを作成し，その識別子を得ます．そしてそれらの識別子に対してシェーダのソースプログラムを読み込みます．関数 `readShaderSource`() は `glsl`.cpp で定義しており，ファイルからソースプログラムを読み込んだ後，glShaderSource() を呼び出します．
+## まず [`glCreateShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml) を使ってシェーダオブジェクトを作成し，その識別子を得ます．そしてそれらの識別子に対してシェーダのソースプログラムを読み込みます．関数 `readShaderSource()` は `glsl`.cpp で定義しており，ファイルからソースプログラムを読み込んだ後，glShaderSource() を呼び出します．
 
 ```c
 /* シェーダオブジェクトの作成 */
@@ -139,7 +139,7 @@ if (readShaderSource(vertShader, "simple.vert")) exit(1);
 if (readShaderSource(fragShader, "simple.frag")) exit(1);
 ```
 
-## 読み込んだシェーダのソースプログラムを，[`glCompileShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCompileShader.xhtml) を使ってコンパイルします．コンパイルが成功したかどうかは，[`glGetShaderiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetShaderiv.xhtml) を使って変数 `compiled` に得ます．この内容が `GL_FALSE` なら，コンパイルに失敗したことになります．関数 `printShaderInfoLog`() は `glsl`.cpp で定義しており，シェーダのコンパイル時に出力されたメッセージを取り出し，標準エラー出力に出力します．
+## 読み込んだシェーダのソースプログラムを，[`glCompileShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCompileShader.xhtml) を使ってコンパイルします．コンパイルが成功したかどうかは，[`glGetShaderiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetShaderiv.xhtml) を使って変数 `compiled` に得ます．この内容が `GL_FALSE` なら，コンパイルに失敗したことになります．関数 `printShaderInfoLog()` は `glsl`.cpp で定義しており，シェーダのコンパイル時に出力されたメッセージを取り出し，標準エラー出力に出力します．
 
 ```c
 /* バーテックスシェーダのソースプログラムのコンパイル */
@@ -176,7 +176,7 @@ glDeleteShader(vertShader);
 glDeleteShader(fragShader);
 ```
 
-## [`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml) によってシェーダプログラムをリンクします．リンクが成功したかどうかは，[`glGetProgramiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramiv.xhtml) を使って変数 `linked` に得ます．この内容が `GL_FALSE` なら，リンクに失敗したことになります．関数 `printProgramInfoLog`() は `glsl`.cpp で定義しており，シェーダのリンク時に出力されたメッセージを取り出し，標準エラー出力に出力します．
+## [`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml) によってシェーダプログラムをリンクします．リンクが成功したかどうかは，[`glGetProgramiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramiv.xhtml) を使って変数 `linked` に得ます．この内容が `GL_FALSE` なら，リンクに失敗したことになります．関数 `printProgramInfoLog()` は `glsl`.cpp で定義しており，シェーダのリンク時に出力されたメッセージを取り出し，標準エラー出力に出力します．
 
 ```c
 /* シェーダプログラムのリンク */
@@ -201,7 +201,7 @@ glUseProgram(gl2Program);
 
 とりあえず，ここでは非常に簡単なシェーダのプログラムを用意しておきます．詳しい説明は次回以降に行います．
 
-## 以下はバーテックスシェーダのソースプログラム (`simple`.`vert`) です．プログラムのエントリポイントとなる関数名は C や C++ 同様 `main`() ですが，戻り値を返すわけではないので，データ型は void です．
+## 以下はバーテックスシェーダのソースプログラム (`simple`.`vert`) です．プログラムのエントリポイントとなる関数名は C や C++ 同様 `main()` ですが，戻り値を返すわけではないので，データ型は void です．
 
 バーテックスシェーダでは，１個１個の頂点に対してこの処理が行われます．`gl_Vertex` はプログラム中で与えられた頂点の座標値であり，これに `gl_ModelViewProjectionMatrix`，すなわちモデルビュー変換行列と透視変換行列の積を掛けたものを `gl_Position` に格納します．`gl_Position` の値が，その頂点のスクリーン上での位置になります．なお，一般にはこの積のかわりに ftransform() という関数を用います．
 

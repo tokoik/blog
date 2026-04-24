@@ -135,7 +135,7 @@ Visual Studio を起動して, 新しいプロジェクトを作成します.
 
 ![関数 `SetupPixelFormat` の追加]({{ site.baseurl }}/assets/images/mfc24.gif)
 
-## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 (ここでは `SetupPixelFormat`()) が追加され, ソースコードを編集する状態になります. ここで `SetupPixelFormat`() の内容を実装します.
+## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 (ここでは `SetupPixelFormat()`) が追加され, ソースコードを編集する状態になります. ここで `SetupPixelFormat()` の内容を実装します.
 
 ```c
 BOOL CGLsampleDlg::SetupPixelFormat(HDC hdc)
@@ -166,13 +166,13 @@ if (pf != 0) return SetPixelFormat(hdc, pf, &pfd);
 return FALSE;
 ```
 
-## この関数では, コンピュータが備える `OpenGL` のサブシステムが用意しているピクセルフォーマットをの中から, 変数 `pfd` に設定した仕様を満たすものを `ChoosePixelFormat`() を使って選択し, 見つかったものの番号 `pf` を `SetPixelFormat`() で現在のデバイスコンテキスト `hdc` に設定します. 見つからなければ, `pf` は 0 になります.
+## この関数では, コンピュータが備える `OpenGL` のサブシステムが用意しているピクセルフォーマットをの中から, 変数 `pfd` に設定した仕様を満たすものを `ChoosePixelFormat()` を使って選択し, 見つかったものの番号 `pf` を `SetPixelFormat()` で現在のデバイスコンテキスト `hdc` に設定します. 見つからなければ, `pf` は 0 になります.
 
-![関数 `SetupPixelFormat`() の実装]({{ site.baseurl }}/assets/images/mfc25.gif)
+![関数 `SetupPixelFormat()` の実装]({{ site.baseurl }}/assets/images/mfc25.gif)
 
 ## イベントハンドラの修正
 
-次に, ダイアログウィンドウが開かれるときに呼ばれるメンバ関数 `OnInitDialog`() に処理内容を追加します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnInitDialog`(void) をダブルクリックします. 関数の本体が表示されますから, 「// `TODO`: 初期化をここに追加します。」の後に下記の内容を追加します.
+次に, ダイアログウィンドウが開かれるときに呼ばれるメンバ関数 `OnInitDialog()` に処理内容を追加します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnInitDialog(void)` をダブルクリックします. 関数の本体が表示されますから, 「// `TODO`: 初期化をここに追加します。」の後に下記の内容を追加します.
 
 ```c
 BOOL CGLsampleDlg::OnInitDialog()
@@ -210,10 +210,10 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## Picture Control に `OpenGL` による描画を行うので, そのクライアント領域にアクセスする `CClientDC` オブジェクトを, それを制御するメンバ変数 (ここでは `m_glView`) 使って生成します. これでいいんでしょうか？ 自信がアリマセン. `OpenGL` の初期設定も, ここでやってしまいます. 多分 `OpenGL` の機能の呼び出しは別の関数にまとめて, それをここで呼び出すようにしたほうがいいんでしょうけど, ここに書く手順が増えるので手を抜きます.
 
-<blockquote>2014 年 6 月 3 日修正：`OnInitDialog`() で `m_pDC`->`m_hDC` = `m_glView`.GetDC()->GetSafeHdc(); という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
-![関数 `OnInitDialog`() の実装]({{ site.baseurl }}/assets/images/mfc26.gif)
+<blockquote>2014 年 6 月 3 日修正：`OnInitDialog()` で `m_pDC`->`m_hDC` = `m_glView`.GetDC()->GetSafeHdc(); という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
+![関数 `OnInitDialog()` の実装]({{ site.baseurl }}/assets/images/mfc26.gif)
 
-## 同様に, ウィンドウの描画が必要になった時に呼ばれるメンバ関数 `OnPaint`() を変更します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnPaint`(void) をダブルクリックします. 関数の本体が表示されますから, その中にある if 文の else 節に下記の内容を追加します.
+## 同様に, ウィンドウの描画が必要になった時に呼ばれるメンバ関数 `OnPaint()` を変更します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnPaint(void)` をダブルクリックします. 関数の本体が表示されますから, その中にある if 文の else 節に下記の内容を追加します.
 
 ```c
 void CGLsampleDlg::OnPaint()
@@ -237,7 +237,7 @@ SwapBuffers(m_pDC->m_hDC);
 
 ## シーンの描画はこの部分で行います. 今のところは, 画面クリアだけしておきます. これも別の関数にまとめておいた方がいいでしょうね.
 
-![関数 `OnPaint`() の実装]({{ site.baseurl }}/assets/images/mfc27.gif)
+![関数 `OnPaint()` の実装]({{ site.baseurl }}/assets/images/mfc27.gif)
 
 ## イベントハンドラの追加
 
@@ -245,7 +245,7 @@ SwapBuffers(m_pDC->m_hDC);
 
 ![WM_DESTROY イベントハンドラの追加]({{ site.baseurl }}/assets/images/mfc30.gif)
 
-## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 `OnDestroy`() が追加され, ソースコードを編集する状態になります. ここで `OnDestroy`() の内容を実装します.
+## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 `OnDestroy()` が追加され, ソースコードを編集する状態になります. ここで `OnDestroy()` の内容を実装します.
 
 ```c
 void CGLsampleDlg::OnDestroy()
@@ -262,7 +262,7 @@ delete m_pDC;
 
 ## レンダリングコンテキストをウィンドウのデバイスコンテキストから結合解除し, そのレンダリングコンテキストを削除します. またクライアント領域のデバイスコンテキストを保持している `CClientDC` オブジェクトを削除します.
 
-![関数 `OnDestroy`() の実装]({{ site.baseurl }}/assets/images/mfc31.gif)
+![関数 `OnDestroy()` の実装]({{ site.baseurl }}/assets/images/mfc31.gif)
 
 ## 最後に, ウィンドウのサイズを変えた時に発生するイベント WM_SIZE に対するハンドラを追加します. ですが, 今作っているプログラムはウィンドウサイズの変更や最大化ができないようにしているので, 現時点ではこのイベントは発生しません. なので, <`em`>ここは省略してかまいません. 
 
@@ -270,7 +270,7 @@ delete m_pDC;
 
 ![WM_SIZE イベントハンドラの追加]({{ site.baseurl }}/assets/images/mfc28.gif)
 
-## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 `OnSize`() が追加され, ソースコードを編集する状態になります. ここで `OnSize`() の内容を実装します.
+## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 `OnSize()` が追加され, ソースコードを編集する状態になります. ここで `OnSize()` の内容を実装します.
 
 ```c
 void CGLsampleDlg::OnSize(UINT nType, int cx, int cy)
@@ -296,11 +296,11 @@ glMatrixMode(GL_MODELVIEW);
 }
 ```
 
-## `OnSize`() は `OnInitDialog`() の実行より前に一度実行されます. しかし, その時点ではまだ `OpenGL` が初期化されていないため, ここで `OpenGL` の機能を使おうとするとエラーになってしまいます (はまりました). そこで `wglGetCurrentContext`() を使って `OpenGL` が使えるかどうか確かめていますが, このやり方がいいのかどうかは知りません.
+## `OnSize()` は `OnInitDialog()` の実行より前に一度実行されます. しかし, その時点ではまだ `OpenGL` が初期化されていないため, ここで `OpenGL` の機能を使おうとするとエラーになってしまいます (はまりました). そこで `wglGetCurrentContext()` を使って `OpenGL` が使えるかどうか確かめていますが, このやり方がいいのかどうかは知りません.
 
-![関数 `OnSize`() の実装]({{ site.baseurl }}/assets/images/mfc29.gif)
+![関数 `OnSize()` の実装]({{ site.baseurl }}/assets/images/mfc29.gif)
 
-## しかし, 繰り返しになりますが, このプログラムでは WM_SIZE イベントが `OnInitDialog`() 実行後に呼び出されることはありません. もし, ウィンドウのサイズを変更できるようにした場合は, `OnSize`() の引数 `cx`, `cy` を使って MoveWindow() などにより `OpenGL` の表示を行っている Picture Control のサイズを変更することになります. その場合は, 変更するサイズを使って `width` や `height` を求めればよいので, わざわざ `GetClientRect`() を使う必要はありません.
+## しかし, 繰り返しになりますが, このプログラムでは WM_SIZE イベントが `OnInitDialog()` 実行後に呼び出されることはありません. もし, ウィンドウのサイズを変更できるようにした場合は, `OnSize()` の引数 `cx`, `cy` を使って MoveWindow() などにより `OpenGL` の表示を行っている Picture Control のサイズを変更することになります. その場合は, 変更するサイズを使って `width` や `height` を求めればよいので, わざわざ `GetClientRect()` を使う必要はありません.
 
 でも, ウィンドウのサイズを変更できるようにするには, すべてのコントロールの配置を計算し直さないといけないんですかね. もう考えるのはめんどくさいので, これは考えないことにします．
 

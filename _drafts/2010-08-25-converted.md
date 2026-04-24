@@ -34,7 +34,7 @@ Picture Control に結びつけた `OpenGL` の描画領域に描くシーンの
 
 ![`Scene` クラスの宣言]({{ site.baseurl }}/assets/images/mfc36.gif)
 
-## ユーザインタフェース機能はクラス変数として `GLfloat` 型の `rotateZ` を１個だけ宣言します. クラス変数って, メンバ関数にとってのグローバル変数なんだなって MFC を使ってると意識させられます. コンストラクタとデストラクタは, ここではあまり仕事がないので, インラインで定義してしまいます. あと, コンストラクタで `rotateZ` を初期化するようにします. メンバ関数には `rotateZ` に値を設定する `setRotateZ`() とシーンを描画する `draw`() を用意することにします.
+## ユーザインタフェース機能はクラス変数として `GLfloat` 型の `rotateZ` を１個だけ宣言します. クラス変数って, メンバ関数にとってのグローバル変数なんだなって MFC を使ってると意識させられます. コンストラクタとデストラクタは, ここではあまり仕事がないので, インラインで定義してしまいます. あと, コンストラクタで `rotateZ` を初期化するようにします. メンバ関数には `rotateZ` に値を設定する `setRotateZ()` とシーンを描画する `draw()` を用意することにします.
 
 個人的には #`pragma` `once` じゃなくて #ifndef 〜 #define 〜 #endif を使いたいところですが, ここでは Visual Studio の流儀に従います.
 
@@ -53,7 +53,7 @@ void draw(void);
 };
 ```
 
-## `Scene`.cpp を開いて `Scene` クラスの実装を行います. コンストラクタとデストラクタは自動生成されていますが, `Scene`.h でインラインにしちゃったので消してしまいます. ここでは `draw`() の実装だけを行います．
+## `Scene`.cpp を開いて `Scene` クラスの実装を行います. コンストラクタとデストラクタは自動生成されていますが, `Scene`.h でインラインにしちゃったので消してしまいます. ここでは `draw()` の実装だけを行います．
 
 ![`Scene` クラスの実装]({{ site.baseurl }}/assets/images/mfc37.gif)
 
@@ -123,7 +123,7 @@ class CGLsampleDlg : public CDialog
 
 ![追加する変数]({{ site.baseurl }}/assets/images/mfc40.gif)
 
-## クラスビューで `OnInitDialog`(void) をダブルクリックして, その定義を変更します.
+## クラスビューで `OnInitDialog(void)` をダブルクリックして, その定義を変更します.
 
 ![インスタンスの生成]({{ site.baseurl }}/assets/images/mfc41.gif)
 
@@ -171,13 +171,13 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 }
 ```
 
-## クラスビューで `OnPaint`(void) をダブルクリックして, その定義を変更します.
+## クラスビューで `OnPaint(void)` をダブルクリックして, その定義を変更します.
 
-<blockquote>2014 年 6 月 3 日修正：`OnInitDialog`() で `m_pDC`->`m_hDC` = `m_glView`.GetDC()->GetSafeHdc(); という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
+<blockquote>2014 年 6 月 3 日修正：`OnInitDialog()` で `m_pDC`->`m_hDC` = `m_glView`.GetDC()->GetSafeHdc(); という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
 
 ![シーンの描画]({{ site.baseurl }}/assets/images/mfc42.gif)
 
-## 画面クリアの後でシーンを描画する `draw`() メソッドを呼び出します.
+## 画面クリアの後でシーンを描画する `draw()` メソッドを呼び出します.
 
 ```c
 void CGLsampleDlg::OnPaint()
@@ -204,11 +204,11 @@ SwapBuffers(m_pDC->m_hDC);
 }
 ```
 
-## クラスビューで `OnDestroy`(void) をダブルクリックして, その定義を変更します.
+## クラスビューで `OnDestroy(void)` をダブルクリックして, その定義を変更します.
 
 ![インスタンスの削除]({{ site.baseurl }}/assets/images/mfc43.gif)
 
-## `OnDestroy`() はウィンドウを閉じるときに呼び出されるので, `OnInitDialog`() で生成したインスタンスをここで削除します.
+## `OnDestroy()` はウィンドウを閉じるときに呼び出されるので, `OnInitDialog()` で生成したインスタンスをここで削除します.
 
 ```c
 void CGLsampleDlg::OnDestroy()
@@ -268,14 +268,14 @@ delete m_pDC;
 
 ![WM_HSCROLL イベントに対するハンドラの追加]({{ site.baseurl }}/assets/images/mfc53.gif)
 
-## `OnHScroll`() を実装します.
+## `OnHScroll()` を実装します.
 
-![関数 `OnHScroll`() の実装]({{ site.baseurl }}/assets/images/mfc54.gif)
+![関数 `OnHScroll()` の実装]({{ site.baseurl }}/assets/images/mfc54.gif)
 
-## ウィンドウ上に (水平方向の)「Slider Control」や「Scroll Bar」が複数存在するとき, そのどれを動かしてもこの `OnHScroll`() が呼ばれます (Vista 以降であればコントロールごとにハンドラを指定できるみたいですけど). したがって, `OnHScroll`() ではどのコントロールが操作されたのかを判断する必要があります. `pScrollBar` にコントロール変数のポインタが入っているので, これを使ってコントロールを識別します.
+## ウィンドウ上に (水平方向の)「Slider Control」や「Scroll Bar」が複数存在するとき, そのどれを動かしてもこの `OnHScroll()` が呼ばれます (Vista 以降であればコントロールごとにハンドラを指定できるみたいですけど). したがって, `OnHScroll()` ではどのコントロールが操作されたのかを判断する必要があります. `pScrollBar` にコントロール変数のポインタが入っているので, これを使ってコントロールを識別します.
 
 「Slider Control」のツマミを動かしているときは `nSBCode` に `SB_THUMBPOSITION` か `SB_THUMBTRACK` が入っているので, この時は現在の位置 `nPos` を `m_xvRotateZ` に代入します. `nSBCode` が `SB_PAGELEFT` あるいは `SB_PAGERIGHT` は「Slider Control」上のツマミ以外の部分をクリックしたときなので, 「１ページ分のジャンプ量 (「Slider Control」の実態はスクロールバーなので)」を求めて `m_xvRotateZ` に加算 / 減算します. 
-最後に `UpdateData`(`FALSE`) によりコントロールの設定値をコントロール自体に反映し, `Invalidate`(`FALSE`) で画面の再表示を行います. `OpenGL` の表示領域は `OpenGL` 自体で画面クリアを行いますので, `Invalidate`() の引数を `FALSE` にして, ここでは画面クリアを行わないようにします (ちらつくので).
+最後に `UpdateData(`FALSE`)` によりコントロールの設定値をコントロール自体に反映し, `Invalidate(`FALSE`)` で画面の再表示を行います. `OpenGL` の表示領域は `OpenGL` 自体で画面クリアを行いますので, `Invalidate()` の引数を `FALSE` にして, ここでは画面クリアを行わないようにします (ちらつくので).
 
 ```c
 void CGLsampleDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
@@ -314,11 +314,11 @@ CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 }
 ```
 
-## `OnInitDialog`(void) をダブルクリックして, その定義を変更します. ここでは `m_xcRotateZ` と `m_xvRotateZ` の初期設定を行います.
+## `OnInitDialog(void)` をダブルクリックして, その定義を変更します. ここでは `m_xcRotateZ` と `m_xvRotateZ` の初期設定を行います.
 
-![関数 `OnInitDialog`() の変更]({{ site.baseurl }}/assets/images/mfc55.gif)
+![関数 `OnInitDialog()` の変更]({{ site.baseurl }}/assets/images/mfc55.gif)
 
-## `SetRange`() メソッドはツマミの上限値と下限値を設定します. `OnHScroll`() の引数 `nPos` で得られる値はこの範囲を変化します.
+## `SetRange()` メソッドはツマミの上限値と下限値を設定します. `OnHScroll()` の引数 `nPos` で得られる値はこの範囲を変化します.
 
 ```c
 BOOL CGLsampleDlg::OnInitDialog()
@@ -367,11 +367,11 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 }
 ```
 
-## `OnPaint`(void) をダブルクリックして, その定義を変更します.
+## `OnPaint(void)` をダブルクリックして, その定義を変更します.
 
-![関数 `OnPaint`() の変更]({{ site.baseurl }}/assets/images/mfc56.gif)
+![関数 `OnPaint()` の変更]({{ site.baseurl }}/assets/images/mfc56.gif)
 
-## ここでは `m_xvRotateZ` の値を `setRotateZ`() メソッドの引数に与えて. シーンの回転角を設定します.
+## ここでは `m_xvRotateZ` の値を `setRotateZ()` メソッドの引数に与えて. シーンの回転角を設定します.
 
 ```c
 void CGLsampleDlg::OnPaint()
@@ -425,11 +425,11 @@ SwapBuffers(m_pDC->m_hDC);
 
 ![変数 `m_xvEditZ` の設定]({{ site.baseurl }}/assets/images/mfc62.gif)
 
-## `OnInitDialog`(void) をダブルクリックして, その定義を変更します. ここでは `m_xvEditZ` の初期設定を行います.
+## `OnInitDialog(void)` をダブルクリックして, その定義を変更します. ここでは `m_xvEditZ` の初期設定を行います.
 
 ![変数 `m_xvEditZ` の初期化]({{ site.baseurl }}/assets/images/mfc63.gif)
 
-## `m_xvEditZ` は CString 型すなわち文字列なので, 角度を保持している `m_xvRotateZ` を文字列に変換してこれに格納します. `Format`() メソッドの第１引数は printf() と同様の書式文字列です. このプロジェクトは文字集合として (デフォルトの)  Unicode を使用する設定になっているので, `_T`() を使って変換しています.
+## `m_xvEditZ` は CString 型すなわち文字列なので, 角度を保持している `m_xvRotateZ` を文字列に変換してこれに格納します. `Format()` メソッドの第１引数は printf() と同様の書式文字列です. このプロジェクトは文字集合として (デフォルトの)  Unicode を使用する設定になっているので, `_T()` を使って変換しています.
 
 ```c
 BOOL CGLsampleDlg::OnInitDialog()
@@ -481,9 +481,9 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## 「Slider Control」の設定値を「Edit Control」に表示する
 
-`OnHScroll`(`UINT` `nSBCode`, `UINT` `nPos`, `CScrollBar`* `pScrollBar`) をダブルクリックして, その定義を変更します.
+`OnHScroll(`UINT` `nSBCode`, `UINT` `nPos`, `CScrollBar`* `pScrollBar`)` をダブルクリックして, その定義を変更します.
 
-![関数 `OnHScroll`() の変更]({{ site.baseurl }}/assets/images/mfc64.gif)
+![関数 `OnHScroll()` の変更]({{ site.baseurl }}/assets/images/mfc64.gif)
 
 ## 「Slider Control」のツマミを動かした位置 `m_xvRotateZ` を文字列に直して `m_xvEditZ` に設定します. これでツマミを動かしたときに, その値が「Edit Control」に表示されます.
 
@@ -524,24 +524,24 @@ CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 }
 ```
 
-## プログラムをビルドして, 「Slider Control」のツマミを動かしてみます. 図形が回転すると同時に, 「Edit Control」の数値が変化すると思います. 【8月26日追記】`Invalidate`(`FALSE`); の後で UpdateWindow(); を実行すれば, ツマミの操作がすぐに「Edit Control」に反映されます. 処理が重くなる気がしますけど.
+## プログラムをビルドして, 「Slider Control」のツマミを動かしてみます. 図形が回転すると同時に, 「Edit Control」の数値が変化すると思います. 【8月26日追記】`Invalidate(`FALSE`)`; の後で UpdateWindow(); を実行すれば, ツマミの操作がすぐに「Edit Control」に反映されます. 処理が重くなる気がしますけど.
 
 ![実行結果]({{ site.baseurl }}/assets/images/mfc65.gif)
 
 ## 「Edit Control」に数値を入力する
 
 逆に, 「Edit Control」に入力した数値が「Slider Control」や表示されている図形に反映されるようにします. ここで重要な問題があります. ダイアログアプリケーションの場合, リターン (Enter) キーや `ESC` キー, Tab キーなどは, フォーカスされている (操作の対象となっている) コントロールがどれであっても, そのキーに割り当てられた操作が実行されてしまいます. リターンキーには「`OK`」ボタンのクリック, `ESC` キーには「キャンセル」ボタンのクリック, Tab キーにはフォーカスの移動が割り当てられています. このため, 特定のコントロールでリターンキーの入力を検出することができなかったり, `ESC` をタイプするといつでもダイアログウィンドウが閉じてしまったりします.
-そこで, キー入力がコントロールで処理される前に呼び出される `PreTranslateMessage`() をオーバーライドして, キー入力を補足するようにします. まずクラスビューで Cプロジェクト名Dlg クラス (ここでは `CGLsampleDlg`) を選択して, プロパティの左から５つ目のボタンをクリックし, PreTranslateMassage を選択して右の▼から `PreTranslateMessage` を追加してください.
+そこで, キー入力がコントロールで処理される前に呼び出される `PreTranslateMessage()` をオーバーライドして, キー入力を補足するようにします. まずクラスビューで Cプロジェクト名Dlg クラス (ここでは `CGLsampleDlg`) を選択して, プロパティの左から５つ目のボタンをクリックし, PreTranslateMassage を選択して右の▼から `PreTranslateMessage` を追加してください.
 
-![関数 `PreTranslateMessage`() のオーバーライド]({{ site.baseurl }}/assets/images/mfc66.gif)
+![関数 `PreTranslateMessage()` のオーバーライド]({{ site.baseurl }}/assets/images/mfc66.gif)
 
-## `PreTranslateMessage`() を実装します.
+## `PreTranslateMessage()` を実装します.
 
-![関数 `PreTranslateMessage`() の実装]({{ site.baseurl }}/assets/images/mfc67.gif)
+![関数 `PreTranslateMessage()` の実装]({{ site.baseurl }}/assets/images/mfc67.gif)
 
-## `PreTranslateMessage`(`MSG`* pMessage) がキータイプにより呼び出された場合は, `pMsg`->`message` が `WM_KEYDOWN` になっています. このとき `pMsg`->`wParam` にタイプされたキーが格納され, `pMsg`->`hwnd` にフォーカスされているコントロールの Window ハンドルが格納されています.
+## `PreTranslateMessage(`MSG`* pMessage)` がキータイプにより呼び出された場合は, `pMsg`->`message` が `WM_KEYDOWN` になっています. このとき `pMsg`->`wParam` にタイプされたキーが格納され, `pMsg`->`hwnd` にフォーカスされているコントロールの Window ハンドルが格納されています.
 
-そこで `pMsg`->`hwnd` からそのコントロール ID を求め, それを使ってコントロールを識別します. 実はこの方法が正しいのかどうかも自信がアリマセン. `FromHandle`(`pMsg`->`hwnd`)->`GetDlgCtrlID`() とするより ::`GetDlgCtrlID`(`pMsg`->`hwnd`) とした方が手っ取り早い気がしますが, "::" が使いたくありませんでした.
+そこで `pMsg`->`hwnd` からそのコントロール ID を求め, それを使ってコントロールを識別します. 実はこの方法が正しいのかどうかも自信がアリマセン. `FromHandle(`pMsg`->`hwnd`)`->`GetDlgCtrlID()` とするより ::`GetDlgCtrlID(`pMsg`->`hwnd`)` とした方が手っ取り早い気がしますが, "::" が使いたくありませんでした.
 
 ```c
 BOOL CGLsampleDlg::PreTranslateMessage(MSG* pMsg)

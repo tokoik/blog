@@ -62,7 +62,7 @@ PFNGLACTIVETEXTUREPROC glActiveTexture;
 
 ## テクスチャユニットを指定したテクスチャの設定
 
-それでは，雛形のプログラムの初期化の関数 `init`() の中にある，ベースのテクスチャを設定している部分に続けて，キューブマッピングの設定を追加します．この設定はテクスチャユニット１に対して行うので，[`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) を使って，テクスチャユニット１を指定します．なお Windows の場合は，これに先立って関数ポインタ変数 `glActiveTexture` に [`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) の実体のエントリポイントを代入しておきます．
+それでは，雛形のプログラムの初期化の関数 `init()` の中にある，ベースのテクスチャを設定している部分に続けて，キューブマッピングの設定を追加します．この設定はテクスチャユニット１に対して行うので，[`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) を使って，テクスチャユニット１を指定します．なお Windows の場合は，これに先立って関数ポインタ変数 `glActiveTexture` に [`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) の実体のエントリポイントを代入しておきます．
 
 ```c
 ...

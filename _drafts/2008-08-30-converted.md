@@ -248,7 +248,7 @@ glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 ## 頂点配列の場合と異なるのは，データの場所を指定する際に [`glBindBuffer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml) を使ってバッファオブジェクトをバインドしておき，`glVertexPointer` 等で指定するデータの場所を，バッファオブジェクトの先頭からのオフセットで指定するという点です．
 
-`BUFFER_OFFSET`(`bytes`) というマクロは赤本から借りました．これは `bytes` を unsigned char にキャストするのとあんまり変わりませんが，unsigned char が１バイトでない（unsigned char のポインタに１を足したときにアドレスが１より大きく増える）システム（あるのか？）てもオフセットを正しく計算できます．
+`BUFFER_OFFSET(`bytes`)` というマクロは赤本から借りました．これは `bytes` を unsigned char にキャストするのとあんまり変わりませんが，unsigned char が１バイトでない（unsigned char のポインタに１を足したときにアドレスが１より大きく増える）システム（あるのか？）てもオフセットを正しく計算できます．
 
 ## バッファオブジェクトの削除
 

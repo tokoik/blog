@@ -27,7 +27,7 @@ published: true
 
 ![画角から求めた投影変換行列]({{ site.baseurl }}/assets/images/cameramatrix2.gif)
 
-## それでは, 画角 `fovy`, 表示領域の縦横比 `aspect`, 前方面の位置 `near`, 後方面の位置 `far` を指定して透視投影変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `cameraMatrix`() を作成してください. なお, 画角が弧度法 (radian) だとわかりにくいので, `fovy` は度数法 (degree, 度) で指定できるようにしてください.
+## それでは, 画角 `fovy`, 表示領域の縦横比 `aspect`, 前方面の位置 `near`, 後方面の位置 `far` を指定して透視投影変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `cameraMatrix()` を作成してください. なお, 画角が弧度法 (radian) だとわかりにくいので, `fovy` は度数法 (degree, 度) で指定できるようにしてください.
 
 ```c
 /*
@@ -48,7 +48,7 @@ GLfloat *matrix)
 
 ## 画角を指定した透視投影
 
-それでは, perspectiveMatrix() をこの `cameraMatrix`() に置き換えて, 透視投影により図形を描いてください. `fovy` は 30 度, `aspect` は 1 としてください. また `far` と `near` には以前の値を使用してください. あと, メインプログラムの先頭部分に `cameraMatrix`() の宣言を書くのを忘れないでください. これで下のような図形が描かれれば OK です.
+それでは, perspectiveMatrix() をこの `cameraMatrix()` に置き換えて, 透視投影により図形を描いてください. `fovy` は 30 度, `aspect` は 1 としてください. また `far` と `near` には以前の値を使用してください. あと, メインプログラムの先頭部分に `cameraMatrix()` の宣言を書くのを忘れないでください. これで下のような図形が描かれれば OK です.
 
 ![画角を指定して描画]({{ site.baseurl }}/assets/images/camera_result.gif)
 

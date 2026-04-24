@@ -125,7 +125,7 @@ glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 ## テクスチャオブジェクトを選択する
 
 このテクスチャ名を使って，テクスチャオブジェクトを処理対象のテクスチャとします．ここでは外側の箱の１面に貼り付けているテクスチャを，キューブマッピングの１面のテクスチャにも利用することにします．
-まず，キューブマッピング用のテクスチャのターゲット名を配列変数 `target` に格納しておきます．そして，[`glTexImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml) を使ってテクスチャの割り当てを行う処理を追加します．この処理に先立って `glBindTexture`(`GL_TEXTURE_CUBE_MAP`, <`em`>`texname`[0]) を実行し，[`glTexImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml) によるテクスチャの割り当てが `texname`[0] で指定されるテクスチャオブジェクトに対して行われるようにします．その後，`glBindTexture`(`GL_TEXTURE_2D`, <`em`>0) を呼び出して，処理対象のテクスチャを箱のテクスチャに切り替えます．このテクスチャ名が <`em`>0 のテクスチャを無名テクスチャといい，デフォルトで用意されているテクスチャを表します．
+まず，キューブマッピング用のテクスチャのターゲット名を配列変数 `target` に格納しておきます．そして，[`glTexImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml) を使ってテクスチャの割り当てを行う処理を追加します．この処理に先立って `glBindTexture(`GL_TEXTURE_CUBE_MAP`, <`em`>`texname`[0])` を実行し，[`glTexImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml) によるテクスチャの割り当てが `texname`[0] で指定されるテクスチャオブジェクトに対して行われるようにします．その後，`glBindTexture(`GL_TEXTURE_2D`, <`em`>0)` を呼び出して，処理対象のテクスチャを箱のテクスチャに切り替えます．このテクスチャ名が <`em`>0 のテクスチャを無名テクスチャといい，デフォルトで用意されているテクスチャを表します．
 
 ```c
 /* テクスチャの割り当て */
@@ -175,7 +175,7 @@ glBindTexture(GL_TEXTURE_2D, 0);
 <dd>target に対して texture というテクスチャ名のテクスチャオブジェクトを結合します．テクスチャオブジェクトは，テクスチャ名に対して最初にこの呼び出しが行われたときに生成されます．これ以降，テクスチャに対する設定は texture に指定したテクスチャオブジェクトに対して行われます．target には GL_TEXTURE_1D, GL_TEXTURE_2D, および OpenGL 1.2 以降では GL_TEXTURE_3D，OpenGL 1.3 以降では GL_TEXTURE_CUBE_MAP が指定できます．テクスチャ名 0 はデフォルトのテクスチャを示します．</dd>
 </dl>
 
-## `texname`[0] のテクスチャに対する，そのほかの設定も行いましょう．この部分もやはり `glBindTexture`(`GL_TEXTURE_CUBE_MAP`, `texname`[0]) と `glBindTexture`(`GL_TEXTURE_2D`, 0) ではさみます．
+## `texname`[0] のテクスチャに対する，そのほかの設定も行いましょう．この部分もやはり `glBindTexture(`GL_TEXTURE_CUBE_MAP`, `texname`[0])` と `glBindTexture(`GL_TEXTURE_2D`, 0)` ではさみます．
 
 なお，ここで [`glTexEnvi()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvi.xhtml) で指定するテクスチャ環境が，テクスチャオブジェクトごとに保存されないことに注意してください．このため，テクスチャオブジェクトごとに異なるテクスチャ環境を設定する場合は，テクスチャオブジェクトを切り替える都度，テクスチャ環境を設定する必要があります．
 
@@ -289,7 +289,7 @@ PFNGLLOADTRANSPOSEMATRIXDPROC glLoadTransposeMatrixd;
 #endif
 ```
 
-## また，初期化の関数 `init`() の最後あたりで，この関数ポインタ変数に [`glLoadTransposeMatrixd()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLoadTransposeMatrixd.xhtml) の実体のエントリポイントを代入しておきます．
+## また，初期化の関数 `init()` の最後あたりで，この関数ポインタ変数に [`glLoadTransposeMatrixd()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLoadTransposeMatrixd.xhtml) の実体のエントリポイントを代入しておきます．
 
 ```c
 ...
@@ -313,7 +313,7 @@ glLoadTransposeMatrixd =
 
 ## 映り込みのテクスチャを回転する
 
-テクスチャを回転させるために，まず `glMatrixMode`(`GL_TEXTURE`) でテクスチャ変換行列に切り替えてから，[`glLoadTransposeMatrixd()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLoadTransposeMatrixd.xhtml) を使って回転の行列を設定します．その後，すぐに `glMatrixMode`(`GL_MODELVIEW`) を呼び出してモデルビュー変換行列に戻しておかないと，その後の座標変換が（テクスチャ変換行列に適用されて）正しく行われなくなってしまいます．
+テクスチャを回転させるために，まず `glMatrixMode(`GL_TEXTURE`)` でテクスチャ変換行列に切り替えてから，[`glLoadTransposeMatrixd()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLoadTransposeMatrixd.xhtml) を使って回転の行列を設定します．その後，すぐに `glMatrixMode(`GL_MODELVIEW`)` を呼び出してモデルビュー変換行列に戻しておかないと，その後の座標変換が（テクスチャ変換行列に適用されて）正しく行われなくなってしまいます．
 
 ```c
 ...

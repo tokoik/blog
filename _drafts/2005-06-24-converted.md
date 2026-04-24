@@ -306,7 +306,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## プログラムの実行結果
 
-これらのテクスチャを使ってプログラムを実際に動かしてみると，次のような実行結果が得られます．右の図は関数 `box`() を glutSolidSphere() に置き換えたものです．
+これらのテクスチャを使ってプログラムを実際に動かしてみると，次のような実行結果が得られます．右の図は関数 `box()` を glutSolidSphere() に置き換えたものです．
 
 <div class="figure">
 ![`GL_ADD` を使って合成した場合（箱）]({{ site.baseurl }}/assets/images/paraboloid6.jpg)

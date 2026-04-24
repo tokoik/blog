@@ -20,7 +20,7 @@ published: true
 <li>[Windows 版](`texture`/texture23.lzh)</li>
 </ul>
 
-## このアーカイブには `main`() を含んだソースプログラムが三つ含まれていますが，ここではその中の `main`1.cpp を使います．これは次のような真っ黒い影を作ります．
+## このアーカイブには `main()` を含んだソースプログラムが三つ含まれていますが，ここではその中の `main`1.cpp を使います．これは次のような真っ黒い影を作ります．
 
 ![影をつけたシーン]({{ site.baseurl }}/assets/images/shadowmap2.jpg)
 
@@ -322,7 +322,7 @@ gl_Position = ftransform();
 
 ## フラグメントシェーダ
 
-フラグメントシェーダでは `GLSL` の組み込み関数 `shadow2DProj`() を使ってテクスチャをサンプリングします．そして，その r 値（赤）が 0 でなければ，フラグメントに日向の陰影を設定し，0 なら影の陰影を背呈します．
+フラグメントシェーダでは `GLSL` の組み込み関数 `shadow2DProj()` を使ってテクスチャをサンプリングします．そして，その r 値（赤）が 0 でなければ，フラグメントに日向の陰影を設定し，0 なら影の陰影を背呈します．
 
 ```c
 // shadow.frag
@@ -367,6 +367,6 @@ gl_FragColor = shadow + (gl_Color - shadow) * shadow2DProj(texture, gl_TexCoord[
 
 ## 余談
 
-`GLSL` の組み込み関数 `shadow2DProj`() の実装が ATI と nVIDIA で異なっていて，最初これらの間で同じ結果が得られずにえらく悩みました．ATI の方は<%= a "オレンジブック" %>に則したもので，私の期待したとおり 0 か 1 の値を返してくれたのですが，nVIDIA の方はなぜか中間的な値を返してくるのです．
-いろいろ調べた結果，[nVIDIA の `GLSL` のリリースノート](http://download.nvidia.com/developer/GLSL/GLSL%20Release%20Notes%20for%20Release%2060.pdf)に「[`glTexParameteri()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameteri.xhtml) で `GL_TEXTURE_COMPARE_MODE` に `GL_COMPARE_R_TO_TEXTURE` を指定していれば，テクスチャの値として比較の結果をサンプリングするので，<`em`>`shadow2DProj`() は `texture`2DProj() と同じである」なんてことが書いてありました．私は最初この [`glTexParameteri()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameteri.xhtml) をはずしていたので，nVIDIA の `shadow2DProj`() の動作が期待と異なるものになってました．
-なお，`GL_TEXTURE_COMPARE_FUNC` や `GL_DEPTH_TEXTURE_MODE` の設定も，`shadow2DProj`() が返す値に影響を与えます．`GL_TEXTURE_COMPARE_FUNC` に `GL_LEQUAL` を設定したときは，参照点がテクスチャの値以下（すなわち日向の）時に `shadow2DProj`() は 1 を返します．また `GL_DEPTH_TEXTURE_MODE` に `GL_LUMINANCE` を設定すれば，`shadow2DProj`() が返す値の RGB に結果が格納されます．これは ATI，nVIDIA とも同じでした．
+`GLSL` の組み込み関数 `shadow2DProj()` の実装が ATI と nVIDIA で異なっていて，最初これらの間で同じ結果が得られずにえらく悩みました．ATI の方は<%= a "オレンジブック" %>に則したもので，私の期待したとおり 0 か 1 の値を返してくれたのですが，nVIDIA の方はなぜか中間的な値を返してくるのです．
+いろいろ調べた結果，[nVIDIA の `GLSL` のリリースノート](http://download.nvidia.com/developer/GLSL/GLSL%20Release%20Notes%20for%20Release%2060.pdf)に「[`glTexParameteri()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameteri.xhtml) で `GL_TEXTURE_COMPARE_MODE` に `GL_COMPARE_R_TO_TEXTURE` を指定していれば，テクスチャの値として比較の結果をサンプリングするので，<`em`>`shadow2DProj()` は `texture`2DProj() と同じである」なんてことが書いてありました．私は最初この [`glTexParameteri()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameteri.xhtml) をはずしていたので，nVIDIA の `shadow2DProj()` の動作が期待と異なるものになってました．
+なお，`GL_TEXTURE_COMPARE_FUNC` や `GL_DEPTH_TEXTURE_MODE` の設定も，`shadow2DProj()` が返す値に影響を与えます．`GL_TEXTURE_COMPARE_FUNC` に `GL_LEQUAL` を設定したときは，参照点がテクスチャの値以下（すなわち日向の）時に `shadow2DProj()` は 1 を返します．また `GL_DEPTH_TEXTURE_MODE` に `GL_LUMINANCE` を設定すれば，`shadow2DProj()` が返す値の RGB に結果が格納されます．これは ATI，nVIDIA とも同じでした．

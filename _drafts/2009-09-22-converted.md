@@ -11,8 +11,8 @@ published: true
 
 ## バーテックスシェーダによる頂点座標の生成
 
-`solidSphere`() では (s, t) を使って頂点の３次元空間中の座標値 (x, y, z) を求めています. (s, t) はテクスチャ座標としてバーテックスシェーダに送っていますので, 同じことはバーテックスシェーダでもできそうです. バーテックスシェーダで頂点の座標値を求めるようにすれば, バーテックスシェーダに頂点の座標値を送る必要もなくなります.
-x = `cos` 2πs `sin` πt, y = `cos` πt, z = `sin` 2πs `sin` πt ですから, これをバーテックスシェーダで計算します. `attribute` 変数 `position` を削除して, かわりに `main`() 内に `vec3` 型の変数 `position` を宣言します.
+`solidSphere()` では (s, t) を使って頂点の３次元空間中の座標値 (x, y, z) を求めています. (s, t) はテクスチャ座標としてバーテックスシェーダに送っていますので, 同じことはバーテックスシェーダでもできそうです. バーテックスシェーダで頂点の座標値を求めるようにすれば, バーテックスシェーダに頂点の座標値を送る必要もなくなります.
+x = `cos` 2πs `sin` πt, y = `cos` πt, z = `sin` 2πs `sin` πt ですから, これをバーテックスシェーダで計算します. `attribute` 変数 `position` を削除して, かわりに `main()` 内に `vec3` 型の変数 `position` を宣言します.
 
 ```c
 #version 120
@@ -43,7 +43,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 }
 ```
 
-## `attribute` 変数 `position` を削除したので, `solidSphere`() でこれに値を設定している部分を削除します. まず, `Position` 型の要素数を 5 から <strong>2</strong> に減らします.
+## `attribute` 変数 `position` を削除したので, `solidSphere()` でこれに値を設定している部分を削除します. まず, `Position` 型の要素数を 5 から <strong>2</strong> に減らします.
 
 ```c
 ...
@@ -57,7 +57,7 @@ typedef GLuint Face[3];
 ...
 ```
 
-## `solidSphere`() では, 頂点位置を計算している部分を削除します. また s と t を, それぞれ (*`position`)[<strong>0</strong>] と (*`position`)[<strong>1</strong>] に代入します.
+## `solidSphere()` では, 頂点位置を計算している部分を削除します. また s と t を, それぞれ (*`position`)[<strong>0</strong>] と (*`position`)[<strong>1</strong>] に代入します.
 
 ```c
 GLuint solidSphere(int slices, int stacks, const GLuint *buffer)
@@ -86,7 +86,7 @@ for (int i = 0; i //float th = 2.0f * 3.141593f * s;
 ...
 ```
 
-## `attribute` 変数 `position` がなくなったので, メインプログラムでも初期化を行う関数 `init`() において `attribute` 変数 `position` の `index` に 0 を指定している部分を削除します. かわりに, `attribute` 変数 `texture` の `index` に <strong>0</strong> を指定します.
+## `attribute` 変数 `position` がなくなったので, メインプログラムでも初期化を行う関数 `init()` において `attribute` 変数 `position` の `index` に 0 を指定している部分を削除します. かわりに, `attribute` 変数 `texture` の `index` に <strong>0</strong> を指定します.
 
 ```c
 ...
@@ -173,7 +173,7 @@ glFlush();
 
 ## バーテックスシェーダを切り替えて形を変える
 
-バーテックスシェーダで頂点の座標値を求めてしまうと, `solidSphere`() はテクスチャ座標と頂点のつながり情報 (三角形のデータ) だけを生成することになり, 球という形を決める処理を行いません. また, バーテックスシェーダでテクスチャ座標から頂点の座標値を求める方法を変更すれば, 描画する図形の形を変えることができます.
+バーテックスシェーダで頂点の座標値を求めてしまうと, `solidSphere()` はテクスチャ座標と頂点のつながり情報 (三角形のデータ) だけを生成することになり, 球という形を決める処理を行いません. また, バーテックスシェーダでテクスチャ座標から頂点の座標値を求める方法を変更すれば, 描画する図形の形を変えることができます.
 それではバーテックスシェーダを変更して, y 軸中心に半径 1, 上面の高さ y = 1, 底面の高さ y = -1 の円柱を描いてください. 円柱では, 球のように頂点位置をそのまま法線ベクトルに使うことができないことに注意してください.
 
 ![バーテックスシェーダを変更して作成した円柱]({{ site.baseurl }}/assets/images/texture06_result.jpg)

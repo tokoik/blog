@@ -39,7 +39,7 @@ OpenGL の解説には, しばしば「初期状態では, 視線は Z 軸の負
 
 ![視野変換行列]({{ site.baseurl }}/assets/images/viewingmatrix2.gif)
 
-## それでは, 視点位置 `ex`, `ey`, `ez`, 目標点位置 `tx`, `ty`, `tz`, 上方向のベクトル `ux`, `uy`, `uz` として視野変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `lookAt`() を作成してください.
+## それでは, 視点位置 `ex`, `ey`, `ez`, 目標点位置 `tx`, `ty`, `tz`, 上方向のベクトル `ux`, `uy`, `uz` として視野変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `lookAt()` を作成してください.
 
 ```c
 /*
@@ -58,15 +58,15 @@ GLfloat *matrix)
 <li>[【解答例】](summer/lookat.txt)←すぐに見ちゃだめだってば</li>
 </ul>
 
-## この関数も `orthogonalMatrix`() と同じファイルに書いといてね.
+## この関数も `orthogonalMatrix()` と同じファイルに書いといてね.
 
 ## 行列の積
 
-視点の移動を行うには, 頂点の座標値に `orthogonalMatrix`() で作った投影変換行列をかけたものに, `lookAt`() で作った視野変換行列をかける必要があります. この計算はバーテックスシェーダで行うこともできますが, 先に投影変換行列と視野変換行列の積を求めておけば, バーテックスシェーダの負担を減らすことができます. ４行４列の行列の積は, 次式により求められます.
+視点の移動を行うには, 頂点の座標値に `orthogonalMatrix()` で作った投影変換行列をかけたものに, `lookAt()` で作った視野変換行列をかける必要があります. この計算はバーテックスシェーダで行うこともできますが, 先に投影変換行列と視野変換行列の積を求めておけば, バーテックスシェーダの負担を減らすことができます. ４行４列の行列の積は, 次式により求められます.
 
 ![配列の積]({{ site.baseurl }}/assets/images/multiply.gif)
 
-## それでは, 引数 `m0` に指定された配列に格納されている行列と引数 `m1` に指定された配列に格納されている行列の積を求め, 引数 `matrix` に与えられた配列に格納する関数 `multiplyMatrix`() を作成してください.
+## それでは, 引数 `m0` に指定された配列に格納されている行列と引数 `m1` に指定された配列に格納されている行列の積を求め, 引数 `matrix` に与えられた配列に格納する関数 `multiplyMatrix()` を作成してください.
 
 ```c
 /*
@@ -82,11 +82,11 @@ void multiplyMatrix(const GLfloat *m0, const GLfloat *m1, GLfloat *matrix)
 <li>[【解答例】](summer/multiply.txt)←例としてはあんまり適切ではないかも</li>
 </ul>
 
-## ついでだから, この関数も `orthogonalMatrix`() と同じファイルに書いといてね.
+## ついでだから, この関数も `orthogonalMatrix()` と同じファイルに書いといてね.
 
 ## 視点の移動
 
-作った関数 `lookAt`() を使って, 実際に視点を移動します. まず, `lookAt`() と `multiplyMatrix`() を呼び出すために, これらの関数の宣言をメインプログラムに追加します.
+作った関数 `lookAt()` を使って, 実際に視点を移動します. まず, `lookAt()` と `multiplyMatrix()` を呼び出すために, これらの関数の宣言をメインプログラムに追加します.
 
 ```c
 ...
@@ -186,7 +186,7 @@ projectionMatrixLocation = glGetUniformLocation(gl2Program, "projectionMatrix");
 
 ## 透視投影変換による描画
 
-それでは, 当初の目的である透視投影変換による描画を行います. まず, 透視投影変換行列を求める関数 `perspectiveMatrix`() を呼び出すために, この関数の宣言をメインプログラムに追加します.
+それでは, 当初の目的である透視投影変換による描画を行います. まず, 透視投影変換行列を求める関数 `perspectiveMatrix()` を呼び出すために, この関数の宣言をメインプログラムに追加します.
 
 ```c
 ...
@@ -208,7 +208,7 @@ static GLint projectionMatrixLocation;
 ...
 ```
 
-## そして, 平行投影変換行列 `orthogonalMatrix`() を呼び出している部分を, `perspectiveMatrix`() に置き換えます.
+## そして, 平行投影変換行列 `orthogonalMatrix()` を呼び出している部分を, `perspectiveMatrix()` に置き換えます.
 
 ```c
 ...

@@ -15,7 +15,7 @@ published: true
 
 ![生成するテクスチャ座標]({{ site.baseurl }}/assets/images/texcoord.gif)
 
-## 球の形状データを生成する関数 `solidSphere`() において, 頂点情報に表面上の座標値を追加します. この関数は各自考えてもらっているはずですが, それを当てにして話をするのは非常に困難なので, [【解答例】](summer/solidsphere.txt)をもとにします. この頂点情報を保持するデータ型 `Position` の要素数を 3 から <strong>5</strong> に変更します.
+## 球の形状データを生成する関数 `solidSphere()` において, 頂点情報に表面上の座標値を追加します. この関数は各自考えてもらっているはずですが, それを当てにして話をするのは非常に困難なので, [【解答例】](summer/solidsphere.txt)をもとにします. この頂点情報を保持するデータ型 `Position` の要素数を 3 から <strong>5</strong> に変更します.
 
 ```c
 ...
@@ -70,7 +70,7 @@ float z = r * sinf(th);
 ...
 ```
 
-## メインプログラムの関数 `init`() において, 追加した頂点情報を受け取る `attribute` 変数と, その `index` を指定します. `attribute` 変数の名前は `texture` とし, `index` は 1 にします.
+## メインプログラムの関数 `init()` において, 追加した頂点情報を受け取る `attribute` 変数と, その `index` を指定します. `attribute` 変数の名前は `texture` とし, `index` は 1 にします.
 
 ```c
 ...

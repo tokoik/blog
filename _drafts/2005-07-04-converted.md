@@ -19,7 +19,7 @@ published: true
 <li>[Windows 版](texture/texture18.lzh)</li>
 </ul>
 
-## また，`box`.cpp で定義している立方体を描く関数 `box`() では，glTexCoord2dv() を使って各面に貼るテクスチャのテクスチャ座標を設定しています．この関数はデフォルトのテクスチャユニット，すなわちテクスチャユニット０ (`GL_TEXTURE0`) に対してテクスチャ座標を設定することができますが，テクスチャユニット２に割り当てたテクスチャに対してテクスチャ座標を設定することはできません．
+## また，`box`.cpp で定義している立方体を描く関数 `box()` では，glTexCoord2dv() を使って各面に貼るテクスチャのテクスチャ座標を設定しています．この関数はデフォルトのテクスチャユニット，すなわちテクスチャユニット０ (`GL_TEXTURE0`) に対してテクスチャ座標を設定することができますが，テクスチャユニット２に割り当てたテクスチャに対してテクスチャ座標を設定することはできません．
 
 ## [`glMultiTexCoord2dv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glMultiTexCoord2dv.xhtml)
 

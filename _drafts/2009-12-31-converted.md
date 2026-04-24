@@ -186,7 +186,7 @@ glEnable(GL_DEPTH_TEST);
 GLfloat bottom[BONES][4], top[BONES][4], blend[BONES][16];
 ```
 
-## まず, `drawBone`() を使ってボーンの形を描くとともに, `bottom`, `top`, および `blend` を求めます.
+## まず, `drawBone()` を使ってボーンの形を描くとともに, `bottom`, `top`, および `blend` を求めます.
 
 ```c
 /*

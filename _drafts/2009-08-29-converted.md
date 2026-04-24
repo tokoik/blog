@@ -139,7 +139,7 @@ void main(void)
 
 ## 変換行列の `uniform` 変数への格納
 
-メインプログラムで平行投影変換行列を求め, それを `uniform` 変数 `projectionMatrix` に格納します. まず, 前に定義した関数 `orthogonalMatrix`() の宣言と, 投影変換行列を格納する配列 `projectionMatrix` の宣言, および `uniform` 変数 `projectionMatrix` の場所を記憶する変数 `projectionMatrixLocation` の宣言を追加します.
+メインプログラムで平行投影変換行列を求め, それを `uniform` 変数 `projectionMatrix` に格納します. まず, 前に定義した関数 `orthogonalMatrix()` の宣言と, 投影変換行列を格納する配列 `projectionMatrix` の宣言, および `uniform` 変数 `projectionMatrix` の場所を記憶する変数 `projectionMatrixLocation` の宣言を追加します.
 
 ```cpp
 /*

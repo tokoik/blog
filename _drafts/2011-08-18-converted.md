@@ -324,7 +324,7 @@ glutSwapBuffers();
 ## データの格納先の指定
 
 シェーダプログラムでデータの格納先として使用する<`em`>結合点を指定するには，[`glTransformFeedbackVaryings()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTransformFeedbackVaryings.xhtml) を使用します．この結合点には `varying` 変数名を指定します．この第 1 引数 `program` には glCreateShader() で得たプログラム名（番号），第 2 引数 count には結合点として使用する `varying` 変数の数，第 3 引数には `varying` 変数名の文字列の配列を指定します．先の [`glBindBufferBase()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBufferBase.xhtml) の第 2 引数 index には，この `varying` 変数名の配列の要素のインデックスを指定します．そして第 4 引数の bufferMode には，複数の頂点属性を単一の頂点バッファオブジェクトにまとめる場合には `GL_INTERLEAVED_ATTRIBS`，別々の頂点バッファオブジェクトに対応付ける場合は `GL_SEPARATE_ATTRIBS` を指定します．
-なお，これはシェーダプログラムにおいてバーテックスシェーダあるいはジオメトリシェーダのアタッチ後，[`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml) によりリンクするまでの間に行わなければならないので，`shader`.cpp で定義している関数 `loadShader`() を変更します．
+なお，これはシェーダプログラムにおいてバーテックスシェーダあるいはジオメトリシェーダのアタッチ後，[`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml) によりリンクするまでの間に行わなければならないので，`shader`.cpp で定義している関数 `loadShader()` を変更します．
 
 ```c
 ...
@@ -467,7 +467,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 ```
 
-## 一方，バーテックスシェーダで更新した速度は，`varying` 変数 `velocity` に代入して頂点バッファオブジェクトに格納することにします．このため，`shader`.cpp の `loadShader`() において [`glTransformFeedbackVaryings()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTransformFeedbackVaryings.xhtml) の第 3 引数の配列 `varyings` のターゲットの変数名に `velocity` を追加します．さらに第 4 引数の bufferMode は，ここでは `position` と `velocity` に別々の頂点バッファオブジェクトに対応付けているので，`GL_SEPARATE_ATTRIBS` を指定します．
+## 一方，バーテックスシェーダで更新した速度は，`varying` 変数 `velocity` に代入して頂点バッファオブジェクトに格納することにします．このため，`shader`.cpp の `loadShader()` において [`glTransformFeedbackVaryings()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTransformFeedbackVaryings.xhtml) の第 3 引数の配列 `varyings` のターゲットの変数名に `velocity` を追加します．さらに第 4 引数の bufferMode は，ここでは `position` と `velocity` に別々の頂点バッファオブジェクトに対応付けているので，`GL_SEPARATE_ATTRIBS` を指定します．
 
 ```c
 ...
@@ -499,7 +499,7 @@ return program;
 }
 ```
 
-## 描画の際には三つ目の頂点バッファオブジェクトを `attribute` 変数 `motion` に結び付け，四つ目の頂点バッファオブジェクトを `varying` 変数 `velocity` に対応付けます．[`glBindBufferBase()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBufferBase.xhtml) の第 2 引数 index は `shader`.cpp で定義している `loadShader`() 内の配列変数 `varyings` における文字列 "`velocity`" のインデックスである 1 を指定します．
+## 描画の際には三つ目の頂点バッファオブジェクトを `attribute` 変数 `motion` に結び付け，四つ目の頂点バッファオブジェクトを `varying` 変数 `velocity` に対応付けます．[`glBindBufferBase()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBufferBase.xhtml) の第 2 引数 index は `shader`.cpp で定義している `loadShader()` 内の配列変数 `varyings` における文字列 "`velocity`" のインデックスである 1 を指定します．
 
 ```c
 ...

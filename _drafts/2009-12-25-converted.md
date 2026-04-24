@@ -103,7 +103,7 @@ return points;
 }
 ```
 
-## 初期化時にこの関数 `disseminate`() を呼び出して頂点バッファオブジェクトに座標値を転送しておき, 描画時に glDrawArrays() によって点を描きます.
+## 初期化時にこの関数 `disseminate()` を呼び出して頂点バッファオブジェクトに座標値を転送しておき, 描画時に glDrawArrays() によって点を描きます.
 
 ![点で描いた円柱]({{ site.baseurl }}/assets/images/winter01.gif)
 
@@ -128,7 +128,7 @@ gl_Position = transformMatrix * vec4(point, 1.0);
 }
 ```
 
-## この個々の点の座標値を時間とともに変化させます. 現在時刻は `uniform` 変数 `elapsedTime` に得ることにします. これを `point` の z 座標値 `point`.z から引いて, 描画する点の位置を変化させます. `point`.z は [0, 1) の区間にありますから, 移動後の位置がこの範囲からはみ出ないように, GLSL の組み込み関数 `fract`() を使って小数点以下のみを取り出します.
+## この個々の点の座標値を時間とともに変化させます. 現在時刻は `uniform` 変数 `elapsedTime` に得ることにします. これを `point` の z 座標値 `point`.z から引いて, 描画する点の位置を変化させます. `point`.z は [0, 1) の区間にありますから, 移動後の位置がこの範囲からはみ出ないように, GLSL の組み込み関数 `fract()` を使って小数点以下のみを取り出します.
 
 ```c
 #version 120
@@ -196,7 +196,7 @@ transformMatrixLocation = glGetUniformLocation(gl2Program, "transformMatrix");
 ...
 ```
 
-## GLUT では `glutGet`(`GLUT_ELAPSED_TIME`) により経過時間をミリ秒単位で得ることができます. これを関数 `init`() の最後のほうで一度だけ呼び出しておきます.
+## GLUT では `glutGet(`GLUT_ELAPSED_TIME`)` により経過時間をミリ秒単位で得ることができます. これを関数 `init()` の最後のほうで一度だけ呼び出しておきます.
 
 ```c
 ...
@@ -216,7 +216,7 @@ glClearColor(0.0, 0.1, 0.3, 1.0);
 ...
 ```
 
-## 描画時に `glutGet`(`GLUT_ELAPSED_TIME`) を呼び出せば, 最初に `glutGet`(`GLUT_ELAPSED_TIME`) を呼び出してからの経過時間を得ることができます. 記号定数 `CYCLE` は変数 `elapsedTime` が 1 増えるのに要する時間で, アニメーションの速度調整に使います. これも後で定義します.
+## 描画時に `glutGet(`GLUT_ELAPSED_TIME`)` を呼び出せば, 最初に `glutGet(`GLUT_ELAPSED_TIME`)` を呼び出してからの経過時間を得ることができます. 記号定数 `CYCLE` は変数 `elapsedTime` が 1 増えるのに要する時間で, アニメーションの速度調整に使います. これも後で定義します.
 
 ```c
 ...
