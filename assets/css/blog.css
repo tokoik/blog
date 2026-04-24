@@ -102,7 +102,8 @@ header, footer {
     記事のタイトル
     */
     h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
-      margin: 0.5em 0.5em 0.2em 1em;
+      margin: 0.5em 0.2em 0.5em 1em;
+      padding: 0;
       text-indent: -1.0em;
       font-weight: bold;
       min-width: 0;
