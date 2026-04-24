@@ -221,14 +221,14 @@ main {
   項目リスト
   */
   dl {
-    margin: 0.5em 1.5em;
+    margin: 0.5em 0 0.5em 2em;
   }
   dt {
-    margin: 0 0 0.2em 1em;
+    margin: 0.2em 0 0.2em 1em;
     font-weight: bold;
   }
   dd {
-    margin: 0 1em 0.2em 2em;
+    margin: 0 0 0.2em 2em;
   }
 
   /*
