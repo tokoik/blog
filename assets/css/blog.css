@@ -203,8 +203,9 @@ main {
   記事の段落
   */
   p {
-    margin: 0.3em 0.5em 0.2em 0;
+    text-indent: 1em;
     line-height: 1.5;
+    margin: 0.3em 0.5em 0.2em 0;
   }
 
   /*
