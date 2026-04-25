@@ -406,7 +406,7 @@ footer {
 @media screen and (max-width: 480px) {
   main {
     body {
-      font-size: small;
+      font-size: 10px;
     }
     div.top {
       display: block;
