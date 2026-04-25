@@ -105,6 +105,7 @@ header, footer {
       margin: 0.5em 0.2em 0.5em 1em;
       padding: 0;
       text-indent: -1.0em;
+      font-size: 120%;
       font-weight: bold;
       min-width: 0;
     }
@@ -178,8 +179,8 @@ main {
   見出し
   */
   h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
-    margin: 0.8em 0 0.2em 1em;
-    font-size: larger;
+    margin: 1em 0 0.2em 1em;
+    font-size: 110%;
     font-weight: bold;
   }
 
@@ -187,7 +188,7 @@ main {
   サブタイトル
   */
   h3, h3 a:link, h3 a:visited, h3 a:focus, h3 a:hover, h3 a:active {
-    margin: 0.5em 0 0.2em 1em;
+    margin: 0.8em 0 0.2em 1em;
     font-size: inherit;
     font-weight: bold;
   }
@@ -196,7 +197,7 @@ main {
   その他の見出し
   */
   h4, h4 a:link, h4 a:visited, h4 a:focus, h4 a:hover, h4 a:active {
-    margin: 0.5em 0 0.2em 1em;
+    margin: 0.8em 0 0.2em 1em;
     font-size: inherit;
   }
 
@@ -368,7 +369,7 @@ main {
     h2 {
       margin: 1em 0 0.5em 0;
       padding: 0.2em;
-      font-size: medium;
+      font-size: inherit;
       background-color: #ada;
       text-align: center;
     }
