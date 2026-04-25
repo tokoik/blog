@@ -189,7 +189,7 @@ gl_FragColor = vec4(diffuseColor * c1, 1.0);
 }
 ```
 
-## こういうことができるので, [アルファテスト]({% post_url 2004-09-16-post %})も昔の機能になってしまいました.
+## こういうことができるので, [アルファテスト]({{ site.baseurl }}{% post_url 2004-09-16-post %})も昔の機能になってしまいました.
 
 ![格子模様で型抜き]({{ site.baseurl }}/assets/images/texture04_result.jpg)
 

@@ -94,6 +94,6 @@ published: true
 
 ## Ambient Occulusion
 
-なお, このような半影を生成する方法の一つに, Ambient Occulusion があります. これをレンダリング後にスクリーン空間上で求める手法は [Screen Space Ambinet Occulusion]({% post_url 2010-11-22-post %}) (SSAO) といいます. [このプログラム](https://github.com/tokoik/imsss)は魚眼レンズを取り付けたカメラでキャプチャした天空画像をライブで照射照度マッピングし, SSAO や [Subsurface Scattering]({% post_url 2010-12-03-post %}) (SSS, 表面下散乱), そして実験的ながら映り込みの遮蔽 (Reflective Occulusion, RO) を再現します. このプログラムで使っている手法は[ここ](http://www.slideshare.net/tokoik/ss-40188035)で解説していますが, 現在モデルを改良しているところです.
+なお, このような半影を生成する方法の一つに, Ambient Occulusion があります. これをレンダリング後にスクリーン空間上で求める手法は [Screen Space Ambinet Occulusion]({{ site.baseurl }}{% post_url 2010-11-22-post %}) (SSAO) といいます. [このプログラム](https://github.com/tokoik/imsss)は魚眼レンズを取り付けたカメラでキャプチャした天空画像をライブで照射照度マッピングし, SSAO や [Subsurface Scattering]({{ site.baseurl }}{% post_url 2010-12-03-post %}) (SSS, 表面下散乱), そして実験的ながら映り込みの遮蔽 (Reflective Occulusion, RO) を再現します. このプログラムで使っている手法は[ここ](http://www.slideshare.net/tokoik/ss-40188035)で解説していますが, 現在モデルを改良しているところです.
 
 ## 《つづく》

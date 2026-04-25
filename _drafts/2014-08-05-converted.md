@@ -64,7 +64,7 @@ published: true
       glTexSubImage2D(`GL_TEXTURE_RECTANGLE`, 0, 0, 0, frame.cols, flipped.rows, `GL_BGR`, `GL_UNSIGNED_BYTE`, flipped.data);
 ```
 
-## あとは[前回]({% post_url 2014-08-01-post %})同様，この二つのテクスチャをマッピングして矩形を描画します．
+## あとは[前回]({{ site.baseurl }}{% post_url 2014-08-01-post %})同様，この二つのテクスチャをマッピングして矩形を描画します．
 
 ## フラグメントシェーダ
 

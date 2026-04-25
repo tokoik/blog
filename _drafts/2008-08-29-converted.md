@@ -17,7 +17,7 @@ published: true
 
 ## 頂点配列
 
-書き忘れたと思っていたことの四つ目です．これまでは学生さん向けのチュートリアルを前提に書いてきたので，何も考えずに [`glBegin()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBegin.xhtml) / [`glEnd()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glEnd.xhtml) を使っていました．しかし実際のアプリケーションでは，もう頂点配列や [Vertex Buffer Object (VBO)]({% post_url 2008-08-30-post %}) を使うのが当たり前だと思います．頂点配列は[トゥーンシェーディング]({% post_url 2008-02-18-post %})の時に使っていましたけど，説明していませんでしたので，改めて書きとめておこうと思います．
+書き忘れたと思っていたことの四つ目です．これまでは学生さん向けのチュートリアルを前提に書いてきたので，何も考えずに [`glBegin()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBegin.xhtml) / [`glEnd()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glEnd.xhtml) を使っていました．しかし実際のアプリケーションでは，もう頂点配列や [Vertex Buffer Object (VBO)]({{ site.baseurl }}{% post_url 2008-08-30-post %}) を使うのが当たり前だと思います．頂点配列は[トゥーンシェーディング]({{ site.baseurl }}{% post_url 2008-02-18-post %})の時に使っていましたけど，説明していませんでしたので，改めて書きとめておこうと思います．
 
 ## データ構造
 
@@ -172,7 +172,7 @@ glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 ## 頂点配列の問題
 
-しかし，[`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) を使っても，描画のたびにクライアント側のメモリからサーバ（グラフィックスサブシステム）側のメモリ（ビデオカード上のメモリ等）へのデータ転送が起こります．このデータ転送は低速なバスを介して行われるので，グラフィックスサブシステムがデータ転送の完了を待つために，本来の性能が発揮できないような状況が発生する場合があります．そこで，グラフィックスサブシステム側に十分なメモリがあるときは，データをグラフィックスサブシステム上のメモリに置いたままにして描画を行うことにより，データ転送の回数を減じることができます．これは [Vertex Buffer Object (VBO)]({% post_url 2008-08-30-post %}) を使うことにより実現できます．
+しかし，[`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) を使っても，描画のたびにクライアント側のメモリからサーバ（グラフィックスサブシステム）側のメモリ（ビデオカード上のメモリ等）へのデータ転送が起こります．このデータ転送は低速なバスを介して行われるので，グラフィックスサブシステムがデータ転送の完了を待つために，本来の性能が発揮できないような状況が発生する場合があります．そこで，グラフィックスサブシステム側に十分なメモリがあるときは，データをグラフィックスサブシステム上のメモリに置いたままにして描画を行うことにより，データ転送の回数を減じることができます．これは [Vertex Buffer Object (VBO)]({{ site.baseurl }}{% post_url 2008-08-30-post %}) を使うことにより実現できます．
 
 ## 補足
 

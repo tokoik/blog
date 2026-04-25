@@ -7,11 +7,11 @@ published: true
 
 ## 環境のテクスチャを最下層に置いたとき
 
-[放物面マッピング]({% post_url 2005-06-24-post %})では映り込みのテクスチャを不透明にする必要があったので，そのテクスチャを最下層に置きました．今回は，そのテクスチャと，その上に重ねたテクスチャとの合成を行ってみます．
+[放物面マッピング]({{ site.baseurl }}{% post_url 2005-06-24-post %})では映り込みのテクスチャを不透明にする必要があったので，そのテクスチャを最下層に置きました．今回は，そのテクスチャと，その上に重ねたテクスチャとの合成を行ってみます．
 
 ## テクスチャユニットを指定したテクスチャ座標の設定
 
-[前回]({% post_url 2005-06-24-post %})作成したプログラムでは，もともとあったテクスチャを，テクスチャユニット２ (`GL_TEXTURE2`) に割り当てています．ただし，このテクスチャは，実際には使用していませんでした．
+[前回]({{ site.baseurl }}{% post_url 2005-06-24-post %})作成したプログラムでは，もともとあったテクスチャを，テクスチャユニット２ (`GL_TEXTURE2`) に割り当てています．ただし，このテクスチャは，実際には使用していませんでした．
 
 <ul>
 <li>[Linux 版](texture/texture18.tar.gz)</li>
@@ -29,16 +29,16 @@ published: true
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#if defined(WIN32)
-//#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
-#  include "glut.h"
-#  include "glext.h"
-PFNGLACTIVETEXTUREPROC glActiveTexture;
-PFNGLMULTITEXCOORD2DVPROC glMultiTexCoord2dv;
-#elif defined(__APPLE__) || defined(MACOSX)
+#if defined(__APPLE__) || defined(MACOSX)
 #  include <GLUT/glut.h>
 #else
 #  include <GL/glut.h>
+#  include <GL/glext.h>
+#  if defined(_MSC_VER)
+//#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+PFNGLACTIVETEXTUREPROC glActiveTexture;
+PFNGLMULTITEXCOORD2DVPROC glMultiTexCoord2dv;
+#  endif
 #endif
 ```
 
@@ -103,14 +103,18 @@ glDisable(GL_TEXTURE_2D);
 ## 一方 `box`.cpp も，テクスチャ座標を glTexCoord2dv() を使って設定している部分を [`glMultiTexCoord2dv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glMultiTexCoord2dv.xhtml) に置き換えます．Windows の場合は関数ポインタ変数 glTexCoord2dv を外部変数として宣言しておいてください．
 
 ```c
-#if defined(WIN32)
-#  include "glut.h"
-#  include "glext.h"
-extern PFNGLMULTITEXCOORD2DVPROC glMultiTexCoord2dv;
-#elif defined(__APPLE__) || defined(MACOSX)
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#if defined(__APPLE__) || defined(MACOSX)
 #  include <GLUT/glut.h>
 #else
 #  include <GL/glut.h>
+#  include <GL/glext.h>
+#  if defined(_MSC_VER)
+//#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+extern PFNGLMULTITEXCOORD2DVPROC glMultiTexCoord2dv;
+#  endif
 #endif
 
 ...

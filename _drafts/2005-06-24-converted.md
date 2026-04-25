@@ -7,7 +7,7 @@ published: true
 
 ## 放物面鏡への映り込みを環境のテクスチャに使う
 
-環境マッピングの手法には，[スフィアマッピング]({% post_url 2005-01-07-post %})と[キューブマッピング]({% post_url 2005-01-21-post %})のほかに，放物面マッピングと呼ばれる手法があります．この方法は Heidrich と Seidel によって提案されました．放物面というのは，パラボラアンテナに使われる曲面 (paraboloid) です．この方法はスフィアマッピングやキューブマッピングのように OpenGL に専用の機能が用意されているわけではありませんが，[マルチテクスチャ]({% post_url 2005-06-15-post %})を使えば簡単に実装できます．
+環境マッピングの手法には，[スフィアマッピング]({{ site.baseurl }}{% post_url 2005-01-07-post %})と[キューブマッピング]({{ site.baseurl }}{% post_url 2005-01-21-post %})のほかに，放物面マッピングと呼ばれる手法があります．この方法は Heidrich と Seidel によって提案されました．放物面というのは，パラボラアンテナに使われる曲面 (paraboloid) です．この方法はスフィアマッピングやキューブマッピングのように OpenGL に専用の機能が用意されているわけではありませんが，[マルチテクスチャ]({{ site.baseurl }}{% post_url 2005-06-15-post %})を使えば簡単に実装できます．
 
 ## 放物面マッピングの特徴
 
@@ -42,7 +42,7 @@ published: true
 もう一つ問題があります．この手法では二つのテクスチャを使い分けまが，どちらのテクスチャを使うのかは画素単位に判断しなければなりません．この判断は反射ベクトル r<sub>z</sub> の符号を見て行うことができるのですが，OpenGL には（プログラマブルシェーダを使わなければ）このような判断を組み込む余地がありません．
 しかし，(s, t) が一方のテクスチャの範囲内にあれば，もう一方のテクスチャでは (s, t) は必ずテクスチャの範囲外になるはずです．そこで Heidrich と Seidel は，アルファテストを使って範囲外のポリゴンを削り取り，表側と裏側に分けて２回描くという[手法](http://www.cs.ubc.ca/~heidrich/Papers/GH.98.pdf)を採用しています．
 一方 [Real-Time Rendering](http://www.realtimerendering.com/) の本には，双方のテクスチャの範囲外の色を黒にして，２つのテクスチャを単に加算するという方法が示されています．確かに，こうすれば範囲内にあるほうのテクスチャの色がマッピングされるはずです．
-ということで，こっちの方法を使って実際にやってみましょう．雛形のプログラムには[マルチテクスチャ]({% post_url 2005-06-15-post %})のときに使ったものを流用します．
+ということで，こっちの方法を使って実際にやってみましょう．雛形のプログラムには[マルチテクスチャ]({{ site.baseurl }}{% post_url 2005-06-15-post %})のときに使ったものを流用します．
 
 <ul>
 <li>[Linux 版](`texture`/texture14.tar.gz)</li>
@@ -56,15 +56,15 @@ published: true
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#if defined(WIN32)
-//#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
-#  include "glut.h"
-#  include "glext.h"
-PFNGLACTIVETEXTUREPROC glActiveTexture;
-#elif defined(__APPLE__) || defined(MACOSX)
+#if defined(__APPLE__) || defined(MACOSX)
 #  include <GLUT/glut.h>
 #else
 #  include <GL/glut.h>
+#  include <GL/glext.h>
+#  if defined(_MSC_VER)
+//#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+PFNGLACTIVETEXTUREPROC glActiveTexture;
+#  endif
 #endif
 ```
 
