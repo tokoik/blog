@@ -5,7 +5,7 @@
 */
 body {
 	font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, "Noto Sans JP", sans-serif;
-	font-size: small;
+	font-size: medium;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -84,6 +84,7 @@ header, footer {
   h1, h1 a:link, h1 a:visited, h1 a:focus, h1 a:hover, h1 a:active {
     margin: 0.2em 0;
     padding: 0.3em 0.5em 0.3em 0.5em;
+    font-weight: bold;
     color: #fff;
     background-color: #073;
   }
@@ -156,6 +157,7 @@ header, footer {
       ボタン
       */
       button {
+        font-size: 15px;
         border: none;
         cursor: pointer;
         background-color: #ada;
@@ -177,7 +179,7 @@ main {
   */
   h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
     margin: 0.8em 0 0.2em 1em;
-    font-size: medium;
+    font-size: larger;
     font-weight: bold;
   }
 
@@ -186,7 +188,7 @@ main {
   */
   h3, h3 a:link, h3 a:visited, h3 a:focus, h3 a:hover, h3 a:active {
     margin: 0.5em 0 0.2em 1em;
-    font-size: small;
+    font-size: inherit;
     font-weight: bold;
   }
 
@@ -195,7 +197,7 @@ main {
   */
   h4, h4 a:link, h4 a:visited, h4 a:focus, h4 a:hover, h4 a:active {
     margin: 0.5em 0 0.2em 1em;
-    font-size: small;
+    font-size: inherit;
   }
 
   /*
@@ -402,6 +404,9 @@ footer {
 */
 @media screen and (max-width: 480px) {
   main {
+    body {
+      font-size: small;
+    }
     div.top {
       display: block;
       div.main {
