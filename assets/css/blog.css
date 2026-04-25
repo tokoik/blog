@@ -26,12 +26,11 @@ pre, code, var, samp, kbd, dt, .mono {
 */
 em {
   font-style: normal;
-	font-weight: bold;
+	color: #050;
 }
 strong {
   font-style: normal;
 	font-weight: bold;
-	color: #ff0000;
 }
 
 /*
@@ -203,9 +202,8 @@ main {
   記事の段落
   */
   p {
-    text-indent: 1em;
     line-height: 1.5;
-    margin: 0.3em 0.5em 0.2em 0;
+    margin: 0.2em 0.5em 0.8em 0;
   }
 
   /*
