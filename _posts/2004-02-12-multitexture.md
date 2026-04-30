@@ -24,6 +24,9 @@ Windows 上でマルチテクスチャを使う方法を質問されたので，
 PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
 PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB;
   
+/*
+** GL_ARB_multitexture 用の関数ポインタの取り出し
+*/
 int initMultiTexture(void)
 {
   glActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC)wglGetProcAddress(&quot;glActiveTextureARB&quot;);

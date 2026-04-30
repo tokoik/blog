@@ -7,27 +7,34 @@ published: true
 
 ## NEC Lavie G Type S
 
-3D液晶を搭載したノートパソコンを導入したので，仕事の合間に[サンプルプログラム](https://gist.github.com/tokoik/4c62bd63e6c080bc68437bb3f2cfaea6)を書いてみました．実行したら，3Dボタンを押してください．cとoのキーで視差を調整できます．もし気分が悪くなったら，すぐにやめてください．
+3D液晶を搭載したノートパソコンを導入したので，仕事の合間に[サンプルプログラム](https://gist.github.com/tokoik/4c62bd63e6c080bc68437bb3f2cfaea6)を書いてみました．実行したら，**3Dボタン** を押してください．cとoのキーで視差を調整できます．もし気分が悪くなったら，すぐにやめてください．
 
 ## 実装
 
-プログラムは[こういう考え方]({{ site.baseurl }}/assets/pdfs/3dlcd.pdf)で実装してみました．まず，ステンシルバッファに１ピクセルおきに縦の線を描き，これをマスクに使います．w と h はウィンドウのサイズです．ゲームモード（フルスクリーン）を使うので，これは液晶のサイズになります．BARRIERBITはこのマスクに使うステンシルバッファのビットで，とりあえず1です．
+プログラムは[こういう考え方]({{ site.baseurl }}/assets/pdfs/3dlcd.pdf)で実装してみました．まず，ステンシルバッファに１ピクセルおきに縦の線を描き，これをマスクに使います．`w` と `h` はウィンドウのサイズです．ゲームモード（フルスクリーン）を使うので，これは液晶のサイズになります．`BARRIERBIT` はこのマスクに使うステンシルバッファのビットで，とりあえず 1 です．
 
 ```cpp
+/* ステンシルバッファだけに必ず描く */
+glDisable(GL_DEPTH_TEST);
+glDrawBuffer(GL_NONE);
+
+/* ステンシルバッファだけをクリアする */
+glClear(GL_STENCIL_BUFFER_BIT);
+
+/* ステンシルバッファの１ビット目に常に書き込む */
 glStencilFunc(GL_ALWAYS, BARRIERBIT, BARRIERBIT);
 glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
 
-glDisable(GL_DEPTH_TEST);
-glDrawBuffer(GL_NONE);
-glClear(GL_STENCIL_BUFFER_BIT);
+/* モデリング変換はしない */
+glMatrixMode(GL_MODELVIEW);
+glLoadIdentity();
 
+/* スクリーン座標を画面の解像度に合わせて直交投影する */
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
 glOrtho(-0.5, (GLdouble)w, -0.5, (GLdouble)h, -1.0, 1.0);
 
-glMatrixMode(GL_MODELVIEW);
-glLoadIdentity();
-
+/* １画素おきに縦線を描く */
 glBegin(GL_LINES);
 for (x = 0; x < w; x += 2)
 {
@@ -35,17 +42,20 @@ for (x = 0; x < w; x += 2)
   glVertex2d(x, h - 1);
 }
 glEnd();
-
 glFlush();
-glDrawBuffer(GL_BACK);
 
-glEnable(GL_DEPTH_TEST);
+/* ステンシルバッファにはもう描かない */
 glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+/* カラーバッファへの描画に戻して隠面消去処理を有効にする */
+glDrawBuffer(GL_BACK);
+glEnable(GL_DEPTH_TEST);
 ```
 
 そして，次の手順で右目から見たシーンを描きます．
 
 ```cpp
+/* RGBA すべてのチャネルとデプスバッファをクリア */
 glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -53,31 +63,40 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 glStencilFunc(GL_NOTEQUAL, BARRIERBIT, BARRIERBIT);
 glColorMask(GL_TRUE, GL_FALSE, GL_TRUE, GL_TRUE);
 
+//
 //（右目の位置を視点にしてシーンを描く）
+//
 
 /* 偶数ラインにＧを表示 */
 glStencilFunc(GL_EQUAL, BARRIERBIT, BARRIERBIT);
 glColorMask(GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE);
 
+//
 //（右目の位置を視点にしてシーンを描く）
+//
 ```
 
 同様にして，左目から見たシーンを描きます．
 
 ```cpp
+/* カラーバッファを残したままデプスバッファだけをクリア */
 glClear(GL_DEPTH_BUFFER_BIT);
 
 /* 偶数ラインにＲ・Ｂを表示 */
 glStencilFunc(GL_EQUAL, BARRIERBIT, BARRIERBIT);
 glColorMask(GL_TRUE, GL_FALSE, GL_TRUE, GL_TRUE);
 
+//
 //（左目の位置を視点にしてシーンを描く）
+//
 
 /* 奇数ラインにＧを表示 */
 glStencilFunc(GL_NOTEQUAL, BARRIERBIT, BARRIERBIT);
 glColorMask(GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE);
 
+//
 //（左目の位置を視点にしてシーンを描く）
+//
 ```
 
 これを見てお分かりのとおり，一方の目ごとにシーンを２回ずつ描いています．両目のシーンを作るのに，計４回描くことになります．これはさすがに効率が悪いですね．
