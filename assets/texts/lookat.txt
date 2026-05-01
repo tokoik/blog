@@ -1,5 +1,5 @@
 /*
-** 視野変換行列を求める
+** ビュー変換行列を求める
 */
 void lookAt(float ex, float ey, float ez,
             float tx, float ty, float tz,
@@ -12,7 +12,7 @@ void lookAt(float ex, float ey, float ez,
   ** 下の l は 0 になることがあるから,
   ** 必要ならエラー処理を追加して.
   */
-  
+
   /* z 軸 = e - t */
   tx = ex - tx;
   ty = ey - ty;

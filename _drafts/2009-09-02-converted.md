@@ -11,11 +11,11 @@ OpenGL の解説には, しばしば「初期状態では, 視線は Z 軸の負
 
 ## クリッピング空間上では, z 軸の正の方向 (視線の反対方向) が奥, 負の方向が手前になります. したがって, クリッピング空間の z = 1 の平面が後方面であり, z = -1 の平面が前方面になります. このためクリッピング座標系上で隠面消去を行うと, 視線方向に対して手前にあるものが, 奥のものに隠されてしまいます. 視野空間を設定する際に `near` < `far` とすれば, 頂点の座標値の z 値の符号が反転するので, 奥のものが手前のものに隠されるようになります.
 
-## 視野変換行列
+## ビュー変換行列
 
 平行投影変換の次は透視投影変換をやりたいところですが, サンプルのプログラムは図形も視点も xy 平面上にあるので, 視点を動かさないと透視投影変換ができません. なので先に視点の移動を行います.
 
-## クリッピング空間では, 視点は原点にあり, 視線は z 軸の負の方向を向いています (^_^;) これを任意の位置から任意の方向を見ることができるようにします. このような変換を<`em`>視野変換 (viewing transform) と呼びます. いま, 視点が $\mathbf{e}$ = (<i>`ex`</i>, <i>`ey`</i>, <i>`ez`</i>) の位置にあり, 目標点 $\mathbf{t}$ = (<i>`tx`</i>, <i>`ty`</i>, <i>`tz`</i>) の方向を向いているとします. また視点の「上方向」は $\mathbf{u}$ = (<i>`ux`</i>, <i>`uy`</i>, <i>`uz`</i>) とします.
+## クリッピング空間では, 視点は原点にあり, 視線は z 軸の負の方向を向いています (^_^;) これを任意の位置から任意の方向を見ることができるようにします. このような変換を<`em`>ビュー変換 (viewing transform) と呼びます. いま, 視点が $\mathbf{e}$ = (<i>`ex`</i>, <i>`ey`</i>, <i>`ez`</i>) の位置にあり, 目標点 $\mathbf{t}$ = (<i>`tx`</i>, <i>`ty`</i>, <i>`tz`</i>) の方向を向いているとします. また視点の「上方向」は $\mathbf{u}$ = (<i>`ux`</i>, <i>`uy`</i>, <i>`uz`</i>) とします.
 
 ![視点の位置と方向]({{ site.baseurl }}/assets/images/viewing0.gif)
 
@@ -35,15 +35,15 @@ OpenGL の解説には, しばしば「初期状態では, 視線は Z 軸の負
 
 ![視点の回転]({{ site.baseurl }}/assets/images/viewingmatrix1.gif)
 
-## したがって視野変換行列 **RT** は, 次式により求められます．
+## したがってビュー変換行列 **RT** は, 次式により求められます．
 
-![視野変換行列]({{ site.baseurl }}/assets/images/viewingmatrix2.gif)
+![ビュー変換行列]({{ site.baseurl }}/assets/images/viewingmatrix2.gif)
 
-## それでは, 視点位置 `ex`, `ey`, `ez`, 目標点位置 `tx`, `ty`, `tz`, 上方向のベクトル `ux`, `uy`, `uz` として視野変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `lookAt()` を作成してください.
+## それでは, 視点位置 `ex`, `ey`, `ez`, 目標点位置 `tx`, `ty`, `tz`, 上方向のベクトル `ux`, `uy`, `uz` としてビュー変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `lookAt()` を作成してください.
 
 ```c
 /*
-** 視野変換行列を求める
+** ビュー変換行列を求める
 */
 void lookAt(float ex, float ey, float ez,
 float tx, float ty, float tz,
@@ -62,7 +62,7 @@ GLfloat *matrix)
 
 ## 行列の積
 
-視点の移動を行うには, 頂点の座標値に `orthogonalMatrix()` で作った投影変換行列をかけたものに, `lookAt()` で作った視野変換行列をかける必要があります. この計算はバーテックスシェーダで行うこともできますが, 先に投影変換行列と視野変換行列の積を求めておけば, バーテックスシェーダの負担を減らすことができます. ４行４列の行列の積は, 次式により求められます.
+視点の移動を行うには, 頂点の座標値に `orthogonalMatrix()` で作った投影変換行列をかけたものに, `lookAt()` で作ったビュー変換行列をかける必要があります. この計算はバーテックスシェーダで行うこともできますが, 先に投影変換行列とビュー変換行列の積を求めておけば, バーテックスシェーダの負担を減らすことができます. ４行４列の行列の積は, 次式により求められます.
 
 ![配列の積]({{ site.baseurl }}/assets/images/multiply.gif)
 
@@ -102,7 +102,7 @@ static GLfloat projectionMatrix[16];
 static GLint projectionMatrixLocation;
 
 /*
-** 視野変換行列
+** ビュー変換行列
 */
 extern void lookAt(float ex, float ey, float ez,
 float tx, float ty, float tz,
@@ -117,7 +117,7 @@ extern void multiplyMatrix(const GLfloat *m0, const GLfloat *m1, GLfloat *matrix
 ...
 ```
 
-## そして, 初期化の段階で視野変換行列を求め, 投影変換行列に掛け合わせます. このために, 視野変換行列を一時的に格納する配列変数 `temp0` と, 投影変換行列を一時的に保存しておく配列変数 `temp1` を用意しておきます.
+## そして, 初期化の段階でビュー変換行列を求め, 投影変換行列に掛け合わせます. このために, ビュー変換行列を一時的に格納する配列変数 `temp0` と, 投影変換行列を一時的に保存しておく配列変数 `temp1` を用意しておきます.
 
 ```c
 ...
@@ -141,7 +141,7 @@ GLfloat temp0[16], temp1[16];
 ...
 ```
 
-## 視野変換行列を `temp0` に求めます. 視点の位置は (4, 5, 6), 目標点の位置は (0, 0, 0) にします. また上方向のベクトルは (0, 1, 0) にします.
+## ビュー変換行列を `temp0` に求めます. 視点の位置は (4, 5, 6), 目標点の位置は (0, 0, 0) にします. また上方向のベクトルは (0, 1, 0) にします.
 
 ```c
 ...
@@ -156,7 +156,7 @@ fprintf(stderr, "Link error.\n");
 exit(1);
 }
 
-/* 視野変換行列を求める */
+/* ビュー変換行列を求める */
 lookAt(4.0f, 5.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, temp0);
 ```
 
@@ -167,10 +167,10 @@ lookAt(4.0f, 5.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, temp0);
 orthogonalMatrix(-1.0f, 1.0f, -1.0f, 1.0f, 7.0f, 11.0f, temp1);
 ```
 
-## その後，視野変換行列 `temp0` と投影変換行列 `temp1` をかけて, `projectionMatrix` に格納します. この `projectionMatrix` に格納した行列は, `uniform` 変数 `projectionMatrix` に渡されます.
+## その後，ビュー変換行列 `temp0` と投影変換行列 `temp1` をかけて, `projectionMatrix` に格納します. この `projectionMatrix` に格納した行列は, `uniform` 変数 `projectionMatrix` に渡されます.
 
 ```c
-/* 視野変換行列と投影変換行列の積を projectionMatrix に入れる */
+/* ビュー変換行列と投影変換行列の積を projectionMatrix に入れる */
 multiplyMatrix(temp0, temp1, projectionMatrix);
 
 /* uniform 変数 projectionMatrix の場所を得る */
@@ -223,7 +223,7 @@ fprintf(stderr, "Link error.\n");
 exit(1);
 }
 
-/* 視野変換行列を求める */
+/* ビュー変換行列を求める */
 
 lookAt(4.0f, 5.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, temp0);
 
@@ -231,7 +231,7 @@ lookAt(4.0f, 5.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, temp0);
 
 perspectiveMatrix(-1.0f, 1.0f, -1.0f, 1.0f, 7.0f, 11.0f, temp1);
 
-/* 視野変換行列と投影変換行列の積を projectionMatrix に入れる */
+/* ビュー変換行列と投影変換行列の積を projectionMatrix に入れる */
 
 multiplyMatrix(temp0, temp1, projectionMatrix);
 

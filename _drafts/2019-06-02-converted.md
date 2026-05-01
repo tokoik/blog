@@ -43,7 +43,7 @@ published: true
     const GgMatrix mp(ggFrustum(screen[0] * zNear, screen[1] * zNear,
       screen[2] * zNear, screen[3] * zNear, zNear, zFar));
  
-    // 視野変換行列を求める
+    // ビュー変換行列を求める
     const GgMatrix mv(ggTranslate(origin[0], origin[1], origin[2]));
  
     // ウィンドウを消去する
@@ -62,7 +62,7 @@ published: true
     window.swapBuffers();
 ```
 
-## めんどくさいので，このプログラムでは宿題用の[補助プログラム](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/)を使っていますが，このループには普通に OpenGL による描画手続きを書くことができ (るはずだと思い) ます．また視野変換行列や投影変換行列の算出に [ggLookAt()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a2924895ad284e08b08a2cfd115c5a7bf) や [ggPerspective()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a7dcbaa73755efd46f1f19b0b3a39b473) のようなものを使っていないのでちょっとややこしいですが，単に下図のような視錐台を [ggFrustum()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a6045dfb6776b306492ac593db94be7ab) で設定しているだけです．
+## めんどくさいので，このプログラムでは宿題用の[補助プログラム](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/)を使っていますが，このループには普通に OpenGL による描画手続きを書くことができ (るはずだと思い) ます．またビュー変換行列や投影変換行列の算出に [ggLookAt()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a2924895ad284e08b08a2cfd115c5a7bf) や [ggPerspective()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a7dcbaa73755efd46f1f19b0b3a39b473) のようなものを使っていないのでちょっとややこしいですが，単に下図のような視錐台を [ggFrustum()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a6045dfb6776b306492ac593db94be7ab) で設定しているだけです．
 
 ## ![視錐台](/images/20190602_0.jpg)
 
@@ -91,13 +91,13 @@ published: true
         // 描画する目を選択してトラッキング情報を得る
 ```
 
-## 投影変換行列はスクリーンのサイズに zNear を掛けたものを [ggFrustum()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a6045dfb6776b306492ac593db94be7ab) の引数に指定して求めます．視野変換行列は，物体の方を視点の位置や方向とは逆方向に移動することによって求めます．[getConjugateMatrix()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/classgg_1_1GgQuaternion.html#a006ed488c61340ae86ff2d9baa117138) メソッドは，共役四元数による回転の変換行列を求めます．
+## 投影変換行列はスクリーンのサイズに zNear を掛けたものを [ggFrustum()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/namespacegg.html#a6045dfb6776b306492ac593db94be7ab) の引数に指定して求めます．ビュー変換行列は，物体の方を視点の位置や方向とは逆方向に移動することによって求めます．[getConjugateMatrix()](http://web.wakayama-u.ac.jp/~tokoi/lecture/gg/html/classgg_1_1GgQuaternion.html#a006ed488c61340ae86ff2d9baa117138) メソッドは，共役四元数による回転の変換行列を求めます．
 
 ```cpp
         const GgMatrix mp(ggFrustum(screen[0] * zNear, screen[1] * zNear,
           screen[2] * zNear, screen[3] * zNear, zNear, zFar));
  
-        // 視野変換行列を求める
+        // ビュー変換行列を求める
         const GgMatrix mv(GgQuaternion(orientation).getConjugateMatrix()
 ```
 

@@ -67,7 +67,7 @@ transformMatrixLocation = glGetUniformLocation(shader, "transformMatrix");
 
 pointLocation = glGetAttribLocation(shader, "point");
 
-// 視野変換行列の設定
+// ビュー変換行列の設定
 
 modelviewMatrix.loadLookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
@@ -419,7 +419,7 @@ pointLocation = glGetAttribLocation(shader, "point");
 // attribute 変数 motion の場所の取得
 motionLocation = glGetAttribLocation(shader, "motion");
 
-// 視野変換行列の設定
+// ビュー変換行列の設定
 
 modelviewMatrix.loadLookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 

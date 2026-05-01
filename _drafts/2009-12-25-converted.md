@@ -226,7 +226,7 @@ glClearColor(0.0, 0.1, 0.3, 1.0);
 */
 static void display(void)
 {
-/* 投影変換／視野変換／モデリング変換 */
+/* 投影変換／ビュー変換／モデル変換 */
 Matrix transformMatrix = projectionMatrix * modelviewMatrix * trackball.get();
 transformMatrix.scale(1.0f, 1.0f, 2.0f);
 transformMatrix.translate(0.0f, 0.0f, -0.5f);

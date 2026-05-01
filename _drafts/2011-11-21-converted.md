@@ -244,7 +244,7 @@ glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTU
 glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, db, 0);
 glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
-// 視野変換行列の設定
+// ビュー変換行列の設定
 
 viewMatrix.loadLookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
@@ -388,7 +388,7 @@ ggInit();
 // 上から見たデプスバッファを求めるシェーダ
 upShader = new UpShader();
 
-// 視野変換行列の設定
+// ビュー変換行列の設定
 
 viewMatrix.loadLookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 ```

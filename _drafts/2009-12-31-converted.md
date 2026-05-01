@@ -129,10 +129,10 @@ animated = temp * animated;            // B(t) の累積
 while ((b = b->getParent()) != 0);
 ```
 
-## 累積した変換は, ボーンに対するモデリング変換になります. 最後に, 現在の視野変換に `initial` と `animated` をかけて, ボーンに対するモデルビュー変換を求めます.
+## 累積した変換は, ボーンに対するモデル変換になります. 最後に, 現在のビュー変換に `initial` と `animated` をかけて, ボーンに対するモデルビュー変換を求めます.
 
 ```c
-/* 現在の視野変換行列をかけておく */
+/* 現在のビュー変換行列をかけておく */
 initial = viewMatrix * initial;
 animated = viewMatrix * animated;
 ```
@@ -203,7 +203,7 @@ drawBone(&bone[i], bottom[i], top[i], blend[i]);
 }
 ```
 
-## 最初に `modelViewMatrix` に現在の視野変換行列 `viewMatrix` を格納しておき, それにこの対象形状に対するモデリング変換を適用します. `modelViewMatrix` にはこの図形に対するモデルビュー変換行列が格納されます. これと現在の投影変換行列 `projectionMatrix` を `uniform` 変数としてバーテックスシェーダに渡します.
+## 最初に `modelViewMatrix` に現在のビュー変換行列 `viewMatrix` を格納しておき, それにこの対象形状に対するモデル変換を適用します. `modelViewMatrix` にはこの図形に対するモデルビュー変換行列が格納されます. これと現在の投影変換行列 `projectionMatrix` を `uniform` 変数としてバーテックスシェーダに渡します.
 
 ```c
 /*
@@ -211,7 +211,7 @@ drawBone(&bone[i], bottom[i], top[i], blend[i]);
 */
 glUseProgram(pProgram);
 
-/* 点のモデリング変換／視野変換／投影変換 */
+/* 点のモデル変換／ビュー変換／投影変換 */
 
 Matrix modelViewMatrix = viewMatrix;
 modelViewMatrix.translate(0.0f, 0.0f, -1.5f);

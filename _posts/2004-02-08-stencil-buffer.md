@@ -25,7 +25,7 @@ glClear(GL_STENCIL_BUFFER_BIT);
 glStencilFunc(GL_ALWAYS, BARRIERBIT, BARRIERBIT);
 glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
 
-/* モデリング変換はしない */
+/* モデル変換はしない */
 glMatrixMode(GL_MODELVIEW);
 glLoadIdentity();
 
