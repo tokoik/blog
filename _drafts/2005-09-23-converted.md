@@ -229,7 +229,7 @@ glViewport(0, 0, width, height);
 
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
-gluPerspective(60.0, (double)width / (double)height, 1.0, 100.0);
+gluPerspective(60.0, (double)width / (double)height, 0.1, 10.0);
 
 /* モデルビュー変換行列の設定 */
 
