@@ -56,11 +56,11 @@ a:focus {
   text-decoration: underline;
 }
 a:hover {
-	color: #840;
+  color: #4a4;
 	text-decoration: underline;
 }
 a:active {
-  color: #c40;
+	color: #a40;
   text-decoration: underline;
 }
 
@@ -81,7 +81,7 @@ header, footer {
   /*
   ブログのタイトル
   */
-  h1, h1 a:link, h1 a:visited, h1 a:focus, h1 a:hover, h1 a:active {
+  h1 {
     margin: 0.2em 0;
     padding: 0.3em 0.5em 0.3em 0.5em;
     font-weight: bold;
@@ -101,7 +101,7 @@ header, footer {
     /*
     記事のタイトル
     */
-    h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
+    h2 {
       margin: 0.5em 0.2em 0.5em 1em;
       padding: 0;
       text-indent: -1.0em;
@@ -178,7 +178,7 @@ main {
   /*
   見出し
   */
-  h2, h2 a:link, h2 a:visited, h2 a:focus, h2 a:hover, h2 a:active {
+  h2 {
     margin: 1em 0 0.2em 1em;
     font-size: 110%;
     font-weight: bold;
@@ -187,7 +187,7 @@ main {
   /*
   サブタイトル
   */
-  h3, h3 a:link, h3 a:visited, h3 a:focus, h3 a:hover, h3 a:active {
+  h3 {
     margin: 0.8em 0 0.2em 1em;
     font-size: inherit;
     font-weight: bold;
@@ -196,7 +196,7 @@ main {
   /*
   その他の見出し
   */
-  h4, h4 a:link, h4 a:visited, h4 a:focus, h4 a:hover, h4 a:active {
+  h4 {
     margin: 0.8em 0 0.2em 1em;
     font-size: inherit;
   }
