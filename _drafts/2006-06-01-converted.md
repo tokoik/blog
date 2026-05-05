@@ -253,7 +253,7 @@ static void box(double x, double y, double z)
 
 /* 箱の色 */
 
-static const GLfloat color[] = { 0.8, 0.8, 0.2, 1.0 };
+static const GLfloat color[] = { 0.8f, 0.8f, 0.2f, 1.0f };
 
 int i, j;
 
