@@ -41,7 +41,7 @@ OpenGL の解説には, しばしば「初期状態では, 視線は Z 軸の負
 
 ## それでは, 視点位置 `ex`, `ey`, `ez`, 目標点位置 `tx`, `ty`, `tz`, 上方向のベクトル `ux`, `uy`, `uz` としてビュー変換行列を作成し, 引数 `matrix` に与えられた配列に格納する関数 `lookAt()` を作成してください.
 
-```c
+```cpp
 /*
 ** ビュー変換行列を求める
 */
@@ -68,7 +68,7 @@ GLfloat *matrix)
 
 ## それでは, 引数 `m0` に指定された配列に格納されている行列と引数 `m1` に指定された配列に格納されている行列の積を求め, 引数 `matrix` に与えられた配列に格納する関数 `multiplyMatrix()` を作成してください.
 
-```c
+```cpp
 /*
 ** 行列 m0 と m1 の積を求める
 */
@@ -88,7 +88,7 @@ void multiplyMatrix(const GLfloat *m0, const GLfloat *m1, GLfloat *matrix)
 
 作った関数 `lookAt()` を使って, 実際に視点を移動します. まず, `lookAt()` と `multiplyMatrix()` を呼び出すために, これらの関数の宣言をメインプログラムに追加します.
 
-```c
+```cpp
 ...
 
 /*
@@ -119,7 +119,7 @@ extern void multiplyMatrix(const GLfloat *m0, const GLfloat *m1, GLfloat *matrix
 
 ## そして, 初期化の段階でビュー変換行列を求め, 投影変換行列に掛け合わせます. このために, ビュー変換行列を一時的に格納する配列変数 `temp0` と, 投影変換行列を一時的に保存しておく配列変数 `temp1` を用意しておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -143,7 +143,7 @@ GLfloat temp0[16], temp1[16];
 
 ## ビュー変換行列を `temp0` に求めます. 視点の位置は (4, 5, 6), 目標点の位置は (0, 0, 0) にします. また上方向のベクトルは (0, 1, 0) にします.
 
-```c
+```cpp
 ...
 
 /* シェーダプログラムのリンク */
@@ -162,14 +162,14 @@ lookAt(4.0f, 5.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, temp0);
 
 ## 視野空間は, xy 平面上では -1 ≦ x, y ≦ 1 とします. `near` と `far` は, 視点の原点からの距離が約 9 なので, ±2 の範囲をとって, それぞれ 7 と 11 とします. 得られた投影変換行列は `temp1` に格納します.
 
-```c
+```cpp
 /* 平行投影変換行列を求める */
 orthogonalMatrix(-1.0f, 1.0f, -1.0f, 1.0f, 7.0f, 11.0f, temp1);
 ```
 
 ## その後，ビュー変換行列 `temp0` と投影変換行列 `temp1` をかけて, `projectionMatrix` に格納します. この `projectionMatrix` に格納した行列は, `uniform` 変数 `projectionMatrix` に渡されます.
 
-```c
+```cpp
 /* ビュー変換行列と投影変換行列の積を projectionMatrix に入れる */
 multiplyMatrix(temp0, temp1, projectionMatrix);
 
@@ -188,7 +188,7 @@ projectionMatrixLocation = glGetUniformLocation(gl2Program, "projectionMatrix");
 
 それでは, 当初の目的である透視投影変換による描画を行います. まず, 透視投影変換行列を求める関数 `perspectiveMatrix()` を呼び出すために, この関数の宣言をメインプログラムに追加します.
 
-```c
+```cpp
 ...
 
 /*
@@ -210,7 +210,7 @@ static GLint projectionMatrixLocation;
 
 ## そして, 平行投影変換行列 `orthogonalMatrix()` を呼び出している部分を, `perspectiveMatrix()` に置き換えます.
 
-```c
+```cpp
 ...
 
 /* シェーダプログラムのリンク */

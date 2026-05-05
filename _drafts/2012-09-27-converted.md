@@ -44,7 +44,7 @@ published: true
 </li>
 </ul>
 
-```c
+```cpp
 LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-3.0.17/ext/apache2/mod_passenger.so
 PassengerRoot /Library/Ruby/Gems/1.8/gems/passenger-3.0.17
 ```
@@ -85,7 +85,7 @@ Mountain Lion では MySQL が使えなくなったので, SQLite3 を使うこ�
 <li> config/database.yml の編集</li>
 </ul>
 
-```c
+```cpp
 production:
 adapter: sqlite3
 ```
@@ -143,7 +143,7 @@ Passenger の起動と RailsBaseURI の設定, アクセスコントロールな
 
 ## これは [Redmine 2.1をCentOS 6.3にインストールする手順 | Redmine.JP Blog](http://blog.`redmine`.jp/articles/redmine-2_1-installation_centos/) を参考にした.
 
-```c
+```cpp
 # Passengerの基本設定。
 # passenger-install-apache2-module --snippet を実行して表示される設定を使用。
 # 環境によって設定値が異なりますので以下の3行はそのまま転記しないでください。
@@ -178,7 +178,7 @@ RailsFrameworkSpawnerIdleTime 0
 
 ## [`redmine` + `passenger` でのアクセス制限 - ihiro81's diary](http://ihiro81.hatenablog.jp/entry/20101213/1292206723) を参照のこと.
 
-```c
+```cpp
 <Location /redmine>
 Order deny,allow
 Deny from all

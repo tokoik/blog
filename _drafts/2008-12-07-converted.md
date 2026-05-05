@@ -21,7 +21,7 @@ published: true
 
 この方法ではテクスチャオブジェクト，フレームバッファオブジェクト，それにシェーダオブジェクトを使うので，それらの識別子を保持する変数を用意します．
 
-```c
+```cpp
 /*
 ** テクスチャの大きさ
 */
@@ -43,7 +43,7 @@ static GLuint gl2Program;
 
 ## 最初にテクスチャオブジェクトを生成し，デプステクスチャを割り当てます．
 
-```c
+```cpp
 /*
 ** 初期化
 */
@@ -80,7 +80,7 @@ glBindTexture(GL_TEXTURE_2D, 0);
 
 ## 次にフレームバッファオブジェクトを作成し，デプスバッファに先ほど作成したテクスチャオブジェクトを割り当てます．
 
-```c
+```cpp
 /* フレームバッファオブジェクトの生成 */
 glGenFramebuffersEXT(1, &fb);
 glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
@@ -102,7 +102,7 @@ glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
 ## 最後に，シェーダオブジェクトを作成します．
 
-```c
+```cpp
 /* GLSL の初期化 */
 if (glslInit()) exit(1);
 
@@ -170,7 +170,7 @@ glUniform1i(glGetUniformLocation(gl2Program, "depth"), 0);
 
 描画はデプステクスチャを割り当てたフレームバッファオブジェクトに対して行います．そのため現在のビューポートを保存しておき，ビューポートをテクスチャのサイズに設定します．
 
-```c
+```cpp
 static void display(void)
 {
 GLint viewport[4]; /* ビューポートの保存用 */
@@ -186,7 +186,7 @@ glViewport(0, 0, TEXWIDTH, TEXHEIGHT);
 
 ## そして通常の手順でモデルビュー変換行列を設定します（透視変換行列はウィンドウのリサイズ時に設定します）．
 
-```c
+```cpp
 /* モデルビュー変換行列の設定 */
 glLoadIdentity();
 
@@ -201,7 +201,7 @@ glMultMatrixd(trackballRotation());
 
 ## 図形の描画はフレームバッファオブジェクトに対して行います．
 
-```c
+```cpp
 /* フレームバッファオブジェクトへのレンダリング開始 */
 glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
 
@@ -226,7 +226,7 @@ glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
 フレームバッファオブジェクトへの描画が完了したら，得られたテクスチャをマッピングして，ウィンドウいっぱいに１枚の四角形を描画します．この四角形の大きさは，テクスチャ空間の大きさに一致させておきます．また，四角形を１枚描くだけなので，デプステストはオフにします．なお，今回はバーテックスシェーダで行う座標変換に透視変換行列やモデルビュー変換行列を用いないので，ここでそれらを設定する必要はありません．
 
-```c
+```cpp
 /* ビューポートを元に戻す */
 glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
 
@@ -269,7 +269,7 @@ glutSwapBuffers();
 
 バーテックスシェーダでは，頂点位置を座標変換するのに加えて，頂点のローカル座標値をそのままテクスチャ座標に使います．頂点位置は，四角形が正規化デバイス座標系（クリッピング座標系，(-1,-1) と (1,1) を対角の頂点とする正方形）に一致するように座標変換します．
 
-```c
+```cpp
 // showdepth.vert
 
 void main(void)
@@ -284,7 +284,7 @@ gl_Position = vec4(gl_Vertex.xy * 2.0 - 1.0, 0.0, 1.0);
 
 フラグメントシェーダでは，サンプリングしたテクスチャの色をそのまま出力します．
 
-```c
+```cpp
 // showdepth.frag
 
 uniform sampler2D depth;

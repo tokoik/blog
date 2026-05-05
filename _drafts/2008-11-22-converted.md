@@ -30,13 +30,13 @@ OpenGL でもマルチサンプリングによるアンチエリアシングを�
 
 ## まず，`glutInitDisplayMode()` に `GLUT_MULTISAMPLE` を追加します．
 
-```c
+```cpp
 glutInitDisplayMode( ... | GLUT_MULTISAMPLE);
 ```
 
 ## マルチサンプリングが使えるかどうかは，次の手順により確認できます．
 
-```c
+```cpp
 GLint buffers, samples;
 
 /* マルチサンプリングの状態の確認 */
@@ -48,14 +48,14 @@ printf("buffers = %d, samples = %d\n", buffers, samples);
 
 ## ここで `buffers` が 1 以上，`samples` が 2 以上であれば，マルチサンプリングが使えます．マルチサンプリングが使えるようなら，描画時に `GL_MULTISAMPLE` を有効にします．この時点でマルチサンプリングによるアンチエリアシングが有効になります．なお，`GL_POINT_SMOOTH`，`GL_LINE_SMOOTH`，および `GL_POLYGON_SMOOTH` の状態は無視されます．
 
-```c
+```cpp
 /* マルチサンプリングを有効にする */
 glEnable(GL_MULTISAMPLE);
 ```
 
 ## 次に，`GL_SAMPLE_ALPHA_TO_COVERAGE` を有効にします．これによってアルファ値が画素の被覆率に置き換えられるようになり，半透明処理が実現されます．
 
-```c
+```cpp
 /* アルファ値をサンプルの被覆率にする */
 glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
 ```
@@ -96,7 +96,7 @@ NVIDIA コントロールパネルを開いて，「3D設定の管理」から�
 
 Windows においてコントロールパネルを使わずにアプリケーション側でマルチサンプリングを使えるようにするには，`wglChoosePixelFormatARB()` で `WGL_SAMPLE_BUFFERS_ARB` に 1 以上，`WGL_SAMPLES_ARB` に 2 以上（いずれもグラフィックスハードウェアの上限値以下）を設定して pixel format を選択します．これは WGL_ARB_multisample がサポートされている必要があります．
 
-```c
+```cpp
 int pixelFormat;
 bool valid;
 UINT numFormats;
@@ -128,7 +128,7 @@ if (valid == true && numFormats >= 1)  {
 
 ## この後，`GL_SAMPLE_BUFFERS` や `GL_SAMPLES` を調べます．
 
-```c
+```cpp
 GLint buffers, samples;
 
 glGetIntegerv(GL_SAMPLE_BUFFERS, &buffers);

@@ -21,7 +21,7 @@ published: true
 
 まず，VBO を使うための API を準備します．[前]({{ site.baseurl }}{% post_url 2006-07-15-post %})にも書いていますが，これは [GLEW](http://glew.sourceforge.net/) を使うと手軽にできます．しかし，ここでは例によって自分で準備することにします．
 
-```c
+```cpp
 #if defined(WIN32)
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
@@ -75,7 +75,7 @@ glDeleteBuffers =
 
 [前回]({{ site.baseurl }}{% post_url 2008-08-29-post %})に書いた頂点配列による描画手順は，まとめると次のようになります．
 
-```c
+```cpp
 /* 頂点データ */
 static GLfloat vert[][3] = {
 ...
@@ -146,7 +146,7 @@ glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 VBO の場合は，まずグラフィックスサブシステム側にメモリを確保（バッファオブジェクトを作成）し，あらかじめそこにデータを転送しておきます．
 
-```c
+```cpp
 ...
 
 /* バッファオブジェクトの名前を４つ用意する */
@@ -194,7 +194,7 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof face, face, GL_STATIC_DRAW);
 
 そして，次の手順で描画を行います．これは頂点配列の描画手順に似ています．
 
-```c
+```cpp
 ...
 
 #define BUFFER_OFFSET(bytes) ((GLubyte *)NULL + (bytes))
@@ -254,7 +254,7 @@ glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 使わなくなったバッファオブジェクトは，[`glDeleteBuffers()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteBuffers.xhtml) を使って削除します．
 
-```c
+```cpp
 glDeleteBuffers(4, buffers);
 ```
 
@@ -262,7 +262,7 @@ glDeleteBuffers(4, buffers);
 
 先の例ではバッファオブジェクトを４つ作っていましたが，`GL_ARRAY_BUFFER` にバインドするバッファオブジェクトは，ひとつにまとめることもできます．まず，`vert`，`norm`，および `texc` を合計したサイズのバッファオブジェクトを確保します．
 
-```c
+```cpp
 ...
 
 #define BUFFER_OFFSET(bytes) ((GLubyte *)NULL + (bytes))
@@ -294,7 +294,7 @@ glBufferData(GL_ARRAY_BUFFER, sizeof vert + sizeof norm + sizeof texc, NULL, GL_
 
 ## [`glBufferData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml) の第３引数に NULL を指定しているので，ここではバッファオブジェクトの確保のみが行われ，バッファオブジェクトの初期化（データの転送）は行われません．データの転送は，この後 [`glBufferSubData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferSubData.xhtml) を使って行います．
 
-```c
+```cpp
 /* バッファオブジェクトの先頭に頂点データを転送する */
 glBufferSubData(GL_ARRAY_BUFFER, BUFFER_OFFSET(0), sizeof vert, vert);
 /* バッファオブジェクトの頂点データの次に法線データを転送する */
@@ -305,7 +305,7 @@ glBufferSubData(GL_ARRAY_BUFFER, BUFFER_OFFSET(sizeof vert + sizeof norm), sizeo
 
 ## 頂点のインデックスの転送は，以前と同じです．
 
-```c
+```cpp
 /* ２つ目のバッファオブジェクトに頂点のインデックスを転送する */
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof face, face, GL_STATIC_DRAW);
@@ -316,7 +316,7 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof face, face, GL_STATIC_DRAW);
 
 ## 描画のときは，[`glVertexPointer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexPointer.xhtml) 等で，データの場所としてデータを転送したバッファオブジェクトのオフセットを指定します．
 
-```c
+```cpp
 /*
 ** 図形の表示
 */

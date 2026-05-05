@@ -29,7 +29,7 @@ CAD などの図形を扱うアプリケーションでは, 図形データを�
 
 [`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) を使って図形を描画します. これには２つのバッファオブジェクトが必要になります. 変数 buffers を<`em`>２つの要素の配列に変更します.
 
-```c
+```cpp
 ...
 
 /*
@@ -42,7 +42,7 @@ static GLuint buffer[2];
 
 ## バッファオブジェクトを参照するポインタも２つ用意します. `Edge` 型は線分の始点と終点の座標値を指す整数型の指標です. このほか, 今度の図形の頂点位置は<`em`>３次元なので, `Position` 型の要素数も 3 に変更しておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -65,7 +65,7 @@ Edge *edge;
 
 ## 最初にバッファオブジェクトを２つ作ります. 変数 `buffer` は配列に変更したので, 頭についていた & は取り去ります.
 
-```c
+```cpp
 ...
 
 /* uniform 変数 projectionMatrix の場所を得る */
@@ -79,7 +79,7 @@ glGenBuffers(2, buffer);
 
 ## 一つ目の頂点バッファオブジェクト `buffer`[0] を指定して, 頂点バッファオブジェクトに８頂点分のメモリ領域を確保します. [`glBufferData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml) の第３引数に NULL を指定しているので, ここではデータの転送を行いません.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトに８頂点分のメモリ領域を確保する */
 glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
 glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * 8, NULL, GL_STATIC_DRAW);
@@ -87,7 +87,7 @@ glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * 8, NULL, GL_STATIC_DRAW);
 
 ## 頂点バッファオブジェクトの座標データのメモリをプログラムのメモリ空間にマップして, その先頭のポインタを得ます. そして, そのポインタの指す場所に頂点の位置データを格納します.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
 position = (Position *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 
@@ -128,7 +128,7 @@ position[7][2] =  1.0f;
 
 ## 次に, 二つ目の頂点バッファオブジェクト `buffer`[1] を指定して, 頂点バッファオブジェクトに１２稜線分のメモリ領域を確保します. [`glBindBuffer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml) や [`glBufferData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml) の第１引数には `GL_ELEMENT_ARRAY_BUFFER` を指定します. 以下の操作は, 頂点バッファオブジェクトの座標データをマップした状態で行う必要があります.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトに１２稜線分のメモリ領域を確保する */  
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (Edge) * 12, NULL, GL_STATIC_DRAW);
@@ -136,7 +136,7 @@ glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (Edge) * 12, NULL, GL_STATIC_DRAW);
 
 ## そして, 頂点バッファオブジェクトの指標データのメモリをプログラムのメモリ空間にマップして, その先頭のポインタを得ます. そして, そのポインタの指す場所に線分の両端点の座標値を指す指標データを格納します.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
 edge = (Edge *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
 
@@ -180,7 +180,7 @@ edge[11][1] = 4;
 
 ## データの書き込みが終わったら, まず頂点バッファオブジェクトの指標データのメモリをプログラムのメモリ空間から切り離し, その頂点バッファオブジェクトを開放します.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
 glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
 
@@ -190,7 +190,7 @@ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 ## その後に, 頂点バッファオブジェクトの座標データのメモリをプログラムのメモリ空間から切り離し, その頂点バッファオブジェクトを開放します.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
 glUnmapBuffer(GL_ARRAY_BUFFER);
 
@@ -206,7 +206,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 図形を描画する際は, まず一つ目の頂点バッファオブジェクト `buffer`[0] を有効にします.
 
-```c
+```cpp
 ...
 
 /*
@@ -236,21 +236,21 @@ glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
 
 ## 頂点情報は３次元の座標値に変更したので, [`glVertexAttribPointer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml) の第２引数に指定するデータの要素数は 3 に変更します.
 
-```c
+```cpp
 /* 頂点情報の格納場所と書式を指定する */
 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 ```
 
 ## 次に, 頂点バッファオブジェクトの指標として `buffer`[1] を有効にします.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトの指標として buffer[1] を指定する */
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
 ```
 
 ## そして, [`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) を使って図形を描画します.
 
-```c
+```cpp
 /* 図形を描く */
 glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
 ```
@@ -262,7 +262,7 @@ glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
 
 ## 最後に, 頂点バッファオブジェクトを２つとも開放します.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトを解放する */
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -282,7 +282,7 @@ glFlush();
 
 あと, 座標値を３次元に変更したので, バーテックスシェーダも修正する必要があります. `attribute` 変数 `position` のデータ型を `vec3` に変更し, `gl_Position` に代入する際に追加していた z 座標値の 0.0 を取り除いてください.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert

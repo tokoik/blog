@@ -17,7 +17,7 @@ shi3z さんの日記「[僕が3Dプログラマをやめた理由　または3D
 
 メインプログラムの関数 `init()` の始めの方にあるデータ型 `Position` および `Edge` の定義と変数 `position` および `edge` の宣言 (下記の...の部分) を<`em`>削除します.
 
-```c
+```cpp
 ...
 
 /*
@@ -43,7 +43,7 @@ GLfloat temp0[16], temp1[16];
 
 ## また, その下にある頂点バッファオブジェクトにデータを転送している箇所 (下記の...の部分) も削除します. この部分は他のソースプログラムに移すので, これはエディタの「編集」メニューにある「切り取り (cut)」で削除してください. emacs なら C-k とか C-SPC と C-w とか, vi なら "ad/^} とか…
 
-```c
+```cpp
 ...
 
 /* 頂点バッファオブジェクトを２つ作る */
@@ -150,7 +150,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 ## 次に, 別のソースファイルを作成し, そこに削除した部分を「貼り付け (paste)」してください. emacs なら C-y とか, vi なら "ap とか… (きりがないな) そして, その前後に以下の内容を追加し, 関数 `wireCube()` を完成させてください. この関数は, 引数に指定されたバッファオブジェクトに対して頂点情報 (座標値) と頂点の指標を設定します. 戻り値は [`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) の第２引数に指定する, 描画する頂点の数 (`GL_LINES` の場合は稜線の数 × 2) です.
 
-```c
+```cpp
 #include <math.h>
 #include <stdlib.h>
 #if defined(WIN32)
@@ -184,7 +184,7 @@ return 24;
 
 ## メインプログラムの関数 `init()` の削除した部分では, 代わりにこの関数 `wireCube()` を呼び出しておきます. 変数 `points` に, この関数の戻り値を保存しておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -207,7 +207,7 @@ points = wireCube(buffer);
 
 ## 関数 `wireCube()` や変数 `points` を, プログラムの最初の部分で宣言しておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -224,7 +224,7 @@ extern GLuint wireCube(const GLuint *buffer);
 
 ## その後, 画面表示の [`glDrawElements()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml) の第２引数は 24 という定数になっているので, これを変数 `points` に変更します.
 
-```c
+```cpp
 /*
 ** 画面表示
 */
@@ -257,7 +257,7 @@ glDrawElements(GL_LINES, points, GL_UNSIGNED_INT, 0);
 
 ## この形状のデータを頂点バッファオブジェクトに設定する関数 `wireSphere()` を作成してください. 引数 `slices` と `stacks` は, それぞれ球の経度方向の分割数と緯度方向の分割数です. 引数 `buffer` にはデータを設定する頂点バッファオブジェクトの名前を格納した配列を指定します. `buffer`[0] には頂点位置, `buffer`[1] には指標を格納します. なお, このプログラムは `wireCube()` と同じファイルに書いてください.
 
-```c
+```cpp
 GLuint wireSphere(int slices, int stacks, const GLuint *buffer)
 {
 Position *position;
@@ -311,7 +311,7 @@ return edges * 2;
 
 ## これができたら, メインプログラムに `wireSphere()` の宣言を追加し, `wireCube()` を呼び出している部分を `wireSphere()` に置き換えてください. `slices` と `stacks` には, ともに 3 以上の整数を設定してください. ここでは 16 と 8 を設定しています.
 
-```c
+```cpp
 ...
 
 /*

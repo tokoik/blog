@@ -28,7 +28,7 @@ published: true
 
 シャドウマッピングでは物体表面上の三次元位置を求めるために，テクスチャ座標の自動生成機能を使っていました．シェーダを使う場合は，バーテックスシェーダで頂点の座標値を得ることができるので，この設定は不要になります（というか，シェーダを使うとテクスチャ座標の自動生成が機能しない？）．まず `main`1.cpp からテクスチャ座標の自動生成の設定を削除し，シェーダプログラムの読み込み処理を追加します．[glsl.h](glsl/glsl.h) と [glsl.cpp](glsl/glsl.cpp) は，[前回]({{ site.baseurl }}{% post_url 2006-05-25-post %})のサンプルプログラムものなどを用いてください．
 
-```c
+```cpp
 ...
 
 /*
@@ -173,7 +173,7 @@ glMultTransposeMatrixd =
 
 ## この #if 0 〜 #`endif` の間は削除しても構いません．次に，描画時にテクスチャ座標の自動生成を有効にしないようにしておきます．
 
-```c
+```cpp
 ...
 
 static void display(void)
@@ -221,7 +221,7 @@ glutSwapBuffers();
 本題とは直接関係ないのですが，このサンプルプログラムで表示されるチェッカーボード状の板は，シェーダを使うと色がうまく設定されなくなります．この板はポリゴン単位に glMaterialfv() を使って材質（色）を設定しているのですが，その値を得るために用いる `gl_FrontMaterial` や gl_BackMaterial は頻繁に値が変更されることが無い（ということが期待されている）`uniform` 変数であるために，ポリゴン単位の材質の変更には追従できないようです．
 そこで `scene`.cpp において glMaterialfv() を使っている部分をすべて [`glColor4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glColor4fv.xhtml) に置き換えます．[`glColor4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glColor4fv.xhtml) で設定した色は attribulte 変数 `gl_Color` で参照できるため，ポリゴン単位や頂点単位に色を設定した場合でも，値を取り出すことができます．
 
-```c
+```cpp
 ...
 
 /*
@@ -287,7 +287,7 @@ glPopMatrix();
 バーテックスシェーダでは，以前にやった [Gouraud シェーディング]({{ site.baseurl }}{% post_url 2005-10-07-post %})とほぼ同じ処理を行います．以前と異なるのは，材質（色）を `gl_Color` から得ることと，日向の部分の陰影のほかに影の部分の陰影も求めておくこと，それに頂点座標にテクスチャ変換行列を掛けてテクスチャ座標を求めておくこと，の３点です．
 影の部分の陰影は，日向の部分の環境光成分＋拡散反射光強度×0.2 とします．本当は環境光成分だけのはずですが，そうすると陰影がつぶれて平板な絵になってしまうので，多少光源の光の影響を与えます．一方，影の部分にハイライトが現れては不自然なので，鏡面反射光強度は加算しません．これをフラグメントシェーダに伝えるために，`shadow` という `varying` 変数に格納しておきます．
 
-```c
+```cpp
 // shadow.vert
 
 varying vec4 shadow;
@@ -324,7 +324,7 @@ gl_Position = ftransform();
 
 フラグメントシェーダでは `GLSL` の組み込み関数 `shadow2DProj()` を使ってテクスチャをサンプリングします．そして，その r 値（赤）が 0 でなければ，フラグメントに日向の陰影を設定し，0 なら影の陰影を背呈します．
 
-```c
+```cpp
 // shadow.frag
 
 uniform sampler2DShadow texture;
@@ -341,7 +341,7 @@ gl_FragColor = shadow;
 
 ## if が使いたくなければ，これは次のように書くこともできます．(`gl_Color` - `shadow`) はバーテックスシェーダであらかじめ計算しておくこともできますね．
 
-```c
+```cpp
 // shadow.frag
 
 uniform sampler2DShadow texture;

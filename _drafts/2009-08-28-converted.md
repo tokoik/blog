@@ -36,7 +36,7 @@ OpenGL 3.0 以降では, 基本図形にも変更が加えられています. `G
 
 ## 描画には頂点バッファオブジェクトを使います. 最初に, 頂点バッファオブジェクトの名前を格納する変数 `buffer` を用意します.
 
-```c
+```cpp
 ...
 
 /*
@@ -56,7 +56,7 @@ static GLuint buffer;
 
 ## 次に, 頂点バッファオブジェクトのメモリにアクセスするために使うポインタ変数を用意します.
 
-```c
+```cpp
 ...
 
 /*
@@ -76,7 +76,7 @@ Position *position;
 
 ## 頂点バッファオブジェクトを一つ作って, その名前を `buffer` に格納します.
 
-```c
+```cpp
 ...
 
 /* シェーダプログラムのリンク */
@@ -100,7 +100,7 @@ glGenBuffers(1, &buffer);
 
 ## 作成した頂点バッファオブジェクトのメモリ領域を確保します. 頂点情報は２次元の頂点位置が４個ですから, 確保するメモリのサイズは sizeof (`Position`) * 4 バイトです. また, この時点では頂点バッファオブジェクトのメモリへのデータの転送を行いませんから, [`glBufferData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml) の第３引数は NULL にしておきます. このメモリは, 最初にデータを書き込んだ後, 変更せずに繰り返して描画に使うので, この第４引数は, `GL_STATIC_DRAW` にします.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトに４頂点分のメモリ領域を確保する */
 glBindBuffer(GL_ARRAY_BUFFER, buffer);
 glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * 4, NULL, GL_STATIC_DRAW);
@@ -126,7 +126,7 @@ glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * 4, NULL, GL_STATIC_DRAW);
 
 <blockquote>[`glBufferData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml) や glBufferSubData() では, テクスチャオブジェクトのメモリ領域に転送するデータを, あらかじめ配列に格納しておく必要があります. 配列を用意したくない時や, 連続していないデータの一部を頻繁に変更するような場合は, [`glMapBuffer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glMapBuffer.xhtml) を使うと便利です. </blockquote>
 
-```c
+```cpp
 /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
 position = (Position *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 
@@ -149,7 +149,7 @@ position[3][1] = -0.9;
 
 ## 頂点情報の設定 (データの転送) が終わったら, 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離し, 頂点バッファオブジェクトを解放します.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
 glUnmapBuffer(GL_ARRAY_BUFFER);
 
@@ -170,7 +170,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 図形の描画は, 頂点バッファオブジェクトに格納した頂点情報を, バーテックスシェーダで宣言した `attribute` 変数 `position` に転送して行います. まず [`glUseProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml) を使って, 描画に使用するシェーダプログラムを適用します.
 
-```c
+```cpp
 ...
 
 /*
@@ -192,7 +192,7 @@ glUseProgram(gl2Program);
 
 ## バーテックスシェーダの `attribute` 変数 `position` には, `index` として 0 を設定しましたから, これを指定して頂点バッファオブジェクトを有効にします. 頂点バッファオブジェクトには, 前に作成した `buffer` を指定します.
 
-```c
+```cpp
 /* index が 0 の attribute 変数に頂点情報を対応付ける */
 glEnableVertexAttribArray(0);
 
@@ -208,7 +208,7 @@ glBindBuffer(GL_ARRAY_BUFFER, buffer);
 
 ## 頂点バッファオブジェクトのメモリには, 2x4 要素の `GLfloat` 型の配列が格納されています. これを `attribute` 変数 `position` に割り当てるので, [`glVertexAttribPointer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml) の第１引数には `position` の `index` である 0 を指定します. 第２引数は, `position` のデータ型が vec2 (２要素) なので, 2 を指定します. vec2 は `GLfloat` 型のベクトルなので, 第３引数には `GL_FLOAT` を指定します. 第４引数は, データ型が整数型であったときに, それを [0,1] または [-1,1] の範囲に正規化するか否かを指定します. ここでは正規化しないので, `GL_FALSE` を指定します. 第５引数には頂点情報と頂点情報の間隔を指定します. 頂点情報が密に (隙間無く) 格納されていれば, 0 を指定します. そして第６引数には, 頂点情報を格納している領域の先頭の位置を指定します. ここでは頂点情報は頂点バッファオブジェクトの先頭から格納されているので, 0 を指定します.
 
-```c
+```cpp
 /* 頂点情報の格納場所と書式を指定する */
 glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 ```
@@ -220,7 +220,7 @@ glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
 ## そして図形を描画します. 描く図形は `GL_LINE_LOOP` です. 頂点バッファオブジェクトに格納されている頂点情報の, 0 番目から 4 個の頂点を描きます.
 
-```c
+```cpp
 /* 図形を描く */
 glDrawArrays(GL_LINE_LOOP, 0, 4);
 ```
@@ -232,7 +232,7 @@ glDrawArrays(GL_LINE_LOOP, 0, 4);
 
 ## 図形の描画が完了したら, 頂点バッファオブジェクトを解放して, `index` が 0 の `attribute` 変数に対応する頂点バッファオブジェクトを無効にします.
 
-```c
+```cpp
 /* 頂点バッファオブジェクトを解放する */
 glBindBuffer(GL_ARRAY_BUFFER, 0);
 

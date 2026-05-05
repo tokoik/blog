@@ -23,7 +23,7 @@ published: true
 
 ## [`glOrtho()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glOrtho.xhtml) を使って, 境界箱を視野空間に設定します. ただし, そのままでは視点が原点にありますから, これを境界箱の前方面の位置に移動します (実際には図形を反対方向に移動します). 透視投影だと視点を前方面上に置けませんが, 平行投影では問題ありません.
 
-```c
+```cpp
 #if defined(WIN32)
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
@@ -111,7 +111,7 @@ return 0;
 
 この状態で, 視野空間を少し奥にずらしてみます.
 
-```c
+```cpp
 ...
 
 /*
@@ -140,7 +140,7 @@ glOrtho(pmin[0], pmax[0], pmin[1], pmax[1], offset, pmax[2] - pmin[2]);
 
 ## このように, クリップされていない部分ではポリゴンが偶数回描かれるのに対し, クリップされた部分では奇数回描かれています. そこで, ポリゴンを描くときにポリゴンの色を表示するのではなく, フレームバッファに保持されている色を反転するようにします. これは [`glLogicOp()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLogicOp.xhtml) で設定できます. こうすると, ポリゴンが偶数回描かれたところ最初の色 (背景色) が描かれ, 奇数回描かれたところでは反転した色が表示されます.
 
-```c
+```cpp
 ...
 
 /*
@@ -166,7 +166,7 @@ glDisable(GL_DEPTH_TEST);
 
 ## 上のプログラムでは背景色が黒なので, ポリゴンの色 (前景色) を白にしています. また, この処理では陰影計算と隠面消去処理を行う必要はありませんから, 光源の設定は削除し, デプステストはオフにしています. そして画面クリアの際にデプスバッファをクリアしないようにして (`GL_DEPTH_BUFFER_BIT` を削除する), `glEnable(`GL_COLOR_LOGIC_OP`)`; (`glEnable(`GL_LOGIC_OP`)`; でもいいかも?) を実行してから図形を描画するようにします. 
 
-```c
+```cpp
 ...
 
 /*

@@ -23,7 +23,7 @@ published: true
 
 異方性反射を正しく実装するには，物体表面の反射特性を精密にモデル化する必要があります．しかし，これはそれなりに面倒な気がします．安直に考えれば，異方性反射は反射率を接線方向から従法線方向に向かって適当に変化させることで実現できそうです．そこで鏡面反射強度のローブ（lobe, 反射光の方向分布の包絡形状）を，接線方向に引き延ばしてみることにします．鏡面反射光成分のローブは輝き係数 `shininess` で決まるので，フラグメントシェーダでこれを変化させます．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;
@@ -69,7 +69,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 ## 線状のハイライトの幅は，`shininess` で制御できます．ただし，glMaterialf() では `GL_SHININESS` に 128 を超える値を指定できないので，これを超える値を指定する場合はフラグメントシェーダ内で直接指定するか，別に `uniform` 変数を用意する必要があります．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;

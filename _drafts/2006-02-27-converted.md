@@ -32,7 +32,7 @@ published: true
 
 ## ただ，これだと点が小さすぎて見えにくいので，[`glPointSize()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPointSize.xhtml) を使って点の大きさを指定します．
 
-```c
+```cpp
 ...
 
 /*
@@ -71,7 +71,7 @@ glEnd();
 
 ## まず，プログラムの初期化部分で，テクスチャマッピングの設定を行います．今回はファイルの入出力に `iostream` / `fstream` を使いますので，プログラムの先頭部分に以下の２行を追加してください．
 
-```c
+```cpp
 #include <iostream>
 #include <fstream>
 
@@ -82,7 +82,7 @@ glEnd();
 
 ## 初期化の関数 `init()` で画像ファイルを読み込み，テクスチャとしてマッピングします．
 
-```c
+```cpp
 ...
 
 /*
@@ -146,7 +146,7 @@ particle::height(HEIGHT);
 
 ## そして，描画時にテクスチャマッピングを有効にします．
 
-```c
+```cpp
 ...
 
 /*
@@ -187,7 +187,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## そこで，`Point` `Sprite` を有効にします．まず，この点に対してテクスチャ座標を生成するようにテクスチャ環境を設定します．
 
-```c
+```cpp
 ...
 
 /*
@@ -210,7 +210,7 @@ GL_RGBA, GL_UNSIGNED_BYTE, image);
 
 ## そして図形の描画時に，`GL_POINT_SPRITE` を有効にします．
 
-```c
+```cpp
 ...
 
 /*
@@ -257,7 +257,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## ただ，これだとテクスチャの全面が点に貼られてしまいます．テクスチャの必要な部分だけを貼り付けるには，テクスチャにアルファチャンネルを付けておいて，アルファテストを有効にします．まず，アルファテストの判別関数を設定します．
 
-```c
+```cpp
 ...
 
 /*
@@ -283,7 +283,7 @@ glAlphaFunc(GL_GREATER, 0.5);
 
 ## そして図形の描画時にアルファテストを有効にします．
 
-```c
+```cpp
 ...
 
 /*
@@ -342,7 +342,7 @@ glDisable(GL_TEXTURE_2D);
 
 現状では [`glPointSize()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPointSize.xhtml) に定数を指定しているので，点の大きさは開いたウィンドウの大きさに関係なく一定になっています．点を形を持った図形として取り扱うなら，これはちょっと不自然です．そこで，ウィンドウの大きさに合わせて点の大きさを変更することにします．まず，点の大きさを決める変数 (`psize`) を用意します．
 
-```c
+```cpp
 ...
 
 /*
@@ -357,7 +357,7 @@ static GLfloat psize;
 
 ## この変数は開いたウィンドウの幅に比例するようにします．
 
-```c
+```cpp
 ...
 
 static void resize(int w, int h)
@@ -373,7 +373,7 @@ trackballRegion(w, h);
 
 ## glPointsize() の引数にこの変数を用います．
 
-```c
+```cpp
 ...
 /*
 ** シーンの描画
@@ -395,7 +395,7 @@ glBegin(GL_POINTS);
 
 このプログラムは透視変換をおこなっているので，点であっても大きさを持っていれば，遠くの点は小さく，近くの点は大きく描かれる必要があります．そこで，点の大きさを視点からの距離に反比例するようにします．まず，次のような３要素の配列変数 `distance` を用意し，0 番目と 1 番目の要素に 0，2 番目の要素に 1 を入れておきます．
 
-```c
+```cpp
 ...
 
 /*
@@ -411,7 +411,7 @@ static GLfloat distance[] = { 0.0, 0.0, 1.0 };
 
 ## そして [`glPointParameterfv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPointParameterfv.xhtml) を使って `GL_POINT_DISTANCE_ATTENUATION` にこの変数を指定します．
 
-```c
+```cpp
 ...
 
 #if defined(WIN32)

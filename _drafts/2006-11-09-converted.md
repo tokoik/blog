@@ -13,7 +13,7 @@ published: true
 
 ATI のビデオカードのドライバ CATALYST のバージョンを 5.x から 6.x にあげたら，[キューブマッピングで FBO を使ってみる]({{ site.baseurl }}{% post_url 2006-07-15-post %})のデモが動かなくなってしまいました．学生さんが研究で作っているプログラムも動かなくなってしまったので，二人で困ったもんだと首をかしげていた（学生さんは発表直前だったのでめちゃめちゃ焦っていた）のですが，どうも 6.x では FBO (Frame Buffer Object) を作るときに，きちんとカラーバッファ→デプスバッファの順に用意してやらないといけないようです．
 
-```c
+```cpp
 glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
 glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, rb);
 /* テクスチャメモリをカラーバッファに結合 */

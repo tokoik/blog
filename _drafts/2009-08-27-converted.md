@@ -29,7 +29,7 @@ published: true
 
 OpenGL 2.1 を想定しているので, GLSL のバージョンに 1.2 を指定します (#`version` 120). バーテックスシェーダでは, 頂点の位置を格納する (予定の) `attribute` 変数 `position` を, そのまま `gl_Position` に代入します. `position` は, とりあえず２次元 (`vec2`) とします. `gl_Position` は４次元 (`vec4`) なので, `vec4()` を使って２次元から４次元に変換します. このとき z = 0.0 とし, 同次座標なので w = 1.0 とします. なお `gl_Position` 変数は, 異なる (独立にコンパイルされた) バーテックスシェーダの間で同一のものを示しています. そのため, この変数に代入する式がそれらのシェーダで同じであり, その式に入力される値も同じなら, この変数は, <`em`>`invariant` として宣言します. このファイル名は `simple`.`vert` とします.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -48,7 +48,7 @@ gl_Position = vec4(position, 0.0, 1.0);
 
 フラグメントシェーダでも, GLSL のバージョンに 1.2 を指定します. バーテックスシェーダからは `gl_Position` 以外何も出力されていない (varying 変数を定義していない) ので, 画素の色として定数 (ここでは赤色) を出力します. `gl_FragColor` も `vec4` (r, g, b, a, a はアルファ値) なので, `vec4()` を使います. このファイル名は `simple`.`frag` とします.
 
-```c
+```cpp
 #version 120
 //
 // simple.frag
@@ -84,7 +84,7 @@ GLSL のシェーダプログラムを利用する手順は, 以下のように�
 
 ## したがってシェーダのソースプログラムは, 次のようにしてアプリケーションのソースプログラムに埋め込むことができます.
 
-```c
+```cpp
 ...
 
 static GLchar *source[] = {
@@ -105,7 +105,7 @@ glShaderSource(shader, sizeof source / sizeof source[0], source, NULL);
 
 ## ファイルに書いたシェーダのソースプログラムを読み込む場合は, ファイルのサイズを調べて `length` に指定し, count は 1 にすればいいでしょう. この場合 `readShaderSource()` は, 例えば次のようになります.
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #if defined(WIN32)
@@ -176,7 +176,7 @@ return ret;
 
 ## この他, シェーダのコンパイル時やリンク時のメッセージがわからないと, シェーダのデバッグができないので, これらを表示する関数を用意します. シェーダのコンパイル時のメッセージは [`glGetShaderiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetShaderiv.xhtml) と [`glGetShaderInfoLog()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetShaderInfoLog.xhtml) を組み合わせて得られますから, これらを用いて `printShaderInfoLog()` という関数を定義します.
 
-```c
+```cpp
 /*
 ** シェーダの情報を表示する
 */
@@ -217,7 +217,7 @@ fprintf(stderr, "Could not allocate InfoLog buffer.\n");
 
 ## 同様にして, シェーダのリンク時のメッセージを表示する関数 `printProgramInfoLog()` という関数を定義します. これには [`glGetProgramiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramiv.xhtml) と [`glGetProgramInfoLog()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramInfoLog.xhtml) を組み合わせて使います.
 
-```c
+```cpp
 /*
 ** プログラムの情報を表示する
 */
@@ -262,7 +262,7 @@ fprintf(stderr, "Could not allocate InfoLog buffer.\n");
 
 シェーダオブジェクトとプログラムオブジェクトの名前 (番号) を格納する変数を用意します. 以下の変数のうち, 少なくとも `gl2Program` は描画時に使いますから, その部分から見えるような場所に置く必要があります. `main()` の入っているソースファイルに<`em`>太字の内容を追加してください.
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #if defined(WIN32)
@@ -295,7 +295,7 @@ static GLuint gl2Program;
 
 ## また, シェーダプログラムのコンパイルとリンクの結果を取り出す変数も用意します.
 
-```c
+```cpp
 ...
 
 /*
@@ -321,7 +321,7 @@ exit(1);
 
 [`glCreateShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml) を使ってシェーダオブジェクトを作成し, その識別子を得ます. そして, それらの識別子に対してシェーダのソースプログラムを読み込みます. この読み込みには前に作成した `readShaderSource()` を使います. 関数 `init()` の最後の部分に, 以下の内容を追加します.
 
-```c
+```cpp
 /* 背景色 */
 glClearColor(1.0, 1.0, 1.0, 1.0);
 
@@ -341,7 +341,7 @@ if (readShaderSource(fragShader, "simple.frag")) exit(1);
 
 ## 読み込んだシェーダのソースプログラムを, [`glCompileShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCompileShader.xhtml) を使ってコンパイルします. コンパイルが成功したかどうかは, [`glGetShaderiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetShaderiv.xhtml) を使って変数 `compiled` に得ます. この内容が `GL_FALSE` なら, コンパイルに失敗したことになります. コンパイル時に出力されたメッセージを, 前に作成した `printShaderInfoLog()` を使って標準エラー出力に出力します.
 
-```c
+```cpp
 /* バーテックスシェーダのソースプログラムのコンパイル */
 glCompileShader(vertShader);
 glGetShaderiv(vertShader, GL_COMPILE_STATUS, &compiled);
@@ -370,7 +370,7 @@ exit(1);
 
 シェーダのソースプログラムのコンパイルに成功したら, プログラムオブジェクトを作成し, シェーダオブジェクトを登録します. この時点でシェーダオブジェクトは不要になるので, 削除してしまいます.
 
-```c
+```cpp
 /* プログラムオブジェクトの作成 */
 gl2Program = glCreateProgram();
 
@@ -403,7 +403,7 @@ glDeleteShader(fragShader);
 
 ## ここでは二つ目の方法を採用します.
 
-```c
+```cpp
 /* attribute 変数 position の index を 0 に指定する */
 glBindAttribLocation(gl2Program, 0, "position");
 ```
@@ -417,7 +417,7 @@ glBindAttribLocation(gl2Program, 0, "position");
 
 [`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml) によってシェーダプログラムをリンクします. リンクが成功したかどうかは, [`glGetProgramiv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramiv.xhtml) を使って変数 `linked` に得ます. この内容が `GL_FALSE` なら, リンクに失敗したことになります. シェーダのリンク時に出力されたメッセージを, 前に作成した `printProgramInfoLog()` を使って標準エラー出力に出力します.
 
-```c
+```cpp
 /* シェーダプログラムのリンク */
 glLinkProgram(gl2Program);
 glGetProgramiv(gl2Program, GL_LINK_STATUS, &linked);

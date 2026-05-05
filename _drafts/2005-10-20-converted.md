@@ -35,7 +35,7 @@ GLSL のユーザ定義関数は，基本的には C や C++ のものと変わ�
 
 関数 `shlick()` を定義して，pow() を置き換えます．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;

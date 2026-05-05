@@ -25,7 +25,7 @@ published: true
 
 ## この点をシェーダを使って書くとき, バーテックスシェーダとフラグメントシェーダのプログラムは, 例えばそれぞれ次のようになります. Point Sprite 自体ジオメトリシェーダ (テッセレータ) で置き換えられるべき機能だと思いますし, いい加減 OpenGL 3.0 以降に移行しろという感じですけど, この記事の本質ではないので許してください. Mac OS X Lion の OpenGL のバージョンはいくつになるんでしょうね?
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.vert
@@ -37,7 +37,7 @@ void main(void)
 gl_Position = ftransform();  // 座標変換するだけ
 ```
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.frag
@@ -53,7 +53,7 @@ gl_FragColor = vec4(1.0);  // 白色を描くだけ
 
 シェーダで点の大きさを変更するには, CPU 側のプログラムで `GL_VERTEX_PROGRAM_POINT_SIZE` を有効にしておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -71,7 +71,7 @@ glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 
 ## そしてバーテックスシェーダで変数 `gl_PointSize` に点の大きさを画素数で指定します.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.vert
@@ -91,7 +91,7 @@ gl_PointSize = size;  // 点の大きさを変更する
 
 ## なお, 点の大きさを投影変換後の w 要素で割れば, 点の大きさを視点からの距離に反比例させることができます.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.vert
@@ -113,7 +113,7 @@ gl_PointSize = size / gl_Position.w;  // 点の大きさを変更する
 
 前の [Point Sprite の記事]({{ site.baseurl }}{% post_url 2006-02-27-post %}) では, 点を丸くするために[アルファテスト]({{ site.baseurl }}{% post_url 2004-09-16-post %})によるカットアウトを使いました. また, [アンチエリアシング]({{ site.baseurl }}{% post_url 2008-08-21-post %})の設定を行って点を丸くすることもできます. ここでは Point Sprite で生成されたフラグメントの点内の相対座標値が格納される変数 `gl_PointCoord` を使ってみます. これは CPU 側のプログラムで `GL_POINT_SPRITE` を有効にすれば値が設定されます.
 
-```c
+```cpp
 ...
 
 /*
@@ -132,7 +132,7 @@ glEnable(GL_POINT_SPRITE);
 
 ## `gl_PointCoord` はフラグメントシェーダだけで使用できる `vec2` 型の変数で, 処理対象のフラグメントの描画する点 (大きさを設定しているので実際は正方形) 内での相対位置が [0, 1] の範囲で設定されます. これは点に貼付けるテクスチャをサンプリングするための<`em`>テクスチャ座標として使うことができます. ここではこれを使って, 点の中心から半径 0.5 の範囲より外にあるフラグメントを捨ててしまいます.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.frag
@@ -158,7 +158,7 @@ gl_FragColor = vec4(1.0);  // 白色を描くだけ
 
 前の [Point Sprite の記事]({{ site.baseurl }}{% post_url 2006-02-27-post %}) では, あらかじめ球の陰影のテクスチャを貼り付けていましたが, これだと光源の位置などをダイナミックに陰影に反映することができません (不可能ではないですが…). そこで, ここではシェーダーで陰影を計算することにします. まず, バーテックスシェーダで光線ベクトルを求めておきます. ここで光源はローカルな点光源とし, 光源の座標値及び点の座標値の w 要素は 1 であるとします.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.vert
@@ -178,7 +178,7 @@ gl_PointSize = size / gl_Position.w;  // 点の大きさを変更する
 
 ## これを `varying` 変数 `light` でフラグメントシェーダに渡します. 点なので, `light` は多分補間されないと思います.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.frag
@@ -212,7 +212,7 @@ gl_FragColor.a = 1.0;
 
 ## 鏡面反射光も加えてみます.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.frag
@@ -246,7 +246,7 @@ gl_FragColor.a = 1.0;
 
 点を描画する際, 点の裏側にある背景のテクスチャを点のテクスチャとしてサンプリングすれば, 点に透明感を与えることができます. CPU 側のプログラムにおいて, `uniform` 変数 `back` にはテクスチャを保持しているテクスチャユニット, `viewport` には表示領域のサイズ (ウィンドウの w と h) を格納しておきます. `gl_FragCoord`.`xy` にはウィンドウ上のフラグメント位置が格納されているので, `viewport` で割って背景のテクスチャ座標を求めます.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.frag
@@ -282,7 +282,7 @@ gl_FragColor.a = 1.0;
 
 スクリーンスペースでやってるので計算自体はでたらめですけど, 法線ベクトルがわかってるなら屈折<`em`>風の表現もできなくはありません.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.frag
@@ -317,7 +317,7 @@ gl_FragColor.a = 1.0;
 
 ## 透明なのに diffuse 見えるのはおかしいので, d の代わりに視線と法線の内積 (n.z) を用います. こうすると球の周辺部が暗くなるので, 多少立体感が出ます. これに環境光も加えて, 全体的に明るくします.
 
-```c
+```cpp
 #version 120
 //
 // pointsprite.frag

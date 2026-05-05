@@ -33,7 +33,7 @@ published: true
 
 これを OpenGL の座標変換に使う場合, 行列の各要素を次の順序で配列に格納します. つまり変換行列を配列に格納する際は, 行列の要素 `m0`〜`m15` の順序を (見かけ上) **転置**しなければなりません.
 
-```c
+```cpp
 GLfloat matrix[] = {
   m0,  m4,  m8,  m12,
   m1,  m5,  m9,  m13,
@@ -201,7 +201,7 @@ glGenBuffers(1, &buffer);
 
 そして図形の描画時に, 変換行列の内容を `uniform` 変数 projectinMatrix に格納します. ここでは [`glUniformMatrix4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniformMatrix4fv.xhtml) の引数 transpose に `GL_FALSE` を指定して, 配列の内容を転置せずに格納します.
 
-```c
+```cpp
 /*
 ** 画面表示
 */

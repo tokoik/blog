@@ -13,7 +13,7 @@ published: true
 
 というわけで, 小ネタ. 今日, 学生さんがつぶやいてたことに対する, 私のボヤキに補足します. たとえば, 次のようにして図形が表示されていたとします.
 
-```c
+```cpp
 static void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -43,7 +43,7 @@ glFlush();
 
 ## この `quad()` を描画する時点のモデルビュー変換行列を取り出し, その左上の 3x3 要素を単位行列にします.
 
-```c
+```cpp
 static void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -96,7 +96,7 @@ glFlush();
 
 ちゃんと視点側を向くビルボード処理をするなら, オブジェクトのローカル座標系の原点の視点座標系での位置 (m[12] m[13] m[14])<sup><i>T</i></sup> を z 軸にして基底ベクトルを求める必要があります. m を次のように設定します (2月22日ポリゴンが裏返ってたので修正).
 
-```c
+```cpp
 // モデルビュー変換行列の操作用
 GLdouble m[16], l;
 

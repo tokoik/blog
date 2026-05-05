@@ -22,7 +22,7 @@ published: true
 
 ## まず `showdepth`.h を読み込んでから，関数 `showdepth()` を呼び出します．
 
-```c
+```cpp
 ...
 
 #include "showdepth.h"
@@ -51,7 +51,7 @@ OpenGL の表示を画像ファイルに保存するには，OS の画面キャ�
 
 ## まず `saveimage`.h を読み込んでから，関数 `saveimage()` を呼び出します．
 
-```c
+```cpp
 ...
 
 #include "saveimage.h"

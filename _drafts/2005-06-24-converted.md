@@ -52,7 +52,7 @@ published: true
 
 ## マルチテクスチャを使って実装するので，Windows ではまず `glext`.h の読み込みと，関数ポインタ変数 `glActiveTexture` の宣言を行っておいてください．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -70,7 +70,7 @@ PFNGLACTIVETEXTUREPROC glActiveTexture;
 
 ## あらかじめテクスチャの境界色に使う変数 `border` を宣言し，それに黒色を設定しておきます．また今回は，もともとあった下地のテクスチャと合わせて合計３つのテクスチャを使うので，テクスチャオブジェクトを３つ作成しておきます．さらに Windows の場合は，関数ポインタ変数 `glActiveTexture` に [`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) の実体のエントリポイントを代入しておきます．
 
-```c
+```cpp
 ...
 
 /*
@@ -101,7 +101,7 @@ glActiveTexture =
 
 ## そうしたら，先に裏面の放物面テクスチャのマッピングを行います．このテクスチャマッピングにはテクスチャユニット０を使います．放物面テクスチャは２次元テクスチャとしてマッピングします．
 
-```c
+```cpp
 /* 裏面の放物面テクスチャのマッピングに使うテクスチャユニット */
 glActiveTexture(GL_TEXTURE0);
 glBindTexture(GL_TEXTURE_2D, texname[0]);
@@ -123,7 +123,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 ## `GL_TEXTURE_WRAP_S` と `GL_TEXTURE_WRAP_T` に `GL_CLAMP_TO_BORDER` を設定して，境界色がテクスチャの周囲に拡張されるようにします．そしてテクスチャの境界色に黒色を設定すれば，テクスチャからはみ出た部分が黒になります．あと，今回は下地の色が影響すると具合が悪いので，裏側の放物面テクスチャで下地のテクスチャを置き換えてしまいます．
 
-```c
+```cpp
 /* テクスチャの繰り返し方法の指定 */
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
@@ -137,7 +137,7 @@ glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 ## テクスチャ座標として，反射ベクトルを自動生成するようにします．また，このテクスチャ座標の変換行列に，前述の行列を設定しておきます．このあたりが，この手法の一番のミソですね．
 
-```c
+```cpp
 /* 反射ベクトルをテクスチャ座標として使う */
 glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
 glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
@@ -157,7 +157,7 @@ glMatrixMode(GL_MODELVIEW);
 
 ## 表面のテクスチャについても，同様の設定を行います．このテクスチャマッピングにはテクスチャユニット１を使います．
 
-```c
+```cpp
 /* 表面の放物面テクスチャのマッピングに使うテクスチャユニット */
 glActiveTexture(GL_TEXTURE1);
 glBindTexture(GL_TEXTURE_2D, texname[1]);
@@ -186,7 +186,7 @@ glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
 
 ## ただし，表面のテクスチャのテクスチャ環境は `GL_ADD` にして，表面のテクスチャを裏面のテクスチャに加算するようにします．
 
-```c
+```cpp
 /* テクスチャ環境 */
 glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
 
@@ -209,7 +209,7 @@ glMatrixMode(GL_MODELVIEW);
 
 ## 最後にもともとあったテクスチャをテクスチャユニット２に割り当てます．
 
-```c
+```cpp
 /* 拡散色のマッピングに用いるテクスチャユニット */
 glActiveTexture(GL_TEXTURE2);
 glBindTexture(GL_TEXTURE_2D, texname[2]);
@@ -226,7 +226,7 @@ fclose(fp);
 
  
 
-```c
+```cpp
 ...
 
 /*
@@ -320,7 +320,7 @@ glDisable(GL_TEXTURE_2D);
 これは表と裏のテクスチャの周囲が正確に一致するようテクスチャを丁寧に切り抜けば，目立たなくすることができます．でも，２枚のテクスチャの周囲を一致させる作業は，今回は手作業でやっているので，どうしても完全にはできませんでした．
 そこで，`GL_ADD` を使うのをあきらめて，`GL_DECAL` を使うことにします．`GL_DECAL` なら，アルファ値を使って必要なところだけ貼り付けることができます．加算をしないので，裏側のテクスチャがにじみ出てきたり，周囲が重なって明るくなったりすることはありません．ただ，逆に表側のテクスチャが裏側 (r<sub>z</sub> = -1) の面に現れる可能性がありますが，物体が閉じていれば裏側の面は見えないので，問題にはならないでしょう．
 
-```c
+```cpp
 ...
 
 /* 表面の放物面テクスチャのマッピングに使うテクスチャユニット */

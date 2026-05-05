@@ -17,7 +17,7 @@ published: true
 <li>[ティーポットを描くプログラム](texture/fbo2.zip)</li>
 </ul>
 
-```c
+```cpp
 ...
 
 static int width, height;   // ウィンドウの幅と高さ
@@ -91,7 +91,7 @@ height = h;
 フレームバッファオブジェクトはカラーバッファやデプスバッファなど, いくつかのバッファの集合体 (collection) です. ここではカラーバッファとデプスバッファからなるフレームバッファオブジェクトを作成します. カラーバッファにレンダリングされた画像を後でテクスチャとして使うので, カラーバッファにはテクスチャを割り当てます. デプスバッファは隠面消去処理だけのために使う (内容をテクスチャとして参照しない) ので, レンダーバッファを割り当てます.
 最初に, フレームバッファオブジェクトやテクスチャ, それにレンダーバッファの名前 (番号) を保存する変数を用意します. また, 作成するフレームバッファオブジェクトのサイズ (= テクスチャのサイズ) を定義しておきます.
 
-```c
+```cpp
 ...
 
 static int width, height;   // スクリーンの幅と高さ
@@ -106,7 +106,7 @@ static GLuint rb;           // デプスバッファ用のレンダーバッフ�
 
 ## 想定している OpenGL のバージョンは 2.1 です. フレームバッファオブジェクトは拡張機能なので, Windows の場合は [`GLEW`](http://glew.sourceforge.net/) を使って拡張機能を使えるようにしておきます.
 
-```c
+```cpp
 /*
 ** 初期化
 */
@@ -124,7 +124,7 @@ exit(1);
 
 ## まず, カラーバッファに使うテクスチャを作成します. テクスチャのサイズはフレームバッファオブジェクトのサイズにします. これは通常のテクスチャの作成と同じですが, 確保したテクスチャメモリに画像データを転送する必要はない (レンダリングによって描き込まれるから) ので, 画像データを渡すのに使う [`glTexImage2D()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml) の最後の引数は 0 (NULL) にしておきます. なお, [`glTexParameteri()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameteri.xhtml) を一つも指定しないと, テクスチャが正常に使用できない場合があります.
 
-```c
+```cpp
 // カラーバッファ用のテクスチャを用意する
 glGenTextures(1, &cb);
 glBindTexture(GL_TEXTURE_2D, cb);
@@ -138,7 +138,7 @@ glBindTexture(GL_TEXTURE_2D, 0);
 
 ## 次に, デプスバッファに使うレンダーバッファを作成します. このサイズもフレームバッファオブジェクトと同じにしておきます. もし[デプスバッファを表示]({{ site.baseurl }}{% post_url 2008-12-07-post %})する場合のように, デプスバッファの内容をテクスチャとして参照する必要があるなら, レンダーバッファではなくテクスチャを作成します.
 
-```c
+```cpp
 // デプスバッファ用のレンダーバッファを用意する
 glGenRenderbuffersEXT(1, &rb);
 glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, rb);
@@ -148,7 +148,7 @@ glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
 
 ## 最後にフレームバッファおオブジェクトを作成し, それにテクスチャとレンダーバッファを結合します.
 
-```c
+```cpp
 // フレームバッファオブジェクトを作成する
 glGenFramebuffersEXT(1, &fb);
 glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
@@ -178,7 +178,7 @@ glEnable(GL_LIGHT0);
 
 描画処理の直前にフレームバッファオブジェクトを有効にすれば, 図形はフレームバッファオブジェクトにレンダリングされ, ディスプレイには表示されなくなります (オフスクリーンレンダリング). ビューポートのサイズはフレームバッファオブジェクトに合わせておきます.
 
-```c
+```cpp
 /*
 ** 画面表示
 */
@@ -231,7 +231,7 @@ glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 クリッピング空間は<%= a "コンピュータグラフィックスの授業" %>や去年の夏休みゼミ資料の[第５回 座標変換]({{ site.baseurl }}{% post_url 2009-08-29-post %})で説明したように, 中心が原点にある一辺の長さが 2 の立方体の空間です. この空間内に描かれているものが画面に表示されます. 物体形状は, モデルビュー変換や透視変換を経て, この空間に投影されます. したがってモデルビュー変換行列と透視変換行列が単位行列なら, 物体の座標はクリッピング空間中の座標になります.
 そこで, モデルビュー変換行列と透視変換行列を単位行列にします.
 
-```c
+```cpp
 // 透視変換行列を単位行列にする
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
@@ -243,14 +243,14 @@ glLoadIdentity();
 
 ## ビューポートはウィンドウのサイズに合わせます.
 
-```c
+```cpp
 // ビューポートはウィンドウのサイズに合わせる
 glViewport(0, 0, width, height);
 ```
 
 ## 陰影付けや隠面消去処理は行わないようにします. また, 画面いっぱいにポリゴンを描くので, 画面消去は不要になります. デプスバッファも使わないので, 消去する必要はありません.
 
-```c
+```cpp
 // 陰影付けと隠面消去処理は行わない
 glDisable(GL_LIGHTING);
 glDisable(GL_DEPTH_TEST);
@@ -258,7 +258,7 @@ glDisable(GL_DEPTH_TEST);
 
 ## レンダリングされた画像が入っているテクスチャを結合して, テクスチャマッピングを有効にします.
 
-```c
+```cpp
 // テクスチャマッピングを有効にする
 glBindTexture(GL_TEXTURE_2D, cb);
 glEnable(GL_TEXTURE_2D);
@@ -266,7 +266,7 @@ glEnable(GL_TEXTURE_2D);
 
 ## xy 平面上に (-1, -1) と (1, 1) を対角線上の頂点とする正方形を白色で描きます. このとき, (-1, -1) の頂点のテクスチャ座標を (0, 0), (1, 1) の頂点のテクスチャ座標を (1, 1) とします.
 
-```c
+```cpp
 // 正方形を描く
 glColor3d(1.0, 1.0, 1.0);
 glBegin(GL_TRIANGLE_FAN);
@@ -283,7 +283,7 @@ glEnd();
 
 ## テクスチャマッピングを無効にします.
 
-```c
+```cpp
 // テクスチャマッピングを無効にする
 glDisable(GL_TEXTURE_2D);
 glBindTexture(GL_TEXTURE_2D, 0);
@@ -291,7 +291,7 @@ glBindTexture(GL_TEXTURE_2D, 0);
 
 ## 最後に [`glFlush()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glFlush.xhtml) (アニメーションするなら glutSwapBuffers()) を実行します.
 
-```c
+```cpp
 glFlush();
 }
 ```

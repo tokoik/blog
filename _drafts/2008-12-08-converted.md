@@ -27,7 +27,7 @@ published: true
 
 ## のフラグメントシェーダのソースプログラム showdepth.`frag` を，以下の内容（`sobel`.`frag`）に書き換えてみてください．
 
-```c
+```cpp
 // sobel.frag
 
 uniform sampler2D depth;
@@ -67,7 +67,7 @@ gl_FragColor = vec4(vec3(d), 1.0);
 
 ## この最後の部分を次のように書き換えると，この結果を２値化できます．
 
-```c
+```cpp
 ...
 float d = step(0.9, 1.0 - length(h));
 gl_FragColor = vec4(vec3(d), 1.0);
@@ -82,7 +82,7 @@ gl_FragColor = vec4(vec3(d), 1.0);
 
 フラグメントシェーダを次のように書き換えて，微分もしてみました．
 
-```c
+```cpp
 // differential.frag
 
 uniform sampler2D texture;
@@ -117,7 +117,7 @@ gl_FragColor = vec4(vec3(1.0 - d), 1.0);
 
 ここまできたら，ついでに Roberts オペレータもやってみました．
 
-```c
+```cpp
 // roberts.frag
 
 uniform sampler2D texture;

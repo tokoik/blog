@@ -21,7 +21,7 @@ published: true
 
 ## まず，これに FBO に使う関数の宣言を追加します．ただし，上の雛形の Windows 版に含まれている `glext`.h はバージョンが古く，FBO に関する宣言が含まれていません．最新の <%= a "`glext`.h" %> は [OpenGL® Extension Registry](http://www.opengl.org/registry/) から入手できますので，それと差し替えてください．なお，OpenGL® Extension Registry は最近 <%= a "SGI" %> から <%= a "OpenGL.org" %> に移管されたようです．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -47,7 +47,7 @@ PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC glCheckFramebufferStatusEXT;
 
 ## テクスチャオブジェクトとフレームバッファオブジェクト，およびレンダーバッファの識別子に使う変数を用意しておきます．
 
-```c
+```cpp
 ...
 
 /*
@@ -63,7 +63,7 @@ static GLuint tex, fb, rb;
 
 ## Windows では，FBO に使う API のエントリポイントを確保しておきます．例によって今回も FBO が使えるという前提でプログラムを書いているので，もし FBO が使えない環境で実行した場合にはエラーとなってしまいますので注意してください．このあたりのことをもっと楽にやりたければ，[GLEW](http://glew.sourceforge.net/) の導入を検討してください．
 
-```c
+```cpp
 /*
 ** 初期化
 */
@@ -93,7 +93,7 @@ glCheckFramebufferStatusEXT =
 
 ## テクスチャオブジェクトを生成し，それを現在のテクスチャに結合しておきます．
 
-```c
+```cpp
 /* テクスチャオブジェクトを生成して結合する */
 glGenTextures(1, &tex);
 glBindTexture(GL_TEXTURE_CUBE_MAP, tex);
@@ -108,7 +108,7 @@ GL_RGBA, GL_UNSIGNED_BYTE, 0);
 
 ## キューブマッピングのテクスチャの設定が済んだところで，デフォルトのテクスチャオブジェクトに戻しておきます．
 
-```c
+```cpp
 ...
 /* キューブマッピング用のテクスチャ座標を生成する */
 glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
@@ -123,7 +123,7 @@ glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 次に，フレームバッファオブジェクトとレンダーバッファの生成を行います．これらの生成はテクスチャオブジェクトと同じような感じです．テクスチャを（後で [`glFramebufferTexture2DEXT()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glFramebufferTexture2DEXT.xhtml) を使って）フレームバッファオブジェクトに結びつけることによって，直接テクスチャにレンダリングできるようになります．一方，レンダーバッファはテクスチャとしては使えませんが，隠面消去を行うなら Z バッファが必要になるので，[`glRenderbufferStorageEXT()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glRenderbufferStorageEXT.xhtml) を使ってデプスバッファ用のレンダーバッファを確保して，[`glFramebufferRenderbufferEXT()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glFramebufferRenderbufferEXT.xhtml) でフレームバッファオブジェクトに結び付けておきます．
 
-```c
+```cpp
 /* フレームバッファオブジェクトを生成して結合する */
 glGenFramebuffersEXT(1, &fb);
 glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
@@ -162,7 +162,7 @@ glDisable(GL_CULL_FACE);
 
 ## キューブマッピングする図形を描画する際には，キューブマッピングのテクスチャオブジェクトを結合しておきます．
 
-```c
+```cpp
 ...
 
 /*
@@ -222,7 +222,7 @@ glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 また FBO ではテクスチャに直接レンダリングするので，レンダリング結果のテクスチャメモリへのコピーは不要になります．これも #if 0 〜 #`endif` ではさんで無効にするか，削除してしまいます．
 最後に，FBO へのレンダリングを解除して，通常のフレームバッファへのレンダリングに戻します．
 
-```c
+```cpp
 ...
 
 static void display(void)
@@ -298,7 +298,7 @@ glScaled(-1.0, -1.0, 1.0);
 
 FBO ではテクスチャのサイズが開いたウィンドウのサイズに制限されないので，テクスチャの大きさはシステムの制限の範囲内で自由に設定できます．試しに，大きなテクスチャを使ってみます．
 
-```c
+```cpp
 ...
 
 /*
@@ -310,7 +310,7 @@ FBO ではテクスチャのサイズが開いたウィンドウのサイズに�
 
 ## テクスチャのサイズに合わせてウィンドウのサイズを制限する必要もなくなりますので，その部分を無効にします．
 
-```c
+```cpp
 ...
 
 static void resize(int w, int h)
@@ -338,7 +338,7 @@ trackballRegion(w, h);
 
 ## ウィンドウサイズの初期値も設定しないようにしておきます．
 
-```c
+```cpp
 ...
 
 /*

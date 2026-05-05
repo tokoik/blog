@@ -154,7 +154,7 @@ Windows (Visual Studio 2008/2010), Mac OS X (Xcode 4), Linux の場合につい�
 <dd>プロジェクトのダウンロードページ <%= a "http://www.glfw.org/download.html" %> からソースファイル glfw-2.7.6.zip (2012 年 9 月 6 日時点) が入手できます. ターミナルを開き, 展開したディレクトリに cd して make を実行すれば，インストールの仕方が表示されます. Mac OS X では次のコマンドでインストールできます.</dd>
 </dl>
 
-```c
+```cpp
 make cocoa
 ```
 
@@ -173,7 +173,7 @@ make cocoa
 <dd>プロジェクトのダウンロードページ <%= a "http://www.glfw.org/download.html" %> からソースファイル glfw-2.7.6.zip (2012 年 9 月 6 日時点) が入手できます. ターミナルを開き, 展開したディレクトリに cd して make を実行すれば，インストールの仕方が表示されます.</dd>
 </dl>
 
-```c
+```cpp
 make x11
 ```
 
@@ -262,7 +262,7 @@ int main(int argc, char *argv[])
 
 ## あるいは, ソースプログラム (main() 関数を含むものだけでよい) の冒頭に次の2行を置くだけでも構いません. DLL を使う場合は,  `GLFW`.`lib` の代わりに GLFWDLL.`lib` を指定してください.
 
-```c
+```cpp
 #pragma comment(lib, "GLFW.lib")
 ```
 
@@ -304,7 +304,7 @@ Base SDK という項目を探して, 設定内容を一度別のものに変更
 
 ## たとえば, 次のような [Makefile](glfw/Makefile) を作っておくと便利です (下の例はタブが失われているのでコピペでは使えません). 「プログラム名」は作成するプログラム名に置き換えてください. C 言語を使う時は `CXX` と `CXXFLAGS` をそれぞれ CC, CFLAGS に, .`cpp` を .c にすべて置き換えてください.
 
-```c
+```cpp
 CXXFLAGS        = -I/usr/X11R6/include -DX11 -Wall
 LDLIBS  = -L/usr/X11R6/lib -lglfw -lGL -lm
 OBJECTS = $(patsubst %.cpp,%.o,$(wildcard *.cpp))
@@ -327,7 +327,7 @@ $(CXX) $(CXXFLAGS) -MM *.cpp > $(TARGET).dep
 
 ## 空のディレクトリにプログラムのソースファイルとこの Makefile を置き, 最初に一度だけ `make` `depend` を実行してください (ヘッダファイルを追加した場合も実行してください). 以降は `make` だけでプログラムがコンパイル・リンクされます.
 
-```c
+```cpp
 make depend
 ```
 

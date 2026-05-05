@@ -17,7 +17,7 @@ published: true
 
 ## 球の形状データを生成する関数 `solidSphere()` において, 頂点情報に表面上の座標値を追加します. この関数は各自考えてもらっているはずですが, それを当てにして話をするのは非常に困難なので, [【解答例】](summer/solidsphere.txt)をもとにします. この頂点情報を保持するデータ型 `Position` の要素数を 3 から <strong>5</strong> に変更します.
 
-```c
+```cpp
 ...
 
 /* 頂点バッファオブジェクトのメモリを参照するポインタのデータ型 */
@@ -31,7 +31,7 @@ typedef GLuint Face[3];
 
 ## 次に, y 軸中心の回転角 `ph` を求めているところから, [0, 1] の範囲をもつパラメータ t を分離します.
 
-```c
+```cpp
 GLuint solidSphere(int slices, int stacks, const GLuint *buffer)
 {
 ...
@@ -47,7 +47,7 @@ float r = sinf(ph);
 
 ## 同様に, x 軸中心の回転角 `th` を求めているところから, [0, 1] の範囲を持つパラメータ s を分離します.
 
-```c
+```cpp
 for (int i = 0; i <= slices; ++i) {
 float s = (float)i / (float)slices;
 float th = 2.0f * 3.141593f * s;
@@ -57,7 +57,7 @@ float z = r * sinf(th);
 
 ## この s, t を, `Position` 型の変数 `position` の追加した要素に代入します.
 
-```c
+```cpp
 (*position)[0] = x;
 (*position)[1] = y;
 (*position)[2] = z;
@@ -72,7 +72,7 @@ float z = r * sinf(th);
 
 ## メインプログラムの関数 `init()` において, 追加した頂点情報を受け取る `attribute` 変数と, その `index` を指定します. `attribute` 変数の名前は `texture` とし, `index` は 1 にします.
 
-```c
+```cpp
 ...
 
 /*
@@ -97,7 +97,7 @@ glLinkProgram(gl2Program);
 
 ## 描画の際に, `attribute` 変数 `texture` の `index` に対して, 頂点情報への対応付けを有効にします.
 
-```c
+```cpp
 ...
 
 /*
@@ -125,7 +125,7 @@ glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
 
 ![頂点バッファオブジェクトの stride と pointer]({{ site.baseurl }}/assets/images/stridepointer.gif)
 
-```c
+```cpp
 /* 頂点情報の格納場所と書式を指定する */
 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof (GLfloat) * 5, 0);
 glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof (GLfloat) * 5, (GLfloat *)0 + 3);
@@ -135,7 +135,7 @@ glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof (GLfloat) * 5, (GLfloat *
 
 ## 図形の描画が終わったら, `attribute` 変数と頂点情報の対応付けを無効にします.
 
-```c
+```cpp
 ...
 
 /* 頂点バッファオブジェクトを解放する */
@@ -161,7 +161,7 @@ glFlush();
 
 ## 最後にシェーダプログラムを変更します. バーテックスシェーダにおいて `vec2` 型の `attribute` 変数 `texture` を宣言し, それを `varying` 変数 t に代入します. ただし, 現在のフラグメントシェーダの処理では, そのまま代入したのでは図形が表示されないので, 16 倍くらいします (これは多分あとで元に戻します).
 
-```c
+```cpp
 #version 120
 //
 // simple.vert

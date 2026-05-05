@@ -72,7 +72,7 @@ BxM^-1はフレームの最初に計算しておけるので、ボーンの数�
 さらにボーン同士が親子関係を持つ場合 (だいたい、みなさん、そーされています), 例えば上図において上のボーンが下のボーンに付随して動くような場合には, 上のボーンに定義する変換 **M'**<sub>1</sub> も **M**<sub>0</sub> からの相対的なものになりますから, **M**<sub>1</sub> も **M**<sub>1</sub> = **M'**<sub>1</sub> **M**<sub>0</sub> として求める必要があります. ボーンが枝分かれするなど複雑な階層構造を持っている場合, これをベタに書くとプログラムがぐちゃぐちゃになってしまいそうです.
 そこでボーンを (実はやりたくなかったけど) クラスにまとめて, インスタンスごとに局所的な変換を持たせることにします. これにはボーンの初期位置を決める変換 **M'**<sub><i>i</i></sub> に用いる回転と平行移動のパラメータ (`rotation` と `position`) と, アニメーションを行うために用いる変換行列 **B'**<sub><i>i</i></sub>(<i>t</i>) を保持する配列 (`animation`) を用意します. これに加えてボーンの長さ (`length`) も保持しておきます (1月4日, ここも参考意見をもとに追加しました).
 
-```c
+```cpp
 ...
 
 class Bone {
@@ -91,7 +91,7 @@ const Bone *parent;   // 親のボーンへのポインタ
 
 ボーンを描画する際に, 現在のボーンから根元のボーンまでの各ボーンの変換を累積した変換行列を求めます. とりあえず現在のボーンの長さを使って, 画面表示するボーンの形状を拡大縮小する変換行列を作成しておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -110,7 +110,7 @@ scale.loadScale(b->getLength(), b->getLength(), b->getLength());
 
 ## 現在のボーンから `parent` をたどって根元のボーンに至るまでの各ボーンに設定されている変換を積算していきます. 累積の順序が通常の座標変換と逆順になるので, コードが多少ダサい感じになってます.
 
-```c
+```cpp
 /* ボーンを初期位置に配置する変換行列とアニメーション後の変換行列 */
 Matrix initial, animated;
 initial.loadIdentity();
@@ -131,7 +131,7 @@ while ((b = b->getParent()) != 0);
 
 ## 累積した変換は, ボーンに対するモデル変換になります. 最後に, 現在のビュー変換に `initial` と `animated` をかけて, ボーンに対するモデルビュー変換を求めます.
 
-```c
+```cpp
 /* 現在のビュー変換行列をかけておく */
 initial = viewMatrix * initial;
 animated = viewMatrix * animated;
@@ -139,7 +139,7 @@ animated = viewMatrix * animated;
 
 ## これで `initial` に各ボーンの初期位置を求める変換, すなわち **M**<sub><i>i</i></sub> が格納され, `animated` に各ボーンのアニメーションの変換を累積したもの, すなわち **B**<sub><i>i</i></sub>(<i>t</i>) が格納されます. この `initial` を使ってボーンの配置後の根元の位置を求め, `uniform` 変数としてバーテックスシェーダに渡す配列変数 `bottom` に格納します. 一方, ボーンの先端の位置は `initial` に先ほど求めた `scale` をかけたものを使って求め, `uniform` 変数としてバーテックスシェーダに渡す配列変数 `top` に格納しておきます.
 
-```c
+```cpp
 /* ボーンの初期位置における根元と先端の位置を求める */
 initial.projection(bottom, boneVertex[0]);
 (initial * scale).projection(top, boneVertex[5]);
@@ -147,14 +147,14 @@ initial.projection(bottom, boneVertex[0]);
 
 ## アニメーションの変換 `animated` にボーンの初期位置を求める変換 `initial` の逆変換をかけます (**B**<sub><i>i</i></sub>(<i>t</i>) **M**<sup>-1</sup><sub><i>i</i></sub>). この変換は, 対象形状の初期位置における点の位置を, アニメーション後の位置に移動します. これもバーテックシェーダに `uniform` 変数として渡す変換行列の配列変数 `blend` に格納しておきます.
 
-```c
+```cpp
 /* バーテックスブレンディング用の変換行列 */
 memcpy(blend, (animated * initial.invert()).get(), sizeof blend[0] * 16);
 ```
 
 ## 最後にボーンの形状を描きます. ボーンを指定した長さになるように拡大縮小し, それにアニメーションの変換を加えた後, 投影変換を行います.
 
-```c
+```cpp
 /* attribute 変数 position に頂点情報を対応付けてボーンを描画する */
 glEnableVertexAttribArray(0);
 glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, boneVertex);
@@ -170,7 +170,7 @@ glDisableVertexAttribArray(0);
 
 ボーンの初期位置におけるボーンの根元と先端の位置 (`bottom`, `top`), および対象形状の初期位置における点の位置をアニメーション後の位置に移動する変換 (`blend`) をバーテックスシェーダに渡して, 図形 (点) の描画を行います.
 
-```c
+```cpp
 ...
 
 /*
@@ -188,7 +188,7 @@ GLfloat bottom[BONES][4], top[BONES][4], blend[BONES][16];
 
 ## まず, `drawBone()` を使ってボーンの形を描くとともに, `bottom`, `top`, および `blend` を求めます.
 
-```c
+```cpp
 /*
 ** ボーンのアニメーション
 */
@@ -205,7 +205,7 @@ drawBone(&bone[i], bottom[i], top[i], blend[i]);
 
 ## 最初に `modelViewMatrix` に現在のビュー変換行列 `viewMatrix` を格納しておき, それにこの対象形状に対するモデル変換を適用します. `modelViewMatrix` にはこの図形に対するモデルビュー変換行列が格納されます. これと現在の投影変換行列 `projectionMatrix` を `uniform` 変数としてバーテックスシェーダに渡します.
 
-```c
+```cpp
 /*
 ** 点を描く
 */
@@ -222,7 +222,7 @@ glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, projectionMatrix.get()
 
 ## またバーテックスブレンディングを行うためのデータとして, 使用するボーンの数 `BONES` や各ボーンの根元と先端を格納した配列 `bottom`, `top`, および対象形状の初期位置における点の位置をアニメーション後の位置に移動する変換行列 `blend` を, それぞれ `uniform` 変数 numberOfBones, boneBottom, boneTop, blendMatrix に格納します.
 
-```c
+```cpp
 /* バーテックスブレンディング用の uniform 変数の設定 */
 glUniform1i(numberOfBonesLocation, BONES);
 glUniform4fv(boneBottomLocation, BONES, bottom[0]);
@@ -232,7 +232,7 @@ glUniformMatrix4fv(blendMatrixLocation, BONES, GL_FALSE, blend[0]);
 
 ## そして点を描きます.
 
-```c
+```cpp
 /* attribute 変数 position に頂点情報を対応付けて図形を描画する */
 glEnableVertexAttribArray(0);
 glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);

@@ -38,7 +38,7 @@ published: true
 
 ## マルチテクスチャを使うので，Windows では [`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) が使えるようにしておきます．また，テクスチャオブジェクト用の変数も用意しておきます．`main`.cpp を次のように変更します．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -80,7 +80,7 @@ glActiveTexture =
 
 ## そしてテクスチャユニット１にディフューズテクスチャを割り当てます．
 
-```c
+```cpp
 ...
 
 /* テクスチャユニット０に法線マップを割り当てる */
@@ -131,7 +131,7 @@ glEnable(GL_CULL_FACE);
 
 ## 最後に，ディフューズテクスチャを割り当てたテクスチャユニットの番号を，シェーダプログラムで使う `uniform` 変数に設定します．
 
-```c
+```cpp
 ...
 
 /* シェーダプログラムの適用 */
@@ -153,7 +153,7 @@ tangent = glGetAttribLocation(gl2Program, "tangent");
 
 ## あと，一応テクスチャをマッピングする部分で，テクスチャマッピングを有効にしておきます．「一応」というのは，もしかしたら GLSL ではこの `glEnable(`GL_TEXTURE_2D`)` は不要なのではないかと思うからです．マッピングするかしないかはシェーダプログラムで決めることができますし，実際，無くても動くので…
 
-```c
+```cpp
 ...
 
 /*
@@ -198,7 +198,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## フラグメントシェーダプログラム `bump`.`frag` は次のように変更します．まず，ディフューズテクスチャを割り当てたテクスチャユニットを指定する `uniform` 変数 `dtexture` を宣言します．そして，そのテクスチャユニット使ってテクスチャをサンプリングして得た色 `dcolor` を使って陰影付けを行います．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;
@@ -237,7 +237,7 @@ gl_FragColor += dcolor * gl_LightSource[0].diffuse * diffuse
 
 視差マッピングではバンプの高さを考慮するので，法線マップのほかに高さマップも読み込んでおく必要があります．ここでは法線マップを作成する際，そのアルファチャンネルに高さマップを入れておくことにします．normalmap.cpp を次のように変更します．
 
-```c
+```cpp
 ...
 
 /*
@@ -278,7 +278,7 @@ free(map);
 
 ## したがってフラグメントシェーダ内で高さマップを参照し，それに視線の方向ベクトルを掛けて，テクスチャ座標をずらす量を決定します．そのために，先に視線の方向単位ベクトル `fview` を求めます．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;
@@ -298,13 +298,13 @@ vec3 fview = normalize(view);
 
 ## 視線の方向ベクトルの `xy` 成分に法線マップのアルファチャンネルに入れておいた高さマップの値を乗じます．これをテクスチャ座標から引いて，ずらしたテクスチャ座標 `texcoord` を求めます．係数の 0.02 はバンプの実際の高さの最高値のようなもので，この値が大きいほどバンプが強くなります．しかし，バンプ内での隠面消去処理を行っていないので，あまり大きな値を設定すると不自然な表示になります．
 
-```c
+```cpp
 vec2 texcoord = gl_TexCoord[0].xy - fview.xy * color.a * 0.02;
 ```
 
 ## ずらしたテクスチャ座標を使って法線マップをサンプリングし，法線ベクトル `fnormal` を求めます．また，ディフューズテクスチャもこのテクスチャ座標を使ってサンプリングします．
 
-```c
+```cpp
 vec3 fnormal = vec3(texture2D(texture, texcoord)) * 2.0 - 1.0;
 vec3 flight = normalize(light);
 float diffuse = dot(flight, fnormal);

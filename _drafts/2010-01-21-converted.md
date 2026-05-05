@@ -31,7 +31,7 @@ GLSL でこの方法を採用するとき, フラグメントシェーダを一�
 
 ## 視点から z 軸方向に -1 のところに置いた投影面の大きさを -`sx` ≤ x ≤ `sx`, -`sy` ≤ y ≤ `sy` とします. 画角を fovy, 表示領域の縦横比を aspect とすれば, `sy` = `tan(fovy / 2)`, `sx` = `sy` × aspect になります.
 
-```c
+```cpp
 ...
 
 /*
@@ -49,7 +49,7 @@ GLfloat sx = sy * (float)width / (float)height;
 
 ## この投影面の -near の位置に置いた前方面への投影像は, 投影面を near 倍したものになります. この投影像上の点が視線の基点になります. これを変数 `org` に保存しておきます.
 
-```c
+```cpp
 /* 投影面の前方面上の投影像のスケール */
 GLfloat org[3];
 org[2] = cameraNear;
@@ -59,7 +59,7 @@ org[1] = org[2] * sy;
 
 ## また, この投影面の -far の位置に置いた後方面への投影像の, 前方面上の投影像からの変位は, もとの投影面を far - near 倍したものになります. これは前方面上にある視線の基点から後方面に向かう視線の方向になります. これを変数 `dir` に格納しておきます.
 
-```c
+```cpp
 /* 投影面の後方面上の投影像の前方面上の投影像からの変位 */
 GLfloat dir[3];
 dir[2] = cameraFar - cameraNear;
@@ -69,7 +69,7 @@ dir[1] = dir[2] * sy;
 
 ## このほか, 視点の位置と目標点の位置から, 視野を回転する変換行列を求めます. これを変数 `rot` に格納しておきます.
 
-```c
+```cpp
 /* 視線の方向を回転する行列 */
 GLfloat rot[9];
 lookat(cameraPosition, cameraTarget, cameraUp, rot);
@@ -77,7 +77,7 @@ lookat(cameraPosition, cameraTarget, cameraUp, rot);
 
 ## シェーダプログラム (バーテックスシェーダ) の `uniform` 変数にこれらの値を格納します. `uniform` 変数 `cam`, `org`, `dir` は `vec3` のベクトル, `rot` は `mat3` の行列です.
 
-```c
+```cpp
 /* バーテックスシェーダの uniform 変数の場所を得る */
 GLint camLocation = glGetUniformLocation(shader, "cam");
 GLint orgLocation = glGetUniformLocation(shader, "org");
@@ -96,7 +96,7 @@ glUniformMatrix3fv(rotLocation, 1, GL_FALSE, rot);
 
 表示領域全体を覆うポリゴンを, 頂点バッファオブジェクトに転送しておきます. ポリゴンの大きさは xy 平面上で -1 ≤ x ≤ 1, -1 ≤ y ≤ 1 です. これを視線を生成するのにも使うので, 頂点の z 座標値を -1 にしておきます.
 
-```c
+```cpp
 /* 表示領域いっぱいに描くポリゴンの頂点座標 */
 static const GLfloat scr[][3] = {
 { -1.0f, -1.0f, -1.0f },
@@ -132,7 +132,7 @@ glEnableVertexAttribArray(scrLocation);
 
 レンダリングする図形のポリゴン (三角形) の頂点の位置や頂点の法線ベクトルは, `uniform` 変数で与えます. この `uniform` 変数の場所を求めておいて, 表示領域を覆うポリゴンを描画する関数に渡します.
 
-```c
+```cpp
 /* フラグメントシェーダの uniform 変数の場所を得る */
 GLint posLocation = glGetUniformLocation(shader, "pos");
 GLint vecLocation = glGetUniformLocation(shader, "vec");
@@ -148,7 +148,7 @@ obj->draw(posLocation, vecLocation, sizeof scr / sizeof scr[0]);
 
 表示領域を覆うポリゴンを, 形状データを構成する三角形の数だけ描きます. このポリゴンは, シェーダプログラムによって, `uniform` 変数に指定した三角形の形に切り抜かれます.
 
-```c
+```cpp
 ...
 
 /*
@@ -162,7 +162,7 @@ for (int i = 0; i < nf; ++i) {
 
 ## なお, `pos`[0] には **P**<sub>0</sub> を格納しますが, `pos`[1] には **E**<sub>1</sub> = **P**<sub>1</sub> - **P**<sub>0</sub>, `pos`[2] には **E**<sub>2</sub> = **P**<sub>2</sub> - **P**<sub>0</sub> を格納します.
 
-```c
+```cpp
 int i0 = face[i][0], i1 = face[i][1], i2 = face[i][2];
 
 /* uniform 変数 pos に三角形の頂点 p0 とそこから２頂点に向かうベクトル e1, e2 を格納する */
@@ -194,7 +194,7 @@ glDrawArrays(GL_TRIANGLE_FAN, 0, points);
 
 バーテックスシェーダでは描画するポリゴンの頂点座標値 `scr` に投影面の前方面上でのスケール `org` をかけます. それを `rot` により視野の方向に回転して, `cam` を加えて視点の位置を平行移動します. これは視線の基点 **O** になります. これを `varying` 変数 o に代入します. 同様に, `scr` に投影面の前方面上の投影像から後方面上の投影像への変位をかけて, これも `rot` により視野の方向に回転します. これは視線の方向 **D** になります. これを `varying` 変数 d に格納します.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -221,7 +221,7 @@ gl_Position = vec4(scr, 1.0);
 
 フラグメントシェーダでは, [前回]({{ site.baseurl }}{% post_url 2010-01-13-post %})同様 [Möller らの方法](http://www.graphics.cornell.edu/pubs/1997/MT97.html)を使って (t, u, v) を求めます. 前回と違うのは, バーテックスシェーダではクリッピング空間の範囲が z 方向についても [-1, 1] だったのに対し, フラグメントシェーダでは `gl_FragDepth` の値の範囲が [0, 1] になっている点です. このため, 今回の方法では視線の基点を前方面上に設定しています. なお, 以下では t < 0 または t > 1 のときに `discard` していますが, この判定はなくても問題ないようです. `gl_FragDepth` がその範囲のフラグメントは捨てられるみたいです.
 
-```c
+```cpp
 #version 120
 //
 // simple.frag

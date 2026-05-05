@@ -21,7 +21,7 @@ published: true
 <li>[Windows 版](texture/texture15.lzh)</li>
 </ul>
 
-```c
+```cpp
 ...
 
 /*
@@ -66,7 +66,7 @@ glActiveTexture(GL_TEXTURE0);
 OpenGL 1.3 ではテクスチャ環境が拡張され，線形補間によるテクスチャの合成機能などが追加されました．この線形補間によるテクスチャの合成機能を使うと，上記のような明度の比例配分をレンダリング時に行うことが可能になります．すなわち，（現在のテクスチャユニットで処理している）映り込みの色の a 倍し，下地の色の 1-a 倍した後に，それらを加算した結果を得ることができます．
 この機能を使用するには，まず [`glTexEnvi()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvi.xhtml) 関数で `GL_TEXTURE_ENV_MODE` に `GL_COMBINE` を指定します．次に [`glTexEnvi()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvi.xhtml) で `GL_COMBINE_RGB` に実行するテクスチャの演算を指定します．線形補間を行うには，ここに `GL_INTERPOLATE` を指定します．`GL_INTERPOLATE` では補間のパラメータ a に何を使うか指定する必要がありますが，デフォルトではこれに [`glTexEnvfv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvfv.xhtml) を使って `GL_TEXTURE_ENV_COLOR` に指定した変数に格納された色が用いられます．ただし，ここで使用されるのは，色の４つの成分 RGBA のうちの A，すなわちアルファ値のみです．
 
-```c
+```cpp
 ...
 
 /*
@@ -124,7 +124,7 @@ glActiveTexture(GL_TEXTURE0);
 現在のテクスチャユニット（テクスチャユニット１）はキューブマッピングの処理を行っており，前のテクスチャユニットは下地のテクスチャの処理を行っています．したがって，`GL_SOURCE2_RGB` に `GL_PREVIOUS` を指定して前のテクスチャユニットの出力を参照すれば，a に物体に張り付けた方のテクスチャを利用できます．
 そして [`glTexEnvi()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexEnvi.xhtml) を使って `GL_OPERAND2_RGB` に参照した値の取り扱い方を設定します．これに `GL_SRC_ALPHA` を指定することで，a に下地のアルファチャンネルを割り当てることができます．
 
-```c
+```cpp
 ...
 
 /*
@@ -179,7 +179,7 @@ glActiveTexture(GL_TEXTURE0);
 
 ## ちなみに，`GL_SRC_ALPHA` を `GL_ONE_MINUS_SRC_ALPHA` に変えると，次のような結果が得られます．
 
-```c
+```cpp
 ...
 
 /* テクスチャユニット１のテクスチャ環境 */

@@ -38,7 +38,7 @@ Picture Control に結びつけた `OpenGL` の描画領域に描くシーンの
 
 個人的には #`pragma` `once` じゃなくて #ifndef 〜 #define 〜 #endif を使いたいところですが, ここでは Visual Studio の流儀に従います.
 
-```c
+```cpp
 #pragma once
 
 class Scene
@@ -59,7 +59,7 @@ void draw(void);
 
 ## 描画する図形はなんでもいいんですけど, GLUT も AUX も使ってないので (GLU は使えますけど) 自分で定義することにします. もうちょっとこだわってシーングラフっぽくしたくなるのですが, そんなことをしていたら終わらないので我慢します.
 
-```c
+```cpp
 #include "StdAfx.h"
 #include "Scene.h"
 
@@ -98,7 +98,7 @@ glPopMatrix();
 
 ## `Scene`.h を #`include` します.
 
-```c
+```cpp
 // GLsampleDlg.h : ヘッダー ファイル
 //
 
@@ -129,7 +129,7 @@ class CGLsampleDlg : public CDialog
 
 ## `OpenGL` の初期化が終わった後で `Scene` クラスのインスタンスを生成して, `m_pScene` に代入します. `Scene` のコンストラクタは `OpenGL` 的な処理を何もしていないので, 実はこのインスタンスはどこで生成しても構わないのですが, 気分的な問題と将来の拡張 (あるのか) に備えて, ここで生成することにします.
 
-```c
+```cpp
 BOOL CGLsampleDlg::OnInitDialog()
 {
 CDialog::OnInitDialog();
@@ -179,7 +179,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## 画面クリアの後でシーンを描画する `draw()` メソッドを呼び出します.
 
-```c
+```cpp
 void CGLsampleDlg::OnPaint()
 {
 if (IsIconic())
@@ -210,7 +210,7 @@ SwapBuffers(m_pDC->m_hDC);
 
 ## `OnDestroy()` はウィンドウを閉じるときに呼び出されるので, `OnInitDialog()` で生成したインスタンスをここで削除します.
 
-```c
+```cpp
 void CGLsampleDlg::OnDestroy()
 {
 CDialog::OnDestroy();
@@ -277,7 +277,7 @@ delete m_pDC;
 「Slider Control」のツマミを動かしているときは `nSBCode` に `SB_THUMBPOSITION` か `SB_THUMBTRACK` が入っているので, この時は現在の位置 `nPos` を `m_xvRotateZ` に代入します. `nSBCode` が `SB_PAGELEFT` あるいは `SB_PAGERIGHT` は「Slider Control」上のツマミ以外の部分をクリックしたときなので, 「１ページ分のジャンプ量 (「Slider Control」の実態はスクロールバーなので)」を求めて `m_xvRotateZ` に加算 / 減算します. 
 最後に `UpdateData(`FALSE`)` によりコントロールの設定値をコントロール自体に反映し, `Invalidate(`FALSE`)` で画面の再表示を行います. `OpenGL` の表示領域は `OpenGL` 自体で画面クリアを行いますので, `Invalidate()` の引数を `FALSE` にして, ここでは画面クリアを行わないようにします (ちらつくので).
 
-```c
+```cpp
 void CGLsampleDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
 // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
@@ -320,7 +320,7 @@ CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 
 ## `SetRange()` メソッドはツマミの上限値と下限値を設定します. `OnHScroll()` の引数 `nPos` で得られる値はこの範囲を変化します.
 
-```c
+```cpp
 BOOL CGLsampleDlg::OnInitDialog()
 {
 CDialog::OnInitDialog();
@@ -373,7 +373,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## ここでは `m_xvRotateZ` の値を `setRotateZ()` メソッドの引数に与えて. シーンの回転角を設定します.
 
-```c
+```cpp
 void CGLsampleDlg::OnPaint()
 {
 if (IsIconic())
@@ -431,7 +431,7 @@ SwapBuffers(m_pDC->m_hDC);
 
 ## `m_xvEditZ` は CString 型すなわち文字列なので, 角度を保持している `m_xvRotateZ` を文字列に変換してこれに格納します. `Format()` メソッドの第１引数は printf() と同様の書式文字列です. このプロジェクトは文字集合として (デフォルトの)  Unicode を使用する設定になっているので, `_T()` を使って変換しています.
 
-```c
+```cpp
 BOOL CGLsampleDlg::OnInitDialog()
 {
 CDialog::OnInitDialog();
@@ -487,7 +487,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## 「Slider Control」のツマミを動かした位置 `m_xvRotateZ` を文字列に直して `m_xvEditZ` に設定します. これでツマミを動かしたときに, その値が「Edit Control」に表示されます.
 
-```c
+```cpp
 void CGLsampleDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
 // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
@@ -543,7 +543,7 @@ CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 
 そこで `pMsg`->`hwnd` からそのコントロール ID を求め, それを使ってコントロールを識別します. 実はこの方法が正しいのかどうかも自信がアリマセン. `FromHandle(`pMsg`->`hwnd`)`->`GetDlgCtrlID()` とするより ::`GetDlgCtrlID(`pMsg`->`hwnd`)` とした方が手っ取り早い気がしますが, "::" が使いたくありませんでした.
 
-```c
+```cpp
 BOOL CGLsampleDlg::PreTranslateMessage(MSG* pMsg)
 {
 // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。

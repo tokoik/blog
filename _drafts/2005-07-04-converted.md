@@ -25,7 +25,7 @@ published: true
 
 特定のテクスチャユニットに対してテクスチャ座標を設定するには，glMultiTexCoord*() という関数群を使います．この関数も Windows の gl.h では宣言されていないので，Windows でこの関数を使用する場合は，[`glMultiTexCoord2dv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glMultiTexCoord2dv.xhtml) の関数ポインタ変数の宣言を main.cpp に追加する必要があります．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -44,7 +44,7 @@ PFNGLMULTITEXCOORD2DVPROC glMultiTexCoord2dv;
 
 ## そしてプログラムの初期化時に，この関数ポインタ変数に関数の実体のエントリポイントを格納しておきます．
 
-```c
+```cpp
 ...
 
 /* 各テクスチャユニット用にテクスチャオブジェクトを作る */
@@ -68,7 +68,7 @@ glBindTexture(GL_TEXTURE_2D, texname[0]);
 
 ## このほか，シーンを描画する際はテクスチャユニット２によるテクスチャマッピングを有効にしておきます．
 
-```c
+```cpp
 ...
 
 /*
@@ -102,7 +102,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## 一方 `box`.cpp も，テクスチャ座標を glTexCoord2dv() を使って設定している部分を [`glMultiTexCoord2dv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glMultiTexCoord2dv.xhtml) に置き換えます．Windows の場合は関数ポインタ変数 glTexCoord2dv を外部変数として宣言しておいてください．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -139,7 +139,7 @@ glEnd();
 
 ## もちろん，テクスチャ環境の `GL_MODULATE` を `GL_COMBINE` に置き換えて，線形補間によるテクスチャの合成を行うこともできます．
 
-```c
+```cpp
 ...
 
 /* テクスチャ環境 */

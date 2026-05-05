@@ -24,7 +24,7 @@ published: true
 
 バーテックスシェーダでは，`varying` 変数 `light` と `view` に設定する値を視点座標系における光線ベクトルと視線ベクトルに変更します．またフラグメントシェーダで接空間の座標系から視点座標系への変換を行うので，その変換行列の元になる視点座標系における法線ベクトルと接線ベクトルを `varying` 変数 n と t に設定します．
 
-```c
+```cpp
 // bump.vert
 
 attribute vec3 tangent;
@@ -57,7 +57,7 @@ gl_Position = ftransform();
 
 フラグメントシェーダでは，まずバーテックスシェーダで設定した `varying` 変数 n と t を使って，接空間から視点座標系への変換行列 `toView` を求めます．`mat3` は３×３要素の実数からなる行列を宣言します．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;
@@ -80,7 +80,7 @@ mat3 toView = mat3(ft, fb, fn);
 
 ## そして求めた変換行列 `toView` を用いて法線マップをサンプリングして得た法線ベクトルを変換し，視点座標系における法線ベクトル `fnormal` を求めます．
 
-```c
+```cpp
 // 法線マップから得たベクトルを視点座標系に変換する
 vec4 color = texture2DProj(texture, gl_TexCoord[0]);
 vec3 fnormal = toView * (vec3(color) * 2.0 - 1.0);
@@ -109,7 +109,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 
 次に環境マッピングを組み込みます．環境マッピングの手法にはキューブマッピングを用います．これをバンプマッピングと組み合わせるために，[マルチテクスチャ]({{ site.baseurl }}{% post_url 2005-06-15-post %})も有効にします．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -130,7 +130,7 @@ PFNGLACTIVETEXTUREPROC glActiveTexture;
 
 ## キューブマッピングを行うにはテクスチャ座標の自動生成を行う必要がありますが，今回はシェーダプログラム内で生成した座標（反射ベクトル）を使ってテクスチャをサンプリングするため，ここではテクスチャの読み込みとサンプリングに関連した設定だけを行います．この設定はテクスチャユニット１に対して行います．環境のテクスチャには，テクスチャマッピング入門の[第１２回]({{ site.baseurl }}{% post_url 2005-01-21-post %})で使った [room2.lzh](`texture`/room2.lzh) を用います．
 
-```c
+```cpp
 ...
 
 /*
@@ -194,7 +194,7 @@ glEnable(GL_CULL_FACE);
 
 ## あと，環境マッピングに使うテクスチャユニットの番号をシェーダプログラムに伝えるために，関数 `init()` の最後あたりで，シェーダプログラムの `uniform` 変数 `environment` にテクスチャユニットの番号 1 を設定しておきます．
 
-```c
+```cpp
 ...
 
 /* シェーダプログラムの適用 */
@@ -218,7 +218,7 @@ tangent = glGetAttribLocation(gl2Program, "tangent");
 
 それではフラグメントシェーダで環境のテクスチャのサンプリングを行って，映り込みを実現してみましょう．まず，環境のテクスチャを保持しているテクスチャユニットを指定するために，`samplerCube` 型の `uniform` 変数 `environment` の定義を追加します．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;
@@ -245,7 +245,7 @@ mat3 toView = mat3(ft, fb, fn);
 
 環境のテクスチャをサンプリングして得た色は，物体表面に映り込ませるために，鏡面反射光の色として使います．その際，光源の映り込みであるハイライトが現れると妙なので，`specular` の計算は省いてしまいます．
 
-```c
+```cpp
 // 法線マップから得たベクトルを視点座標系に変換する
 vec4 color = texture2DProj(texture, gl_TexCoord[0]);
 vec3 fnormal = toView * (vec3(color) * 2.0 - 1.0);

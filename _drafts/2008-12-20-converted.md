@@ -38,7 +38,7 @@ published: true
 
 ## このバーテックスシェーダプログラム `reflect`.`vert` は次のようになっています．
 
-```c
+```cpp
 // reflect.vert
 
 varying vec3 r;  // 視線の反射ベクトル
@@ -59,7 +59,7 @@ gl_Position = ftransform();
 そして，GLSL の組み込み関数 `reflect()` を使って，視線の反射ベクトルを求めます．これを使ってキューブマップをサンプリングすれば反射マッピングを実現できますが，ここではテクスチャを回転させるために，さらにテクスチャマトリクスを乗じています．この結果を `varying` 変数 r に格納して，フラグメントシェーダに渡します．
 フラグメントシェーダプログラム `reflect`.`frag` では，この r を使ってキューブマップをサンプリングします．
 
-```c
+```cpp
 // reflect.frag
 
 uniform samplerCube cubemap;
@@ -77,7 +77,7 @@ gl_FragColor = textureCube(cubemap, r);
 
 GLSL の組み込み関数には，反射方向を求める `reflect()` の他に，屈折方向を求める `refract()` というものがあります．これを使って屈折マッピングを実現してみます．`reflect`.`vert` を次のように書き換えてください．
 
-```c
+```cpp
 // reflect.vert
 
 varying vec3 r;  // 視線の反射ベクトル
@@ -102,7 +102,7 @@ gl_Position = ftransform();
 
 フラグメントシェーダプログラム `reflect`.`frag` では，この s を使ってキューブマップをサンプリングします．
 
-```c
+```cpp
 // reflect.frag
 
 uniform samplerCube cubemap;
@@ -126,7 +126,7 @@ gl_FragColor = textureCube(cubemap, s);
 
 物体の境界面では，視線は反射方向と屈折方向に分かれるので，その点の色は反射方向にあるものの色と屈折方向にあるものの色を合成したものになります．そこで，試しにこれらを合成してフラグメントの色を決定するようにしてみましょう．フラグメントシェーダプログラムにおいて GLSL の組み込み関数 `mix()` を使って，反射方向にあるテクスチャのサンプル値と屈折方向にあるテクスチャのサンプル値を合成します．
 
-```c
+```cpp
 // reflect.frag
 
 uniform samplerCube cubemap;
@@ -152,7 +152,7 @@ gl_FragColor = mix(textureCube(cubemap, s), textureCube(cubemap, r), 0.5);
 
 ## ここで f は視線が境界面に垂直に入射するときの反射率で，これは[フレネルの式]({{ site.baseurl }}{% post_url 2005-06-20-post %})において入射角θ= 0 (c = $\mathbf{v}$·$\mathbf{h}$ = 1) として求めることができます．**V** は視線ベクトルですが，ここでは参照点から視点に向かう単位ベクトルです．**N** は参照点における単位法線ベクトルです．これらをもとに参照点における反射率を求め，`varying` 変数 t に格納します．これをバーテックスシェーダプログラムに組み込むと，次のようになります．
 
-```c
+```cpp
 // reflect.vert
 
 varying vec3 r;  // 視線の反射ベクトル
@@ -179,7 +179,7 @@ gl_Position = ftransform();
 
 ## フラグメントシェーダプログラムでは，反射方向にあるテクスチャのサンプル値と屈折方向にあるテクスチャのサンプル値の合成に `varying` 変数 t を使うようにします．
 
-```c
+```cpp
 // reflect.frag
 
 uniform samplerCube cubemap;

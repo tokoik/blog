@@ -18,7 +18,7 @@ published: true
 <li>[第２版ソースファイル](glsl/glsl2.zip)</li>
 </ul>
 
-```c
+```cpp
 ...
 
 /*
@@ -80,7 +80,7 @@ glDisable(GL_CULL_FACE);
 
 ## 図形描画の際にテクスチャ座標を設定しておきます．シェーダプログラムを使う場合は，`glEnable(`GL_TEXTURE_2D`)`; を実行する必要はありません．
 
-```c
+```cpp
 ...
 
 /*
@@ -119,7 +119,7 @@ glutSolidTeapot(1.0);
 
 ## これでテクスチャマッピングの準備は完了です．試しに関数 `init()` の最後にある `glUseProgram(`gl2Program`)`; をコメントアウトしてプログラムをコンパイル・実行し，テクスチャが正しく貼れるか確かめてください（確かめたらプログラムを元に戻してください）．
 
-```c
+```cpp
 /* シェーダプログラムの適用 */
 ```
 
@@ -131,7 +131,7 @@ glutSolidTeapot(1.0);
 
 バーテックスシェーダでは，テクスチャ変換行列 `gl_TextureMatrix`[0] を処理対象の頂点のテクスチャ座標 `gl_MultiTexCoord0` に掛けて，組み込み `varying` 変数 `gl_TexCoord`[0] に代入します．`gl_MultiTexCoord0` はテクスチャユニット０に設定されたテクスチャ座標です．`gl_TexCoord` は配列変数になっていますが，添え字の番号とテクスチャユニットは無関係（ただし総数は同じ）なので，`gl_TexCoord` のどの要素にどのテクスチャユニットのテクスチャ座標を入れても構いません．
 
-```c
+```cpp
 // texture.vert
 
 varying vec4 position;
@@ -156,7 +156,7 @@ gl_Position = ftransform();
 ２次元テクスチャは GLSL の組み込み関数 `texture2DProj()` を使ってサンプリングします．変数 `texture` は `sampler2D` 型の `uniform` 変数で，どのテクスチャユニットからどういう方法でテクスチャをサンプリングするかを指定します．この変数 `texture` の値（すなわちテクスチャユニット番号）の設定は，アプリケーションプログラム側で行います．
 以下のプログラムでは，`gl_TexCoord`[0] に格納されているテクスチャ座標をテクスチャ変換行列 `gl_TextureMatrix`[0] により変換し，その結果を使って `texture` で指定されたテクスチャユニットが保持するテクスチャをサンプリングします．そして，サンプリングした色 `color` を使って拡散反射光強度と環境光の反射光強度を計算します．
 
-```c
+```cpp
 // texture.frag
 
 uniform sampler2D texture;
@@ -185,7 +185,7 @@ gl_FragColor = color * gl_LightSource[0].diffuse * diffuse
 
 ## もちろん，`gl_LightSource`[0].`diffuse` と `color` * `gl_LightSource`[0].`ambient` は `color` でくくることができます．
 
-```c
+```cpp
 // texture.frag
 
 uniform sampler2D texture;
@@ -215,7 +215,7 @@ gl_FragColor = color * (gl_LightSource[0].diffuse * diffuse + gl_LightSource[0].
 
 `uniform` 変数の値はアプリケーションプログラムで設定します．これは，まず[`glGetUniformLocation()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml) 関数を使ってプログラムオブジェクト内から値を設定する `uniform` 変数を探し出し，その識別子を得ます．そして glUniform*() 関数を使って，その識別子に対して値を設定します．ここではフラグメントシェーダプログラムの `texture` という `uniform` 変数に値を設定しますから，次のような手続きになります．
 
-```c
+```cpp
 ...
 
 /*

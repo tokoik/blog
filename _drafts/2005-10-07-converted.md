@@ -43,7 +43,7 @@ GLSL は C や C++ 言語によく似ていますが，レンダリングのプ�
 <li>[第１版ソースファイル](glsl/glsl1.zip)</li>
 </ul>
 
-```c
+```cpp
 // simple.frag
 
 void main (void)
@@ -59,7 +59,7 @@ gl_FragColor = gl_Color;
 
 ## バーテックスシェーダにおいて `gl_FrontColor` に何も設定していないと，`gl_Color` には黒が入っています．そこで，バーテックスシェーダで `varying` 変数の `gl_FrontColor` に色を設定してみます．`vec4()` は () 内の値を４要素の実数からなるベクトルに直します．ついでに，`gl_Position` の値を `ftransform()` という GLSL の組み込み関数の値にします．この関数は OpenGL の固定機能による座標変換を忠実に再現するものです．
 
-```c
+```cpp
 // simple.vert
 
 void main(void)
@@ -80,7 +80,7 @@ gl_Position = ftransform();
 
 `vec3`, `vec4` はそれぞれ３要素，４要素の実数型のベクトルを表します．`gl_LightSource`[0].`position`.`xyz` の .`xyz` は，ベクトル `gl_LightSource`[0].`position` の４つの要素のうち，`xyz` の３つの成分を（この順で）使用することを示します．`normalize()` はベクトルを正規化する GLSL の組み込み関数です．
 
-```c
+```cpp
 // simple.vert
 
 void main(void)
@@ -93,7 +93,7 @@ vec3 light = normalize((gl_LightSource[0].position * position.w - gl_LightSource
 
 ## 拡散反射率 `diffuse` は光線ベクトル `light` と法線ベクトル `normal` の内積により求めます．これに光源強度の拡散反射光成分 `gl_LightSource`[0].`diffuse` と拡散反射係数 `gl_FrontMaterial`.`diffuse` を乗じて，拡散反射光強度を求めます．`dot()` は内積を求める GLSL の組み込み関数で，その結果が負の時は 0 になるよう GLSL の組み込み関数 `max()` を用いて `dot()` と 0 の大きい方を求めます．
 
-```c
+```cpp
 float diffuse = max(dot(light, normal), 0.0);
 
 gl_FrontColor = gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * diffuse;
@@ -117,7 +117,7 @@ gl_Position = ftransform();
 
 そして光源強度の鏡面反射光成分 `gl_LightSource`[0].`specular` と鏡面反射係数 `gl_FrontMaterial`.`specular` の積にこの `specular` を乗じて鏡面反射光強度を求め，これと環境光の反射光強度を先ほど求めた拡散反射光強度に加えて `gl_FrontColor` に代入します．
 
-```c
+```cpp
 // simple.vert
 
 void main(void)
@@ -142,7 +142,7 @@ gl_Position = ftransform();
 
 ## なお，光源強度と反射係数の積は，あらかじめ `gl_FrontLightProduct` という uniform 変数に格納されています．この部分を置き換えると，最終的なプログラムは次のようになります．
 
-```c
+```cpp
 // simple.vert
 
 void main(void)
@@ -181,7 +181,7 @@ gl_Position = ftransform();
 
 Phong シェーディングは，前述の Gouraud シェーディングで実装したバーテックスシェーダの中の陰影計算を，フラグメントシェーダに移すことにより実現できます．その際，陰影計算を画素単位に行うために，オブジェクト表面上の点の視点座標系での位置と，その点における法線ベクトルが必要になります．そこでローカル変数 `position` と `normal` を，ともに `varying` 変数として宣言し直すことにします．そしてバーテックスシェーダでこれらの値を計算し，フラグメントシェーダでこれらの値の補間値を参照します．`position` と `normal` を `vec3` 型の `varying` として宣言するので，`main` の中の `position` と `normal` の型宣言の `vec3` は削除してください．また，その次の `light` の計算から `gl_Position` の計算の前までを削除してください．
 
-```c
+```cpp
 // simple.vert
 
 varying vec4 position;
@@ -202,7 +202,7 @@ gl_Position = ftransform();
 
 ## バーテックスシェーダで計算した `position` と `normal` の補間値を得るために，フラグメントシェーダでもこれらを `varying` 変数として宣言します．また，バーテックスシェーダから削除した部分は，そっくりそのままフラグメントシェーダの `main()` の中に移します．ただし，この状態ではまだフラグメントシェーダは動作しません（コンパイルできません）．
 
-```c
+```cpp
 // simple.frag
 
 varying vec4 position;
@@ -225,7 +225,7 @@ gl_FrontColor = gl_FrontLightProduct[0].diffuse * diffuse
 
 ## この計算結果の格納先を，`gl_FrontColor` から `gl_FragColor` に書き換えます．また補間によって得られた法線ベクトル `normal` は正規化されていませんから，ここで改めて正規化します．
 
-```c
+```cpp
 // simple.frag
 
 varying vec4 position;

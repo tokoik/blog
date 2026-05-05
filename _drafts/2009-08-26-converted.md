@@ -31,7 +31,7 @@ Windows で `GLEW` を使用するには, [`GLEW` の Windows 用バイナリフ
 
 と言うわけで, このゼミで作成するプログラムの最初の雛形は, 以下ののようになります. `GLEW` に関係する部分を<`em`>太字にしてあります.
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #if defined(WIN32)

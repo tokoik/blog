@@ -23,7 +23,7 @@ published: true
 
 データは全て三角形とします．まず，頂点位置を保存する配列 `vert` と，その頂点における法線ベクトル `norm`，その頂点におけるテクスチャ座標 `texc`，およびどの頂点を結んで一つの三角形を構成するのかを表した頂点のインデックス `face` という三つの配列があったとします．
 
-```c
+```cpp
 /* 頂点データ */
 static GLfloat vert[][3] = {
 ...
@@ -50,7 +50,7 @@ static GLuint face[][3] = {
 
 ## また，このデータに含まれる三角形の数を `nf` とします．
 
-```c
+```cpp
 /* 三角形の数 */
 static int nf = sizeof face / sizeof face[0];
 ```
@@ -59,7 +59,7 @@ static int nf = sizeof face / sizeof face[0];
 
 この図形は，[`glBegin()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBegin.xhtml) / [`glEnd()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glEnd.xhtml) を使うと，次の手順で描くことができます．
 
-```c
+```cpp
 /*
 ** 図形の表示
 */
@@ -104,7 +104,7 @@ glDisable(GL_TEXTURE_2D);
 
 頂点配列を使うと，これを次のように書くことができます．
 
-```c
+```cpp
 /*
 ** 図形の表示
 */
@@ -115,7 +115,7 @@ void display(void)
 
 ## 最初にクライアント（アプリケーション）側に置く頂点，法線，およびテクスチャ座標の配列を有効にします．
 
-```c
+```cpp
 /* 頂点データ，法線データ，テクスチャ座標の配列を有効にする */
 glEnableClientState(GL_VERTEX_ARRAY);
 glEnableClientState(GL_NORMAL_ARRAY);
@@ -124,7 +124,7 @@ glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 ## 次に，これらのデータが格納されている場所を指定します．
 
-```c
+```cpp
 /* 頂点データ，法線データ，テクスチャ座標の場所を指定する */
 glVertexPointer(3, GL_FLOAT, 0, vert);
 glNormalPointer(GL_FLOAT, 0, norm);
@@ -142,7 +142,7 @@ glTexCoordPointer(2, GL_FLOAT, 0, texc);
 
 ## そして，テクスチャマッピングを有効にして，このデータを描画します．
 
-```c
+```cpp
 /* 頂点のインデックスの場所を指定して図形を描画する */
 glEnable(GL_TEXTURE_2D);
 glDrawElements(GL_TRIANGLES, nf * 3, GL_UNSIGNED_INT, face);
@@ -156,7 +156,7 @@ glDisable(GL_TEXTURE_2D);
 
 ## 最後にクライアント側に置いた頂点，法線，およびテクスチャ座標の配列を無効にします．
 
-```c
+```cpp
 /* 頂点データ，法線データ，テクスチャ座標の配列を無効にする */
 glDisableClientState(GL_VERTEX_ARRAY);
 glDisableClientState(GL_NORMAL_ARRAY);

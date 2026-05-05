@@ -64,7 +64,7 @@ Visual Studio を起動して, 新しいプロジェクトを作成します.
 
 ## `OpenGL` を使うので, ヘッダファイルやライブラリの指定を stdafx.h の最後に追加します.
 
-```c
+```cpp
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 
@@ -137,7 +137,7 @@ Visual Studio を起動して, 新しいプロジェクトを作成します.
 
 ## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 (ここでは `SetupPixelFormat()`) が追加され, ソースコードを編集する状態になります. ここで `SetupPixelFormat()` の内容を実装します.
 
-```c
+```cpp
 BOOL CGLsampleDlg::SetupPixelFormat(HDC hdc)
 {
 PIXELFORMATDESCRIPTOR pfd = {
@@ -174,7 +174,7 @@ return FALSE;
 
 次に, ダイアログウィンドウが開かれるときに呼ばれるメンバ関数 `OnInitDialog()` に処理内容を追加します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnInitDialog(void)` をダブルクリックします. 関数の本体が表示されますから, 「// `TODO`: 初期化をここに追加します。」の後に下記の内容を追加します.
 
-```c
+```cpp
 BOOL CGLsampleDlg::OnInitDialog()
 {
 CDialog::OnInitDialog();
@@ -215,7 +215,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## 同様に, ウィンドウの描画が必要になった時に呼ばれるメンバ関数 `OnPaint()` を変更します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnPaint(void)` をダブルクリックします. 関数の本体が表示されますから, その中にある if 文の else 節に下記の内容を追加します.
 
-```c
+```cpp
 void CGLsampleDlg::OnPaint()
 {
 if (IsIconic())
@@ -247,7 +247,7 @@ SwapBuffers(m_pDC->m_hDC);
 
 ## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 `OnDestroy()` が追加され, ソースコードを編集する状態になります. ここで `OnDestroy()` の内容を実装します.
 
-```c
+```cpp
 void CGLsampleDlg::OnDestroy()
 {
 CDialog::OnDestroy();
@@ -272,7 +272,7 @@ delete m_pDC;
 
 ## すると「プロジェクト名Dlg.cpp」ファイル (ここでは GLsampleDlg.cpp) にメンバ関数 `OnSize()` が追加され, ソースコードを編集する状態になります. ここで `OnSize()` の内容を実装します.
 
-```c
+```cpp
 void CGLsampleDlg::OnSize(UINT nType, int cx, int cy)
 {
 CDialog::OnSize(nType, cx, cy);

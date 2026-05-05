@@ -18,7 +18,7 @@ Mac OS X Lion では OpenGL のバージョン 3.2 が使えるものの，そ�
 
 描画する図形は[以前]({{ site.baseurl }}{% post_url 2009-12-25-post %})と同様に点 (`GL_POINTS`) にします．頂点バッファオブジェクトを作成し，それに点の位置の初期値を設定します．点の位置の初期値は乱数により決定します．この<`em`>初期値は CPU 側からは変更することがないので，[`glBufferData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml) の第 4 引数 usage は `GL_STATIC_DRAW` でいいんじゃないかと思います．
 
-```c
+```cpp
 ...
 
 /*
@@ -112,7 +112,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 頂点バッファオブジェクトに格納された頂点属性（座標値）を使って，[`glDrawArrays()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml) により点を描画します．
 
-```c
+```cpp
 ...
 
 /*
@@ -171,7 +171,7 @@ glutSwapBuffers();
 
 ## バーテックスシェーダプログラムでは `attribute` 変数 `point` に与えられた座標値を座標変換して `gl_Position` に代入します．ここで `point` のデータ型を `vec4` にしても構いません．その場合 `point` の w 要素には 1.0 が入っているみたいなので，`transformMatrix` を乗じる際に `vec4` にキャストする必要はありません．
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -187,7 +187,7 @@ gl_Position = transformMatrix * vec4(point, 1.0);
 
 ## フラグメントシェーダでは，フラグメントカラーに白色を設定します．
 
-```c
+```cpp
 #version 120
 //
 // simple.frag
@@ -207,7 +207,7 @@ gl_FragColor = vec4(1.0);
 
 `Transform` `Feedback` による計算結果の格納先として，頂点バッファオブジェクトをもう一つ用意します．この [`glBufferData()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml) の第 4 引数 usage に何を指定すればいいのかよくわからないのですが（調べ方が足りない），とりあえず `GL_STATIC_DRAW` を指定しています．もしかしたら `GL_STREAM_COPY` か `GL_DYNAMIC_COPY` を指定すべきなのかもしれません．
 
-```c
+```cpp
 ...
 
 /*
@@ -249,7 +249,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 シェーダプログラムによる計算結果の格納先となる頂点バッファオブジェクトの指定には [`glBindBufferBase()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBufferBase.xhtml) を使用します．この第 1 引数 target には，`Transform` `Feedback` の場合は `GL_TRANSFORM_FEEDBACK_BUFFER` を指定します．第 2 引数 index には格納先として使用する<`em`>結合点の配列の要素のインデックス（後述）を指定します．第 3 引数 `buffer` には格納先の頂点バッファオブジェクトを指定します．その後 [`glBeginTransformFeedback()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBeginTransformFeedback.xhtml) で `Transform` `Feedback` を開始します．この引数 primitiveMode には，描画する図形要素が点 (`GL_POINTS`) なら `GL_POINTS`, 線 (`GL_LINES`, `GL_LINE_LOOP`, `GL_LINE_STRIP`, `GL_LINES_ADJACENCY`, `GL_LINE_STRIP_ADJACENCY`) なら `GL_LINES`，三角形 (`GL_TRIANGLES`, `GL_TRIANGLE_STRIP`, `GL_TRIANGLE_FAN`, `GL_TRIANGLES_ADJACENCY`, `GL_TRIANGLE_STRIP_ADJACENCY`) なら `GL_TRIANGLES` を指定します．ジオメトリシェーダを使用する場合も，これに準じます．
 二つの頂点バッファオブジェクトは，一方を描画用に参照しているときは，もう一方をデータの格納用に使用します．そして次のフレームの描画では，この関係を逆転します．このような<`em`>ダブルバッファリングを実現するために，<`em`>静的変数 `frame` を使ってバッファの切り替えを行っています．
 
-```c
+```cpp
 ...
 
 /*
@@ -326,7 +326,7 @@ glutSwapBuffers();
 シェーダプログラムでデータの格納先として使用する<`em`>結合点を指定するには，[`glTransformFeedbackVaryings()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTransformFeedbackVaryings.xhtml) を使用します．この結合点には `varying` 変数名を指定します．この第 1 引数 `program` には glCreateShader() で得たプログラム名（番号），第 2 引数 count には結合点として使用する `varying` 変数の数，第 3 引数には `varying` 変数名の文字列の配列を指定します．先の [`glBindBufferBase()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBufferBase.xhtml) の第 2 引数 index には，この `varying` 変数名の配列の要素のインデックスを指定します．そして第 4 引数の bufferMode には，複数の頂点属性を単一の頂点バッファオブジェクトにまとめる場合には `GL_INTERLEAVED_ATTRIBS`，別々の頂点バッファオブジェクトに対応付ける場合は `GL_SEPARATE_ATTRIBS` を指定します．
 なお，これはシェーダプログラムにおいてバーテックスシェーダあるいはジオメトリシェーダのアタッチ後，[`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml) によりリンクするまでの間に行わなければならないので，`shader`.cpp で定義している関数 `loadShader()` を変更します．
 
-```c
+```cpp
 ...
 
 /*
@@ -357,7 +357,7 @@ return program;
 
 ## 上記では計算結果の格納先の `varying` 変数として `position` を使用することにしましたので，バーテックスシェーダプログラムにこれを追加します．ここでは現在の点の位置 `point` に 1 フレームごとの移動量 (0.0, -0.01, 0.0) を加えたものを `position` とし，その y が点を描画する範囲を超えたら反対側の位置に戻します．これが次のフレームの描画において `point` として参照されます．
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -385,7 +385,7 @@ if (position.y < -1.0) position.y += 2.0;  // 範囲を出たら反対側の位�
 これを書いているうちに，`Transform` `Feedback` を使った良い解説 [Noise-Based Particles, Part II at The Little Grasshopper](http://prideout.net/blog/?p=67) を見つけました．[The Little Grasshopper](http://prideout.net/blog/) には他にも非常に有用な解説やサンプルがあります．素晴らしい．
 複数の頂点バッファオブジェクトに書き込む場合について考えます．これは上記のサイトに書いてありますが，自分なりにまとめておきたいと思います．物体を加速させる場合は，加速度を積分して速度を求め，速度を積分して位置を求める必要がありますから，位置のほかに速度も更新する必要があります．このため，頂点バッファオブジェクトをさらに二つ追加します．また，速度は `attribute` 変数 `motion` を介してバーテックスシェーダに渡すことにします．
 
-```c
+```cpp
 ...
 
 /*
@@ -469,7 +469,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 ## 一方，バーテックスシェーダで更新した速度は，`varying` 変数 `velocity` に代入して頂点バッファオブジェクトに格納することにします．このため，`shader`.cpp の `loadShader()` において [`glTransformFeedbackVaryings()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTransformFeedbackVaryings.xhtml) の第 3 引数の配列 `varyings` のターゲットの変数名に `velocity` を追加します．さらに第 4 引数の bufferMode は，ここでは `position` と `velocity` に別々の頂点バッファオブジェクトに対応付けているので，`GL_SEPARATE_ATTRIBS` を指定します．
 
-```c
+```cpp
 ...
 
 /*
@@ -501,7 +501,7 @@ return program;
 
 ## 描画の際には三つ目の頂点バッファオブジェクトを `attribute` 変数 `motion` に結び付け，四つ目の頂点バッファオブジェクトを `varying` 変数 `velocity` に対応付けます．[`glBindBufferBase()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBufferBase.xhtml) の第 2 引数 index は `shader`.cpp で定義している `loadShader()` 内の配列変数 `varyings` における文字列 "`velocity`" のインデックスである 1 を指定します．
 
-```c
+```cpp
 ...
 
 /*
@@ -590,7 +590,7 @@ glutSwapBuffers();
 
 ## バーテックスシェーダでは `attribute` 変数 `motion` と `varying` 変数 `velocity` を追加します．現在の速度 `motion` に加速度を加えたものを `velocity` に代入します．これは次のフレームの描画において `motion` として参照されます．この速度を現在の位置 `point` に加えて `position` に代入します．ただし，この位置が範囲をはみ出た時には反対側に戻すとともに，速度を 0 にします．
 
-```c
+```cpp
 #version 120
 //
 // simple.vert

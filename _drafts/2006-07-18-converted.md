@@ -21,7 +21,7 @@ published: true
 
 ## まず[前回]({{ site.baseurl }}{% post_url 2006-07-15-post %})と同様，これに FBO に使う関数の宣言を追加します．この雛形の Windows 版に含まれている `glext`.h もバージョンが古く，FBO に関する宣言が含まれていませんので，最新の <%= a "`glext`.h" %> 入手して差し替えてください．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -49,7 +49,7 @@ PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC glCheckFramebufferStatusEXT;
 
 ## テクスチャオブジェクトとフレームバッファオブジェクトの識別子に使う変数を用意しておきます．
 
-```c
+```cpp
 ...
 
 /*
@@ -65,7 +65,7 @@ PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC glCheckFramebufferStatusEXT;
 
 ## Windows では，FBO に使う API のエントリポイントを確保しておきます．今回も FBO が使えるという前提でプログラムを書いているので，もし FBO が使えない環境で実行した場合にはエラーとなってしまいますので注意してください．
 
-```c
+```cpp
 /*
 ** 初期化
 */
@@ -95,7 +95,7 @@ glCheckFramebufferStatusEXT =
 
 ## テクスチャオブジェクトを生成し，それを現在のテクスチャに結合しておきます．
 
-```c
+```cpp
 /* テクスチャオブジェクトを生成して結合する */
 glGenTextures(1, &tex);
 glBindTexture(GL_TEXTURE_2D, tex);
@@ -108,7 +108,7 @@ GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
 
 ## テクスチャの設定が済んだところで，デフォルトのテクスチャオブジェクトに戻しておきます．
 
-```c
+```cpp
 /* 比較の結果を輝度値として得る */
 glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
 
@@ -141,7 +141,7 @@ glTexGendv(GL_Q, GL_EYE_PLANE, genfunc[3]);
 
 次に，フレームバッファオブジェクトを生成します．今回はカラーバッファを用意しないので，カラーバッファを読み書きしないようにしておきます．
 
-```c
+```cpp
 /* フレームバッファオブジェクトを生成して結合する */
 glGenFramebuffersEXT(1, &fb);
 glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
@@ -169,7 +169,7 @@ glEnable(GL_CULL_FACE);
 
 ## 光源側から見てレンダリングする際に，FBO へのレンダリングを有効にします．
 
-```c
+```cpp
 ...
 
 static void display(void)
@@ -199,7 +199,7 @@ glClear(GL_DEPTH_BUFFER_BIT);
 
  
 
-```c
+```cpp
 ...
 
 /* シーンを描画する */
@@ -226,7 +226,7 @@ glCullFace(GL_BACK);
 
 ## テクスチャマッピングを有効にする際に，テクスチャオブジェクトを結合しておきます．
 
-```c
+```cpp
 ...
 
 /* モデルビュー変換行列に戻す */
@@ -243,7 +243,7 @@ glEnable(GL_TEXTURE_2D);
 
 ## 視点から見たシーンの描画が済み，テクスチャマッピングを無効にしたら，テクスチャオブジェクトの結合を解除しておきます．
 
-```c
+```cpp
 ...
 glDisable(GL_TEXTURE_2D);
 
@@ -258,7 +258,7 @@ glutSwapBuffers();
 
 ## この場合もテクスチャのサイズでウインドウのサイズを制限する必要はなくなるので，その部分を無効にしておきます．
 
-```c
+```cpp
 ...
 
 static void resize(int w, int h)
@@ -280,7 +280,7 @@ trackballRegion(w, h);
 
 ## 初期ウィンドウサイズもデフォルトに戻しておきます．
 
-```c
+```cpp
 ...
 
 /*

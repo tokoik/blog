@@ -14,7 +14,7 @@ published: true
 `solidSphere()` では (s, t) を使って頂点の３次元空間中の座標値 (x, y, z) を求めています. (s, t) はテクスチャ座標としてバーテックスシェーダに送っていますので, 同じことはバーテックスシェーダでもできそうです. バーテックスシェーダで頂点の座標値を求めるようにすれば, バーテックスシェーダに頂点の座標値を送る必要もなくなります.
 x = `cos` 2πs `sin` πt, y = `cos` πt, z = `sin` 2πs `sin` πt ですから, これをバーテックスシェーダで計算します. `attribute` 変数 `position` を削除して, かわりに `main()` 内に `vec3` 型の変数 `position` を宣言します.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -45,7 +45,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ## `attribute` 変数 `position` を削除したので, `solidSphere()` でこれに値を設定している部分を削除します. まず, `Position` 型の要素数を 5 から <strong>2</strong> に減らします.
 
-```c
+```cpp
 ...
 
 /* 頂点バッファオブジェクトのメモリを参照するポインタのデータ型 */
@@ -59,7 +59,7 @@ typedef GLuint Face[3];
 
 ## `solidSphere()` では, 頂点位置を計算している部分を削除します. また s と t を, それぞれ (*`position`)[<strong>0</strong>] と (*`position`)[<strong>1</strong>] に代入します.
 
-```c
+```cpp
 GLuint solidSphere(int slices, int stacks, const GLuint *buffer)
 {
 ...
@@ -88,7 +88,7 @@ for (int i = 0; i //float th = 2.0f * 3.141593f * s;
 
 ## `attribute` 変数 `position` がなくなったので, メインプログラムでも初期化を行う関数 `init()` において `attribute` 変数 `position` の `index` に 0 を指定している部分を削除します. かわりに, `attribute` 変数 `texture` の `index` に <strong>0</strong> を指定します.
 
-```c
+```cpp
 ...
 
 /*
@@ -110,7 +110,7 @@ glBindAttribLocation(gl2Program, 0, "texture");
 
 ## `index` が 1 の `attribute` 変数は使わなくなったので, これを指定している部分を削除します. また, 頂点バッファオブジェクトには `vec2` 型 (`GLfloat` ２個組) のテクスチャ座標しか入っていないので, [`glVertexAttribPointer()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml) の第２引数 size には <strong>2</strong> を指定し, 第５引数 stride には <strong>0</strong> を指定します.
 
-```c
+```cpp
 ...
 
 /*

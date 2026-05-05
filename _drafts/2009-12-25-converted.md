@@ -56,7 +56,7 @@ CPU に頼らずバーテックスシェーダで座標値を逐次更新する�
 
 </blockquote>
 
-```c
+```cpp
 ...
 
 /* 頂点バッファオブジェクトのメモリを参照するポインタのデータ型 */
@@ -113,7 +113,7 @@ return points;
 
 点を打つだけですから, シェーダプログラムは非常に簡単です. バーテックスシェーダでは点の座標値を格納した `attribute` 変数 `point` を座標変換するだけです.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -130,7 +130,7 @@ gl_Position = transformMatrix * vec4(point, 1.0);
 
 ## この個々の点の座標値を時間とともに変化させます. 現在時刻は `uniform` 変数 `elapsedTime` に得ることにします. これを `point` の z 座標値 `point`.z から引いて, 描画する点の位置を変化させます. `point`.z は [0, 1) の区間にありますから, 移動後の位置がこの範囲からはみ出ないように, GLSL の組み込み関数 `fract()` を使って小数点以下のみを取り出します.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -149,7 +149,7 @@ gl_Position = transformMatrix * vec4(point.xy, z, 1.0);
 
 ## フラグメントシェーダではフラグメントに白色を設定するだけです.
 
-```c
+```cpp
 #version 120
 //
 // simple.frag
@@ -166,7 +166,7 @@ gl_FragColor = vec4(1.0);
 
 次に, プログラム実行中の経過時間を求め, シェーダプログラムの `uniform` 変数 `elapsedTime` に格納します. そのために, まず, `uniform` 変数 `elapsedTime` の場所を求め, 変数 `elapsedTimeLocation` に保存しておきます. `elapsedTimeLocation` は後で定義します.
 
-```c
+```cpp
 ...
 
 /*
@@ -198,7 +198,7 @@ transformMatrixLocation = glGetUniformLocation(gl2Program, "transformMatrix");
 
 ## GLUT では `glutGet(`GLUT_ELAPSED_TIME`)` により経過時間をミリ秒単位で得ることができます. これを関数 `init()` の最後のほうで一度だけ呼び出しておきます.
 
-```c
+```cpp
 ...
 
 /* トラックボール処理の初期化 */
@@ -218,7 +218,7 @@ glClearColor(0.0, 0.1, 0.3, 1.0);
 
 ## 描画時に `glutGet(`GLUT_ELAPSED_TIME`)` を呼び出せば, 最初に `glutGet(`GLUT_ELAPSED_TIME`)` を呼び出してからの経過時間を得ることができます. 記号定数 `CYCLE` は変数 `elapsedTime` が 1 増えるのに要する時間で, アニメーションの速度調整に使います. これも後で定義します.
 
-```c
+```cpp
 ...
 
 /*
@@ -254,7 +254,7 @@ glEnableVertexAttribArray(pointLocation);
 
 ## 最後に変数 `elapsedTimeLocation` と記号定数 `CYCLE` を定義します. `CYCLE` は 5,000 ミリ秒にしておきます.
 
-```c
+```cpp
 ...
 
 /*

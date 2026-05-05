@@ -40,7 +40,7 @@ OpenGL の陰影付けは，頂点における陰影を計算した後，その�
 
 ## この状態では下地の色（ポリゴンの陰影）そのものでテクスチャの明度が変調されており，ハイライト部分もそのままテクスチャの明度の変調に使われています．そこで，光源の設定の段階で [`glLightModeli()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLightModeli.xhtml) を使って `GL_LIGHT_MODEL_COLOR_CONTROL` に `GL_SEPARATE_SPECULAR_COLOR` を設定します．
 
-```c
+```cpp
 /* 拡散反射光と鏡面反射光を別々に補間する */
 glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR);
 ```

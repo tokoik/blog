@@ -13,7 +13,7 @@ published: true
 
 CLAMP つながりというわけではないんですが（狙ってましたが），書き忘れたと思っていたことの三つ目です．ポリゴンにテクスチャをマッピングする際，テクスチャの拡大縮小に線形補間（`GL_LINEAR` 等）を指定したとします．
 
-```c
+```cpp
 /* テクスチャを拡大・縮小する方法の指定 */
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -21,7 +21,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 ## このときテクスチャの繰り返しに `GL_CLAMP` を指定して
 
-```c
+```cpp
 /* テクスチャの繰り返しの指定 */
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
@@ -49,7 +49,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
 `GL_CLAMP` はサンプリングするテクスチャ座標を [0,1] の範囲にクランプする（範囲内に収める）のですが，`GL_CLAMP_TO_EDGE` では [1/(2N),1-1/(2N)]（N はテクスチャの画素数）の範囲にクランプします．
 
-```c
+```cpp
 /* テクスチャの繰り返しの指定 */
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -65,7 +65,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 一方 `GL_CLAMP_TO_BORDER` では，サンプリングするテクスチャ座標を [-1/(2N),1+1/(2N)]（N はテクスチャの画素数）の範囲にクランプします．
 
-```c
+```cpp
 /* テクスチャの繰り返しの指定 */
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
@@ -81,7 +81,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 
 なお，境界色は `GL_TEXTURE_BORDER_COLOR` で指定できます．
 
-```c
+```cpp
 /* テクスチャの境界色 */
 static const GLfloat border[] = { 0.0, 1.0, 0.0, 1.0 };
 

@@ -13,7 +13,7 @@ published: true
 材質の情報をシェーダプログラムに組み込めるということは, 材質をシェーダプログラム側でなんとでもできるということでもあります. そこで, シェーダプログラムを使って物体の表面に模様を付けることを考えてみます. 物体の表面に模様を付けるには, 色を物体表面上の位置に応じて変化させます. ここでは頂点の y 座標値 (`position`.y) に応じて, その頂点の色を変化させてみます.
 `position`.y は [-1, 1] の範囲をもちますから, これを 2π 倍します. これを GLSL の組み込み関数 `cos()` の引数に指定して, その戻り値を 0.5 倍した後 0.5 を足します. これにより [0, 1] の範囲の値が得られますから, これを使って二つの色を比例配分します. 配分には GLSL の組み込み関数 `mix()` を使います.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -44,7 +44,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 前の方法では, バーテックスシェーダで頂点の色を変化させていました. 物体表面上の色は頂点における色を補間して求めるので, はっきりとした色の変化を付けることができません. そこで, バーテックスシェーダでは陰影の計算だけを行っておき, 物体の色はバーテックスシェーダ側で変化させることにします.
 まず, バーテックスシェーダで定義している拡散反射係数 `diffuseMaterial` を削除します. そのかわり, 色を変化させる基準に使っている `position`.y をフラグメントシェーダに送るために使う `varying` 変数 y を宣言し, これに `position`.y を代入します. 一方 `varying` 変数 `diffuseColor` には, 法線ベクトル $\mathbf{n}$ と光線ベクトル $\mathbf{l}$ の内積値と光源の色の積だけを代入しておきます.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -68,7 +68,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ## フラグメントシェーダでは `varying` 変数 y を宣言し, 二つの色 (`c1`, `c2`) を定義しておきます. バーテックスシェーダで行っていたように, この y をもとに二つの色の配分比 a を求めます. これを使って `c1`, `c2` を配分し, `diffuseColor` に掛け合わせます.
 
-```c
+```cpp
 #version 120
 //
 // simple.frag
@@ -96,7 +96,7 @@ gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
 
 ![矩形関数の作り方]({{ site.baseurl }}/assets/images/rectangular.gif)
 
-```c
+```cpp
 #version 120
 //
 // simple.frag
@@ -120,7 +120,7 @@ gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
 
 ## ついでに, x 座標も `varying` 変数でフラグメントシェーダに送ってみます. バーテックスシェーダで float 型の y の代わりに `vec2` 型の t という `varying` 変数を宣言し, それに x, y 座標を４倍したものを代入します. 
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -148,7 +148,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ![格子模様の作り方]({{ site.baseurl }}/assets/images/checkerboard.gif)
 
-```c
+```cpp
 #version 120
 //
 // simple.frag
@@ -172,7 +172,7 @@ gl_FragColor = vec4(diffuseColor * mix(c1, c2, a), 1.0);
 
 ## さらに, 色を切り替えるかわりに <`em`>`discard` を実行すれば, 型を抜くこともできます.
 
-```c
+```cpp
 #version 120
 //
 // simple.frag

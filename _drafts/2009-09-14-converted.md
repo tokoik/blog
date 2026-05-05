@@ -91,7 +91,7 @@ published: true
 陰影計算には図形表面における法線ベクトルが必要になりますが, 今描いているのは半径 1 の単位球なので, 頂点の位置をそのままその点における法線ベクトルに使えます. また, 光源に向かうベクトル (光線ベクトル) が z 軸 (0, 0, 1) と一致していれば, 拡散反射光強度は光線単位ベクトルと法線単位ベクトルの内積に比例する (Lambert の余弦法則) ので, これは頂点の z 座標値になってしまいます. そこで, 試しにバーテックスシェーダで頂点の z 座標値を拡散反射色としてフラグメントシェーダに渡してみます.
 バーテックスシェーダで `vec3` 型の <`em`>`varying` 変数 `diffuseColor` を宣言し, これに頂点の座標値の z 成分 `position`.z を代入します. `position`.z は負の値になることがありますが, <`em`>今は気にしないことにします. `vec3()` によって `diffuseColor` の３つの要素の全てに同じ値が代入されます.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -111,7 +111,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ## フラグメントシェーダでは, `varying` 変数 `diffuseColor` をそのまま `gl_FragColor` に出力します. `gl_FragColor` に代入された値は [0, 1] にクランプされるので, `diffuseColor` が負になっていても (多分) 問題ありません.
 
-```c
+```cpp
 #version 120
 //
 // simple.frag
@@ -133,7 +133,7 @@ gl_FragColor = vec4(diffuseColor, 1.0);
 
 それでは, 光源の方向 (光線ベクトル) を設定してみます. 光源の方向は, 例えば (10.0, 6.0, 3.0) とします. このベクトルを GLSL の組み込み関数 `normalize()` を使って正規化し, `vec3` 型の <`em`>const 変数 (というか定数) `lightDirection` に格納しておきます. これと面の法線ベクトル `position` との内積を求めます. ベクトルの内積には GLSL の組み込み関数 `dot()` を用います.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -163,7 +163,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 じゃあ, ここではどうするかなんですけど, とりあえず <i>k<sub>d</sub></i> は [0, 1] の間で設定すべきでしょう. 一方 <i>E<sub>L</sub></i> は, おそらくとても大きな値を設定すべきだと思いますが, そうすると計算結果を `gl_FragColor` が許容できる範囲に収めるために, <i>k<sub>d</sub></i> を十分小さくする必要があります. これは, 直接光の放射照度が間接光の放射照度に比べてずっと小さい (ことが多い) と考えれば合理的ですが, これらの値は計算結果が飽和しないように慎重に決めなければなりません.
 そこで, やっぱりめんどくさいので, ここでも光源の (放射照度ではなく) 「明るさ」を [0, 1] の範囲で設定することにしたいと思います. ああ, 気弱だ．光源の明るさを<span style="background-color: #ff0;">黄色 (1.0, 1.0, 0.0)</span> として const 変数 `lightColor` に設定し, 拡散反射係数 <i>k<sub>d</sub></i> を<span style="background-color: #0ff;">シアン (0.0, 1.0, 1.0)</span> として const 変数 `diffuseMaterial` に設定します. そして, 陰影を計算する際に, これらを掛け合わせます.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -193,7 +193,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 材質の情報 (拡散反射係数しかないけど) や光源の情報は, 今のところシェーダプログラムに埋め込んでいます. 材質の情報はシェーダプログラムに埋め込んでしまっても構わないと思いますけど, 光源の情報は複数のシェーダプログラムの間で共有することが多いでしょうから, これは少し都合が悪いかも知れません. そこで, 光源の情報はアプリケーションプログラムから設定するようにします.
 まず, バーテックスシェーダで光源の方向と位置を設定している const 変数 `lightDirection` と `lightColor` を <`em`>`uniform` 変数に変更します. もちろん, これらを初期化している値は削除します.
 
-```c
+```cpp
 #version 120
 //
 // simple.vert
@@ -216,7 +216,7 @@ gl_Position = projectionMatrix * vec4(position, 1.0);
 
 ## 次に, メインプログラムで, 光源の方向と色を保持する配列変数 `lightDirection` と `lightColor` を宣言します. 光源の方向は正規化しておきます. 光源の色は, 今度は<span style="background-color: #fff;">白</span>にします. また, `uniform` 変数の場所を保持する変数 `lightDirectionLocation` と `lightColorLocation` も宣言しておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -243,7 +243,7 @@ static GLint lightDirectionLocation, lightColorLocation;
 
 ## そして, シェーダプログラムをリンクした後に `lightDirectionLocation` と `lightColorLocation` に `uniform` 変数の場所を保存しておきます.
 
-```c
+```cpp
 ...
 
 /*
@@ -272,7 +272,7 @@ glGenBuffers(2, buffer);
 
 ## 最後に, 描画の際, シェーダプログラムを適用した後に, unform 変数 (の場所) に対して値を設定します.
 
-```c
+```cpp
 ...
 
 /*

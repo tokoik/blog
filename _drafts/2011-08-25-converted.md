@@ -18,7 +18,7 @@ Vine Linux 6.0 が[リリース](http://vinelinux.org/aboutvine6.html)されま�
 `NVIDIA` のプロプライエタリドライバ (xorg-x11-drv-nvidia) は「アプリケーションの追加と削除」からもインストールできますが，これだと xorg.conf を作ってくれなかったり，他にもいくつか追加の作業があったので，`NVIDIA` が提供している Linux 用のインストーラを使うことにします．
 まず，初期状態です．Nouveau ドライバが使用されています．Nouveau ドライバでも，講義の宿題プログラムなどで使っているいくつかの拡張機能はサポートされています（"`OpenGL` `extensions`" は抜粋です）．
 
-```c
+```cpp
 OpenGL vendor string: nouveau
 OpenGL renderer string: Gallium 0.4 on NV86
 OpenGL version string: 2.1 Mesa 7.10.3
@@ -35,7 +35,7 @@ GL_ARB_vertex_array_object, GL_APPLE_vertex_array_object
 
 ## その後，再起動します．再起動しても，initrd に Nouveau ドライバが残っているせいか，Nouveau ドライバが動いています．ただし，`OpenGL` のバージョンは 1.4 になっています．GLSL コンパイラが使えなくなったということでしょうか．
 
-```c
+```cpp
 OpenGL vendor string: nouveau
 OpenGL renderer string: Gallium 0.4 on NV86
 ```
@@ -46,7 +46,7 @@ OpenGL renderer string: Gallium 0.4 on NV86
 
 `NVIDIA` からダウンロードしてきたインストーラを起動します．その前に，X サーバを止めます．gdm が動いている場合は，run level を変更します．これは X でログインしたまま実行しても問題ないと思いますが，気になるなら Ctrl-Alt-F2 で仮想コンソールに切り替えて行います（が，もしかしたら仮想コンソールのビデオ出力がおかしくなっているかもしれないので，その場合は Ctrl-Alt-F7 で X に戻ります）．
 
-```c
+```cpp
 % sudo telinit 3
 ```
 
@@ -64,7 +64,7 @@ OpenGL renderer string: Gallium 0.4 on NV86
 
 ## 今のところ，これで問題なく動いています．宿題プログラムは一通り動きました．
 
-```c
+```cpp
 OpenGL vendor string: NVIDIA Corporation
 OpenGL renderer string: GeForce 8500 GT/PCI/SSE2
 OpenGL version string: 3.3.0 NVIDIA 280.13

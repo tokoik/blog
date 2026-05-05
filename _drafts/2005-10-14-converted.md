@@ -25,7 +25,7 @@ published: true
 
 ファイル `main`.cpp に，シェーダプログラムを読み込む手続きを追加します．これは[第１回]({{ site.baseurl }}{% post_url 2005-10-06-post %})と同様です．まず `glsl`.h を #`include` して，シェーダオブジェクトのハンドルに使う変数を宣言します．
 
-```c
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -56,7 +56,7 @@ static GLuint gl2Program;
 
 ## そして，初期化の際にシェーダプログラムの読み込みを行います．
 
-```c
+```cpp
 ...
 
 /*
@@ -139,7 +139,7 @@ glUniform1i(glGetUniformLocation(gl2Program, "texture"), 0);
 
 ## ここでバーテックスシェーダ (`bump`.`vert`) とフラグメントシェーダ (`bump`.`frag`）に[第３回]({{ site.baseurl }}{% post_url 2005-10-08-post %})で作成したテクスチャの参照を行うものをそのまま用いれば，この球にテクスチャを貼った状態で陰影を付けることができます．
 
-```c
+```cpp
 // bump.vert
 
 varying vec4 position;
@@ -158,7 +158,7 @@ gl_Position = ftransform();
 }
 ```
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;
@@ -193,7 +193,7 @@ gl_FragColor = color * (gl_LightSource[0].diffuse * diffuse + gl_LightSource[0].
 ファイル `sphere`.cpp で定義している球の描画手続きにも，若干の変更を加えます．頂点位置を設定する際に，法線マップのテクスチャ座標や法線ベクトルに加えて，接線ベクトルも設定します．
 まず，法線ベクトルから接線ベクトルを算出する手続き `setTangent()` を定義します．接線ベクトルは，球の上方向のベクトル (0, 1, 0) と法線ベクトルとの外積により求めることにします．これをバーテックスシェーダで算出することもできますが，この算出方法は球のモデルに依存していますから，シェーダプログラムに汎用性を持たせるために，接線ベクトルの算出手続きを球の描画手続きとセットにしておくことにします．
 
-```c
+```cpp
 #include <math.h>
 
 #if defined(WIN32)
@@ -244,7 +244,7 @@ glVertexAttrib3dv(tangent, t);
 
 次に，この関数 `setTangent()` を，球の描画において頂点位置を設定している部分に追加します．
 
-```c
+```cpp
 /*
 ** 球の描画
 */
@@ -284,7 +284,7 @@ glEnd();
 
 接線ベクトルの設定に用いている `attribute` 変数のハンドルを保存する変数を用意します．
 
-```c
+```cpp
 ...
 
 /*
@@ -302,7 +302,7 @@ GLint tangent;
 
 ## シェーダプログラムオブジェクト `gl2Program` から，`attribute` 変数 `tangent` のハンドルを取り出して，この変数に保存しておきます．
 
-```c
+```cpp
 ...
 
 /*
@@ -327,7 +327,7 @@ tangent = glGetAttribLocation(gl2Program, "tangent");
 
 ## 球を描画する関数  `sphere()` の引数にこのハンドルを渡します．
 
-```c
+```cpp
 ...
 
 /*
@@ -356,7 +356,7 @@ sphere(1.0, 64, 32, tangent);
 
 <p>[第２回]({{ site.baseurl }}{% post_url 2005-10-07-post %})で作成した Phong の陰影付けのシェーダプログラムでは，陰影計算を視点座標系で行うために，オブジェクト表面上の点の位置 `position` と，その点における法線ベクトル `normal` を `varying` 変数にしてバーテックスシェーダからフラグメントシェーダに送っていました．バンプマッピングでは接空間において陰影計算を行わなければならないため，代わりに接空間における光線ベクトル `light` と視線ベクトル `view` を `varying` 変数にします．</p>
 
-```c
+```cpp
 // bump.vert
 
 attribute vec3 tangent;
@@ -367,7 +367,7 @@ varying vec3 view;
 
 ## まず，視点座標系における視線ベクトルと光線ベクトルを求めます．
 
-```c
+```cpp
 void main()
 {
 // 位置ベクトルと光線ベクトルを求める
@@ -377,7 +377,7 @@ vec3 l = normalize((gl_LightSource[0].position * p.w - gl_LightSource[0].positio
 
 ## 同様に，視点座標系における法線ベクトル $\mathbf{n}$ と接線ベクトル $\mathbf{t}$ を求めます．次に，これらの外積により従法線ベクトル $\mathbf{b}$ を求めておきます．そして，これらを使って視点座標系から接空間への変換を行います．下のプログラムでは `GLSL` の組み込み関数を `dot()` を用いて，($\mathbf{t}$<sup><i>T</i></sup> $\mathbf{b}$<sup><i>T</i></sup> $\mathbf{n}$<sup><i>T</i></sup>) による変換を行っています．
 
-```c
+```cpp
 // 法線ベクトルと接線ベクトルから接空間への変換行列を求める
 vec3 n = normalize(gl_NormalMatrix * gl_Normal);
 vec3 t = normalize(gl_NormalMatrix * tangent);
@@ -408,7 +408,7 @@ gl_Position = ftransform();
 
 フラグメントシェーダの変更点のポイントは，法線ベクトルをテクスチャから取り出してくることと，その法線ベクトルを使った陰影計算を接空間の座標系で行うところにあります．したがってこの陰影計算には，視点座標系の位置 `position` や法線ベクトル `normal` の代わりに，バーテックスシェーダで計算した接空間における光線ベクトル `light` と視線ベクトル `view` を用います．
 
-```c
+```cpp
 // bump.frag
 
 uniform sampler2D texture;
@@ -419,7 +419,7 @@ varying vec3 view;
 
 ## テクスチャは法線マップなので，これをサンプリングした値 `color` を用いてフラグメントの法線ベクトル `fnormal` を求めます．法線マップに格納されている法線ベクトルの各要素の値は [0,1] に収められているので，これを [-1,1] に引き伸ばします．光線ベクトル `light` は `varying` 変数で得ているので，ここで計算する必要はありません．その代わり，`varying` 変数の `light` を正規化して `flight` としておきます．`diffuse` は `flight` と `fnormal` の内積で求めます．
 
-```c
+```cpp
 void main (void)
 {
 vec4 color = texture2DProj(texture, gl_TexCoord[0]);
@@ -430,7 +430,7 @@ float diffuse = max(dot(flight, fnormal), 0.0);
 
 ## 視線ベクトル `view` も `varying` 変数として得ていますから，これを正規化して `fview` としておきます．中間ベクトル `halfway` は `flight` と `fview` の逆ベクトルの和から求めます．拡散反射係数には材質として設定したものを用いるので，それと光源強度の拡散反射成分との積 `gl_FrontLightProduct`[0].`diffuse` を使って拡散反射光強度を求めます．これに材質として設定した環境光の反射係数と環境光強度の積 `gl_FrontLightProduct`[0].`ambient` と鏡面反射光強度 `specular` を加えて，`gl_FragColor` に代入します．
 
-```c
+```cpp
 vec3 fview = normalize(view);
 vec3 halfway = normalize(flight + fview);
 float specular = pow(max(dot(fnormal, halfway), 0.0), gl_FrontMaterial.shininess);

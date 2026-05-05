@@ -9,7 +9,7 @@ published: true
 
 [fink](http://www.finkproject.org/index.php?phpLang=ja) の `dvipdfmx` で日本語を含む `dvi` ファイルを変換しようとすると，エラーになってしまいます．
 
-```c
+```cpp
 % dvipdfmx test.dvi
 
 test.dvi -> test.pdf
@@ -24,7 +24,7 @@ Output file removed.
 
 <%= a "ftp://ftp.oreilly.com/pub/examples/nutshell/cjkv/adobe/aj16.tar.Z" %> をダウンロードして CMap ディレクトリを/sw/share/texmf/dvipdfm の下に置き，
 
-```c
+```cpp
 % sudo mktexlsr
 ```
 
