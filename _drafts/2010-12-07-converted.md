@@ -112,7 +112,7 @@ static GLuint rb;           // デプスバッファ用のレンダーバッフ�
 */
 static void init(void)
 {
-#if defined(WIN32)
+#if defined(_WIN32)
 // GLEW の初期化
 GLenum err = glewInit();
 if (err != GLEW_OK) {

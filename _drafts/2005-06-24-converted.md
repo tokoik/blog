@@ -93,7 +93,7 @@ static const GLfloat border[] = { 0.0, 0.0, 0.0, 0.0 };
 GLuint texname[3];
 glGenTextures(3, texname);
 
-#if defined(WIN32)
+#if defined(_WIN32)
 glActiveTexture =
 (PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");
 #endif

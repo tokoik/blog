@@ -22,7 +22,7 @@ published: true
 まず，VBO を使うための API を準備します．[前]({{ site.baseurl }}{% post_url 2006-07-15-post %})にも書いていますが，これは [GLEW](http://glew.sourceforge.net/) を使うと手軽にできます．しかし，ここでは例によって自分で準備することにします．
 
 ```cpp
-#if defined(WIN32)
+#if defined(_WIN32)
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
 #  include "glext.h"
@@ -46,7 +46,7 @@ PFNGLDELETEBUFFERSPROC glDeleteBuffers;
 void init(void)
 
 {
-#if defined(WIN32)
+#if defined(_WIN32)
 glGenBuffers =
 (PFNGLGENBUFFERSPROC)wglGetProcAddress("glGenBuffers");
 glIsBuffer =

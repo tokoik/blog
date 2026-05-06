@@ -52,7 +52,7 @@ PFNGLMULTITEXCOORD2DVPROC glMultiTexCoord2dv;
 GLuint texname[3];
 glGenTextures(3, texname);
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 glActiveTexture =
 (PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");

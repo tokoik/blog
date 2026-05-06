@@ -414,7 +414,7 @@ static GLfloat distance[] = { 0.0, 0.0, 1.0 };
 ```cpp
 ...
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
@@ -434,7 +434,7 @@ PFNGLPOINTPARAMETERFVPROC glPointParameterfv;
 */
 static void init(void)
 {
-#if defined(WIN32)
+#if defined(_WIN32)
 glPointParameterfv =
 (PFNGLPOINTPARAMETERFVPROC)wglGetProcAddress("glPointParameterfv");
 #endif

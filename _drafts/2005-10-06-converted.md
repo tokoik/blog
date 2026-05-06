@@ -61,7 +61,7 @@ published: true
 #include <stdlib.h>
 #include <math.h>
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"

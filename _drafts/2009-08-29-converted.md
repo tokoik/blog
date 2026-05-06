@@ -46,7 +46,7 @@ GLfloat matrix[] = {
 
 ```cpp
 #include <math.h>
-#if defined(WIN32)
+#if defined(_WIN32)
 #  include "glut.h"
 #elif defined(__APPLE__) || defined(MACOSX)
 #  include <GLUT/glut.h>

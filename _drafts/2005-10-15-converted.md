@@ -114,7 +114,7 @@ gl_FragColor += gl_FrontLightProduct[0].diffuse * diffuse
 #include <stdlib.h>
 #include <math.h>
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
@@ -149,7 +149,7 @@ GL_RGBA, GL_UNSIGNED_BYTE, texture);
 GLuint texname[1];
 glGenTextures(1, texname);
 
-#if defined(WIN32)
+#if defined(_WIN32)
 glActiveTexture =
 (PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");
 #endif

@@ -30,7 +30,7 @@ published: true
 #include <stdlib.h>
 #include <math.h>
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
@@ -196,7 +196,7 @@ gl_FragColor = color * (gl_LightSource[0].diffuse * diffuse + gl_LightSource[0].
 ```cpp
 #include <math.h>
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 #  include "glut.h"
 #  include "glext.h"

@@ -24,7 +24,7 @@ published: true
 ## [`glOrtho()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glOrtho.xhtml) を使って, 境界箱を視野空間に設定します. ただし, そのままでは視点が原点にありますから, これを境界箱の前方面の位置に移動します (実際には図形を反対方向に移動します). 透視投影だと視点を前方面上に置けませんが, 平行投影では問題ありません.
 
 ```cpp
-#if defined(WIN32)
+#if defined(_WIN32)
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
 #elif defined(__APPLE__) || defined(MACOSX)

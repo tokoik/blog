@@ -163,7 +163,7 @@ glUseProgram(gl2Program);
 
 glUniform1i(glGetUniformLocation(gl2Program, "texture"), 0);
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 glMultTransposeMatrixd =
 (PFNGLMULTTRANSPOSEMATRIXDPROC)wglGetProcAddress("glMultTransposeMatrixd");

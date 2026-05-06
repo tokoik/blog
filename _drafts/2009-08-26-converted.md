@@ -34,7 +34,7 @@ Windows で `GLEW` を使用するには, [`GLEW` の Windows 用バイナリフ
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
-#if defined(WIN32)
+#if defined(_WIN32)
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  pragma comment(lib, "glew32.lib")
 #  include "glew.h"
@@ -62,7 +62,7 @@ glFlush();
 */
 static void init(void)
 {
-#if defined(WIN32)
+#if defined(_WIN32)
 /* GLEW の初期化 */
 GLenum err = glewInit();
 if (err != GLEW_OK) {

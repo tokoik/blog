@@ -71,7 +71,7 @@ static void init(void)
 GLuint texname[2];
 glGenTextures(2, texname);
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 glActiveTexture =
 (PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");

@@ -108,7 +108,7 @@ glShaderSource(shader, sizeof source / sizeof source[0], source, NULL);
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
-#if defined(WIN32)
+#if defined(_WIN32)
 #  pragma warning(disable: 4996)
 #  include <malloc.h>
 #  include "glew.h"
@@ -265,7 +265,7 @@ fprintf(stderr, "Could not allocate InfoLog buffer.\n");
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
-#if defined(WIN32)
+#if defined(_WIN32)
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  pragma comment(lib, "glew32.lib")
 #  include "glew.h"
@@ -306,7 +306,7 @@ static void init(void)
 /* シェーダプログラムのコンパイル／リンク結果を得る変数 */
 GLint compiled, linked;
 
-#if defined(WIN32)
+#if defined(_WIN32)
 
 /* GLEW の初期化 */
 GLenum err = glewInit();

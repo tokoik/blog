@@ -44,7 +44,7 @@ static GLuint loadShader(const char *vert, const char *frag)
 */
 static void init(void)
 {
-#if defined(WIN32)
+#if defined(_WIN32)
   // GLEW の初期化
   GLenum err = glewInit();
   if (err != GLEW_OK) {
@@ -182,7 +182,7 @@ static GLuint ab;           // 環境光の反射光
 */
 static void init(void)
 {
-#if defined(WIN32)
+#if defined(_WIN32)
   // GLEW の初期化
   GLenum err = glewInit();
   if (err != GLEW_OK) {
@@ -370,7 +370,7 @@ static GLuint loadShader(const char *vert, const char *frag)
 */
 static void init(void)
 {
-#if defined(WIN32)
+#if defined(_WIN32)
   // GLEW の初期化
   GLenum err = glewInit();
   if (err != GLEW_OK) {

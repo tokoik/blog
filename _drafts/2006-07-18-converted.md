@@ -25,7 +25,7 @@ published: true
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#if defined(WIN32)
+#if defined(_WIN32)
 //#  pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #  include "glut.h"
 #  include "glext.h"
@@ -74,7 +74,7 @@ static void init(void)
 /* シェーダプログラムのコンパイル／リンク結果を得る変数 */
 GLint compiled, linked;
 
-#if defined(WIN32)
+#if defined(_WIN32)
 glGenFramebuffersEXT =
 (PFNGLGENFRAMEBUFFERSEXTPROC)wglGetProcAddress("glGenFramebuffersEXT");
 glBindFramebufferEXT =

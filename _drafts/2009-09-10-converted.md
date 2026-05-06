@@ -153,7 +153,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 ```cpp
 #include <math.h>
 #include <stdlib.h>
-#if defined(WIN32)
+#if defined(_WIN32)
 #  include "glew.h"
 #  include "glut.h"
 #  include "glext.h"
