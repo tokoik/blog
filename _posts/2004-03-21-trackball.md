@@ -74,7 +74,7 @@ static double rt[16];
 この行列の初期値は単位行列にしておきます．cq は最初単位クォータニオンなので，これを使うこともできます．
 
 ```cpp
-void init (void)
+void init ()
 {
   ...
 
@@ -91,7 +91,7 @@ static int cx, cy;
 
 ...
 
-void idle(void)
+void idle()
 {
   glutPostRedisplay();
 }
@@ -180,7 +180,7 @@ void motion(int x, int y)
 あとは，求めた回転の変換行列を用いて，図形を描画します．
 
 ```cpp
-void display(void)
+void display()
 {
   ...
   
