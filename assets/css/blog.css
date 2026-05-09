@@ -272,17 +272,19 @@ main {
     border-width: 2px;
     border-color: #ada;
     border-collapse: collapse;
-
-    img{
-      margin: auto;
-      padding: 0
-    }
   }
   th, td {
     padding: 0.3em;
     border-style: solid;
     border-width: 1px;
     border-color: #ada;
+  }
+  table img {
+    border: none;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    display: block;
   }
 
   /*
@@ -292,7 +294,7 @@ main {
     border: none;
     max-width: 100%;
     height: auto;
-    margin: 1em auto 1em auto;
+    margin: 1em auto;
     display: block;
     float: none;
   }
