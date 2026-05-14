@@ -1,7 +1,8 @@
 ---
 title: "Mac OS X 10.8 Server に Redmine をインストール"
 date: 2012-09-27
-categories: [メモ]
+category: メモ
+tags: []
 published: true
 ---
 

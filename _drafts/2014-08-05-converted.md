@@ -1,7 +1,8 @@
 ---
 title: "GLSL で画像処理 (4) 背景差分"
 date: 2014-08-05
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

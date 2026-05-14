@@ -1,7 +1,8 @@
 ---
 title: "視線と三角形の交差判定"
 date: 2008-11-29
-categories: [メモ]
+category: メモ
+tags: []
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "SSAO ベースの SSRO 付きライブ放射照度マッピング"
 date: 2016-12-31
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

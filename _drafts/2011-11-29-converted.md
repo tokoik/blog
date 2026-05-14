@@ -1,7 +1,8 @@
 ---
 title: "ゴムシミュレータ（１）"
 date: 2011-11-29
-categories: [OpenGL,ゼミ]
+category: OpenGL
+tags: [ゼミ]
 published: true
 ---
 

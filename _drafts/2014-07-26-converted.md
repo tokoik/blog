@@ -1,7 +1,8 @@
 ---
 title: "GLSL で画像処理 (2) 簡単なフィルタ"
 date: 2014-07-26
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

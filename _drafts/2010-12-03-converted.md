@@ -1,7 +1,8 @@
 ---
 title: "似非 SSS (Subsurface Scagttering)"
 date: 2010-12-03
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

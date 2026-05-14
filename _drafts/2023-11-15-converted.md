@@ -1,7 +1,8 @@
 ---
 title: "RealSense (3) メッシュ化した点群を Geometry Instansing で描いてみる"
 date: 2023-11-15
-categories: [Unity,RealSense]
+category: Unity
+tags: [RealSense]
 published: true
 ---
 

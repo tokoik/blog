@@ -1,7 +1,8 @@
 ---
 title: "SSAO (Screen Space Ambient Occlusion)"
 date: 2010-11-22
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "GLSL で画像処理 (5) フレーム間差分"
 date: 2014-08-26
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

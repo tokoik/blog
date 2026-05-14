@@ -1,7 +1,8 @@
 ---
 title: "Oculus Rift でリアルタイムボリュームレンダリング"
 date: 2014-09-13
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

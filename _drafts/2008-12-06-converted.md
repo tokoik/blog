@@ -1,7 +1,8 @@
 ---
 title: "デプスバッファの表示と画面表示の保存"
 date: 2008-12-06
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

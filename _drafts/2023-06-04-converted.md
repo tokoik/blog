@@ -1,7 +1,8 @@
 ---
 title: "セパラブルフィルタ"
 date: 2023-06-04
-categories: [OpenGL,GLSL,コンピュートシェーダ]
+category: OpenGL
+tags: [GLSL,コンピュートシェーダ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "Depth Peeling"
 date: 2008-11-23
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

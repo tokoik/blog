@@ -1,7 +1,8 @@
 ---
 title: "RealSense (1) SDK の Unity Package の使い方"
 date: 2023-10-27
-categories: [Unity,RealSense]
+category: Unity
+tags: [RealSense]
 published: true
 ---
 

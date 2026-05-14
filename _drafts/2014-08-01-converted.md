@@ -1,7 +1,8 @@
 ---
 title: "GLSL で画像処理 (3) ワーピング"
 date: 2014-08-01
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

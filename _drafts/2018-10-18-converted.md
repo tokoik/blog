@@ -1,7 +1,8 @@
 ---
 title: "粒子のレンダリング (2) ポイントの移動"
 date: 2018-10-18
-categories: [OpenGL,GLSL,コンピュートシェーダ]
+category: OpenGL
+tags: [GLSL,コンピュートシェーダ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "GLFW 3 で Oculus Rift を使う (1)"
 date: 2017-05-29
-categories: [OpenGL,メモ]
+category: OpenGL
+tags: [メモ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "第７回 ユーザ定義関数"
 date: 2005-10-20
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "シャドウマッピングで FBO を使ってみる"
 date: 2006-07-18
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

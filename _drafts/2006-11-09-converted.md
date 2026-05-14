@@ -1,7 +1,8 @@
 ---
 title: "ATI のドライバのバージョン"
 date: 2006-11-09
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

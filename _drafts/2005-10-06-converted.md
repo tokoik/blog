@@ -1,7 +1,8 @@
 ---
 title: "第１回 シェーダプログラムの読み込み"
 date: 2005-10-06
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

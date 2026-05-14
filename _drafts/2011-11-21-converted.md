@@ -1,7 +1,8 @@
 ---
 title: "Transform Feedback と Vertex Texture Fetch"
 date: 2011-11-21
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

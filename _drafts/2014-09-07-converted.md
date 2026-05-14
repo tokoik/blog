@@ -1,7 +1,8 @@
 ---
 title: "地理院地図 3D を Oculus Rift で見てみる"
 date: 2014-09-07
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "第９回 球を線で描く"
 date: 2009-09-10
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

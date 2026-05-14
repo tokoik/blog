@@ -1,7 +1,8 @@
 ---
 title: "第５回 座標変換"
 date: 2009-08-29
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

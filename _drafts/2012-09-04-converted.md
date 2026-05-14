@@ -1,7 +1,8 @@
 ---
 title: "Screen Space Motion Blur"
 date: 2012-09-04
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

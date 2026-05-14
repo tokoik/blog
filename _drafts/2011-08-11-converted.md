@@ -1,7 +1,8 @@
 ---
 title: "OpenCV によるカメラ入力と OpenGL のスワップバッファ"
 date: 2011-08-11
-categories: [OpenGL,メモ]
+category: OpenGL
+tags: [メモ]
 published: true
 ---
 

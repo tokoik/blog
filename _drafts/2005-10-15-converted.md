@@ -1,7 +1,8 @@
 ---
 title: "第５回 環境マップバンプマッピング"
 date: 2005-10-15
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

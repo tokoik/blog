@@ -1,7 +1,8 @@
 ---
 title: "MacOS X 10.9 / Xcode 5 で GLUT を使うと警告が出る"
 date: 2014-06-17
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

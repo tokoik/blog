@@ -1,7 +1,8 @@
 ---
 title: "分光現象"
 date: 2008-12-21
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

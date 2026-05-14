@@ -1,7 +1,8 @@
 ---
 title: "第２回 準備"
 date: 2009-08-26
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

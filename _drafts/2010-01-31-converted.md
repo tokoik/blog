@@ -1,7 +1,8 @@
 ---
 title: "ゼブラパターンの映り込み"
 date: 2010-01-31
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

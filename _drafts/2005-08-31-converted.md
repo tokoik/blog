@@ -1,7 +1,8 @@
 ---
 title: "第２５回 球にバンプマッピング"
 date: 2005-08-31
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

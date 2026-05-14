@@ -1,7 +1,8 @@
 ---
 title: "キューブマッピングで FBO を使ってみる"
 date: 2006-07-15
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

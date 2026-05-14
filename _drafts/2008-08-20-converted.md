@@ -1,7 +1,8 @@
 ---
 title: "GL_SEPARATE_SPECULAR_COLOR"
 date: 2008-08-20
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "丸い点を描く"
 date: 2008-08-21
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

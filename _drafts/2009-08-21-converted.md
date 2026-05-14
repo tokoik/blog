@@ -1,7 +1,8 @@
 ---
 title: "第１回 レンダリングパイプライン"
 date: 2009-08-21
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

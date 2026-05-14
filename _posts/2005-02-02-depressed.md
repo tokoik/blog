@@ -1,7 +1,7 @@
 ---
 title: "落ち込んでなんていられない"
 date: 2005-02-02
-categories: [その他]
+category: その他
 published: true
 ---
 

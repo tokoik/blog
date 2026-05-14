@@ -1,7 +1,8 @@
 ---
 title: "第１５回 ポイントのアニメーション"
 date: 2009-12-25
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

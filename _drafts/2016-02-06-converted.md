@@ -1,7 +1,8 @@
 ---
 title: "NuGet による freeglut / GLFW / GLEW の組み込み"
 date: 2016-02-06
-categories: [OpenGL,メモ]
+category: OpenGL
+tags: [メモ]
 published: true
 ---
 

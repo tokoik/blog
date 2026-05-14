@@ -1,7 +1,8 @@
 ---
 title: "Vine Linux 6 への移行"
 date: 2011-08-25
-categories: [メモ]
+category: メモ
+tags: []
 published: true
 ---
 

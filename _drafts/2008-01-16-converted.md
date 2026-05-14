@@ -1,7 +1,8 @@
 ---
 title: "GLUTによるOpenGL入門2 テクスチャマッピング"
 date: 2008-01-16
-categories: [雑文]
+category: 雑文
+tags: []
 published: true
 ---
 

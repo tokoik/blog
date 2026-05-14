@@ -1,7 +1,8 @@
 ---
 title: "とっても簡単なマルチテクスチャのサンプル"
 date: 2004-02-12
-categories: [OpenGL,テクスチャ]
+category: 資料
+tags: [OpenGL, テクスチャ]
 published: true
 ---
 

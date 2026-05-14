@@ -1,7 +1,8 @@
 ---
 title: "トゥーンシェーディング"
 date: 2008-02-18
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

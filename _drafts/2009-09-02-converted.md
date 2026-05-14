@@ -1,7 +1,8 @@
 ---
 title: "第６回 視点の移動"
 date: 2009-09-02
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

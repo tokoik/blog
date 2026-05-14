@@ -1,7 +1,8 @@
 ---
 title: "(3) OpenGL のバージョンとプロファイルの指定"
 date: 2012-09-08
-categories: [OpenGL,GLFW]
+category: OpenGL
+tags: [GLFW]
 published: true
 ---
 

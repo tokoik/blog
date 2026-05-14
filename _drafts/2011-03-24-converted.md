@@ -1,7 +1,8 @@
 ---
 title: "シェーダで Point Sprite"
 date: 2011-03-24
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

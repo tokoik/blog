@@ -1,7 +1,8 @@
 ---
 title: "第１６回 バーテックスブレンディング"
 date: 2009-12-31
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "fink の dvipdfmx"
 date: 2008-02-15
-categories: [メモ]
+category: メモ
+tags: []
 published: true
 ---
 

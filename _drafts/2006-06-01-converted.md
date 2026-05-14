@@ -1,7 +1,8 @@
 ---
 title: "第９回 GLSL によるシャドウマッピング"
 date: 2006-06-01
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "第２４回 バンプマッピング"
 date: 2005-08-26
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

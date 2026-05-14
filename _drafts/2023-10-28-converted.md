@@ -1,7 +1,8 @@
 ---
 title: "RealSense (2) メッシュ化した点群を Forward Rendering で描いてみる"
 date: 2023-10-28
-categories: [Unity,RealSense]
+category: Unity
+tags: [RealSense]
 published: true
 ---
 

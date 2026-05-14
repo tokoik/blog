@@ -1,7 +1,8 @@
 ---
 title: "頂点配列"
 date: 2008-08-29
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

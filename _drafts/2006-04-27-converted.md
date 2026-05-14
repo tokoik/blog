@@ -1,7 +1,8 @@
 ---
 title: "glPolygonStipple() による実装"
 date: 2006-04-27
-categories: [OpenGL,3D液晶]
+category: OpenGL
+tags: [3D液晶]
 published: true
 ---
 

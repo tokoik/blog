@@ -1,7 +1,8 @@
 ---
 title: "第２６回 レンダリング画像をテクスチャに使う"
 date: 2005-09-23
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

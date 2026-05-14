@@ -1,7 +1,8 @@
 ---
 title: "第８回 指標を用いた図形の描画"
 date: 2009-09-09
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

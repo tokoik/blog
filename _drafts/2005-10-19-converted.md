@@ -1,7 +1,8 @@
 ---
 title: "第６回 異方性反射"
 date: 2005-10-19
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

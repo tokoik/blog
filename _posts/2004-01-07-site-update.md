@@ -1,7 +1,7 @@
 ---
 title: "ホームページ更新"
 date: 2004-01-07
-categories: [その他]
+category: その他
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "第２回 Gouraud シェーディングと Phong シェーディング"
 date: 2005-10-07
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

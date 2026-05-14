@@ -1,7 +1,8 @@
 ---
 title: "屈折マッピング"
 date: 2008-12-20
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

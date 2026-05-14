@@ -1,7 +1,8 @@
 ---
 title: "Oculus Rift に図形を表示するプログラムを C++ で作る"
 date: 2019-06-02
-categories: [OpenGL,GLFW]
+category: OpenGL
+tags: [GLFW]
 published: true
 ---
 

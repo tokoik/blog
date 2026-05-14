@@ -1,7 +1,8 @@
 ---
 title: "とっても簡単なボクセル化"
 date: 2009-10-07
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

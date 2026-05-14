@@ -1,7 +1,8 @@
 ---
 title: "第１７回 レイキャスティング"
 date: 2010-01-13
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

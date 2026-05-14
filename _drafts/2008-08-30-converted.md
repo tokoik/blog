@@ -1,7 +1,8 @@
 ---
 title: "Vertex Buffer Object"
 date: 2008-08-30
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

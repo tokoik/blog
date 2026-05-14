@@ -1,7 +1,8 @@
 ---
 title: "GLSL で画像処理 (1) 画像を取り込む"
 date: 2014-07-25
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

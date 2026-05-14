@@ -1,7 +1,8 @@
 ---
 title: "第７回 カメラパラメータ"
 date: 2009-09-07
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

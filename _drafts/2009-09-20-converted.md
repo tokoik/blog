@@ -1,7 +1,8 @@
 ---
 title: "第１２回 模様を付ける"
 date: 2009-09-20
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

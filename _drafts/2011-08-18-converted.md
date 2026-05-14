@@ -1,7 +1,8 @@
 ---
 title: "Transform Feedback"
 date: 2011-08-18
-categories: [OpenGL,メモ]
+category: OpenGL
+tags: [メモ]
 published: true
 ---
 

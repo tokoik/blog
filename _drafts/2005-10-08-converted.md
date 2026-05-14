@@ -1,7 +1,8 @@
 ---
 title: "第３回 テクスチャの参照"
 date: 2005-10-08
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

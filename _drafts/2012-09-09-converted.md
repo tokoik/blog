@@ -1,7 +1,8 @@
 ---
 title: "(4) シェーダの追加"
 date: 2012-09-09
-categories: [OpenGL,GLFW]
+category: OpenGL
+tags: [GLFW]
 published: true
 ---
 

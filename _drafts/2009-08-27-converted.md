@@ -1,7 +1,8 @@
 ---
 title: "第３回 シェーダプログラム"
 date: 2009-08-27
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

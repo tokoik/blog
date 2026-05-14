@@ -1,7 +1,8 @@
 ---
 title: "第１１回 拡散反射光による陰影"
 date: 2009-09-14
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

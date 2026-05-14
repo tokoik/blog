@@ -1,7 +1,8 @@
 ---
 title: "メッシュを使った図形描画"
 date: 2015-11-25
-categories: [OpenGL,ゼミ]
+category: OpenGL
+tags: [ゼミ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "デプスバッファの輪郭線抽出"
 date: 2008-12-08
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

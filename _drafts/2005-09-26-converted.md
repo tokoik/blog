@@ -1,7 +1,8 @@
 ---
 title: "第２７回 シャドウマッピング"
 date: 2005-09-26
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

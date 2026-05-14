@@ -1,7 +1,8 @@
 ---
 title: "メディアデザインセミナー１"
 date: 2019-06-03
-categories: [授業]
+category: 授業
+tags: []
 published: true
 ---
 

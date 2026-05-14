@@ -1,7 +1,8 @@
 ---
 title: "(1) GLFW で OpenGL を使う"
 date: 2012-09-06
-categories: [OpenGL,GLFW]
+category: OpenGL
+tags: [GLFW]
 published: true
 ---
 

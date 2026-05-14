@@ -1,7 +1,8 @@
 ---
 title: "髪の毛 (3)"
 date: 2015-01-05
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

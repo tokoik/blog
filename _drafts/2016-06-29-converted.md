@@ -1,7 +1,8 @@
 ---
 title: "魚眼レンズ画像の平面展開"
 date: 2016-06-29
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

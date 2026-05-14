@@ -1,7 +1,8 @@
 ---
 title: "第４回 図形の描画"
 date: 2009-08-28
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

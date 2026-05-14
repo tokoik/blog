@@ -1,7 +1,8 @@
 ---
 title: "第１０回 球を三角形で描く"
 date: 2009-09-12
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "投影テクスチャマッピングとシャドウマッピング"
 date: 2015-06-07
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

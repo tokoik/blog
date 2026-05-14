@@ -1,7 +1,8 @@
 ---
 title: "Xcode の Project Template"
 date: 2009-06-20
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

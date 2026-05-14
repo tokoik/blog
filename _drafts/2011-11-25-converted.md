@@ -1,7 +1,8 @@
 ---
 title: "いい加減な視差画像生成"
 date: 2011-11-25
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

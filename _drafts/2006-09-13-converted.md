@@ -1,7 +1,8 @@
 ---
 title: "国際会議に行ってきた"
 date: 2006-09-13
-categories: [雑文]
+category: 雑文
+tags: []
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER"
 date: 2008-08-22
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

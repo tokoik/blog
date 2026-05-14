@@ -1,7 +1,8 @@
 ---
 title: "第１８回 レイキャスティングふたたび"
 date: 2010-01-21
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "ビルボード"
 date: 2011-02-21
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

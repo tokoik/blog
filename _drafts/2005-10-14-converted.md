@@ -1,7 +1,8 @@
 ---
 title: "第４回 GLSL によるバンプマッピング"
 date: 2005-10-14
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

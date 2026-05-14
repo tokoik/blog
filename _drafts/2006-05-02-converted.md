@@ -1,7 +1,8 @@
 ---
 title: "お金が無い！"
 date: 2006-05-02
-categories: [雑文]
+category: 雑文
+tags: []
 published: true
 ---
 

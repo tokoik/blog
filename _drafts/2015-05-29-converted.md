@@ -1,7 +1,8 @@
 ---
 title: "GLFW3 を Linuxmint にインストールしたときのメモ"
 date: 2015-05-29
-categories: [OpenGL,GLFW]
+category: OpenGL
+tags: [GLFW]
 published: true
 ---
 

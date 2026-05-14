@@ -1,7 +1,8 @@
 ---
 title: "魚眼レンズ画像の平面展開のサンプルプログラム"
 date: 2016-12-03
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

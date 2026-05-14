@@ -1,7 +1,8 @@
 ---
 title: "Point Sprite を使ってみる"
 date: 2006-02-27
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

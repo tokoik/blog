@@ -1,7 +1,8 @@
 ---
 title: "第１３回 テクスチャ座標の生成"
 date: 2009-09-21
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

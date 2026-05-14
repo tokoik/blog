@@ -1,7 +1,8 @@
 ---
 title: "シェーダとのデータのやりとりサンプルプログラム"
 date: 2025-07-27
-categories: [OpenGL,GLSL,コンピュートシェーダ]
+category: OpenGL
+tags: [GLSL,コンピュートシェーダ]
 published: true
 ---
 

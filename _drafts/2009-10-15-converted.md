@@ -1,7 +1,8 @@
 ---
 title: "デプスバッファを使ったボクセル化"
 date: 2009-10-15
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "第１４回 頂点座標の生成"
 date: 2009-09-22
-categories: [OpenGL,GLSL,ゼミ]
+category: OpenGL
+tags: [GLSL,ゼミ]
 published: true
 ---
 

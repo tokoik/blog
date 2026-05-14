@@ -1,7 +1,8 @@
 ---
 title: "ラスタライザ野郎の独り言"
 date: 2010-01-11
-categories: [雑文]
+category: 雑文
+tags: []
 published: true
 ---
 

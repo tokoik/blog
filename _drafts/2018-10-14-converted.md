@@ -1,7 +1,8 @@
 ---
 title: "粒子のレンダリング (1) ポイントの描画"
 date: 2018-10-14
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

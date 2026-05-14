@@ -1,7 +1,8 @@
 ---
 title: "第８回 視差マッピング"
 date: 2006-05-25
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

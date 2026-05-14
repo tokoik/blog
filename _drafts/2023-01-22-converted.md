@@ -1,7 +1,8 @@
 ---
 title: "Unity のメッシュ (1)"
 date: 2023-01-22
-categories: [ゼミ,Unity]
+category: ゼミ
+tags: [Unity]
 published: true
 ---
 

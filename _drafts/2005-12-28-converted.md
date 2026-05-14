@@ -1,7 +1,8 @@
 ---
 title: "とりあえず顔を上げていこう"
 date: 2005-12-28
-categories: [雑文]
+category: 雑文
+tags: []
 published: true
 ---
 

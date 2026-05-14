@@ -1,7 +1,8 @@
 ---
 title: "マルチプルレンダーターゲット"
 date: 2010-12-08
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

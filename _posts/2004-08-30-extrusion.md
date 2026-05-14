@@ -1,7 +1,8 @@
 ---
 title: "押し出し"
 date: 2004-08-30
-categories: [OpenGL]
+category: 資料
+tags: [OpenGL]
 math: true
 published: true
 ---

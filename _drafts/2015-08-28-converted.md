@@ -1,7 +1,8 @@
 ---
 title: "放射照度マッピング (2)"
 date: 2015-08-28
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

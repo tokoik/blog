@@ -1,7 +1,8 @@
 ---
 title: "半透明処理"
 date: 2008-11-22
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

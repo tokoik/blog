@@ -1,7 +1,8 @@
 ---
 title: "3D テクスチャ"
 date: 2006-06-23
-categories: [OpenGL,テクスチャ]
+category: OpenGL
+tags: [テクスチャ]
 published: true
 ---
 

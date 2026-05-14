@@ -1,7 +1,8 @@
 ---
 title: "フレームバッファオブジェクトの使い方あげいん"
 date: 2010-12-07
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

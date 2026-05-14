@@ -1,7 +1,8 @@
 ---
 title: "矩形の描き方"
 date: 2016-08-31
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

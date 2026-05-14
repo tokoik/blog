@@ -1,7 +1,8 @@
 ---
 title: "FBO を使ってデプスバッファを表示する"
 date: 2008-12-07
-categories: [OpenGL,GLSL]
+category: OpenGL
+tags: [GLSL]
 published: true
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "MFC によるダイアログベースのアプリケーション（２）"
 date: 2010-08-25
-categories: [OpenGL]
+category: OpenGL
+tags: []
 published: true
 ---
 

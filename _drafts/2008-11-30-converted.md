@@ -1,7 +1,8 @@
 ---
 title: "Athlon 64 X2 vs.  Core 2 Duo"
 date: 2008-11-30
-categories: [雑文]
+category: 雑文
+tags: []
 published: true
 ---
 
