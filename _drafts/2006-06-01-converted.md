@@ -220,7 +220,7 @@ glutSwapBuffers();
 ## glMaterialfv() の問題
 
 本題とは直接関係ないのですが，このサンプルプログラムで表示されるチェッカーボード状の板は，シェーダを使うと色がうまく設定されなくなります．この板はポリゴン単位に glMaterialfv() を使って材質（色）を設定しているのですが，その値を得るために用いる `gl_FrontMaterial` や gl_BackMaterial は頻繁に値が変更されることが無い（ということが期待されている）`uniform` 変数であるために，ポリゴン単位の材質の変更には追従できないようです．
-そこで `scene`.cpp において glMaterialfv() を使っている部分をすべて [`glColor4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glColor4fv.xhtml) に置き換えます．[`glColor4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glColor4fv.xhtml) で設定した色は attribulte 変数 `gl_Color` で参照できるため，ポリゴン単位や頂点単位に色を設定した場合でも，値を取り出すことができます．
+そこで scene.cpp において glMaterialfv() を使っている部分をすべて [`glColor4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glColor4fv.xhtml) に置き換えます．[`glColor4fv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glColor4fv.xhtml) で設定した色は attribulte 変数 `gl_Color` で参照できるため，ポリゴン単位や頂点単位に色を設定した場合でも，値を取り出すことができます．
 
 ```cpp
 ...

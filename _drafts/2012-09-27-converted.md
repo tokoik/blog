@@ -15,7 +15,7 @@ published: true
  
 <ul>
 <li>[Redmineのインストール | Redmine.JP](http://redmine.jp/guide/RedmineInstall/)</li>
-<li>[RedmineInstallOSXServer - Redmine](http://www.`redmine`.org/projects/redmine/wiki/RedmineInstallOSXServer)</li>
+<li>[RedmineInstallOSXServer - Redmine](http://www.redmine.org/projects/redmine/wiki/RedmineInstallOSXServer)</li>
 <li>[磁力式駆動: プロジェクト管理ツールRedmineをSQLite3で利用する。](http://chiki2-cq.seesaa.net/article/90956602.html)</li>
 <li>[Redmine を rbenv + `ruby`-build + bundler + `sqlite3` で導入 / 構築する - AtAsAtAmAtArA](http://d.hatena.ne.jp/atasatamatara/20120316/1331926385)</li>
 <li>[Redmine設定メモ - Wikimura](http://www.kimura-lab.net/wikimura/index.php/Redmine%E8%A8%AD%E5%AE%9A%E3%83%A1%E3%83%A2)</li>
@@ -142,7 +142,7 @@ Passenger の起動と RailsBaseURI の設定, アクセスコントロールな
 
 <h4>/etc/apache2/passenger.conf</h4>
 
-## これは [Redmine 2.1をCentOS 6.3にインストールする手順 | Redmine.JP Blog](http://blog.`redmine`.jp/articles/redmine-2_1-installation_centos/) を参考にした.
+これは [Redmine 2.1をCentOS 6.3にインストールする手順 | Redmine.JP Blog](http://blog.redmine.jp/articles/redmine-2_1-installation_centos/) を参考にした.
 
 ```cpp
 # Passengerの基本設定。

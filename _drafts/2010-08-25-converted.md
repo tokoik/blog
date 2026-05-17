@@ -31,7 +31,7 @@ Picture Control に結びつけた `OpenGL` の描画領域に描くシーンの
  
 ![クラス名の設定]({{ site.baseurl }}/assets/images/mfc35.gif)
 
-## `Scene` クラスの宣言を行います. `Scene`.h を開きます.
+## `Scene` クラスの宣言を行います. Scene.h を開きます.
 
 ![`Scene` クラスの宣言]({{ site.baseurl }}/assets/images/mfc36.gif)
 
@@ -54,7 +54,7 @@ void draw(void);
 };
 ```
 
-## `Scene`.cpp を開いて `Scene` クラスの実装を行います. コンストラクタとデストラクタは自動生成されていますが, `Scene`.h でインラインにしちゃったので消してしまいます. ここでは `draw()` の実装だけを行います．
+## Scene.cpp を開いて `Scene` クラスの実装を行います. コンストラクタとデストラクタは自動生成されていますが, Scene.h でインラインにしちゃったので消してしまいます. ここでは `draw()` の実装だけを行います．
 
 ![`Scene` クラスの実装]({{ site.baseurl }}/assets/images/mfc37.gif)
 
@@ -97,7 +97,7 @@ glPopMatrix();
 
 ![ダイアログクラスの修正]({{ site.baseurl }}/assets/images/mfc38.gif)
 
-## `Scene`.h を #`include` します.
+## Scene.h を #`include` します.
 
 ```cpp
 // GLsampleDlg.h : ヘッダー ファイル
@@ -174,7 +174,7 @@ return TRUE;  // フォーカスをコントロールに設定した場合を除
 
 ## クラスビューで `OnPaint(void)` をダブルクリックして, その定義を変更します.
 
-<blockquote>2014 年 6 月 3 日修正：`OnInitDialog()` で `m_pDC`->`m_hDC` = `m_glView`.GetDC()->GetSafeHdc(); という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
+<blockquote>2014 年 6 月 3 日修正：`OnInitDialog()` で `m_pDC->m_hDC = m_glView.GetDC()->GetSafeHdc();` という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
 
 ![シーンの描画]({{ site.baseurl }}/assets/images/mfc42.gif)
 

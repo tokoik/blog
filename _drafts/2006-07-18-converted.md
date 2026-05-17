@@ -20,7 +20,7 @@ published: true
 <li>[Windows 版](`glsl`/glsl9.lzh)</li>
 </ul>
 
-## まず[前回]({{ site.baseurl }}{% post_url 2006-07-15-post %})と同様，これに FBO に使う関数の宣言を追加します．この雛形の Windows 版に含まれている `glext`.h もバージョンが古く，FBO に関する宣言が含まれていませんので，最新の <%= a "`glext`.h" %> 入手して差し替えてください．
+## まず[前回]({{ site.baseurl }}{% post_url 2006-07-15-post %})と同様，これに FBO に使う関数の宣言を追加します．この雛形の Windows 版に含まれている glext.h もバージョンが古く，FBO に関する宣言が含まれていませんので，最新の <%= a "glext.h" %> 入手して差し替えてください．
 
 ```cpp
 #include <stdio.h>

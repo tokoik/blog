@@ -13,7 +13,7 @@ published: true
 ## テクスチャを参照する
 
 シェーダプログラムの中でもテクスチャを参照することができます．もちろん，[マルチテクスチャ]({{ site.baseurl }}{% post_url 2005-06-15-post %})が使えます．複数のテクスチャを組み合わせた処理を<`em`>手続きで書けるってあたりが，シェーダプログラミングの醍醐味でしょう．
-とりあえず，[前回]({{ site.baseurl }}{% post_url 2005-10-07-post %})のプログラムにテクスチャに使う画像を読み込む処理を追加します．テクスチャには，以前に使った[この画像](glsl/dot.`raw`.gz)を使います．なお本題とは関係ありませんが，以下のプログラムでは OpenGL 1.4 で標準機能となったミップマップの自動生成機能を使用しています．
+とりあえず，[前回]({{ site.baseurl }}{% post_url 2005-10-07-post %})のプログラムにテクスチャに使う画像を読み込む処理を追加します．テクスチャには，以前に使った[この画像](glsl/dot.raw.gz)を使います．なお本題とは関係ありませんが，以下のプログラムでは OpenGL 1.4 で標準機能となったミップマップの自動生成機能を使用しています．
 
 <ul>
 <li>[第２版ソースファイル](glsl/glsl2.zip)</li>
@@ -126,11 +126,11 @@ glutSolidTeapot(1.0);
 
 ## シェーダプログラムの作成
 
-シェーダプログラムは前回作成した Phong シェーディングのものをもとにして作成します．phong.`vert` と phong.`frag` をそれぞれ `texture`.`vert` と `texture`.`frag` というファイル名にコピーしてください．
+シェーダプログラムは前回作成した Phong シェーディングのものをもとにして作成します．phong.vert と phong.frag をそれぞれ texture.vert と texture.frag というファイル名にコピーしてください．
 
 ## バーテックスシェーダ
 
-バーテックスシェーダでは，テクスチャ変換行列 `gl_TextureMatrix`[0] を処理対象の頂点のテクスチャ座標 `gl_MultiTexCoord0` に掛けて，組み込み `varying` 変数 `gl_TexCoord`[0] に代入します．`gl_MultiTexCoord0` はテクスチャユニット０に設定されたテクスチャ座標です．`gl_TexCoord` は配列変数になっていますが，添え字の番号とテクスチャユニットは無関係（ただし総数は同じ）なので，`gl_TexCoord` のどの要素にどのテクスチャユニットのテクスチャ座標を入れても構いません．
+バーテックスシェーダでは，テクスチャ変換行列 `gl_TextureMatrix[0]` を処理対象の頂点のテクスチャ座標 `gl_MultiTexCoord0` に掛けて，組み込み `varying` 変数 `gl_TexCoord[0]` に代入します．`gl_MultiTexCoord0` はテクスチャユニット０に設定されたテクスチャ座標です．`gl_TexCoord` は配列変数になっていますが，添え字の番号とテクスチャユニットは無関係（ただし総数は同じ）なので，`gl_TexCoord` のどの要素にどのテクスチャユニットのテクスチャ座標を入れても構いません．
 
 ```cpp
 // texture.vert
@@ -184,7 +184,7 @@ gl_FragColor = color * gl_LightSource[0].diffuse * diffuse
 }
 ```
 
-## もちろん，`gl_LightSource`[0].`diffuse` と `color` * `gl_LightSource`[0].`ambient` は `color` でくくることができます．
+もちろん，`gl_LightSource[0].diffuse` と `color` * `gl_LightSource[0].ambient` は `color` でくくることができます．
 
 ```cpp
 // texture.frag

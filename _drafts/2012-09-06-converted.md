@@ -76,7 +76,7 @@ OpenGL に対応していて GLUT のようにマルチプラットフォーム�
 </dd>
 </dl>
 
-## 最初からダブルバッファリングになっていることや, マウスやキーボード, ジョイスティックの扱い方を見ると, `GLFW` は GLUT に比べてゲーム向きになっているように思われます. また GLUT にあって `GLFW` に無い機能の多くは, もともと OpenGL の Core Profile では使えない機能だと思います. Mac OS X の GLUT が Legacy Profile すなわち OpenGL 2.1 にしか対応していないのは, このような問題があるからかも知れません. あと, `GLFW` の Reference や User Guide がとても良くできているので, これらを読めばこのブログに書いてあるようなことは必要ないと思います.
+最初からダブルバッファリングになっていることや, マウスやキーボード, ジョイスティックの扱い方を見ると, `GLFW` は GLUT に比べてゲーム向きになっているように思われます. また GLUT にあって `GLFW` に無い機能の多くは, もともと OpenGL の Core Profile では使えない機能だと思います. Mac OS X の GLUT が Legacy Profile すなわち OpenGL 2.1 にしか対応していないのは, このような問題があるからかも知れません. あと, `GLFW` の Reference や User Guide がとても良くできているので, これらを読めばこのブログに書いてあるようなことは必要ないと思います.
 
 ## `GLFW` のインストール
 
@@ -84,7 +84,7 @@ Windows (Visual Studio 2008/2010), Mac OS X (Xcode 4), Linux の場合につい�
 
 <h4>Windows</h4>
 
-## プロジェクトのダウンロードページ <%= a "http://www.glfw.org/download.html" %> からバイナリファイル glfw-2.7.6.bin.WIN32.zip (2012 年 9 月 6 日時点) が入手できます. これには MinGW, Visual Studio 2008, Visual Studio 2010 のバイナリが入っています.
+プロジェクトのダウンロードページ <%= a "http://www.glfw.org/download.html" %> からバイナリファイル glfw-2.7.6.bin.WIN32.zip (2012 年 9 月 6 日時点) が入手できます. これには MinGW, Visual Studio 2008, Visual Studio 2010 のバイナリが入っています.
 
 <dl>
 <dt>Visual Studio 2008</dt>
@@ -95,16 +95,16 @@ Windows (Visual Studio 2008/2010), Mac OS X (Xcode 4), Linux の場合につい�
 <li>C:\Program Files\Microsoft SDKs\Windows\v6.0A\Include\gl にコピーする</li>
 </ul>
 </li>
-<li>`lib`-msvc90 フォルダにある `GLFW`.`lib`
+<li>`lib`-msvc90 フォルダにある GLFW.lib
 <ul>
 <li>C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib にコピーする</li>
-<li>`GLFW`.`lib` はスタティックリンクライブラリなので DLL のコピーは不要</li>
+<li>`GLFW.lib はスタティックリンクライブラリなので DLL のコピーは不要</li>
 </ul>
 </li>
 <li>ダイナミックリンクする場合
 <ul>
-<li>GLFWDLL.`lib` を C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib にコピーする</li>
-<li>`GLFW`.dll は, 32bit版 Windows なら C:\Windows\System32 に, 64bit 版Windows なら C:\Windows\SysWOW64 にコピーする</li>
+<li>GLFWDLL.lib を C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib にコピーする</li>
+<li>GLFW.dll は, 32bit版 Windows なら C:\Windows\System32 に, 64bit 版Windows なら C:\Windows\SysWOW64 にコピーする</li>
 </ul>
 </li>
 </ul>
@@ -120,19 +120,19 @@ Windows (Visual Studio 2008/2010), Mac OS X (Xcode 4), Linux の場合につい�
 </li>
 </ul>
 <ul>
-<li>`lib`-msvc100 フォルダにある `GLFW`.`lib`
+<li>lib-msvc100 フォルダにある GLFW.lib
 <ul>
 <li>32bit 版 Windows なら C:\Program Files\Microsoft SDKs\Windows\v7.0A\Lib にコピーする</li>
 <li>64bit 版 Windows なら C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Libにコピーする</li>
-<li>`GLFW`.`lib` はスタティックリンクライブラリなので DLL のコピーは不要</li>
+<li>`GLFW.lib はスタティックリンクライブラリなので DLL のコピーは不要</li>
 </ul>
 </li>
 </ul>
 <ul>
 <li>ダイナミックリンクする場合
 <ul>
-<li>32bit 版 Windows なら GLFWDLL.`lib` をC:\Program Files\Microsoft SDKs\Windows\v7.0A\Lib にコピーし `GLFW`.dll を C:\Windows\System32 にコピーする</li>
-<li>64bit 版 Windows なら GLFWDLL.`lib` を C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib にコピーし `GLFW`.dll を C:\Windows\SysWOW64 にコピーする</li>
+<li>32bit 版 Windows なら GLFWDLL.lib をC:\Program Files\Microsoft SDKs\Windows\v7.0A\Lib にコピーし GLFW.dll を C:\Windows\System32 にコピーする</li>
+<li>64bit 版 Windows なら GLFWDLL.lib を C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib にコピーし GLFW.dll を C:\Windows\SysWOW64 にコピーする</li>
 </ul>
 </li>
 </ul>
@@ -143,12 +143,12 @@ Windows (Visual Studio 2008/2010), Mac OS X (Xcode 4), Linux の場合につい�
 
 <h4>Mac OS X</h4>
 
-## Mac OS X では HomeBrew (<%= a "http://mxcl.github.com/homebrew/" %>) や Fink (<%= a "http://www.finkproject.org/" %>) などのパッケージを使うと楽です.
+Mac OS X では HomeBrew (<%= a "http://mxcl.github.com/homebrew/" %>) や Fink (<%= a "http://www.finkproject.org/" %>) などのパッケージを使うと楽です.
 
 ```
 ```
 
-## なお MacPorts (<%= a "http://www.macports.org/" %>) には用意されていないようです (2012 年 9 月 6 日時点).
+なお MacPorts (<%= a "http://www.macports.org/" %>) には用意されていないようです (2012 年 9 月 6 日時点).
 
 <dl>
 <dt>ソースをコンパイルする場合</dt>
@@ -159,7 +159,7 @@ Windows (Visual Studio 2008/2010), Mac OS X (Xcode 4), Linux の場合につい�
 make cocoa
 ```
 
-## shared library もインストールする場合は, さらに次のコマンドを実行してください.
+shared library もインストールする場合は, さらに次のコマンドを実行してください.
 
 ```
 
@@ -248,20 +248,20 @@ int main(int argc, char *argv[])
 <dd>この関数は開いている他のウィンドウを閉じたり, 走っているスレッドを停止させたりします. この関数はプログラムの終了時に呼び出します.</dd>
 </dl>
 
-## glfwOpenWindows() の設定に問題がある (ハードウェアが対応していない設定を行ったなど) と, ウィンドウは開かれません. またウィンドウのクローズ動作はイベントとして取得されず, 描画の前に glfwGetWindowParam(GLFW_OPENED) によってウィンドウが開いていることを確かめる必要があります. またイベントの取得は glfwSwapBuffers() あるいは glfwPollEvents(), glfwWaitEvents() で行いますので, これらが実行されなければイベントは取得されません (マウスやキーボードの操作を知ることができません).
+`glfwOpenWindows()` の設定に問題がある (ハードウェアが対応していない設定を行ったなど) と, ウィンドウは開かれません. またウィンドウのクローズ動作はイベントとして取得されず, 描画の前に `glfwGetWindowParam(` `GLFW_OPENED` `)` によってウィンドウが開いていることを確かめる必要があります. またイベントの取得は `glfwSwapBuffers()` あるいは `glfwPollEvents()`, `glfwWaitEvents()` で行いますので, これらが実行されなければイベントは取得されません (マウスやキーボードの操作を知ることができません).
 
 ## コンパイルの仕方
 
  
 <h4>Windows</h4>
 
-## プログラムの作成は「Win32 コンソールアプリケーション」のプロジェクトを作成して行ってください. その際, 作成したプロジェクトの「プロパティ」の「構成プロパティ」「リンカー」「入力」にある「追加の依存ファイル」に, opengl32.`lib` と `GLFW`.`lib` を追加してください. 以下に手順の説明を用意しています.
+プログラムの作成は「Win32 コンソールアプリケーション」のプロジェクトを作成して行ってください. その際, 作成したプロジェクトの「プロパティ」の「構成プロパティ」「リンカー」「入力」にある「追加の依存ファイル」に, opengl32.lib と GLFW.lib を追加してください. 以下に手順の説明を用意しています.
 
 <ul>
 <li>[Visual Studio 2010 での手順](glfw/vs2010/) [[PDF](glfw/vs2010.pdf)]</li>
 </ul>
 
-## あるいは, ソースプログラム (main() 関数を含むものだけでよい) の冒頭に次の2行を置くだけでも構いません. DLL を使う場合は,  `GLFW`.`lib` の代わりに GLFWDLL.`lib` を指定してください.
+あるいは, ソースプログラム (main() 関数を含むものだけでよい) の冒頭に次の2行を置くだけでも構いません. DLL を使う場合は,  GLFW.lib の代わりに GLFWDLL.lib を指定してください.
 
 ```cpp
 #pragma comment(lib, "GLFW.lib")
@@ -282,14 +282,14 @@ int main(int argc, char *argv[])
 
 ## Xcode を使ってプログラムを作成する場合は, プロジェクトの新規作成の際に Application の Command Line Tool のテンプレートを指定してください. その際，"Product Name" には作成するプログラムの名前, "Organization Name" には作成者の名前, "Company Identifier" には, Apple に開発者として登録しているなら Apple から取得した開発者 ID を指定しますが, 開発者 ID を持っていなければ適当な文字列を設定してください. あと "Type" には使用するプログラミング言語を指定してください.
 
-プロジェクトが作成されると, 中に main.c あるいは main.`cpp`, main.m などといったファイルができています. これに main() 関数が定義されています. このほかに "プロジェクト名.1" というファイルも作られていますが, これは man 形式のオンラインマニュアルなので, マニュアルを書かないなら削除して構いません.
+プロジェクトが作成されると, 中に main.c あるいは main.cpp, main.m などといったファイルができています. これに main() 関数が定義されています. このほかに "プロジェクト名.1" というファイルも作られていますが, これは man 形式のオンラインマニュアルなので, マニュアルを書かないなら削除して構いません.
 次に, 左のペインの「プロダクト名」を選んでから, その右の TARGETS のところの「プロダクト名」を選んで, 中央の Build Settings を選んでください. そして, その下にある All を選んだのち, Other Linker Flags という項目を探し (右側に検索ボックスがあります) そこに -framework OpenGL -L/usr/local/lib -`lglfw` を設定してください. 同様に Header Search Path という項目を探して, そこに /usr/local/include を設定してください. また Library Search Path という項目を探して, そこに /usr/local/lib を設定してください. なお, fink の場合は /usr/local のところを /sw にしてください. 以下に手順の説明を用意しています.
 
 <ul>
 <li>[Xcode 4 での手順](glfw/xcode4/) [[PDF](glfw/xcode4.pdf)]</li>
 </ul>
 
-## あるいは, Build Phases を選んで OpenGL Framework と /usr/local/lib/libglfw.a を Link Binary With Libraries に追加しても構いません. ターミナルで次のコマンドを実行すればディレクトリ /usr/local/lib の内容が Finder に表示されますので, Drag & Drop でファイルをここに入れることができます.
+あるいは, Build Phases を選んで OpenGL Framework と /usr/local/lib/libglfw.a を Link Binary With Libraries に追加しても構いません. ターミナルで次のコマンドを実行すればディレクトリ /usr/local/lib の内容が Finder に表示されますので, Drag & Drop でファイルをここに入れることができます.
 
 ```
 
@@ -303,7 +303,7 @@ Base SDK という項目を探して, 設定内容を一度別のものに変更
 ```
 ```
 
-## たとえば, 次のような [Makefile](glfw/Makefile) を作っておくと便利です (下の例はタブが失われているのでコピペでは使えません). 「プログラム名」は作成するプログラム名に置き換えてください. C 言語を使う時は `CXX` と `CXXFLAGS` をそれぞれ CC, CFLAGS に, .`cpp` を .c にすべて置き換えてください.
+たとえば, 次のような [Makefile](glfw/Makefile) を作っておくと便利です (下の例はタブが失われているのでコピペでは使えません). 「プログラム名」は作成するプログラム名に置き換えてください. C 言語を使う時は `CXX` と `CXXFLAGS` をそれぞれ `CC`, `CFLAGS` に, .cpp を .c にすべて置き換えてください.
 
 ```cpp
 CXXFLAGS        = -I/usr/X11R6/include -DX11 -Wall

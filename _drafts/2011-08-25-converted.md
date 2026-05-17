@@ -30,7 +30,7 @@ GL_ARB_vertex_array_object, GL_APPLE_vertex_array_object
 
 ## Nouveau ドライバの無効化
 
-/boot/grub/menu.lst のカーネルの引数に `nouveau`.modeset=0 を追加します．
+/boot/grub/menu.lst のカーネルの引数に nouveau.modeset=0 を追加します．
 
 ```
 

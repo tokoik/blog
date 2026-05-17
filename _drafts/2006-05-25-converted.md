@@ -30,14 +30,14 @@ published: true
 
 ## ディフューズテクスチャを追加する
 
-雛型には[GLSL によるバンプマッピング]({{ site.baseurl }}{% post_url 2005-10-14-post %})で作成したプログラムを使います．まず最初に，これにディフューズテクスチャ（拡散反射光成分のテクスチャ）のマッピングを追加します．テクスチャには，以前に使った[この画像](glsl/dot.`raw`.gz)を使います．
+雛型には[GLSL によるバンプマッピング]({{ site.baseurl }}{% post_url 2005-10-14-post %})で作成したプログラムを使います．まず最初に，これにディフューズテクスチャ（拡散反射光成分のテクスチャ）のマッピングを追加します．テクスチャには，以前に使った[この画像](glsl/dot.raw.gz)を使います．
 
 <ul>
 <li>[Linux 版](glsl/glsl4.tar.gz)</li>
 <li>[Windows 版](glsl/glsl4.lzh)</li>
 </ul>
 
-## マルチテクスチャを使うので，Windows では [`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) が使えるようにしておきます．また，テクスチャオブジェクト用の変数も用意しておきます．`main`.cpp を次のように変更します．
+## マルチテクスチャを使うので，Windows では [`glActiveTexture()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml) が使えるようにしておきます．また，テクスチャオブジェクト用の変数も用意しておきます．main.cpp を次のように変更します．
 
 ```cpp
 #include <stdio.h>
@@ -197,7 +197,7 @@ glDisable(GL_TEXTURE_2D);
 }
 ```
 
-## フラグメントシェーダプログラム `bump`.`frag` は次のように変更します．まず，ディフューズテクスチャを割り当てたテクスチャユニットを指定する `uniform` 変数 `dtexture` を宣言します．そして，そのテクスチャユニット使ってテクスチャをサンプリングして得た色 `dcolor` を使って陰影付けを行います．
+## フラグメントシェーダプログラム bump.frag は次のように変更します．まず，ディフューズテクスチャを割り当てたテクスチャユニットを指定する `uniform` 変数 `dtexture` を宣言します．そして，そのテクスチャユニット使ってテクスチャをサンプリングして得た色 `dcolor` を使って陰影付けを行います．
 
 ```cpp
 // bump.frag

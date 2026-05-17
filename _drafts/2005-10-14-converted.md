@@ -24,7 +24,7 @@ published: true
 
 ## シェーダプログラムの読み込み
 
-ファイル `main`.cpp に，シェーダプログラムを読み込む手続きを追加します．これは[第１回]({{ site.baseurl }}{% post_url 2005-10-06-post %})と同様です．まず `glsl`.h を #`include` して，シェーダオブジェクトのハンドルに使う変数を宣言します．
+ファイル main.cpp に，シェーダプログラムを読み込む手続きを追加します．これは[第１回]({{ site.baseurl }}{% post_url 2005-10-06-post %})と同様です．まず glsl.h を #`include` して，シェーダオブジェクトのハンドルに使う変数を宣言します．
 
 ```cpp
 #include <stdio.h>
@@ -138,7 +138,7 @@ glUniform1i(glGetUniformLocation(gl2Program, "texture"), 0);
 }
 ```
 
-## ここでバーテックスシェーダ (`bump`.`vert`) とフラグメントシェーダ (`bump`.`frag`）に[第３回]({{ site.baseurl }}{% post_url 2005-10-08-post %})で作成したテクスチャの参照を行うものをそのまま用いれば，この球にテクスチャを貼った状態で陰影を付けることができます．
+## ここでバーテックスシェーダ (bump.vert) とフラグメントシェーダ (bump.frag）に[第３回]({{ site.baseurl }}{% post_url 2005-10-08-post %})で作成したテクスチャの参照を行うものをそのまま用いれば，この球にテクスチャを貼った状態で陰影を付けることができます．
 
 ```cpp
 // bump.vert
@@ -191,7 +191,7 @@ gl_FragColor = color * (gl_LightSource[0].diffuse * diffuse + gl_LightSource[0].
 
 ## 球の描画手続きの変更
 
-ファイル `sphere`.cpp で定義している球の描画手続きにも，若干の変更を加えます．頂点位置を設定する際に，法線マップのテクスチャ座標や法線ベクトルに加えて，接線ベクトルも設定します．
+ファイル sphere.cpp で定義している球の描画手続きにも，若干の変更を加えます．頂点位置を設定する際に，法線マップのテクスチャ座標や法線ベクトルに加えて，接線ベクトルも設定します．
 まず，法線ベクトルから接線ベクトルを算出する手続き `setTangent()` を定義します．接線ベクトルは，球の上方向のベクトル (0, 1, 0) と法線ベクトルとの外積により求めることにします．これをバーテックスシェーダで算出することもできますが，この算出方法は球のモデルに依存していますから，シェーダプログラムに汎用性を持たせるために，接線ベクトルの算出手続きを球の描画手続きとセットにしておくことにします．
 
 ```cpp
@@ -241,7 +241,7 @@ glVertexAttrib3dv(tangent, t);
 }
 ```
 
-## 求めた接線ベクトル t は，[`glVertexAttrib3dv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttrib3dv.xhtml) を使って `attribute` 変数としてバーテックスシェーダに渡します．この `attribute` 変数のハンドル `tangent` は，後で `main`.cpp で設定します．
+## 求めた接線ベクトル t は，[`glVertexAttrib3dv()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttrib3dv.xhtml) を使って `attribute` 変数としてバーテックスシェーダに渡します．この `attribute` 変数のハンドル `tangent` は，後で main.cpp で設定します．
 
 次に，この関数 `setTangent()` を，球の描画において頂点位置を設定している部分に追加します．
 
@@ -429,7 +429,7 @@ vec3 flight = normalize(light);
 float diffuse = max(dot(flight, fnormal), 0.0);
 ```
 
-## 視線ベクトル `view` も `varying` 変数として得ていますから，これを正規化して `fview` としておきます．中間ベクトル `halfway` は `flight` と `fview` の逆ベクトルの和から求めます．拡散反射係数には材質として設定したものを用いるので，それと光源強度の拡散反射成分との積 `gl_FrontLightProduct`[0].`diffuse` を使って拡散反射光強度を求めます．これに材質として設定した環境光の反射係数と環境光強度の積 `gl_FrontLightProduct`[0].`ambient` と鏡面反射光強度 `specular` を加えて，`gl_FragColor` に代入します．
+視線ベクトル `view` も `varying` 変数として得ていますから，これを正規化して `fview` としておきます．中間ベクトル `halfway` は `flight` と `fview` の逆ベクトルの和から求めます．拡散反射係数には材質として設定したものを用いるので，それと光源強度の拡散反射成分との積 `gl_FrontLightProduct[0].diffuse` を使って拡散反射光強度を求めます．これに材質として設定した環境光の反射係数と環境光強度の積 `gl_FrontLightProduct[0].ambient` と鏡面反射光強度 `specular` を加えて，`gl_FragColor` に代入します．
 
 ```cpp
 vec3 fview = normalize(view);

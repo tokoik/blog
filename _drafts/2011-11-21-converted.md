@@ -45,14 +45,14 @@ GPU (おおここにも３文字アクロニム) を使った計算は, 頂点�
 この中に図形を追加します. うちでは千年一日のごとく使っている「三角形分割された `Alias` `OBJ` 形式のファイル」を使います. プロジェクトに以下のファイルを追加します.
 
 <ul>
-<li><%= a "`GgSimpleShader`.h" %></li>
-<li><%= a "`GgSimpleShader`.cpp" %></li>
-<li><%= a "`GgSimpleShader`.`vert`" %></li>
-<li><%= a "`GgSimpleShader`.`frag`" %></li>
-<li>[`cross`.`obj`](tfb/cross.`obj`)</li>
+<li><%= a "GgSimpleShader.h" %></li>
+<li><%= a "GgSimpleShader.cpp" %></li>
+<li><%= a "GgSimpleShader.vert" %></li>
+<li><%= a "GgSimpleShader.frag" %></li>
+<li>[`cross.obj`](tfb/cross.obj)</li>
 </ul>
 
-## そして以下の内容を `main`.cpp の最初の部分に追加します. 解説をこの辺りから始めると終わらないので, `GgObj` クラスだとか `GgSimpleShader` クラスだとかの詳細は省きます. あと, ここで static なポインタ変数を使うのは<`em`>ダサイと思いますけど (atexit() とか使ってるし) 私は static おじさんだからいいんです.
+そして以下の内容を main.cpp の最初の部分に追加します. 解説をこの辺りから始めると終わらないので, `GgObj` クラスだとか `GgSimpleShader` クラスだとかの詳細は省きます. あと, ここで `static` なポインタ変数を使うのは**ダサイ**と思いますけど (`atexit()` とか使ってるし) 私は `static` おじさんだからいいんです.
 
 ```cpp
 ...
@@ -76,7 +76,7 @@ class Drops
 {
 ```
 
-## そして, 初期化の際にこれらのインスタンスを作っておきます. `cross`.`obj` は四角形２枚 (三角形４枚) からなる形状データです.
+そして, 初期化の際にこれらのインスタンスを作っておきます. cross.obj は四角形２枚 (三角形４枚) からなる形状データです.
 
 ```cpp
 ...
@@ -169,7 +169,7 @@ drops->draw(dropsShader->getPositionLocation(), dropsShader->getVelocityLocation
 
 ## フレームバッファオブジェクトによるテクスチャの作成
 
-追加した図形を真上から見たときの深度値 (デプスバッファの値) と可視点の法線ベクトルをフレームバッファオブジェクトを使って取得し, テクスチャを作成します. まず, テクスチャオブジェクトを作成し, それを組み合わせてフレームバッファオブジェクトを作成します. `main`.cpp の最初の部分でフレームバッファオブジェクト名やテクスチャ名を格納する変数を宣言しておきます.
+追加した図形を真上から見たときの深度値 (デプスバッファの値) と可視点の法線ベクトルをフレームバッファオブジェクトを使って取得し, テクスチャを作成します. まず, テクスチャオブジェクトを作成し, それを組み合わせてフレームバッファオブジェクトを作成します. main.cpp の最初の部分でフレームバッファオブジェクト名やテクスチャ名を格納する変数を宣言しておきます.
 
 ```cpp
 ...
@@ -203,7 +203,7 @@ class Drops
 {
 ```
 
-## 初期化の際にテクスチャを作り, それを組み合わせてフレームバッファオブジェクトを作ります. 法線を格納するテクスチャは浮動小数点テクスチャの方がいいので internalFormat に `GL_RGBA32F` を指定します (`GL_RGBA` でも値をスケール・オフセットすれば使えます). 深度を格納するテクスチャの internalFormat は `GL_DEPTH_COMPONENT` にします.
+初期化の際にテクスチャを作り, それを組み合わせてフレームバッファオブジェクトを作ります. 法線を格納するテクスチャは浮動小数点テクスチャの方がいいので internalFormat に `GL_RGBA32F` を指定します (`GL_RGBA` でも値をスケール・オフセットすれば使えます). 深度を格納するテクスチャの internalFormat は `GL_DEPTH_COMPONENT` にします.
 
  
 
@@ -254,7 +254,7 @@ viewMatrix.loadLookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 trackball = new GgTrackball;
 ```
 
-## フレームバッファオブジェクトに描画するときに使うシェーダを作成します. 「オレオレ補助プログラム」を使っている都合上, このために `GgShader` クラスを継承したクラスをひとつ作ります. `attribute` 変数は頂点の座標値 `pv` と頂点の法線ベクトル `nv` の二つだとします.
+フレームバッファオブジェクトに描画するときに使うシェーダを作成します. 「オレオレ補助プログラム」を使っている都合上, このために `GgShader` クラスを継承したクラスをひとつ作ります. `attribute` 変数は頂点の座標値 `pv` と頂点の法線ベクトル `nv` の二つだとします.
 
 ```cpp
 /*
@@ -311,7 +311,7 @@ glUseProgram(name());
 }
 ```
 
-## このバーテックスシェーダ `upShader`.`vert` では頂点の法線ベクトル `nv` をそのままフラグメントシェーダに送ります. また頂点の座標値は, この図形を「上」から見た時のテクスチャを作るので, `xz` 平面を xy 平面とし y 方向を z 方向とするように要素を入れ替えます. また透視変換は行わないので w は 1 にしておきます.
+## このバーテックスシェーダ upShader.vert では頂点の法線ベクトル `nv` をそのままフラグメントシェーダに送ります. また頂点の座標値は, この図形を「上」から見た時のテクスチャを作るので, `xz` 平面を xy 平面とし y 方向を z 方向とするように要素を入れ替えます. また透視変換は行わないので w は 1 にしておきます.
 
 ```cpp
 #version 120
@@ -332,7 +332,7 @@ norm = nv;
 gl_Position = vec4(pv.xzy, 1.0);
 ```
 
-## フラグメントシェーダ `upShader`.`frag` では頂点の法線ベクトルを補間したものを正規化して, 画素値とします.
+## フラグメントシェーダ upShader.frag では頂点の法線ベクトルを補間したものを正規化して, 画素値とします.
 
 ```cpp
 #version 120
@@ -394,7 +394,7 @@ upShader = new UpShader();
 viewMatrix.loadLookat(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 ```
 
-## このシェーダを使ってフレームバッファオブジェクトに描画します. 隠面消去の際のデプスバッファの比較関数 [`glDepthFunc()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDepthFunc.xhtml) を `GL_GREATER` にしているのは, `upShader`.`vert` で図形の y と z を入れ替えたためです. この場合, 空から見れば z が大きい方が空に近くなります. これに伴って, デプスバッファをクリアする値 [`glClearDepth()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearDepth.xhtml) も最も遠いところの値 (1.0) ではなく, 最も近いところの値 (0.0) にします.
+## このシェーダを使ってフレームバッファオブジェクトに描画します. 隠面消去の際のデプスバッファの比較関数 [`glDepthFunc()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDepthFunc.xhtml) を `GL_GREATER` にしているのは, upShader.vert で図形の y と z を入れ替えたためです. この場合, 空から見れば z が大きい方が空に近くなります. これに伴って, デプスバッファをクリアする値 [`glClearDepth()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearDepth.xhtml) も最も遠いところの値 (1.0) ではなく, 最も近いところの値 (0.0) にします.
 
 ```cpp
 ...
@@ -507,7 +507,7 @@ return velocityLocation;
 }
 ```
 
-## また, このバーテックスシェーダ `dropsShader`.`vert` では, 点の現在位置とデプステクスチャを比較し, 点の方が下になれば, その位置の法線のテクスチャの値を使って跳ね返り方向を求め, それを新たな速度にします. ただし, この方法だと[ピッチングマシーンの実験](http://www.wakayama-u.ac.jp/~tokoi/opengl/ex-c.html)同様うまく跳ね返らないことがある (ゴロになる…ここの[ベストアンサー](http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1369673233)でも指摘されてるしｗ) けど, <strong>もういいよ</strong>ね.
+## また, このバーテックスシェーダ dropsShader.vert では, 点の現在位置とデプステクスチャを比較し, 点の方が下になれば, その位置の法線のテクスチャの値を使って跳ね返り方向を求め, それを新たな速度にします. ただし, この方法だと[ピッチングマシーンの実験](http://www.wakayama-u.ac.jp/~tokoi/opengl/ex-c.html)同様うまく跳ね返らないことがある (ゴロになる…ここの[ベストアンサー](http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1369673233)でも指摘されてるしｗ) けど, <strong>もういいよ</strong>ね.
 
 ```cpp
 #version 120

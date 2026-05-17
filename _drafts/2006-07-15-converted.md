@@ -20,7 +20,7 @@ published: true
 <li>[Windows 版](texture/texture22.lzh)</li>
 </ul>
 
-## まず，これに FBO に使う関数の宣言を追加します．ただし，上の雛形の Windows 版に含まれている `glext`.h はバージョンが古く，FBO に関する宣言が含まれていません．最新の <%= a "`glext`.h" %> は [OpenGL® Extension Registry](http://www.opengl.org/registry/) から入手できますので，それと差し替えてください．なお，OpenGL® Extension Registry は最近 <%= a "SGI" %> から <%= a "OpenGL.org" %> に移管されたようです．
+## まず，これに FBO に使う関数の宣言を追加します．ただし，上の雛形の Windows 版に含まれている glext.h はバージョンが古く，FBO に関する宣言が含まれていません．最新の <%= a "glext.h" %> は [OpenGL® Extension Registry](http://www.opengl.org/registry/) から入手できますので，それと差し替えてください．なお，OpenGL® Extension Registry は最近 <%= a "SGI" %> から <%= a "OpenGL.org" %> に移管されたようです．
 
 ```cpp
 #include <stdio.h>

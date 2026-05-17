@@ -26,7 +26,7 @@ published: true
 <li>[Windows 版](transparent/showdepth.lzh)</li>
 </ul>
 
-## のフラグメントシェーダのソースプログラム showdepth.`frag` を，以下の内容（`sobel`.`frag`）に書き換えてみてください．
+のフラグメントシェーダのソースプログラム showdepth.frag を，以下の内容（sobel.frag）に書き換えてみてください．
 
 ```cpp
 // sobel.frag

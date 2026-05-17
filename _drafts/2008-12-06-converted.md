@@ -17,11 +17,11 @@ published: true
 卒研でデプスバッファを使ったネタをやっている学生さんがいるのですが，そういうときにはデバッグのためにデプスバッファの内容を確かめたくなることがあります．そのために作ったものがあります．
 
 <ul>
-<li>[`showdepth`.h](transparent/showdepth.h)</li>
-<li>[`showdepth`.c](transparent/showdepth.c)</li>
+<li>[showdepth.h](transparent/showdepth.h)</li>
+<li>[showdepth.c](transparent/showdepth.c)</li>
 </ul>
 
-## まず `showdepth`.h を読み込んでから，関数 `showdepth()` を呼び出します．
+## まず showdepth.h を読み込んでから，関数 `showdepth()` を呼び出します．
 
 ```cpp
 ...
@@ -46,11 +46,11 @@ break;
 OpenGL の表示を画像ファイルに保存するには，OS の画面キャプチャ機能や，[Fraps](http://www.fraps.com/) のような画面キャプチャソフトウェアを使えばいいのですが，これも以前何か必要なことがあって作りました．
 
 <ul>
-<li>[`saveimage`.h](transparent/saveimage.h)</li>
-<li>[`saveimage`.c](transparent/saveimage.c)</li>
+<li>[saveimage.h](transparent/saveimage.h)</li>
+<li>[saveimage.c](transparent/saveimage.c)</li>
 </ul>
 
-## まず `saveimage`.h を読み込んでから，関数 `saveimage()` を呼び出します．
+まず saveimage.h を読み込んでから，関数 `saveimage()` を呼び出します．
 
 ```cpp
 ...

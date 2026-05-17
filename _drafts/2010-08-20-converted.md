@@ -209,12 +209,12 @@ glLoadIdentity();
 return TRUE;  // フォーカスをコントロールに設定した場合を除き、TRUE を返します。
 ```
 
-## Picture Control に `OpenGL` による描画を行うので, そのクライアント領域にアクセスする `CClientDC` オブジェクトを, それを制御するメンバ変数 (ここでは `m_glView`) 使って生成します. これでいいんでしょうか？ 自信がアリマセン. `OpenGL` の初期設定も, ここでやってしまいます. 多分 `OpenGL` の機能の呼び出しは別の関数にまとめて, それをここで呼び出すようにしたほうがいいんでしょうけど, ここに書く手順が増えるので手を抜きます.
+Picture Control に `OpenGL` による描画を行うので, そのクライアント領域にアクセスする `CClientDC` オブジェクトを, それを制御するメンバ変数 (ここでは `m_glView`) 使って生成します. これでいいんでしょうか？ 自信がアリマセン. `OpenGL` の初期設定も, ここでやってしまいます. 多分 `OpenGL` の機能の呼び出しは別の関数にまとめて, それをここで呼び出すようにしたほうがいいんでしょうけど, ここに書く手順が増えるので手を抜きます.
 
-<blockquote>2014 年 6 月 3 日修正：`OnInitDialog()` で `m_pDC`->`m_hDC` = `m_glView`.GetDC()->GetSafeHdc(); という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
+<blockquote>2014 年 6 月 3 日修正：`OnInitDialog()` で `m_pDC->m_hDC = m_glView.GetDC()->GetSafeHdc();` という代入は不要だというご指摘を頂きました．ありがとうございます．</blockquote>
 ![関数 `OnInitDialog()` の実装]({{ site.baseurl }}/assets/images/mfc26.gif)
 
-## 同様に, ウィンドウの描画が必要になった時に呼ばれるメンバ関数 `OnPaint()` を変更します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnPaint(void)` をダブルクリックします. 関数の本体が表示されますから, その中にある if 文の else 節に下記の内容を追加します.
+同様に, ウィンドウの描画が必要になった時に呼ばれるメンバ関数 `OnPaint()` を変更します. クラスビューの「Cプロジェクト名Dlg」クラス (ここでは `CGLsampleDlg`) を選択し, その下のメンバ一覧にある `OnPaint(void)` をダブルクリックします. 関数の本体が表示されますから, その中にある if 文の else 節に下記の内容を追加します.
 
 ```cpp
 void CGLsampleDlg::OnPaint()

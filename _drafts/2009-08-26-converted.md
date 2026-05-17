@@ -17,20 +17,20 @@ published: true
 ## `GLUT`
 
 また, このゼミでも例によって <%= a "`GLUT`" %> を使うことにします. オリジナルの `GLUT` はもう長いことメンテナンスされていないので, 代わりに <%= a "freeglut" %> や <%= a "OpenGLUT" %> を使ったほうがいいかもしれません. 実際, 最近の Linux のディストリビューションの多くは freeglut を採用しているようです. Mac OS X の `GLUT` は, Apple 自前の実装です. なお `GLUT` では, 古い OpenGL の機能を削り落とした forward compatible あるいは core profile のレンダリングコンテキストを作成することができません (多分…実はよく知らんのだな).
-Windows で `GLUT` を使うには, [`GLUT` の Windows 用のバイナリファイル](http://www.xmission.com/~nate/glut.html)に含まれる `glut`32.`lib` と `glut`32.dll, および `glut`.h をソースプログラムと同じフォルダに入れておいてください.
+Windows で `GLUT` を使うには, [`GLUT` の Windows 用のバイナリファイル](http://www.xmission.com/~nate/glut.html)に含まれる glut32.lib と glut32.dll, および glut.h をソースプログラムと同じフォルダに入れておいてください.
 
 ## `GLEW`
 
 グラフィックスハードウェアが対応しており, ドライバが最新であれば, OpenGL の最新の機能を使用することができます. しかし, 最新の機能を呼び出す API が, 必ずしも開発環境 (Visual Studio など) から使用できるようになっているとは限りません. 不足している API を整備するには, <%= a "`GLEW`" %> や <%= a "GLee" %> を導入します. なお, Linux において X Window System に NVIDIA のプロプライエタリドライバを組み込んでいる場合や, Mac OS X では, これらを使用する必要はありません. AMD (ATI) の場合は `GLEW` を組み込む必要があると思いますが, 実機がないので割愛させてください.
-Windows で `GLEW` を使用するには, [`GLEW` の Windows 用バイナリファイル](http://glew.sourceforge.net/)に含まれる `glew32`.`lib` と `glew32`.dll, および `glew`.h と wglew.h (これは多分使わないと思う) をソースプログラムと同じフォルダに入れておいてください.
+Windows で `GLEW` を使用するには, [`GLEW` の Windows 用バイナリファイル](http://glew.sourceforge.net/)に含まれる glew32.lib と glew32.dll, および glew.h と wglew.h (これは多分使わないと思う) をソースプログラムと同じフォルダに入れておいてください.
 
-## `glext`.h
+## glext.h
 
-あと, <%= a "`glext`.h" %> も最新のものを入手しておいてください. Windows の場合は, これもソースプログラムと同じフォルダに入れておいてください.
+あと, <%= a "glext.h" %> も最新のものを入手しておいてください. Windows の場合は, これもソースプログラムと同じフォルダに入れておいてください.
 
 ## 雛形のソースプログラム
 
-と言うわけで, このゼミで作成するプログラムの最初の雛形は, 以下ののようになります. `GLEW` に関係する部分を<`em`>太字にしてあります.
+と言うわけで, このゼミで作成するプログラムの最初の雛形は, 以下ののようになります. GLEW に関係する部分を<`em`>太字にしてあります.
 
 ```cpp
 #include <stdio.h>
