@@ -1,49 +1,55 @@
 ---
 title: "第１回 シェーダプログラムの読み込み"
 date: 2005-10-06
-category: OpenGL
-tags: [GLSL]
+category: GLSL 入門
+tags: [OpenGL, GLSL]
 published: true
 ---
 
 ## 戦力外通告
 
-一口に仕事といってもいろんな側面があるとは思うのですが，だからと言って独りよがりなことばかりしていれば，評価を得ることはできません．そして評価が得られない状態が継続していると，当然その組織に貢献していないと見なされ，戦力外を通告されることになります．
+一口に仕事といってもいろんな側面があるとは思うのですが，だからと言って独りよがりなことばかりしていれば，評価を得ることはできません．そして評価が得られない状態が継続していると，当然その組織に貢献していないと見なされ，戦力外を通告されることになります[^1]．
 
-## もっと組織に貢献する形で行動を最適化しなければと考えています．ちょっと頑張ってみます (2013年7月3日追記)．
+[^1]: もっと組織に貢献する形で行動を最適化しなければと考えています．ちょっと頑張ってみます．(2013 年 7 月 3 日追記)．
 
 ## 固定機能の追加の限界とプログラマブルシェーダ
 
-[dot3 バンプマッピング]({{ site.baseurl }}{% post_url 2005-08-26-post %})や[シャドウマッピング]({{ site.baseurl }}{% post_url 2005-09-26-post %})は，画素単位の陰影付けや影付け処理を固定機能のハードウェア上に実装するための，非常に巧みな拡張機能だと思います．しかし，ユーザ（デザイナ，プログラマ）の多様な発想から発せられる様々な要求をこのような形で実装し続けることには，遠からず限界がきます．したがって，ユーザの発想をユーザ自身の手によって実装できるような仕組みを用意することは，当然の流れなのでしょう．
+[Dot3 バンプマッピング]({{ site.baseurl }}{% post_url 2005-08-26-texture %})や[シャドウマッピング]({{ site.baseurl }}{% post_url 2005-09-26-texture %})は，画素単位の陰影付けや影付け処理を固定機能のハードウェア上に実装するための，非常に巧みな拡張機能だと思います．しかし，ユーザ（デザイナ，プログラマ）の多様な発想から発せられる様々な要求をこのような形で実装し続けることには，遠からず限界がきます．したがって，ユーザの発想をユーザ自身の手によって実装できるような仕組みを用意することは，当然の流れなのでしょう．
+
 プログラマブルシェーダの導入によって，レンダリング時における頂点単位の処理や画素単位の処理がユーザに解放されました．当初このプログラミングには，アセンブリ言語が用いられていました．しかし，他のプログラミング言語と同様，プログラムの開発効率や可読性，それに互換性が重視された結果，現在ではここにも高級言語が用いられるようになっています．
-このような高級言語として，Windows の DirectX 9 には [HLSL (High Level Shading Language)](http://www.microsoft.com/japan/msdn/directx/books/progDX9/Directx_Chap01.asp) や，[nVIDIA](http://www.nvidia.com) が開発した（HLSL とほぼ同じで OpenGL でも使える）[Cg](http://developer.nvidia.com/page/cg_main.html) があります．また OpenGL には，Cg の他に [3DLabs](http://www.3dlabs.com/) が開発し OpenGL 2.0 の標準機能に取り込まれた [`GLSL` (OpenGL Shading Language)](http://www.opengl.org/documentation/oglsl.html) があります．ここでは `GLSL` について簡単に説明します．
 
-## `GLSL` (OpenGL Shading Language)
+このような高級言語として，Windows の DirectX 9 には [HLSL (High Level Shading Language)](http://www.microsoft.com/japan/msdn/directx/books/progDX9/Directx_Chap01.asp) や，[nVIDIA](http://www.nvidia.com) が開発した（HLSL とほぼ同じで OpenGL でも使える）[Cg](http://developer.nvidia.com/page/cg_main.html) があります．また OpenGL には，Cg の他に [3DLabs](http://www.3dlabs.com/) が開発し OpenGL 2.0 の標準機能に取り込まれた [GLSL (OpenGL Shading Language)](http://www.opengl.org/documentation/oglsl.html) があります．ここでは GLSL について簡単に説明します．
 
-`GLSL` は OpenGL の 1.5 の拡張機能として実装され，OpenGL 2.0 で標準機能となりました．3DLabs の Wildcat VP や Realism，nVIDIA の GeForce FX 以降，ATI の RADEON 9600 以降のビデオカードであれば，最新のドライバを使用することにより，`GLSL` が使用できます．
-ただし OpenGL の 1.5 と 2.0 では，`GLSL` をサポートするための API の関数名が微妙に異なります．関数名の末尾の "ARB" の有無以外にも変化があることに加えて，引数のデータ型も少し違っていたりします．現在使用している[ノートパソコン]({{ site.baseurl }}{% post_url 2004-02-08-post %})が OpenGL 1.5 だったのでどちらを説明すべきか少し悩んだのですが，やはりこれまでのやり方？に倣って，`GLSL` を標準機能としている OpenGL 2.0 をもとに説明します．`GLSL` についての詳細については<%= a "オレンジブック" %>か，もしくは [`GLSL` の仕様書](http://oss.sgi.com/projects/ogl-sample/registry/ARB/GLSLangSpec.Full.1.10.59.pdf)と [OpenGL 2.0 の仕様書](http://www.opengl.org/documentation/specs/version2.0/glspec20.pdf)を参照してください．
+## GLSL (OpenGL Shading Language)
+
+GLSL は OpenGL の 1.5 の拡張機能として実装され，OpenGL 2.0 で標準機能となりました．3DLabs の Wildcat VP や Realism，nVIDIA の GeForce FX 以降，ATI の RADEON 9600 以降のビデオカードであれば，最新のドライバを使用することにより，GLSL が使用できます．
+
+ただし OpenGL の 1.5 と 2.0 では，GLSL をサポートするための API の関数名が微妙に異なります．関数名の末尾の "ARB" の有無以外にも変化があることに加えて，引数のデータ型も少し違っていたりします．現在使用している[ノートパソコン]({{ site.baseurl }}{% post_url 2004-02-08-texture %})が OpenGL 1.5 だったのでどちらを説明すべきか少し悩んだのですが，やはりこれまでのやり方？に倣って，GLSL を標準機能としている OpenGL 2.0 をもとに説明します．
+
+GLSL についての詳細については<%= a "オレンジブック" %>か，もしくは [GLSL の仕様書](http://oss.sgi.com/projects/ogl-sample/registry/ARB/GLSLangSpec.Full.1.10.59.pdf)と [OpenGL 2.0 の仕様書](http://www.opengl.org/documentation/specs/version2.0/glspec20.pdf)を参照してください．
 
 ## シェーダプログラムの読み込み
 
 シェーダのプログラミングは，頂点単位の処理を行うバーテックスシェーダと，画素単位の処理を行うフラグメントシェーダの二つについて行います．これらは独立したプログラムですが，バーテックスシェーダで処理した結果をフラグメントシェーダで使用するので，この二つは対にして取り扱う必要があります．
-`GLSL` のシェーダプログラミングで私が最初に驚いたのは，シェーダのソースプログラムを実行時にコンパイルすることでした．このためにシェーダプログラムのコンパイラが，`GLSL` をサポートする API，すなわちビデオカードのドライバに含まれています．これは私のドライバに対するイメージから大きくかけ離れたものでした．
+
+GLSL のシェーダプログラミングで私が最初に驚いたのは，シェーダのソースプログラムを実行時にコンパイルすることでした．このためにシェーダプログラムのコンパイラが，GLSL をサポートする API，すなわちビデオカードのドライバに含まれています．これは私のドライバに対するイメージから大きくかけ離れたものでした．
+
 毎回実行時にコンパイルするのは非効率的のように思えますが，こうすることによりビデオカードの機能の差を隠蔽し，使用するビデオカードにとって最も効率的なシェーダプログラムを生成することができます．なお，Cg でも実行時にコマンドラインコンパイラ (cgc) を呼び出す方法が推奨されていたりします．
-`GLSL` のシェーダプログラムを利用する手順は，以下のようになります．
 
-<ol>
-<li>バーテックスシェーダとフラグメントシェーダのシェーダオブジェクトを作成します ([`glCreateShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml))．</li>
-<li>作成したそれぞれのシェーダオブジェクトに対してソースプログラムを読み込みます (glShaderSource())．</li>
-<li>読み込んだソースプログラムをコンパイルします ([`glCompileShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCompileShader.xhtml))．</li>
-<li>プログラムオブジェクトを作成します ([`glCreateProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml))．</li>
-<li>プログラムオブジェクトに対してシェーダオブジェクトを登録します ([`glAttachShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glAttachShader.xhtml))．</li>
-<li>シェーダプログラムをリンクします ([`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml))．</li>
-<li>シェーダプログラムを適用します ([`glUseProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml))．</li>
-</ol>
+GLSL のシェーダプログラムを利用する手順は，以下のようになります．
 
-## 以下，次のサンプルプログラムに追加する形で，この手順を説明します．このアーカイブファイルには，Makefile (Vine Linux 6.1)，Xcode 3 のプロジェクトファイル (Mac OS X)，および Visual Studio 2010 のソリューションファイル (Windows) を添付しています．
+1. バーテックスシェーダとフラグメントシェーダのシェーダオブジェクトを作成します ([`glCreateShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml))．
+2. 作成したそれぞれのシェーダオブジェクトに対してソースプログラムを読み込みます (glShaderSource())．
+3. 読み込んだソースプログラムをコンパイルします ([`glCompileShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCompileShader.xhtml))．
+4. プログラムオブジェクトを作成します ([`glCreateProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml))．
+5. プログラムオブジェクトに対してシェーダオブジェクトを登録します ([`glAttachShader()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glAttachShader.xhtml))．
+6. シェーダプログラムをリンクします ([`glLinkProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml))．
+7. シェーダプログラムを適用します ([`glUseProgram()`](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml))．
+
+以下，次のサンプルプログラムに追加する形で，この手順を説明します．
 
 <ul>
-<li>[第０版ソースファイル](`glsl`/glsl0.zip)</li>
+<li>[第０版ソースファイル](glsl/glsl0.zip)</li>
 </ul>
 
 <div class="figure">
@@ -51,7 +57,7 @@ published: true
 ![オリジナルプログラムの生成画像２]({{ site.baseurl }}/assets/images/glsl1.jpg)
 </div>
 
-## プログラムはテクスチャマッピング入門の[第１回]({{ site.baseurl }}{% post_url 2004-09-13-post %})で使ったのと同じ，１枚の四角形をくるくる回すものです．ただし，材質や光源の設定を変えてあります．
+プログラムはテクスチャマッピング入門の[第１回]({{ site.baseurl }}{% post_url 2004-09-13-texture %})で使ったのと同じ，１枚の四角形をくるくる回すものです．ただし，材質や光源の設定を変えてあります．
 
 ## オブジェクトの識別子
 
@@ -121,7 +127,7 @@ glLightfv(GL_LIGHT0, GL_AMBIENT, lightamb);
 glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 ```
 
-## 関数 `glslInit()` は glsl.cpp で定義しており，`GLSL` で使用する API のエントリポイントを，関数ポインタ変数に格納します．この作業は Windows でのみ必要です．
+## 関数 `glslInit()` は glsl.cpp で定義しており，GLSL で使用する API のエントリポイントを，関数ポインタ変数に格納します．この作業は Windows でのみ必要です．
 
 ```cpp
 /* GLSL の初期化 */
@@ -236,5 +242,5 @@ gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 </div>
 
 <ul>
-<li>[第１版ソースファイル](`glsl`/glsl1.zip)</li>
+<li>[第１版ソースファイル](glsl/glsl1.zip)</li>
 </ul>
