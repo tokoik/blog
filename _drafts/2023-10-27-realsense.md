@@ -282,7 +282,7 @@ public class TriangleMeshRenderer : MonoBehaviour
 <ol>
 <li>Project ウィンドウの Assets の中に Shaders というフォルダを作ります。この Assets を選択した状態で上の <code>Assets</code> メニューから <code>Create ></code> <code>Folder</code> を選び、フォルダを作成してください。フォルダ名は Shaders にしておくことにします。</li>
 <li>作成した Shaders フォルダを選択した状態で上の <code>Assets</code> メニューから <code>Create ></code> <code>Shader ></code> <code>Unlit Shader</code> を選択して、シェーダを作成してください。シェーダ名は TriangleMesh にすることにします。</li>
-<li>このシェーダに <code>_UVMap</code> というプロパティを追加します。RealSense はデプスセンサ (ステレオカメラ) とカラーセンサが独立していて違う位置にあり、解像度も異なるため、点群の各点におけるカラーデータの画素位置 (テクスチャ座標, UV) を別のデータとして持っているからです。
+<li>このシェーダに <code>_UVMap</code> というプロパティを追加します。RealSense はデプスセンサ (ステレオカメラ) とカラーセンサが独立していて違う位置にあり、解像度も異なるため、点群の各点におけるカラーデータの画素位置 (テクスチャ座標、UV) を別のデータとして持っているからです。
 ```cpp
 Shader "Unlit/TriangleMesh"
 {

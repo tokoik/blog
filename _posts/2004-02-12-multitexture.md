@@ -8,11 +8,11 @@ published: true
 
 ## 拡張機能を使う
 
-Windows 上でマルチテクスチャを使う方法を質問されたので，[OpenGL FAQ の Q23](http://www.opengl.org/resources/faq/technical/extensions.htm) を見ながら，とりあえず[サンプルプログラム](https://github.com/tokoik/multitexture)を作ってみました．うーん，修行が足りんなぁ（恥）．それにしても，GeForce 4600 に同梱されていたドライバでマルチテクスチャ（の一部の機能）が使えんとは思わなんだ．うーん，修行が足りん．
+Windows 上でマルチテクスチャを使う方法を質問されたので、[OpenGL FAQ の Q23](http://www.opengl.org/resources/faq/technical/extensions.htm) を見ながら、とりあえず[サンプルプログラム](https://github.com/tokoik/multitexture)を作ってみました。うーん、修行が足りんなぁ（恥）。それにしても、GeForce 4600 に同梱されていたドライバでマルチテクスチャ（の一部の機能）が使えんとは思わなんだ。うーん、修行が足りん。
 
 ## `wglGetProcAddress()`
 
-マルチテクスチャなどの OpenGL の拡張機能は，Linux の Mesa や Mac OS X だと何も気にせずに使えていた気がしてました．でも Windows では，[`wglGetProcAddress()`](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイント引っぱってこないといけないんですね．そのために，まず [OpenGL SDK](https://www.opengl.org/sdk/) に含まれる [glext.h](https://registry.khronos.org/OpenGL/api/GL/glext.h) を持ってきて `#include` します．
+マルチテクスチャなどの OpenGL の拡張機能は、Linux の Mesa や Mac OS X だと何も気にせずに使えていた気がしてました。でも Windows では、[`wglGetProcAddress()`](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイント引っぱってこないといけないんですね。そのために、まず [OpenGL SDK](https://www.opengl.org/sdk/) に含まれる [glext.h](https://registry.khronos.org/OpenGL/api/GL/glext.h) を持ってきて `#include` します。
 
 ```cpp
 #if defined(__APPLE__) || defined(MACOSX)
@@ -29,7 +29,7 @@ Windows 上でマルチテクスチャを使う方法を質問されたので，
 #  include <GL/glext.h>
 ```
 
-そして使用する拡張機能の API，例えば `glActiveTextureARB()` や `glMultiTexCoord2fARB()` などの関数ポインタを用意し，それぞれに [`wglGetProcAddress()`](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイントを格納してやります．このとき `wglGetProcAddress()` の戻り値が `NULL` なら，その拡張機能がサポートされていないことになります．
+そして使用する拡張機能の API、例えば `glActiveTextureARB()` や `glMultiTexCoord2fARB()` などの関数ポインタを用意し、それぞれに [`wglGetProcAddress()`](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイントを格納してやります。このとき `wglGetProcAddress()` の戻り値が `NULL` なら、その拡張機能がサポートされていないことになります。
 
 ```cpp
 #  if defined(_WIN32)
@@ -60,7 +60,7 @@ int initMultiTexture() {
 #endif
 ```
 
-Windows の場合は，これを OpenGL の初期化処理 `init()` の時点で実行しておく必要があります．それで，めでたく API がサポートされていれば，これらの拡張機能を使います．
+Windows の場合は、これを OpenGL の初期化処理 `init()` の時点で実行しておく必要があります。それで、めでたく API がサポートされていれば、これらの拡張機能を使います。
 
 ```cpp
 void init() {
@@ -79,7 +79,7 @@ void init() {
 }
 ```
 
-マルチテクスチャの使い方は通常のテクスチャマッピングとあんまり変わりませんが，`glBindTexture()` でテクスチャを指定する前に，`glActiveTextureARB()` を使ってそのテクスチャを割り当てるテクスチャユニットを指定しておきます．また，テクスチャ座標の指定には glTexCoord*() の代わりに glMultiTexCoord*ARB() を用いて，テクスチャ座標とともにテクスチャユニットも指定します．
+マルチテクスチャの使い方は通常のテクスチャマッピングとあんまり変わりませんが、`glBindTexture()` でテクスチャを指定する前に、`glActiveTextureARB()` を使ってそのテクスチャを割り当てるテクスチャユニットを指定しておきます。また、テクスチャ座標の指定には glTexCoord*() の代わりに glMultiTexCoord*ARB() を用いて、テクスチャ座標とともにテクスチャユニットも指定します。
 
 ```cpp
 /* テクスチャネーム */
@@ -137,6 +137,6 @@ void display() {
 
 ## GLH, GLEW, Glad, GLee, ExtGL
 
-多分，[nvsdk](http://developer.nvidia.com/object/nvsdk_home.html) なんかに入っている GLH (platform-indepenedent C++ OpenGL helper library) ってのを使うのがスジなんでしょうね．拡張機能の利用をサポートするライブラリには，この他に [GLEW](http://glew.sourceforge.net/), [Glad](https://glad.dav1d.de/), [GLee](http://elf-stone.com/glee.php), [ExtGL](http://www.levp.de/3d/index.html)（これは開発をやめてしまったらしい）などがあるようです．Windows で OpenGL の拡張機能を使うときに悩む人は結構いるんでしょうか．
+多分、[nvsdk](http://developer.nvidia.com/object/nvsdk_home.html) なんかに入っている GLH (platform-indepenedent C++ OpenGL helper library) ってのを使うのがスジなんでしょうね。拡張機能の利用をサポートするライブラリには、この他に [GLEW](http://glew.sourceforge.net/), [Glad](https://glad.dav1d.de/), [GLee](http://elf-stone.com/glee.php), [ExtGL](http://www.levp.de/3d/index.html)（これは開発をやめてしまったらしい）などがあるようです。Windows で OpenGL の拡張機能を使うときに悩む人は結構いるんでしょうか。
 
-> この記事の内容は {{ page.date | date: "%Y 年 %m 月" }}のものです。マルチテクスチャは 2001 年 8 月にリリースされた OpenGL 1.3 から標準機能 (Core Features) になっています．また GLH は，かつて NVSDK (旧 NVIDIA SDK) に含まれていた，プラットフォームに依存しない C++ OpenGL ヘルパーライブラリ (glh_extensions.h など) です．これは古い NVIDIA のサンプルコードやツールで使用されていましたが，2026 年時点では使われなくなっています (見つけられませんでした)．
+> この記事の内容は {{ page.date | date: "%Y 年 %m 月" }}のものです。マルチテクスチャは 2001 年 8 月にリリースされた OpenGL 1.3 から標準機能 (Core Features) になっています。また GLH は、かつて NVSDK (旧 NVIDIA SDK) に含まれていた、プラットフォームに依存しない C++ OpenGL ヘルパーライブラリ (glh_extensions.h など) です。これは古い NVIDIA のサンプルコードやツールで使用されていましたが、2026 年時点では使われなくなっています (見つけられませんでした)。
