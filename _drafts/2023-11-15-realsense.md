@@ -9,11 +9,11 @@ published: true
 
 ## Geometry Instansing してみる
 
-１つの RealSense で取得した点群は整列しているので、それをもとに作った三角形メッシュも三角形が規則正しく並んだものになっています。そのため、このメッシュのインデックスを作っている <code>CreateTriangleMeshIndex()</code> は、頂点番号を等間隔に生成しています。このように同じ図形を多数描く場合は、１つ１つを独立したデータとして描くより、一つの図形を GPU 内で複製して描いた方が効率が良くなります。GPU のこの機能を Geometry Instancing と呼びます。
+１つの RealSense で取得した点群は整列しているので、それをもとに作った三角形メッシュも三角形が規則正しく並んだものになっています。そのため、このメッシュのインデックスを作っている `CreateTriangleMeshIndex()` は、頂点番号を等間隔に生成しています。このように同じ図形を多数描く場合は、１つ１つを独立したデータとして描くより、一つの図形を GPU 内で複製して描いた方が効率が良くなります。GPU のこの機能を Geometry Instancing と呼びます。
 
 ## スクリプトの修正
 
-いま描いているメッシュは、縦横に並んだ点群の隣接する 4 点が作る四角形を２つの三角形で描いています。したがって、１つの四角形を GPU 内で複製して描きます。四角形を１つしか使わないので、インデックスは必要ありません。そのためインデックスを格納する <code>indexBuffer</code> は削除して、代わりに複製する四角形の数を記録するメンバ変数 <code>instances</code> を追加します。
+いま描いているメッシュは、縦横に並んだ点群の隣接する 4 点が作る四角形を２つの三角形で描いています。したがって、１つの四角形を GPU 内で複製して描きます。四角形を１つしか使わないので、インデックスは必要ありません。そのためインデックスを格納する `indexBuffer` は削除して、代わりに複製する四角形の数を記録するメンバ変数 `instances` を追加します。
 
 ```cpp
 //[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
@@ -30,7 +30,7 @@ public class TriangleMeshRenderer : MonoBehaviour
   private Texture2D uvmap;
 ```
 
-<code>indexBuffer</code> を削除したので、それにインデックスを格納する処理も削除します。<code>CreateTriangleMeshIndex()</code> も使わないので、この定義も削除しても構いません。代わりに四角形の数を <code>instances</code> に求めておきます。
+`indexBuffer` を削除したので、それにインデックスを格納する処理も削除します。`CreateTriangleMeshIndex()` も使わないので、この定義も削除しても構いません。代わりに四角形の数を `instances` に求めておきます。
 
 ```cpp
   private void ResetMesh(int width, int height)
@@ -52,7 +52,7 @@ public class TriangleMeshRenderer : MonoBehaviour
     //mesh.vertices = vertices;
 ```
 
-<code>indexBuffer</code> は削除したので、破棄する必要もなくなります。
+`indexBuffer` は削除したので、破棄する必要もなくなります。
 
 ```cpp
   void OnDestroy()
@@ -75,7 +75,7 @@ public class TriangleMeshRenderer : MonoBehaviour
   }
 ```
 
-<code>Graphics.DrawProceduralNow()</code> では三角形 <code>MeshTopology.Triangles</code> ではなく四角形 <code>MeshTopology.Quads</code> を描きます。四角形１つなので、頂点の数は 4 です。それを <code>instances</code> 個複製して描きます。<code>MeshTopology.Quads</code> は、[マニュアル](https://docs.unity3d.com/ScriptReference/MeshTopology.Quads.html)には
+`Graphics.DrawProceduralNow()` では三角形 `MeshTopology.Triangles` ではなく四角形 `MeshTopology.Quads` を描きます。四角形１つなので、頂点の数は 4 です。それを `instances` 個複製して描きます。`MeshTopology.Quads` は、[マニュアル](https://docs.unity3d.com/ScriptReference/MeshTopology.Quads.html)には
 
 <blockquote>Note that quad topology is emulated on many platforms, so it's more efficient to use a triangular mesh.</blockquote>
 
@@ -96,14 +96,14 @@ public class TriangleMeshRenderer : MonoBehaviour
 
 ## シェーダの修正
 
-<code>Graphics.DrawProceduralNow()</code> は１つの四角形を <code>instances</code> 個複製して描画するので、バーテックスシェーダに渡される頂点番号 <code>SV_VertexID</code> は 0～3 の範囲になります。そこでバーテックスシェーダの引数にインスタンスの番号 <code>SV_InstanceID</code> を追加し、これと <code>SV_VertexID</code> を組み合わせて実際の頂点番号を求めます。四角形の最初の頂点番号は <code>SV_InstanceID</code> ですから、<code>SV_VertexID</code> と実際の頂点番号との対応は次のようになります。<code>_UVMap_TexelSize.z</code> は点群の横方向の点の数です。
+`Graphics.DrawProceduralNow()` は１つの四角形を `instances` 個複製して描画するので、バーテックスシェーダに渡される頂点番号 `SV_VertexID` は 0～3 の範囲になります。そこでバーテックスシェーダの引数にインスタンスの番号 `SV_InstanceID` を追加し、これと `SV_VertexID` を組み合わせて実際の頂点番号を求めます。四角形の最初の頂点番号は `SV_InstanceID` ですから、`SV_VertexID` と実際の頂点番号との対応は次のようになります。`_UVMap_TexelSize.z` は点群の横方向の点の数です。
 
 <table style="background-color: white;">
-<tr><th><code>SV_VertexID</code></th><th>実際の頂点番号</th></tr>
-<tr><td style="text-align: center;">0</td><td><code>SV_InstanceID</code></td></tr>
-<tr><td style="text-align: center;">1</td><td><code>SV_InstanceID</code> + 1</td></tr>
-<tr><td style="text-align: center;">2</td><td><code>SV_InstanceID</code> + <code>_UVMap_TexelSize.z</code> + 1</td></tr>
-<tr><td style="text-align: center;">3</td><td><code>SV_InstanceID</code> + <code>_UVMap_TexelSize.z</code></td></tr>
+<tr><th>`SV_VertexID`</th><th>実際の頂点番号</th></tr>
+<tr><td style="text-align: center;">0</td><td>`SV_InstanceID`</td></tr>
+<tr><td style="text-align: center;">1</td><td>`SV_InstanceID` + 1</td></tr>
+<tr><td style="text-align: center;">2</td><td>`SV_InstanceID` + `_UVMap_TexelSize.z` + 1</td></tr>
+<tr><td style="text-align: center;">3</td><td>`SV_InstanceID` + `_UVMap_TexelSize.z`</td></tr>
 </table>
 
 ```cpp
@@ -119,6 +119,4 @@ public class TriangleMeshRenderer : MonoBehaviour
         v.vertex = float4(_Vertex[vertex_id], 1.0);
 ```
 
-<ul>
-<li>[RealSenseSample (Geometry Instancing)](https://github.com/tokoik/RealSenseSample/tree/instancing)</li>
-</ul>
+- [RealSenseSample (Geometry Instancing)](https://github.com/tokoik/RealSenseSample/tree/instancing)
