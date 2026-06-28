@@ -577,3 +577,7 @@ footer {
   color: #24292f;
   font-weight: bold;
 }
+.language-plaintext .highlighter-rouge {
+  color: #520500;
+  background-color: #fff5f5;
+}
