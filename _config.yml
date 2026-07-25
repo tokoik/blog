@@ -27,3 +27,9 @@ github:
     branch: "main"
     path: "/"
   repository_url: "https://github.com/tokoik/blog"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
