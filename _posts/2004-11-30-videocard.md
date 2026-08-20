@@ -1,7 +1,7 @@
 ---
 title: "またビデオカードが壊れた"
 date: 2004-11-30
-category: その他
+category: 雑記
 published: true
 ---
 
