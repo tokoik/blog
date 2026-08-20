@@ -580,8 +580,8 @@ footer {
 
 /* GitHub Pages / Jekyll インラインコード用カスタムスタイル */
 code.language-plaintext.highlighter-rouge {
-  color: #520500 !important;
-  background-color: #eee !important;
+  color: #520 !important;
+  background-color: #fea !important;
   padding: 2px 5px;
   border-radius: 3px;
 }
