@@ -118,4 +118,4 @@ glColorMask(GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE);
 
 ところで、このノートパソコンには3D液晶を生かすアプリケーションとして、ファイナルファンタジーXIがバンドルされてました。このゲームで3D表示をどんなふうに生かすのか興味はあるのですが、学校でこれにはまってしまうわけにもいかないんで、まだ封を切ってません。どーすっかな。
 
-- [ステンシルバッファを使った立体視](https://github.com/tokoik/pitcher)
+- [ステンシルバッファを使った立体視](https://github.com/tokoik/pitcher0)
