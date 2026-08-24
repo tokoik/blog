@@ -68,8 +68,8 @@ published: true
       <li><a href="/shori1/latex.html">LaTeX の概要</a></li>
       <li><a href="/vr/vrmlintro.pdf">VRML に触ってみる (PDF)</a></li>
       <li>Processing 入門 (PDF):
-        <a href="/mdextercise1.pdf">1 日目</a>,
-        <a href="/mdextercise2.pdf">2 日目</a>
+        <a href="/mdexercise1.pdf">1 日目</a>,
+        <a href="/mdexercise1.pdf">2 日目</a>
       </li>
       <li>WebGL 入門 (PDF):
         <a href="/cg1.pdf">第 1 回</a>,
