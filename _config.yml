@@ -33,3 +33,13 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-paginate
+
+exclude:
+  - _docs
+  - GUIDELINES.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .git
+
