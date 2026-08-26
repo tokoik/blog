@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 420 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(0.993805,0,0,1,10,10)">
+        <rect x="0" y="200" width="402.493" height="35" style="fill:rgb(235,235,235);"/>
+    </g>
+    <g transform="matrix(1,0,0,1,10,10)">
+        <path d="M0,200L400,200" style="fill:none;stroke:black;stroke-width:1px;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,160,-90)">
+        <path d="M50,100L200,200" style="fill:none;stroke:black;stroke-width:1px;stroke-dasharray:4,4,0,0,0,0;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,310,10)">
+        <path d="M50,100L50,300" style="fill:none;stroke:black;stroke-width:1px;stroke-dasharray:4,4,0,0,0,0;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,10,10)">
+        <g transform="matrix(1,-0,-0,1,-10,-10)">
+            <path d="M207,19L210,10L213,19L207,19Z" style="fill:rgb(242,13,13);"/>
+            <path d="M210,210L210,17.2" style="fill:none;stroke:rgb(242,13,13);stroke-width:1px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,0.75,10,60)">
+        <g transform="matrix(1,-0,-0,1.333333,-10,-80)">
+            <path d="M207,69L210,60L213,69L207,69Z"/>
+            <path d="M210,210L210,67.2" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,10,10)">
+        <g transform="matrix(1,-0,-0,1,-10,-10)">
+            <path d="M204.176,202.512L210,210L200.847,207.504L204.176,202.512Z"/>
+            <path d="M60,110C60,110 176.079,187.386 204.009,206.006" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,160,110)">
+        <g transform="matrix(1,-0,-0,1,-160,-110)">
+            <path d="M354.176,302.512L360,310L350.847,307.504L354.176,302.512Z" style="fill:rgb(242,13,13);"/>
+            <path d="M210,210C210,210 326.079,287.386 354.009,306.006" style="fill:none;stroke:rgb(242,13,13);stroke-width:1px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,-1,160,310)">
+        <g transform="matrix(1,0,0,-1,-160,310)">
+            <path d="M350.847,112.496L360,110L354.176,117.488L350.847,112.496Z"/>
+            <path d="M210,210C210,210 326.079,132.614 354.009,113.994" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,10,10)">
+        <path d="M50,100L200,100" style="fill:none;stroke:black;stroke-width:1px;stroke-dasharray:4,4,0,0,0,0;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,119.583919,28.068073)">
+        <g transform="matrix(13.333333,0,0,13.333333,82.837956,169.545859)">
+        </g>
+        <text x="77.649px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">I</text>
+    </g>
+    <g transform="matrix(1,0,0,1,269.968033,128.068073)">
+        <g transform="matrix(13.333333,0,0,13.333333,82.837956,169.545859)">
+        </g>
+        <text x="77.649px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">I</text>
+    </g>
+    <g transform="matrix(1,0,0,1,154.775976,-10.131797)">
+        <text x="77.649px" y="169.546px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:13.333px;">−</text>
+        <g transform="matrix(13.333333,0,0,13.333333,103.586654,169.545859)">
+        </g>
+        <text x="85.436px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N∙I</text>
+    </g>
+    <g transform="matrix(1,0,0,1,85.776627,-39.397422)">
+        <text x="77.649px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">−</text>
+        <text x="85.169px" y="169.546px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:13.333px;">(</text>
+        <text x="89.609px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N</text>
+        <text x="99.238px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">∙</text>
+        <text x="102.571px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">I</text>
+        <text x="107.76px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">)</text>
+        <g transform="matrix(13.333333,0,0,13.333333,121.828842,169.545859)">
+        </g>
+        <text x="112.2px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N</text>
+    </g>
+    <g transform="matrix(1,0,0,1,79.109961,-137.825156)">
+        <text x="77.649px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">−2</text>
+        <text x="91.835px" y="169.546px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:13.333px;">(</text>
+        <text x="96.275px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N</text>
+        <text x="105.904px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">∙</text>
+        <text x="109.238px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">I</text>
+        <text x="114.426px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">)</text>
+        <g transform="matrix(13.333333,0,0,13.333333,128.495508,169.545859)">
+        </g>
+        <text x="118.867px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N</text>
+    </g>
+    <g transform="matrix(1,0,0,1,217.816992,-54.545859)">
+        <text x="72.46px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">I</text>
+        <text x="77.649px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">−2</text>
+        <text x="91.835px" y="169.546px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:13.333px;">(</text>
+        <text x="96.275px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N</text>
+        <text x="105.904px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">∙</text>
+        <text x="109.238px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">I</text>
+        <text x="114.426px" y="169.546px" style="font-family:'TimesNewRomanPSMT', 'Times New Roman', serif;font-size:13.333px;">)</text>
+        <g transform="matrix(13.333333,0,0,13.333333,128.495508,169.545859)">
+        </g>
+        <text x="118.867px" y="169.546px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N</text>
+    </g>
+    <g transform="matrix(1,0,0,1,10,10)">
+        <g transform="matrix(1,-0,-0,1,-10,-10)">
+            <path d="M207,120.52L210,111.52L213,120.52L207,120.52Z" style="fill:rgb(13,121,242);"/>
+            <path d="M210,210L210,118.72" style="fill:none;stroke:rgb(13,121,242);stroke-width:1px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,48.217257,40.402805)">
+        <g transform="matrix(13.333333,0,0,13.333333,158.515816,41.317898)">
+        </g>
+        <text x="148.887px" y="41.318px" style="font-family:'TimesNewRomanPS-BoldMT', 'Times New Roman', serif;font-weight:700;font-size:13.333px;">N</text>
+    </g>
+</svg>
