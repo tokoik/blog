@@ -35,9 +35,9 @@
 - **元記事ファイル**: `_drafts/` 配下に slug 付きのファイル名で配置されています。
 - **移行先**: 変換・整形後に `_posts/` へ移動します。
 - **画像・静的アセット**:
-  - 画像ファイルは `assets/images/` 直下に**フラット**に配置します。
+  - 記事から参照される画像ファイルは、記事のファイル名の slug にもとづいて、`assets/images/` 以下のサブディレクトリ（`texture/` や `glsl/` 等）に配置します。
   - 画像以外の静的ファイル（zip 等）は `assets/` 直下に配置します。
-  - ファイル名が重複する場合は連番を付与します（例: `figure-1.png`, `figure-2.png`）。
+  - 同一ディレクトリ内でファイル名が重複する場合は連番を付与します（例: `figure-1.png`, `figure-2.png`）。
 
 ### 2.2 Front Matter の仕様
 
@@ -47,8 +47,8 @@
 ---
 title: "記事のタイトル"
 date: YYYY-MM-DD HH:MM:SS +0900
-categories: [資料] # または [雑記]
-tags: [OpenGL]    # カテゴリが「資料」の場合は tags に OpenGL を追加
+categories: [資料] # シリーズ連載記事の場合は連載名（例: [今風 OpenGL の使い方]）、その他は [資料] または [雑記]
+tags: [OpenGL, GLSL] # 関連タグ（OpenGL, GLSL, ゼミ, FBO 等）を併記
 math: true        # 数式を含む場合のみ指定
 published: true
 ---
@@ -56,8 +56,9 @@ published: true
 
 #### カテゴリ・タグの変換規則
 
-- tDiary のカテゴリ `[OpenGL]` → カテゴリ: `資料`、`tags: [OpenGL]` を追加
-- tDiary のカテゴリ `[雑文]` → カテゴリ: `雑記`
+- **シリーズ連載記事**: 連載名を `categories` に設定し、関連タグ（`OpenGL`, `GLSL`, `ゼミ`, `FBO` 等）を `tags` に併記します。
+- **単発の資料記事**: tDiary のカテゴリ `[OpenGL]` → `categories: [資料]`、`tags: [OpenGL]`（必要に応じて `GLSL` 等も追加）
+- **雑記・メモ記事**: tDiary のカテゴリ `[雑文]` や `[メモ]` → `categories: [雑記]`
 
 ### 2.3 本文の整形・記法ルール
 
@@ -72,7 +73,7 @@ published: true
    - インライン数式: `$ ... $`
    - ディスプレイ（ブロック）数式: `$$ ... $$`
 5. **画像リンク**:
-   - 書式: `![代替テキスト]({{ site.baseurl }}/assets/images/ファイル名)`
+   - 書式: `![代替テキスト]({{ site.baseurl }}/assets/images/<サブディレクトリ名>/ファイル名)`
 6. **記事内リンク（過去記事へのリンク）**:
    - tDiary の日付（例: `?date=YYYYMMDD`）をもとに対応する `_drafts` / `_posts` のファイル名を特定します。
    - 書式: `{{ site.baseurl }}{% post_url YYYY-MM-DD-slug %}`
@@ -107,8 +108,10 @@ published: true
 - **ビルドツール**: CMake（最小要求バージョン `3.22`）
 - **シェル環境**: PowerShell（`git`, `cmake`, `python` が利用可能）
 - **外部ライブラリ管理**:
+  - 古いサンプルプログラムで用いている GLUT は **freeglut** に移行します。
   - CMake 標準の `FetchContent` を利用し、プロジェクト内の `libs/` フォルダへ自動ダウンロード・構成します。
   - 主な使用ライブラリとバージョン:
+    - **freeglut**: master（または安定リリース）
     - **GLFW**: 3.5.1
     - **GLEW**: 2.3.1
     - **GLM**: 1.0.3
