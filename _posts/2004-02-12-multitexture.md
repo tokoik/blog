@@ -15,7 +15,7 @@ Windows 上でマルチテクスチャを使う方法を質問されたので、
 マルチテクスチャなどの OpenGL の拡張機能は、Linux の Mesa や Mac OS X だと何も気にせずに使えていた気がしてました。でも Windows では、[`wglGetProcAddress()`](https://learn.microsoft.com/ja-jp/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress) を使って API のエントリポイント引っぱってこないといけないんですね。そのために、まず [OpenGL SDK](https://www.opengl.org/sdk/) に含まれる [glext.h](https://registry.khronos.org/OpenGL/api/GL/glext.h) を持ってきて `#include` します。
 
 ```cpp
-#if defined(__APPLE__) || defined(MACOSX)
+#if defined(__APPLE__)
 #  define GL_SILENCE_DEPRECATION
 #  include <GLUT/glut.h>
 #  include <OpenGL/glext.h>
