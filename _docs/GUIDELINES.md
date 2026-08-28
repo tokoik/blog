@@ -69,6 +69,8 @@ published: true
 3. **プログラムコード**:
    - プログラムコードは言語指定付きのコードブロック（例: ` ```cpp `, ` ```glsl `）にします。
    - **ファイル名はコードブロック内に含めない**ようにします。
+   - `_CRT_SECURE_NO_WARNINGS` はソースコード内で定義し、`#pragma warning(disable: 4996)` の行は削除します。
+   - GLEW を使う場合は `glext.h` をインクルードする必要はないため、`#include <GL/glext.h>` や `#include "glext.h"` の行は削除します。
 4. **数式表示 (`math: true`)**:
    - インライン数式: `$ ... $`
    - ディスプレイ（ブロック）数式: `$$ ... $$`
@@ -109,6 +111,7 @@ published: true
 - **シェル環境**: PowerShell（`git`, `cmake`, `python` が利用可能）
 - **外部ライブラリ管理**:
   - 古いサンプルプログラムで用いている GLUT は **freeglut** に移行します。
+  - GLEW を使用する場合、`glext.h` は不要なため `#include <GL/glext.h>` や `#include "glext.h"` は削除します。
   - CMake 標準の `FetchContent` を利用し、プロジェクト内の `libs/` フォルダへ自動ダウンロード・構成します。
   - 主な使用ライブラリとバージョン:
     - **freeglut**: master（または安定リリース）
@@ -131,6 +134,8 @@ published: true
   - その他実行に必要なファイルは `"Resource Files"` フィルタに配置します。
   - 実行時リソースはビルド時にバイナリ出力先（実行ファイルと同じ場所）へコピーします。
   - 外部ライブラリは `libs/` に自動ダウンロードします。
+  - `_CRT_SECURE_NO_WARNINGS` はソースコード内で定義するため、Visual Studio の設定（プリプロセッサ定義等）には含めないでください。
+  - ソースコード内の `#pragma warning(disable: 4996)` の行は削除してください。
 - **macOS (Xcode)**:
   - Xcode プロジェクトファイルを作成可能にします。
   - `.app` アプリケーションバンドルを作成し、必要なリソースをバンドル内にコピーします。
