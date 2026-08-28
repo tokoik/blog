@@ -1,4 +1,4 @@
-GLuint wireSphere(int slices, int stacks, const GLuint *buffer)
+GLuint wireSphere(int slices, int stacks, const GLuint* buffer)
 {
   Position *position;
   Edge *edge;

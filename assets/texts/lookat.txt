@@ -4,7 +4,7 @@
 void lookAt(float ex, float ey, float ez,
             float tx, float ty, float tz,
             float ux, float uy, float uz,
-            GLfloat *matrix)
+            GLfloat* matrix)
 {
   float l;
 

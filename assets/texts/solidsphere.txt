@@ -1,4 +1,4 @@
-GLuint solidSphere(int slices, int stacks, const GLuint *buffer)
+GLuint solidSphere(int slices, int stacks, const GLuint* buffer)
 {
   GLuint vertices = (slices + 1) * (stacks + 1);
   GLuint faces = slices * stacks * 2;

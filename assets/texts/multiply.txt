@@ -1,7 +1,7 @@
 /*
 ** 行列 m0 と m1 の積を求める
 */
-void multiplyMatrix(const GLfloat *m0, const GLfloat *m1, GLfloat *matrix)
+void multiplyMatrix(const GLfloat* m0, const GLfloat* m1, GLfloat* matrix)
 {
   for (int i = 0; i < 16; ++i) {
     int j = i & ~3, k = i & 3;
