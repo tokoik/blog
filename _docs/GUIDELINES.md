@@ -47,7 +47,7 @@
 ---
 title: "記事のタイトル"
 date: YYYY-MM-DD HH:MM:SS +0900
-categories: [資料] # シリーズ連載記事の場合は連載名（例: [今風 OpenGL の使い方]）、その他は [資料] または [雑記]
+category: 資料 # シリーズ連載記事の場合は連載名（例: [今風OpenGLの使い方]）、その他は [資料] または [雑記]
 tags: [OpenGL, GLSL] # 関連タグ（OpenGL, GLSL, ゼミ, FBO 等）を併記
 math: true        # 数式を含む場合のみ指定
 published: true
@@ -57,8 +57,8 @@ published: true
 #### カテゴリ・タグの変換規則
 
 - **シリーズ連載記事**: 連載名を `categories` に設定し、関連タグ（`OpenGL`, `GLSL`, `ゼミ`, `FBO` 等）を `tags` に併記します。
-- **単発の資料記事**: tDiary のカテゴリ `[OpenGL]` → `categories: [資料]`、`tags: [OpenGL]`（必要に応じて `GLSL` 等も追加）
-- **雑記・メモ記事**: tDiary のカテゴリ `[雑文]` や `[メモ]` → `categories: [雑記]`
+- **単発の資料記事**: tDiary のカテゴリ `[OpenGL]` → `category: 資料`、`tags: [OpenGL]`（必要に応じて `GLSL` 等も追加）
+- **雑記・メモ記事**: tDiary のカテゴリ `[雑文]` や `[メモ]` → `category: 雑記`
 
 ### 2.3 本文の整形・記法ルール
 
