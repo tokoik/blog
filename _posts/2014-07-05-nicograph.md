@@ -1,8 +1,8 @@
 ---
 title: "NICOGRAPH 2014 論文募集"
 date: 2014-07-05 00:00:00 +0900
-category: 告知
-tags: [NICOGRAPH]
+category: 雑記
+tags: [学会, NICOGRAPH]
 published: true
 ---
 
