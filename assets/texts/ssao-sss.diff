@@ -1,0 +1,190 @@
+diff -rcw ssao/main.cpp sss/main.cpp
+*** ssao/main.cpp	2010-12-01 09:40:02.000000000 +0900
+--- sss/main.cpp	2010-12-03 19:29:00.000000000 +0900
+***************
+*** 117,123 ****
+  ** 深度のサンプリングに使う点群
+  */
+  #define MAXSAMPLES 256                        // サンプル点の最大数
+! #define SAMPLERADIUS 0.1f                     // サンプル点の散布半径
+  static GLfloat pointbuf[MAXSAMPLES][4];       // サンプル点の位置
+  static GLint point;                           // サンプル点の uniform 変数
+  
+--- 117,123 ----
+  ** 深度のサンプリングに使う点群
+  */
+  #define MAXSAMPLES 256                        // サンプル点の最大数
+! #define SAMPLERADIUS 0.3f                     // サンプル点の散布半径
+  static GLfloat pointbuf[MAXSAMPLES][4];       // サンプル点の位置
+  static GLint point;                           // サンプル点の uniform 変数
+  
+***************
+*** 144,151 ****
+  /*
+  ** 材質
+  */
+! static const GLfloat kd[] = { 0.5f, 0.5f, 0.1f, 0.6f };     // 拡散反射係数 (alpha > 0 にする)
+! static const GLfloat ks[] = { 0.2f, 0.2f, 0.2f, 0.0f };     // 鏡面反射係数 (alpha = 0 にする)
+  static const GLfloat kshi = 40.0f;                          // 輝き係数
+  static const GLfloat kr[] = { 0.2f, 0.2f, 0.2f, 0.0f };     // 映り込みの反射率 (alpha = 0 にする)
+  static const GLfloat keta = 0.67f;                          // 屈折率の比
+--- 144,151 ----
+  /*
+  ** 材質
+  */
+! static const GLfloat kd[] = { 0.4f, 0.4f, 0.1f, 1.0f };     // 拡散反射係数 (alpha > 0 にする)
+! static const GLfloat ks[] = { 0.6f, 0.6f, 0.6f, 0.0f };     // 鏡面反射係数 (alpha = 0 にする)
+  static const GLfloat kshi = 40.0f;                          // 輝き係数
+  static const GLfloat kr[] = { 0.2f, 0.2f, 0.2f, 0.0f };     // 映り込みの反射率 (alpha = 0 にする)
+  static const GLfloat keta = 0.67f;                          // 屈折率の比
+***************
+*** 158,165 ****
+  ** 光源
+  */
+  static const GLfloat lpos[] = { 0.0f, 0.0f, 10.0f, 1.0f };  // 光源位置 (w は無視している)
+! static const GLfloat lcol[] = { 0.5f, 0.5f, 0.5f, 1.0f };   // 光源強度 (alpha = 1 にする)
+! static const GLfloat lamb[] = { 0.8f, 0.8f, 0.8f, 0.0f };   // 環境光強度 (alpha = 0 にする)
+  
+  /*
+  ** 視点
+--- 158,165 ----
+  ** 光源
+  */
+  static const GLfloat lpos[] = { 0.0f, 0.0f, 10.0f, 1.0f };  // 光源位置 (w は無視している)
+! static const GLfloat lcol[] = { 0.2f, 0.2f, 0.2f, 1.0f };   // 光源強度 (alpha = 1 にする)
+! static const GLfloat lamb[] = { 0.9f, 0.9f, 0.9f, 0.0f };   // 環境光強度 (alpha = 0 にする)
+  
+  /*
+  ** 視点
+***************
+*** 382,393 ****
+    glBindTexture(GL_TEXTURE_2D, 0);
+  
+    /*
+!   ** 環境遮蔽係数を算出するのに使う球状の点群
+    */
+  
+    // サンプル点の生成
+    for (int i = 0; i < MAXSAMPLES; ++i) {
+!     float r = SAMPLERADIUS * (float)rand() / (float)RAND_MAX;
+      float t = 6.2831853f * (float)rand() / ((float)RAND_MAX + 1.0f);
+      float cp = 2.0f * (float)rand() / (float)RAND_MAX - 1.0f;
+      float sp = sqrt(1.0f - cp * cp);
+--- 382,393 ----
+    glBindTexture(GL_TEXTURE_2D, 0);
+  
+    /*
+!   ** 露出度を算出するのに使う球状の点群
+    */
+  
+    // サンプル点の生成
+    for (int i = 0; i < MAXSAMPLES; ++i) {
+!     float r = SAMPLERADIUS * pow((float)rand() / (float)RAND_MAX, 1.0f / 3.0f);
+      float t = 6.2831853f * (float)rand() / ((float)RAND_MAX + 1.0f);
+      float cp = 2.0f * (float)rand() / (float)RAND_MAX - 1.0f;
+      float sp = sqrt(1.0f - cp * cp);
+***************
+*** 446,452 ****
+    glPushMatrix();
+  
+    // 地面を描く
+!   ground();
+  
+    // トラックボール式の回転を与える
+    glMultMatrixd(tb->rotation());
+--- 446,452 ----
+    glPushMatrix();
+  
+    // 地面を描く
+!   //ground();
+  
+    // トラックボール式の回転を与える
+    glMultMatrixd(tb->rotation());
+***************
+*** 679,685 ****
+    glutInit(&argc, argv);
+    glutInitWindowSize(512, 512);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+!   glutCreateWindow("SSAO Sample");
+    glutDisplayFunc(display);
+    glutReshapeFunc(resize);
+    glutMouseFunc(mouse);
+--- 679,685 ----
+    glutInit(&argc, argv);
+    glutInitWindowSize(512, 512);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+!   glutCreateWindow("SSS Sample");
+    glutDisplayFunc(display);
+    glutReshapeFunc(resize);
+    glutMouseFunc(mouse);
+diff -rcw ssao/pass2.frag sss/pass2.frag
+*** ssao/pass2.frag	2010-12-01 10:24:16.000000000 +0900
+--- sss/pass2.frag	2010-12-03 20:28:01.000000000 +0900
+***************
+*** 22,28 ****
+    
+    // diffspec のアルファ値が 0 なら背景 (unit[6]) のみ
+    if (diffspec.a == 0.0) {
+!     gl_FragColor = texture2D(unit[6], texcoord);
+      return;
+    }
+    
+--- 22,29 ----
+    
+    // diffspec のアルファ値が 0 なら背景 (unit[6]) のみ
+    if (diffspec.a == 0.0) {
+!     //gl_FragColor = texture2D(unit[6], texcoord);
+!     gl_FragColor = vec4(0.0);
+      return;
+    }
+    
+***************
+*** 54,74 ****
+      if (q.z < texture2D(unit[4], q.xy).z) ++count;
+    }
+  
+!   // 遮蔽されないポイントの数から環境遮蔽係数を求める
+!   float a = clamp(float(count) * SAMPLING_RATIO / float(SAMPLES), 0.0, 1.0);
+    
+!   // 環境光の反射光 (unit[1]) に環境遮蔽係数を適用
+    vec4 color = diffspec + texture2D(unit[1], texcoord) * a;
+    
+    // unit[3] から法線ベクトルを取り出す
+    vec3 normal = texture2D(unit[3], texcoord).xyz;
+  
+    // 環境 (反射マッピング)
+    color += texture2D(unit[5], normal.xy * 0.5 + 0.5) * reflection;
+    
+    // 背景 (屈折マッピング)
+    vec4 bg = texture2D(unit[6], texcoord + refract(vec3(0.0, 0.0, 1.0), normal, refraction).xy * bgdistance);
+  
+-   // 全景と背景を合成して出力
+    gl_FragColor = mix(bg, color, color.a);
+  }
+--- 55,80 ----
+      if (q.z < texture2D(unit[4], q.xy).z) ++count;
+    }
+  
+!   // 遮蔽されないポイントの数から周辺のボリュームを求め，露出度に換算する
+!   float a = clamp(float(count) * SAMPLING_RATIO / float(SAMPLES), 1.0, SAMPLING_RATIO);
+    
+!   // 環境光の反射光 (unit[1]) に露出度を適用
+    vec4 color = diffspec + texture2D(unit[1], texcoord) * a;
+    
++   gl_FragColor = color;
++   return;
++   
+    // unit[3] から法線ベクトルを取り出す
+    vec3 normal = texture2D(unit[3], texcoord).xyz;
+  
+    // 環境 (反射マッピング)
+    color += texture2D(unit[5], normal.xy * 0.5 + 0.5) * reflection;
+    
++   gl_FragColor = color;
++   return;
++   
+    // 背景 (屈折マッピング)
+    vec4 bg = texture2D(unit[6], texcoord + refract(vec3(0.0, 0.0, 1.0), normal, refraction).xy * bgdistance);
+  
+    gl_FragColor = mix(bg, color, color.a);
+  }
