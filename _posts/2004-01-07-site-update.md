@@ -2,7 +2,7 @@
 title: "ホームページ更新"
 date: 2004-01-07
 category: 雑記
-tags: [雑記]
+tags: [その他]
 published: true
 ---
 
