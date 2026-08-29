@@ -1,29 +1,25 @@
+/*
+** 球を線で描く
+*/
 GLuint wireSphere(int slices, int stacks, const GLuint* buffer)
 {
-  Position *position;
-  Edge *edge;
+  /* 頂点の数 */
+  GLuint vertices = slices * stacks - slices + 2;
 
-  GLuint vertices = slices * (stacks - 1) + 2;
-  GLuint edges = slices * (stacks - 1) * 2 + slices;
-
-  int count;
-
-  /* 頂点バッファオブジェクトを有効にする */
-  glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
+  /* 頂点のデータ型 */
+  typedef GLfloat Position[3];
 
   /* 頂点バッファオブジェクトにメモリ領域を確保する */
-  glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * vertices, NULL, GL_STATIC_DRAW);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (Edge) * edges, NULL, GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(Position) * vertices, NULL, GL_STATIC_DRAW);
 
   /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
-  position = (Position *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-  edge = (Edge *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+  Position* position = (Position*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 
   /* 北極点の位置 */
-  (*position)[0] =  0.0f;
-  (*position)[1] =  1.0f;
-  (*position)[2] =  0.0f;
+  (*position)[0] = 0.0f;
+  (*position)[1] = 1.0f;
+  (*position)[2] = 0.0f;
   ++position;
 
   /* 中間部分の頂点の位置 */
@@ -45,9 +41,28 @@ GLuint wireSphere(int slices, int stacks, const GLuint* buffer)
   }
 
   /* 南極点の位置 */
-  (*position)[0] =  0.0f;
+  (*position)[0] = 0.0f;
   (*position)[1] = -1.0f;
-  (*position)[2] =  0.0f;
+  (*position)[2] = 0.0f;
+
+  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
+  glUnmapBuffer(GL_ARRAY_BUFFER);
+
+  /* 頂点バッファオブジェクトを解放する */
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  /* 稜線の数 */
+  GLuint edges = slices * stacks * 2 - slices;
+
+  /* 稜線のデータ型 */
+  typedef GLuint Edge[2];
+
+  /* 稜線の頂点バッファオブジェクトにメモリ領域を確保する */
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Edge) * edges, NULL, GL_STATIC_DRAW);
+
+  /* 稜線の頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
+  Edge* edge = (Edge*)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
 
   /* 北極点周りの稜線 */
   for (int i = 1; i <= slices; ++i) {
@@ -57,7 +72,7 @@ GLuint wireSphere(int slices, int stacks, const GLuint* buffer)
   }
 
   /* 中間部分の稜線 */
-  count = 1;
+  int count = 1;
   for (int j = 2; j < stacks; ++j) {
     for (int i = 1; i < slices; ++i) {
 
@@ -112,13 +127,11 @@ GLuint wireSphere(int slices, int stacks, const GLuint* buffer)
   (*edge)[0] = count;
   (*edge)[1] = vertices - 1;
 
-  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
+  /* 稜線の頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
   glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
-  glUnmapBuffer(GL_ARRAY_BUFFER);
 
-  /* 頂点バッファオブジェクトを解放する */
+  /* 稜線の頂点バッファオブジェクトを解放する */
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
 
   return edges * 2;
 }

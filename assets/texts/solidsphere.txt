@@ -1,19 +1,20 @@
+/*
+** 球を三角形で描く
+*/
 GLuint solidSphere(int slices, int stacks, const GLuint* buffer)
 {
+  /* 頂点の数 */
   GLuint vertices = (slices + 1) * (stacks + 1);
-  GLuint faces = slices * stacks * 2;
 
-  /* 頂点バッファオブジェクトを有効にする */
-  glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
+  /* 頂点のデータ型 */
+  typedef GLfloat Position[3];
 
   /* 頂点バッファオブジェクトにメモリ領域を確保する */
-  glBufferData(GL_ARRAY_BUFFER, sizeof (Position) * vertices, NULL, GL_STATIC_DRAW);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (Face) * faces, NULL, GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(Position) * vertices, NULL, GL_STATIC_DRAW);
 
   /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
-  Position *position = (Position *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-  Face *face = (Face *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+  Position* position = (Position*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 
   /* 頂点の位置 */
   for (int j = 0; j <= stacks; ++j) {
@@ -32,6 +33,25 @@ GLuint solidSphere(int slices, int stacks, const GLuint* buffer)
       ++position;
     }
   }
+
+  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
+  glUnmapBuffer(GL_ARRAY_BUFFER);
+
+  /* 頂点バッファオブジェクトを解放する */
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  /* 面の数 */
+  GLuint faces = slices * stacks * 2;
+
+  /* 面のデータ型 */
+  typedef GLuint Face[3];
+
+  /* 頂点バッファオブジェクトにメモリ領域を確保する */
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer[1]);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Face) * faces, NULL, GL_STATIC_DRAW);
+
+  /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間にマップする */
+  Face* face = (Face*)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
 
   /* 面の指標 */
   for (int j = 0; j < stacks; ++j) {
@@ -54,11 +74,9 @@ GLuint solidSphere(int slices, int stacks, const GLuint* buffer)
 
   /* 頂点バッファオブジェクトのメモリをプログラムのメモリ空間から切り離す */
   glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
-  glUnmapBuffer(GL_ARRAY_BUFFER);
 
   /* 頂点バッファオブジェクトを解放する */
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
 
   return faces * 3;
 }
