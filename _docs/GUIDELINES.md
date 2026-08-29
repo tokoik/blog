@@ -68,7 +68,7 @@ published: true
    - Markdown として正しく段落やリストが認識されるよう、適切な空行を挿入します。
 3. **プログラムコード**:
    - プログラムコードは言語指定付きのコードブロック（例: ` ```cpp `, ` ```glsl `）にします。
-   - **ファイル名はコードブロック内に含めない**ようにします。
+   - **ファイル名や GLSL のデータ型（attribute, in, out, varying, uniform, vec2, vec3, vec4, mat3, mat4, float, int 等）はインラインのコードブロックにしない**ようにします（サンプルプログラム内のソースファイル名コメントは保持します）。
    - `_CRT_SECURE_NO_WARNINGS` はソースコード内で定義し、`#pragma warning(disable: 4996)` の行は削除します。
    - GLEW を使う場合は `glext.h` をインクルードする必要はないため、`#include <GL/glext.h>` や `#include "glext.h"` の行は削除します。
 4. **数式表示 (`math: true`)**:
