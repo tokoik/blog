@@ -47,7 +47,7 @@
 ---
 title: "記事のタイトル"
 date: YYYY-MM-DD HH:MM:SS +0900
-category: 資料 # シリーズ連載記事の場合は連載名（例: [今風OpenGLの使い方]）、その他は [資料] または [雑記]
+category: 資料 # シリーズ連載記事の場合は連載名（例: [今風 OpenGL の使い方]）、その他は [資料] または [雑記]
 tags: [OpenGL, GLSL] # 関連タグ（OpenGL, GLSL, ゼミ, FBO 等）を併記
 math: true        # 数式を含む場合のみ指定
 published: true
