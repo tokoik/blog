@@ -29,7 +29,7 @@ public class TriangleMeshRenderer : MonoBehaviour
   private Texture2D uvmap;
 ```
 
-`indexBuffer` を削除したので、それにインデックスを格納する処理も削除します。`CreateTriangleMeshIndex()` も使わないので、この定義も削除しても構いません。代わりに四角形の数を `instances` に求めておきます。
+`indexBuffer` を削除したので、それにインデックスを格納する処理も削除します。`CreateTriangleMeshIndex()` も使わないので、この定義を削除しても構いません。代わりに四角形の数を `instances` に求めておきます。
 
 ```csharp
   private void ResetMesh(int width, int height)
@@ -95,14 +95,22 @@ public class TriangleMeshRenderer : MonoBehaviour
 
 ## シェーダの修正
 
-`Graphics.DrawProceduralNow()` は１つの四角形を `instances` 個複製して描画するので、バーテックスシェーダに渡される頂点番号 `SV_VertexID` は 0～3 の範囲になります。そこでバーテックスシェーダの引数にインスタンスの番号 `SV_InstanceID` を追加し、これと `SV_VertexID` を組み合わせて実際の頂点番号を求めます。四角形の最初の頂点番号は `SV_InstanceID` ですから、`SV_VertexID` と実際の頂点番号との対応は次のようになります。`_UVMap_TexelSize.z` は点群の横方向の点の数です。
+`Graphics.DrawProceduralNow()` は１つの四角形を `instances` 個複製して描画するので、バーテックスシェーダに渡される頂点番号 `SV_VertexID` は 0～3 の範囲になります。そこでバーテックスシェーダの引数にインスタンスの番号 `SV_InstanceID` を追加し、これと `SV_VertexID` を組み合わせて実際の頂点番号を求めます。
+
+点群の横方向の点の数を $W$ (`_UVMap_TexelSize.z`) とすると、横方向に並ぶ四角形の数は $W - 1$ 個です。したがって、インスタンス番号 `instance_id` から四角形の 2 次元位置 $(x, y)$ を求めると、四角形の左下の基準頂点番号 `base_vertex` は次のようになります。
+
+$$x = \text{instance\_id} \pmod{W - 1}$$
+$$y = \lfloor \text{instance\_id} / (W - 1) \rfloor$$
+$$\text{base\_vertex} = y \times W + x$$
+
+これをもとに、四角形を構成する 4 つの頂点について、`SV_VertexID` と実際の頂点番号との対応を考えると次のようになります。
 
 | `SV_VertexID` | 実際の頂点番号 |
 | :---: | :--- |
-| 0 | `SV_InstanceID` |
-| 1 | `SV_InstanceID` + 1 |
-| 2 | `SV_InstanceID` + `_UVMap_TexelSize.z` + 1 |
-| 3 | `SV_InstanceID` + `_UVMap_TexelSize.z` |
+| 0 | `base_vertex` |
+| 1 | `base_vertex` + 1 |
+| 2 | `base_vertex` + `_UVMap_TexelSize.z` + 1 |
+| 3 | `base_vertex` + `_UVMap_TexelSize.z` |
 
 ```hlsl
       //v2f vert(appdata v)
@@ -111,7 +119,9 @@ public class TriangleMeshRenderer : MonoBehaviour
         // vertex_id は 0～3 なので instance_id と組み合わせて実際の頂点番号を求める
         uint b0 = vertex_id & 1;
         uint b1 = vertex_id >> 1;
-        vertex_id = instance_id + b1 * _UVMap_TexelSize.z + (b0 ^ b1);
+        uint w1 = (uint)_UVMap_TexelSize.z - 1;
+        uint base_vertex = (instance_id / w1) * (uint)_UVMap_TexelSize.z + (instance_id % w1);
+        vertex_id = base_vertex + b1 * (uint)_UVMap_TexelSize.z + (b0 ^ b1);
 
         v2f v;
         v.vertex = float4(_Vertex[vertex_id], 1.0);
