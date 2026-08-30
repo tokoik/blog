@@ -1,6 +1,5 @@
 ---
 title: "ビデオカード発火"
-date: 2004-10-27
 category: 雑記
 tags: [ハードウェア]
 published: true

@@ -1,6 +1,5 @@
 ---
 title: "ステンシルバッファを使った立体視"
-date: 2004-02-08
 category: 資料
 tags: [OpenGL, 3D液晶]
 published: true

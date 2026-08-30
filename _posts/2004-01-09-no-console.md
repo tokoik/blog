@@ -1,6 +1,5 @@
 ---
 title: "Windows でコンソールを出さない方法"
-date: 2004-01-09
 category: メモ
 tags: [OpenGL]
 published: true

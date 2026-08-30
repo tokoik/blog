@@ -1,6 +1,5 @@
 ---
 title: "ゴム網シミュレータ"
-date: 2004-03-25
 category: 資料
 tags: [OpenGL, 3D液晶]
 published: true

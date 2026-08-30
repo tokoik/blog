@@ -1,6 +1,5 @@
 ---
 title: "日本のCGプロダクション"
-date: 2004-05-13
 category: 雑記
 tags: [昔話]
 published: true

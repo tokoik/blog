@@ -1,6 +1,5 @@
 ---
 title: "トラックボール"
-date: 2004-03-21
 category: 資料
 tags: [OpenGL]
 published: true

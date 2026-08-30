@@ -1,6 +1,5 @@
 ---
 title: "RealSense (3) メッシュ化した点群を Geometry Instancing で描いてみる"
-date: 2023-11-15 00:00:00 +0900
 category: Unity
 tags: [Unity, RealSense]
 published: true

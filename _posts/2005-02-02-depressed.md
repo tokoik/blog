@@ -1,6 +1,5 @@
 ---
 title: "落ち込んでなんていられない"
-date: 2005-02-02
 category: 雑記
 tags: [その他, VR]
 published: true
