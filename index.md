@@ -67,14 +67,15 @@ published: true
       <li><a href="/ray/">安直レイトレーシング入門</a></li>
       <li><a href="/shori1/latex.html">LaTeX の概要</a></li>
       <li><a href="/vr/vrmlintro.pdf">VRML に触ってみる (PDF)</a></li>
-      <li>Processing 入門 (PDF):
-        <a href="/mdexercise1.pdf">1 日目</a>,
-        <a href="/mdexercise1.pdf">2 日目</a>
+      <li>Processing 入門:
+        <a href="/mdexercise1.pdf">1 日目 (PDF)</a>,
+        <a href="/mdexercise1.pdf">2 日目 (PDF)</a>
       </li>
-      <li>WebGL 入門 (PDF):
-        <a href="/cg1.pdf">第 1 回</a>,
-        <a href="/cg2.pdf">第 2 回</a>
+      <li>WebGL 入門:
+        <a href="/cg1.pdf">第 1 回 (PDF)</a>,
+        <a href="/cg2.pdf">第 2 回 (PDF)</a>
       </li>
+      <li><a href="/blog/assets/pdfs/UnityMesh.pdf">Unity の Mesh (PDF)</a></li>
     </ul>
     <h2>著書</h2>
     <ul>
