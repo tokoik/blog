@@ -198,7 +198,7 @@ protected void LateUpdate()
 
     ```csharp
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-    *//*public class RsPointCloudRenderer : MonoBehaviour
+    //public class RsPointCloudRenderer : MonoBehaviour
     public class TriangleMeshRenderer : MonoBehaviour
     {
     ```
@@ -251,17 +251,17 @@ protected void LateUpdate()
 7. `ResetMesh()` で行っているインデックスの作成に `CreateTriangleMeshIndex()` をいます。
 
     ```csharp
-        *//*var indices = new int[vertices.Length];
-        *//*for (int i = 0; i < vertices.Length; i++)
-        *//*  indices[i] = i;
-        *var indices = CreateTriangleMeshIndex(width - 1, height - 1);*
+        //var indices = new int[vertices.Length];
+        //for (int i = 0; i < vertices.Length; i++)
+        //  indices[i] = i;
+        var indices = CreateTriangleMeshIndex(width - 1, height - 1);
     ```
 
 8. このインデックスを `MeshTopology.Triangles` でメッシュに設定します。
 
     ```csharp
-        *//*mesh.SetIndices(indices, MeshTopology.Points, 0, false);
-        *mesh.SetIndices(indices, MeshTopology.Triangles, 0, false);*
+        //mesh.SetIndices(indices, MeshTopology.Points, 0, false);
+        mesh.SetIndices(indices, MeshTopology.Triangles, 0, false);
     ```
 
 ## シェーダの作成
@@ -278,7 +278,7 @@ protected void LateUpdate()
         Properties
         {
             _MainTex ("Texture", 2D) = "white" {}
-            *_UVMap("UV", 2D) = "" {}  // 追加*
+            _UVMap("UV", 2D) = "" {}  // 追加
         }
     ```
 
@@ -318,7 +318,7 @@ protected void LateUpdate()
 
     ```csharp
                 sampler2D _MainTex;
-                *sampler2D _UVMap;  // 追加*
+                sampler2D _UVMap;  // 追加
                 float4 _MainTex_ST;
     ```
 
@@ -327,8 +327,8 @@ protected void LateUpdate()
     ```csharp
                 v2f vert (appdata v)
                 {
-                    *// y 座標値を反転する*
-                    *v.vertex.y = -v.vertex.y;*
+                    // y 座標値を反転する
+                    v.vertex.y = -v.vertex.y;
     
                     v2f o;
                     o.vertex = UnityObjectToClipPos(v.vertex);
@@ -343,16 +343,16 @@ protected void LateUpdate()
     ```csharp
                 fixed4 frag (v2f i) : SV_Target
                 {
-                    *// _UVMap をサンプリングしてテクスチャ座標 uv を得る*
-                    *float2 uv = tex2D(_UVMap, i.uv);*
-                    *if (any(float4(uv, 1.0 - uv) <= 0.0)) discard;*
+                    // _UVMap をサンプリングしてテクスチャ座標 uv を得る
+                    float2 uv = tex2D(_UVMap, i.uv);
+                    if (any(float4(uv, 1.0 - uv) <= 0.0)) discard;
     ```
 
 8. このテクスチャ座標 `uv` を使ってカラーデータ _MainTex をサンプリングして、フラグメントの色を求めます。
 
     ```csharp
                     // sample the texture
-                    *fixed4 col = tex2D(_MainTex, uv);  // uv をテクスチャ座標に使う*
+                    fixed4 col = tex2D(_MainTex, uv);  // uv をテクスチャ座標に使う
                     // apply fog
                     UNITY_APPLY_FOG(i.fogCoord, col);
                     return col;
@@ -429,7 +429,7 @@ protected void LateUpdate()
             {
                 CGPROGRAM
                 #pragma vertex vert
-                *#pragma geometry geom  // 追加*
+                #pragma geometry geom  // 追加
                 #pragma fragment frag
                 // make fog work
                 #pragma multi_compile_fog
@@ -459,12 +459,12 @@ protected void LateUpdate()
     
                 v2f vert (appdata v)
                 {
-                    *// 頂点の位置が (0, 0, 0) なら w も 0 にして出力する*
-                    *if (all((float3)v.vertex == 0.0))*
-                    *{*
-                    *    v.vertex.w = 0.0;*
-                    *    return v;*
-                    *}*
+                    // 頂点の位置が (0, 0, 0) なら w も 0 にして出力する
+                    if (all((float3)v.vertex == 0.0))
+                    {
+                        v.vertex.w = 0.0;
+                        return v;
+                    }
     
                     v.vertex.y = -v.vertex.y;
     
