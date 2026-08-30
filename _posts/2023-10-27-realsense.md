@@ -8,7 +8,7 @@ published: true
 
 ## Intel RealSense SDK の Unity Package の使い方
 
-なんと初めて [Unity](/categories/Unity/) という Blog カテゴリを使います。私としては画期的ですね。もちろん自分自身は OpenGL / GLSL を使ったプログラムを C や C++ でゴリゴリに書くってことを長らくやってきたわけです。でも、そういう実装を他の人に渡しても（自分がメンテする場合を除いて）結局活用してもら無かったりします。それで、かつては「Maya から使えんか」とか言われ、今は「Unity で何とかならんか」と言われるわけです。それで自分も遅まきながら Unity とか勉強したりしているんですが…
+なんと初めて [Unity](/categories/Unity/) という Blog カテゴリを使います。私としては画期的ですね。もちろん自分自身は OpenGL / GLSL を使ったプログラムを C や C++ でゴリゴリに書くってことを長らくやってきたわけです。でも、そういう実装を他の人に渡しても（自分がメンテする場合を除いて）結局活用してもらえなかったりします。それで、かつては「Maya から使えんか」とか言われ、今は「Unity で何とかならんか」と言われるわけです。それで自分も遅まきながら Unity とか勉強したりしているんですが…
 
 やっぱり難しいですね。これ、やっぱり CG やリアルタイムグラフィックスなんかを理解していて、その上で API やプログラミングの知識を持ってないと、ランタイムを使いこなせないんじゃないでしょうか。当たり前ですね。ゲームエンジンですから。でも、エディタがすごくよくできているせいで「誰でも」「簡単に」「ゲームが」作れるようになっています。素晴らしいです。それで「Unity でゲームを作ったことがあります」という学生さんに「じゃあ Unity を卒研の道具に使えば」と言ったりするんですけど（うちでは「研究テーマ」と「研究ツール」の両方を決めることを求めています）、なぜか途中で詰んでしまう人がたまに出ます。
 
@@ -22,10 +22,10 @@ published: true
 
 というわけで、今回は自分自身が [RealSense SDK (librealsense)](https://github.com/IntelRealSense/librealsense) の Unity Package の使い方を勉強しながら、Teams 上で学生さんに説明したので、その内容をここにメモっています。
 
-1. GitHub の [librealsense の Releases](https://github.com/IntelRealSense/librealsense/releases) の Assets にある SDK のインストーラ の Intel.RealSense.SDK-WIN10-2.*.*.*.exe をダウンロードしてください。また Intel.RealSense.unitypackage という　Unity Package もダウンロードしてください。
+1. GitHub の [librealsense の Releases](https://github.com/IntelRealSense/librealsense/releases) の Assets にある SDK のインストーラ の Intel.RealSense.SDK-WIN10-2.*.*.*.exe をダウンロードしてください。また Intel.RealSense.unitypackage という Unity Package もダウンロードしてください。
 2. SDK のインストーラを起動して SDK をインストールしてください。インストール完了後に `Realsense Viewer` の起動を促されます。これを起動すると PC に接続している RealSense の Firmware のアップデートを促されますので、アップデートしておいてください。`RealSense Viewer` はこのあと終了してください。
-3. Unity Hub か Unity のエディタを起動して、新しいプロジェクトを作ってください。テンプレートは `3D` か `D (URP)` を選んでください。`3D` は古いビルトインパイプライン、`3D (URP)` は Universal Render Pipeline と言って自分でレンダリングパイプラインを記述できる Scriptable Render Pipeline で、今はもっぱらこれが使われるみたいです。ここでは `3D (URP)` を選ぶことにします (このプロジェクトはうっかりビルトインパイプラインの `3D` で作っちゃったけど、3D (URP) でも同じ手順でできると思います)。
-4. `Assets` メニューから `Import Package... >` `Custum Package...` を選び、先ほどダウンロードした RealSense の Unity Package を開いてください。`Import Unity Package` というウィンドウがポップアップしますから、そのまま `Import` をクリックしてください。
+3. Unity Hub か Unity のエディタを起動して、新しいプロジェクトを作ってください。テンプレートは `3D` か `3D (URP)` を選んでください。`3D` は古いビルトインパイプライン、`3D (URP)` は Universal Render Pipeline と言って自分でレンダリングパイプラインを記述できる Scriptable Render Pipeline で、今はもっぱらこれが使われるみたいです。ここでは `3D (URP)` を選ぶことにします (このプロジェクトはうっかりビルトインパイプラインの `3D` で作っちゃったけど、3D (URP) でも同じ手順でできると思います)。
+4. `Assets` メニューから `Import Package... >` `Custom Package...` を選び、先ほどダウンロードした RealSense の Unity Package を開いてください。`Import Unity Package` というウィンドウがポップアップしますから、そのまま `Import` をクリックしてください。
 5. Unity Package の Import が終わると Project ウィンドウに `RealSenseSDK2.0` というフォルダができますから、その中の `Scenes` というフォルダを開いてください。中に `StartHere` というシーンがあります。これは、ここからすべてのシーンを起動するものです。これをダブルクリックして `▶` をクリックすれば、エディタ内で実行を開始します。
 6. 学生さんが最初に必要になるのは、この中の `PointCloudDepthAndColor` だと思います。このシーン自体は `Samples` のフォルダの中にあります。また、同じフォルダにある `PointCloudProcessingBlock` には、Decimation や時間方向のフィルタ、穴ふさぎフィルタなどが組み込まれています。これには UI もついているので、UI を付けるときの参考にもなると思います。
 
@@ -47,7 +47,7 @@ published: true
 ![Prefab の追加]({{ site.baseurl }}/assets/images/20231027_2.png)  
     - `RsDevice` が RealSense のインタフェースなので、RealSense が複数あるときは、これも複数 Hierarchy に置きます。その場合、センサごとに `RsDevice` の名前を変えておいた方が良いでしょう (`RsDevice0`, `RsDevice1`, ...)。
     - どの `RsDevice` がどの RealSense を担当するかは、Requested Serial Number で指定すればいいんじゃないかと思います。これは RealSense Viewer で調べることができます。
-    - 実空間上の RealSense の位置を Unity の 3D 空間に反映する場合のように点群を `RsDevice` に連動して動かしたければ、PointCloud を `RsDevice` の下の階層に置いておくと良いじゃないかと思います。
+    - 実空間上の RealSense の位置を Unity の 3D 空間に反映する場合のように点群を `RsDevice` に連動して動かしたければ、PointCloud を `RsDevice` の下の階層に置いておくと良いんじゃないかと思います。
     - 複数の RealSense から得た複数の点群をシーンに配置する場合は、それぞれの `RsDevice` の下に `PointCloud` を置いた方が良いでしょう。
 2. Hierarchy ウィンドウの `RsProcessingPipe` が `RsDevice` のデータを加工するパイプラインになります。したがって、この Source には使用する RealSense を担当する `RsDevice` を指定し、Profile には使用する設定を選びます。いずれも `⊕` をクリックすれば、選択可能なものの一覧が出ます。検索欄に数文字打ち込めば、目的のものを見つけられると思います。  
 ![RsProcessingPipe の Source の選択肢]({{ site.baseurl }}/assets/images/20231027_3.png)
@@ -82,7 +82,7 @@ published: true
 
 ## スクリプトの解説
 
-あと、スクリプトとシェーダについて、少し説明します。スクリプトは Assetes の RealSenseSDK2.0 の Scripts フォルダにあります。
+あと、スクリプトとシェーダについて、少し説明します。スクリプトは Assets の RealSenseSDK2.0 の Scripts フォルダにあります。
  まず RsDevice というスクリプトを開いてください。ダブルクリックすれば VisualStudio が起動すると思います。デフォルトの Multithread の場合、下記のように RealSense の起動時に開始されたスレッドで RealSense のフレームの取得を待ち、データが到着したら SampleEvent というイベントを発行するという処理を繰り返しています。
 
 ```csharp
@@ -182,9 +182,9 @@ protected void LateUpdate()
 }
 ```
 
-描画処理を `Update()` ではなく `LastUpdate()` で行っているのは、(デフォルトでは使われない) Unity Thread の場合に `Upload()` で点群の収集を行っているために、それより後で描画するためだと思います。(デフォルトの) Multithread なら描画と並行して点群の収集が行われるので、`Update()` で描画しても問題ない気がします。
+描画処理を `Update()` ではなく `LateUpdate()` で行っているのは、(デフォルトでは使われない) Unity Thread の場合に `Update()` で点群の収集を行っているために、それより後で描画するためだと思います。(デフォルトの) Multithread なら描画と並行して点群の収集が行われるので、`Update()` で描画しても問題ない気がします。
 
- 点群自体はこの `vertices` に入っているので、点群そのものを使うならこれか、その前の points を使えばいいと思いおます。デプスに対してごにょごにょしようとするなら RsDevice スクリプトでフレームをいじるか、`RsProcessingPIpe` の ProcessFrame をいじる (この中で使っている Process っていう Abstruct クラスをオーバーライドする？) といいんじゃないでしょうか。
+ 点群自体はこの `vertices` に入っているので、点群そのものを使うならこれか、その前の points を使えばいいと思います。デプスに対してごにょごにょしようとするなら RsDevice スクリプトでフレームをいじるか、`RsProcessingPipe` の ProcessFrame をいじる (この中で使っている Process っていう Abstract クラスをオーバーライドする？) といいんじゃないでしょうか。
 
 ## 点群を三角形メッシュ化する
 
@@ -248,7 +248,7 @@ protected void LateUpdate()
       }
     ```
 
-7. `ResetMesh()` で行っているインデックスの作成に `CreateTriangleMeshIndex()` をいます。
+7. `ResetMesh()` で行っているインデックスの作成に `CreateTriangleMeshIndex()` を使います。
 
     ```csharp
         //var indices = new int[vertices.Length];
@@ -316,7 +316,7 @@ protected void LateUpdate()
 
 5. `_UVMap` のサンプラ変数を追加します。
 
-    ```csharp
+    ```hlsl
                 sampler2D _MainTex;
                 sampler2D _UVMap;  // 追加
                 float4 _MainTex_ST;
@@ -324,7 +324,7 @@ protected void LateUpdate()
 
 6. RealSense の `RsProcessingPipe` から得られる点群データは上下が反転しているので、バーテックスシェーダで y 座標値の符号を反転します。
 
-    ```csharp
+    ```hlsl
                 v2f vert (appdata v)
                 {
                     // y 座標値を反転する
@@ -340,7 +340,7 @@ protected void LateUpdate()
 
 7. フラグメントシェーダでは、バーテックスシェーダから与えられるテクスチャ座標 `i.uv` を使って `_UVMap` をサンプリングし、カラーデータのテクスチャ座標 `uv` を得ます。このテクスチャ座標が範囲外の時は、画素を捨てます。
 
-    ```csharp
+    ```hlsl
                 fixed4 frag (v2f i) : SV_Target
                 {
                     // _UVMap をサンプリングしてテクスチャ座標 uv を得る
@@ -350,7 +350,7 @@ protected void LateUpdate()
 
 8. このテクスチャ座標 `uv` を使ってカラーデータ _MainTex をサンプリングして、フラグメントの色を求めます。
 
-    ```csharp
+    ```hlsl
                     // sample the texture
                     fixed4 col = tex2D(_MainTex, uv);  // uv をテクスチャ座標に使う
                     // apply fog
@@ -376,7 +376,7 @@ protected void LateUpdate()
 ![Shader の選択]({{ site.baseurl }}/assets/images/20231027_13.png)
 5. Hierarchy ウィンドウで `RsDevice` の `Color` ストリームを選択し、Inspector で RsStreamTextureRenderer の Source に `RsProcessingPipe`、Stream に Color、Format に Rgb8 が選ばれていることを確認してください。
 6. Texture Binding のマテリアルに TriangleMeshMat を選んでください。その際、Material.mainTexture が選ばれていることを確認してください。  
-![Texture Binding の設定]]({{ site.baseurl }}/assets/images/20231027_14.png)
+![Texture Binding の設定]({{ site.baseurl }}/assets/images/20231027_14.png)
 
 ## TriangleMesh オブジェクトの作成
 
@@ -384,8 +384,8 @@ protected void LateUpdate()
 
 1. Hierarchy ウィンドウで `PointCloud` を選択し、上の `Edit` メニューから `Delete` を選ぶか、`Delete キー`をタイプして削除します。
 2. 上の `GameObject` メニューから `Create Empty` `Ctrl+Shift+N` を選び、空の Game Object を作成します。オブジェクト名は、これも `TriangleMesh` とかにしておきます。
-3. この `TriangleMesh` を選択した状態で上の `Component` メニューから `Mesh >` `Mesh Filter` を選ぶか、Inspactor の一番下の `Add Component` をクリックして Mesh Filter を選んで、Mesh Filter を追加します。
-4. 同様に、この `TriangleMesh` を選択した状態で上の `Component` メニューから `Mesh >` `Mesh Renderer` を選ぶか、Inspactor の一番下の `Add Component` をクリックして Mesh Renderer を選んで、Mesh Renderer を追加します。
+3. この `TriangleMesh` を選択した状態で上の `Component` メニューから `Mesh >` `Mesh Filter` を選ぶか、Inspector の一番下の `Add Component` をクリックして Mesh Filter を選んで、Mesh Filter を追加します。
+4. 同様に、この `TriangleMesh` を選択した状態で上の `Component` メニューから `Mesh >` `Mesh Renderer` を選ぶか、Inspector の一番下の `Add Component` をクリックして Mesh Renderer を選んで、Mesh Renderer を追加します。
 5. 追加した Mesh Renderer の Material の Element0 に TriangleMeshMat を選びます。  
 ![Material の選択]({{ site.baseurl }}/assets/images/20231027_15.png)
 6. Inspector の一番下の `Add Component` をクリックして、Triangle Mesh Renderer を選んでください。  
@@ -437,7 +437,7 @@ protected void LateUpdate()
 
 3. バーテックスシェーダで頂点の位置が (0, 0, 0) なら、その w も 0 にして次段のジオメトリシェーダに送ります。RealSense の計測範囲は有限なので、w = 0 すなわち無限遠のデータを取得していることはないはずです。
 
-    ```csharp
+    ```hlsl
                 #include "UnityCG.cginc"
     
                 struct appdata
@@ -478,7 +478,7 @@ protected void LateUpdate()
 
 4. 以下の内容のジオメトリシェーダを追加します。これは渡された３つの頂点 `v[3]` のどれか一つでも w = 0 だったら頂点を一つも出力しません。`[maxvertexcount(3)]` はこのシェーダが最大で３つの頂点を出力することを示しています。
 
-    ```csharp
+    ```hlsl
                 [maxvertexcount(3)]
                 void geom (triangle v2f v[3], inout TriangleStream<v2f> ts)
                 {
@@ -492,7 +492,7 @@ protected void LateUpdate()
 
 5. フラグメントシェーダには変更ありません。
 
-    ```csharp
+    ```hlsl
                 fixed4 frag (v2f i) : SV_Target
                 {
                     float2 uv = tex2D(_UVMap, i.uv);
