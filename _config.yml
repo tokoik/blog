@@ -43,3 +43,4 @@ exclude:
   - vendor
   - .git
 
+permalink: /blog/:year-:month-:day.html
