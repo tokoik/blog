@@ -19,7 +19,7 @@ Unity のレンダリングパイプラインは他のゲームエンジンと�
 
 ## スクリプトの修正
 
-[前回]({{ site.baseurl }}{% post_url 2023-10-27-realsense %})、Game Object の `TriangleMesh` の Mesh Renderer に組み込んだスクリプト `TriangleMeshRenderer` を修正します。Mesh Renderer は G-バッファにレンダリングするために使うので、Forward Rendering では使用しません。したがって Mesh Renderer や Mesh Filter は不要なのですが、ここで削除すると手順が増えるので残しておきます。一方 Mesh は使わないので、`TriangleMeshRenderer` クラスからは削除します。代わりに、この Mesh に組み込んでいた頂点やインデックスのデータを保持する `GraphicsBuffer` のメンバ `vertexBuffer` と `indexBuffer` を追加します。また `Material` を保持するメンバ `material` も追加しておきます。
+[前回]({{ page.previous | relative_url }})、Game Object の `TriangleMesh` の Mesh Renderer に組み込んだスクリプト `TriangleMeshRenderer` を修正します。Mesh Renderer は G-バッファにレンダリングするために使うので、Forward Rendering では使用しません。したがって Mesh Renderer や Mesh Filter は不要なのですが、ここで削除すると手順が増えるので残しておきます。一方 Mesh は使わないので、`TriangleMeshRenderer` クラスからは削除します。代わりに、この Mesh に組み込んでいた頂点やインデックスのデータを保持する `GraphicsBuffer` のメンバ `vertexBuffer` と `indexBuffer` を追加します。また `Material` を保持するメンバ `material` も追加しておきます。
 
 ```csharp
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
