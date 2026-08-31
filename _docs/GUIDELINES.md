@@ -78,6 +78,7 @@ published: true
 6. **記事内リンク（過去記事へのリンク）**:
    - tDiary の日付（例: `?date=YYYYMMDD`）をもとに対応する `_drafts` / `_posts` のファイル名を特定します。
    - 書式: `{{ site.baseurl }}{% post_url YYYY-MM-DD-slug %}`
+   - [前回] の記事を参照するときは `[前回]({{ page.previous | relative_url }})`
    - ※ 旧 URL からのリダイレクトは旧サーバー側で処理するため、移行先での個別リダイレクト設定は不要です。
 7. **サンプルプログラムへのリンク**:
    - 書式: `https://github.com/tokoik/<リポジトリ名>`
