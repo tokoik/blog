@@ -317,5 +317,3 @@ public class TriangleMeshRenderer : MonoBehaviour
 ![Material に TriangleMeshMat を選択]({{ site.baseurl }}/assets/images/20231028_2.png)
 
 - [RealSenseSample (Forward Rendering)](https://github.com/tokoik/RealSenseSample/tree/forward)
-
-.
