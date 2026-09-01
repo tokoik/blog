@@ -7,7 +7,7 @@ published: true
 
 ## Intel RealSense SDK の Unity Package の使い方
 
-なんと初めて [Unity](/categories/Unity/) という Blog カテゴリを使います。私としては画期的ですね。もちろん自分自身は OpenGL / GLSL を使ったプログラムを C や C++ でゴリゴリに書くってことを長らくやってきたわけです。でも、そういう実装を他の人に渡しても（自分がメンテする場合を除いて）結局活用してもらえなかったりします。それで、かつては「Maya から使えんか」とか言われ、今は「Unity で何とかならんか」と言われるわけです。それで自分も遅まきながら Unity とか勉強したりしているんですが…
+なんと初めて [Unity]({{ site.baseurl }}/categories/Unity/) という Blog カテゴリを使います。私としては画期的ですね。もちろん自分自身は OpenGL / GLSL を使ったプログラムを C や C++ でゴリゴリに書くってことを長らくやってきたわけです。でも、そういう実装を他の人に渡しても（自分がメンテする場合を除いて）結局活用してもらえなかったりします。それで、かつては「Maya から使えんか」とか言われ、今は「Unity で何とかならんか」と言われるわけです。それで自分も遅まきながら Unity とか勉強したりしているんですが…
 
 やっぱり難しいですね。これ、やっぱり CG やリアルタイムグラフィックスなんかを理解していて、その上で API やプログラミングの知識を持ってないと、ランタイムを使いこなせないんじゃないでしょうか。当たり前ですね。ゲームエンジンですから。でも、エディタがすごくよくできているせいで「誰でも」「簡単に」「ゲームが」作れるようになっています。素晴らしいです。それで「Unity でゲームを作ったことがあります」という学生さんに「じゃあ Unity を卒研の道具に使えば」と言ったりするんですけど（うちでは「研究テーマ」と「研究ツール」の両方を決めることを求めています）、なぜか途中で詰んでしまう人がたまに出ます。
 
@@ -21,28 +21,28 @@ published: true
 
 というわけで、今回は自分自身が [RealSense SDK (librealsense)](https://github.com/IntelRealSense/librealsense) の Unity Package の使い方を勉強しながら、Teams 上で学生さんに説明したので、その内容をここにメモっています。
 
-1. GitHub の [librealsense の Releases](https://github.com/IntelRealSense/librealsense/releases) の Assets にある SDK のインストーラ の Intel.RealSense.SDK-WIN10-2.*.*.*.exe をダウンロードしてください。また Intel.RealSense.unitypackage という Unity Package もダウンロードしてください。
-2. SDK のインストーラを起動して SDK をインストールしてください。インストール完了後に `Realsense Viewer` の起動を促されます。これを起動すると PC に接続している RealSense の Firmware のアップデートを促されますので、アップデートしておいてください。`RealSense Viewer` はこのあと終了してください。
+1. GitHub の [librealsense の Releases](https://github.com/IntelRealSense/librealsense/releases) の Assets にある SDK のインストーラの Intel.RealSense.SDK-WIN10-2.*.*.*.exe をダウンロードしてください。また Intel.RealSense.unitypackage という Unity Package もダウンロードしてください。
+2. SDK のインストーラを起動して SDK をインストールしてください。インストール完了後に `RealSense Viewer` の起動を促されます。これを起動すると PC に接続している RealSense の Firmware のアップデートを促されますので、アップデートしておいてください。`RealSense Viewer` はこのあと終了してください。
 3. Unity Hub か Unity のエディタを起動して、新しいプロジェクトを作ってください。テンプレートは `3D` か `3D (URP)` を選んでください。`3D` は古いビルトインパイプライン、`3D (URP)` は Universal Render Pipeline と言って自分でレンダリングパイプラインを記述できる Scriptable Render Pipeline で、今はもっぱらこれが使われるみたいです。ここでは `3D (URP)` を選ぶことにします (このプロジェクトはうっかりビルトインパイプラインの `3D` で作っちゃったけど、3D (URP) でも同じ手順でできると思います)。
 4. `Assets` メニューから `Import Package... >` `Custom Package...` を選び、先ほどダウンロードした RealSense の Unity Package を開いてください。`Import Unity Package` というウィンドウがポップアップしますから、そのまま `Import` をクリックしてください。
 5. Unity Package の Import が終わると Project ウィンドウに `RealSenseSDK2.0` というフォルダができますから、その中の `Scenes` というフォルダを開いてください。中に `StartHere` というシーンがあります。これは、ここからすべてのシーンを起動するものです。これをダブルクリックして `▶` をクリックすれば、エディタ内で実行を開始します。
 6. 学生さんが最初に必要になるのは、この中の `PointCloudDepthAndColor` だと思います。このシーン自体は `Samples` のフォルダの中にあります。また、同じフォルダにある `PointCloudProcessingBlock` には、Decimation や時間方向のフィルタ、穴ふさぎフィルタなどが組み込まれています。これには UI もついているので、UI を付けるときの参考にもなると思います。
 
- PointCloudDepthAndColor を実行すると、こんな具合になります。視点はマウスで動かせます。
+`PointCloudDepthAndColor` を実行すると、こんな具合になります。視点はマウスで動かせます。
 
 ![Samples の PointCloudColorAndDepth のシーン]({{ site.baseurl }}/assets/images/20231027_0.jpg)
 
- ただ、これは実際には点で描いているので、クローズアップするとこういうことになります。
+ただ、これは実際には点で描いているので、クローズアップするとこういうことになります。
 
 ![PointCloudColorAndDepth のクローズアップ]({{ site.baseurl }}/assets/images/20231027_1.jpg)
 
- これを三角形のメッシュで描いて、クローズアップしても隙間が空かないようにしたいと思います。
+これを三角形のメッシュで描いて、クローズアップしても隙間が空かないようにしたいと思います。
 
 ## 新しいシーンを作る
 
 自分で新しいシーンを作るときは、`File` メニューの `New Scene` を選ぶか、とりあえず Project ウィンドウの Assets の中にある Scenes に作られている SampleScene を使ってください。
 
-1. Project ウィンドウの Assets の RealSenseSDK2.0 の Prefabs にある `PointCloud`、`RsDevice`、`RsProcessingPipe` の３つの Prefab を Hierarchy ウィンドウにドラッグ＆ドロップします。  
+1. Project ウィンドウの Assets の RealSenseSDK2.0 の Prefabs にある `PointCloud`、`RsDevice`、`RsProcessingPipe` の 3 つの Prefab を Hierarchy ウィンドウにドラッグ＆ドロップします。  
 ![Prefab の追加]({{ site.baseurl }}/assets/images/20231027_2.png)  
     - `RsDevice` が RealSense のインタフェースなので、RealSense が複数あるときは、これも複数 Hierarchy に置きます。その場合、センサごとに `RsDevice` の名前を変えておいた方が良いでしょう (`RsDevice0`, `RsDevice1`, ...)。
     - どの `RsDevice` がどの RealSense を担当するかは、Requested Serial Number で指定すればいいんじゃないかと思います。これは RealSense Viewer で調べることができます。
@@ -69,7 +69,7 @@ published: true
 この状態で `▶` をクリックすると、テクスチャが貼られます。  
 ![テクスチャが貼られた点群]({{ site.baseurl }}/assets/images/20231027_11.png)
 
- ただし、これは三角形メッシュでではなく点 (というか四角形) です。点のサイズは `PointCloud` の RsPointCloudRenderer の Point Size で指定します。三角形のメッシュにするにはインデックスデータを作るなど、もう一工夫必要になります。
+ただし、これは三角形メッシュではなく点 (というか四角形) です。点のサイズは `PointCloud` の RsPointCloudRenderer の Point Size で指定します。三角形のメッシュにするにはインデックスデータを作るなど、もう一工夫必要になります。
 
 ## Orbit Camera Control を組み込む
 
@@ -77,12 +77,13 @@ published: true
 
 ![Orbit Camera Control の組み込み]({{ site.baseurl }}/assets/images/20231027_12.png)
 
- これでマウスを使ってカメラを操作することができるようになります。この `OrbitCameraControl` は結構便利で、他のものにも流用できると思います (他では Unity Editor のエラーが出ることがありますが、スクリプトの Start() の当該の部分を削除すると動きます)。
+これでマウスを使ってカメラを操作することができるようになります。この `OrbitCameraControl` は結構便利で、他のものにも流用できると思います (他では Unity Editor のエラーが出ることがありますが、スクリプトの Start() の当該の部分を削除すると動きます)。
 
 ## スクリプトの解説
 
 あと、スクリプトとシェーダについて、少し説明します。スクリプトは Assets の RealSenseSDK2.0 の Scripts フォルダにあります。
- まず RsDevice というスクリプトを開いてください。ダブルクリックすれば VisualStudio が起動すると思います。デフォルトの Multithread の場合、下記のように RealSense の起動時に開始されたスレッドで RealSense のフレームの取得を待ち、データが到着したら SampleEvent というイベントを発行するという処理を繰り返しています。
+
+まず RsDevice というスクリプトを開いてください。ダブルクリックすれば Visual Studio が起動すると思います。デフォルトの Multithread の場合、下記のように RealSense の起動時に開始されたスレッドで RealSense のフレームの取得を待ち、データが到着したら SampleEvent というイベントを発行するという処理を繰り返しています。
 
 ```csharp
 /// <summary>
@@ -98,7 +99,7 @@ private void WaitForFrames()
 }
 ```
 
-なお Unity Thread の場合は、このスクリプトの最後の Update() で、次のようにフレームを取得して同様に SampleEvent を発行しています。
+なお Unity Thread の場合は、このスクリプトの最後の `Update()` で、次のようにフレームを取得して同様に SampleEvent を発行しています。
 
 ```csharp
 void Update()
@@ -116,7 +117,7 @@ void Update()
 }
 ```
 
-点群の描画を行っているのは RsPointCloudRenderer というスクリプトです。ここでは次のように入力フレーム frame がコンポジットフレーム (複数のデータが合成されているとき) はフレームセットのデプスのフレームから点の位置 Xyz32f を取り出してキュー `q` に入れています。
+点群の描画を行っているのは RsPointCloudRenderer というスクリプトです。ここでは次のように入力フレーム `frame` がコンポジットフレーム (複数のデータが合成されているとき) のときはフレームセットのデプスのフレームから点の位置 `Xyz32f` を取り出してキュー `q` に入れています。
 
 ```csharp
 private void OnNewSample(Frame frame)
@@ -183,7 +184,7 @@ protected void LateUpdate()
 
 描画処理を `Update()` ではなく `LateUpdate()` で行っているのは、(デフォルトでは使われない) Unity Thread の場合に `Update()` で点群の収集を行っているために、それより後で描画するためだと思います。(デフォルトの) Multithread なら描画と並行して点群の収集が行われるので、`Update()` で描画しても問題ない気がします。
 
- 点群自体はこの `vertices` に入っているので、点群そのものを使うならこれか、その前の points を使えばいいと思います。デプスに対してごにょごにょしようとするなら RsDevice スクリプトでフレームをいじるか、`RsProcessingPipe` の ProcessFrame をいじる (この中で使っている Process っていう Abstract クラスをオーバーライドする？) といいんじゃないでしょうか。
+点群自体はこの `vertices` に入っているので、点群そのものを使うならこれか、その前の points を使えばいいと思います。デプスに対してごにょごにょしようとするなら RsDevice スクリプトでフレームをいじるか、`RsProcessingPipe` の ProcessFrame をいじる (この中で使っている Process っていう Abstract クラスをオーバーライドする？) といいんじゃないでしょうか。
 
 ## 点群を三角形メッシュ化する
 
@@ -230,12 +231,12 @@ protected void LateUpdate()
             // 左から i 番目の四角形の左下の頂点番号
             int pi = p0 + i;
     
-            // １つ目の三角形の頂点番号
+            // 1 つ目の三角形の頂点番号
             indeces[fi + 0] = pi;
             indeces[fi + 1] = pi + 1;
             indeces[fi + 2] = pi + slices + 1;
     
-            // ２つ目の三角形の頂点番号
+            // 2 つ目の三角形の頂点番号
             indeces[fi + 3] = pi + slices + 2;
             indeces[fi + 4] = pi + slices + 1;
             indeces[fi + 5] = pi + 1;
@@ -362,7 +363,7 @@ protected void LateUpdate()
     }
     ```
 
- 多分、この用途ではフォグや `TRANSFORM_TEX` によるテクスチャ座標の位置調整は不要だと思うので、削除しても構わない (むしろ削除した方がいい) んじゃないかと思います。
+多分、この用途ではフォグや `TRANSFORM_TEX` によるテクスチャ座標の位置調整は不要だと思うので、削除しても構わない (むしろ削除した方がいい) んじゃないかと思います。
 
 ## マテリアルの作成
 
@@ -402,7 +403,7 @@ protected void LateUpdate()
 
 ![視点を動かした場合の三角形のメッシュによる表示]({{ site.baseurl }}/assets/images/20231027_19.jpg)
 
-これは RealSense が計測不能だったりした点の位置を (0, 0, 0) にしてしまうため、三角形のメッシュで表示したときに３つの頂点のうち１つが (0, 0, 0) の三角形がそこまで伸びて表示されるからです。そこで、これを避けるために、どれか１つの頂点でも (0, 0, 0) になっている三角形は描かないようにします。それには (あんまり使いたくないけど) ジオメトリシェーダを使います。
+これは RealSense が計測不能だったりした点の位置を (0, 0, 0) にしてしまうため、三角形のメッシュで表示したときに3 つの頂点のうち 1 つが (0, 0, 0) の三角形がそこまで伸びて表示されるからです。そこで、これを避けるために、どれか 1 つの頂点でも (0, 0, 0) になっている三角形は描かないようにします。それには (あんまり使いたくないけど) ジオメトリシェーダを使います。
 
 ## ジオメトリシェーダの追加
 
@@ -475,7 +476,7 @@ protected void LateUpdate()
                 }
     ```
 
-4. 以下の内容のジオメトリシェーダを追加します。これは渡された３つの頂点 `v[3]` のどれか一つでも w = 0 だったら頂点を一つも出力しません。`[maxvertexcount(3)]` はこのシェーダが最大で３つの頂点を出力することを示しています。
+4. 以下の内容のジオメトリシェーダを追加します。これは渡された 3 つの頂点 `v[3]` のどれか一つでも w = 0 だったら頂点を一つも出力しません。`[maxvertexcount(3)]` はこのシェーダが最大で 3 つの頂点を出力することを示しています。
 
     ```hlsl
                 [maxvertexcount(3)]
@@ -513,7 +514,7 @@ protected void LateUpdate()
 
 ![不要な三角形を削除した三角形のメッシュによる表示]({{ site.baseurl }}/assets/images/20231027_20.jpg)
 
-RealSense の D400 シリーズは (アクティブ) ステレオカメラなので、カメラに近い計測対象の周囲に視差による閉塞 (occulusion) により計測できない場所が生じることがあります (これが生じない LiDAR の L515 がディスコンなのは残念)。ここではその部分の三角形を単に削除しているので、そこに隙間 (穴) が生じています。
+RealSense の D400 シリーズは (アクティブ) ステレオカメラなので、カメラに近い計測対象の周囲に視差による閉塞 (occlusion) により計測できない場所が生じることがあります (これが生じない LiDAR の L515 がディスコンなのは残念)。ここではその部分の三角形を単に削除しているので、そこに隙間 (穴) が生じています。
 
 RealSense SDK にはそういう穴をふさぐ関数が用意されていますが (サンプルの PointCloudProcessingBlocks というシーンで使っています)、[このプログラム](https://github.com/tokoik/getdepth)ではそれを使わず、GPU を使って自前実装しています。今後はそれも Unity で実装しようと考えています。
 
