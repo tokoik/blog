@@ -70,7 +70,7 @@ RealSense に対応したメッシュのデータを作成するメソッド `Re
     material.SetBuffer("_Vertex", vertexBuffer);
 ```
 
- 同様にインデックスデータを格納する `GraphicsBuffer` を `indexBuffer` に確保します。
+同様にインデックスデータを格納する `GraphicsBuffer` を `indexBuffer` に確保します。
 
 ```csharp
     //var indices = new int[vertices.Length];
@@ -84,7 +84,7 @@ RealSense に対応したメッシュのデータを作成するメソッド `Re
     indexBuffer.SetData(indices);
 ```
 
- この後の Mesh に関連するコードは削除します。その結果、テクスチャ座標 UV を渡すことができなくなってしまいますが、これは後で何とかします。
+この後の `Mesh` に関連するコードは削除します。その結果、テクスチャ座標 UV を渡すことができなくなってしまいますが、これは後で何とかします。
 
 ```csharp
     //mesh.MarkDynamic();
@@ -111,7 +111,7 @@ RealSense に対応したメッシュのデータを作成するメソッド `Re
   }
 ```
 
- `OnDestroy()` ではもともと Mesh が作られていたら `Dispose()` が呼ばれていたので、代わりに `vertexBuffer` が作られていたら、それを解放するついでに Game Object を `Dispose()` することにします。これでいいんでしょうか。
+`OnDestroy()` ではもともと `Mesh` が作られていたら `Dispose()` が呼ばれていたので、代わりに `vertexBuffer` が作られていたら、それを解放するついでに Game Object を `Dispose()` することにします。これでいいんでしょうか。
 
 ```csharp
   void OnDestroy()
@@ -134,7 +134,7 @@ RealSense に対応したメッシュのデータを作成するメソッド `Re
   }
 ```
 
- RealSense から頂点データを取り出して Mesh を更新していた `LateUpdate()` では、これまで `points` に取り出した頂点の数が Mesh の頂点の数と比較して違っていたら Mesh を作り直していました。Mesh を使わなくなったので、代わりにこれを (頂点データの一時保管に使う) `vertices` の長さと比較することにします。
+RealSense から頂点データを取り出して `Mesh` を更新していた `LateUpdate()` では、これまで `points` に取り出した頂点の数が `Mesh` の頂点の数と比較して違っていたら `Mesh` を作り直していました。`Mesh` を使わなくなったので、代わりにこれを (頂点データの一時保管に使う) `vertices` の長さと比較することにします。
 
 ```csharp
   protected void LateUpdate()
@@ -153,7 +153,7 @@ RealSense に対応したメッシュのデータを作成するメソッド `Re
           }
 ```
 
- そのあと `points` の頂点データを一時保管用の配列 `vertices` にコピーして Mesh に設定していましたが、これも Mesh の代わりに `GraphicsBuffer` の `vertexBuffer` に格納するようにします。本当は `uvmap` 同様 `points.VertexData` を直接 `vertexBuffer` にコピーしたかったんですけど、`points.VertexData` の先のデータを `vertexBuffer.GetNativeBufferPtr()` の先にコピーする方法がわかりませんでした (`Marshal.Copy()` を使う？)。
+そのあと `points` の頂点データを一時保管用の配列 `vertices` にコピーして `Mesh` に設定していましたが、これも `Mesh` の代わりに `GraphicsBuffer` の `vertexBuffer` に格納するようにします。本当は `uvmap` 同様 `points.VertexData` を直接 `vertexBuffer` にコピーしたかったんですけど、`points.VertexData` の先のデータを `vertexBuffer.GetNativeBufferPtr()` の先にコピーする方法がわかりませんでした (`Marshal.Copy()` を使う？)。
 
 ```csharp
           if (points.TextureData != IntPtr.Zero)
@@ -175,7 +175,7 @@ RealSense に対応したメッシュのデータを作成するメソッド `Re
   }
 ```
 
- 最後に `OnRenderObject()` メソッドを追加します。この Game Object `TriangleMesh` では Mesh Renderer では描画しませんから、`OnRenderObject()` で `Graphics.DrawProceduralNow()` により直接描画します。
+最後に `OnRenderObject()` メソッドを追加します。この Game Object `TriangleMesh` では Mesh Renderer では描画しませんから、`OnRenderObject()` で `Graphics.DrawProceduralNow()` により直接描画します。
 
 ```csharp
   void OnRenderObject()
@@ -191,7 +191,7 @@ RealSense に対応したメッシュのデータを作成するメソッド `Re
 
 ## シェーダの修正
 
-というわけで Mesh Renderer を使わず Mesh を削除してしまったので、テクスチャ座標 UV を渡していません。これを「後で何とかします」ということで、シェーダで何とかすることにします。マテリアルの `TriangleMeshMat` に組み込んだシェーダの `TriangleMesh` を修正します。バーテックスシェーダ `vert()` に入力する頂点属性には位置 `POSITION` もテクスチャ座標 `TEXCOORD0` も存在しなくなったので、その構造体 `appdata` は削除してしまいます。
+というわけで Mesh Renderer を使わず `Mesh` を削除してしまったので、テクスチャ座標 UV を渡していません。これを「後で何とかします」ということで、シェーダで何とかすることにします。マテリアルの `TriangleMeshMat` に組み込んだシェーダの `TriangleMesh` を修正します。バーテックスシェーダ `vert()` に入力する頂点属性には位置 `POSITION` もテクスチャ座標 `TEXCOORD0` も存在しなくなったので、その構造体 `appdata` は削除してしまいます。
 
 ```hlsl
 Shader "Unlit/TriangleMesh" {
@@ -224,7 +224,7 @@ Shader "Unlit/TriangleMesh" {
       };
 ```
 
- 代わりに「本当の」テクスチャ座標 UV が入っている `_UVMap` のテクスチャサイズ `_UVMap_TexelSize` と、`GraphicsBuffer` の `vertexBuffer` を受け取る `StructuredBuffer` の `_Vertex` を追加します。
+代わりに「本当の」テクスチャ座標 UV が入っている `_UVMap` のテクスチャサイズ `_UVMap_TexelSize` と、`GraphicsBuffer` の `vertexBuffer` を受け取る `StructuredBuffer` の `_Vertex` を追加します。
 
 ```hlsl
       sampler2D _MainTex;
@@ -244,7 +244,7 @@ Shader "Unlit/TriangleMesh" {
         v.vertex = float4(_Vertex[vertex_id], 1.0);
 ```
 
- そして `_UVMap` をサンプリングするためのテクスチャ座標 UV を `vertex_id` と `_UVMap_TexelSize` を使って求めます。
+そして `_UVMap` をサンプリングするためのテクスチャ座標 UV を `vertex_id` と `_UVMap_TexelSize` を使って求めます。
 
 ```hlsl
         if (all((float3)v.vertex == 0.0))
@@ -266,7 +266,7 @@ Shader "Unlit/TriangleMesh" {
 
 これで Mesh Renderer は使わなくなったので、ここで削除します。Hierarchy ウィンドウで `TriangleMesh` オブジェクトを選択し、Inspector で Triangle Mesh Renderer (Script) → Mesh Renderer → Mesh Filter の順に削除 (右上の `︙` から Remove Component を選択) してください。この結果 `TriangleMesh` オブジェクトは Empty になります。
 
- 次に、スクリプトの TriangleMeshRenderer を修正します。まず、このスクリプトを組み込んだ時に Mesh Filter と Mesh Renderer が自動的に組み込まれないように、`[RequireComponent ... ]` を削除します。また、このスクリプトから直接マテリアルを参照するために、メンバ変数 `material` を `[SerializeField]` にするか、`public` にします。
+次に、スクリプトの TriangleMeshRenderer を修正します。まず、このスクリプトを組み込んだ時に Mesh Filter と Mesh Renderer が自動的に組み込まれないように、`[RequireComponent ... ]` を削除します。また、このスクリプトから直接マテリアルを参照するために、メンバ変数 `material` を `[SerializeField]` にするか、`public` にします。
 
 ```csharp
 //[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
@@ -287,7 +287,7 @@ public class TriangleMeshRenderer : MonoBehaviour
   FrameQueue q;
 ```
 
- マテリアルはこのスクリプトのプロパティで設定しますから、コンポーネントから取り出す必要はありません。
+マテリアルはこのスクリプトのプロパティで設定しますから、コンポーネントから取り出す必要はありません。
 
 ```csharp
   private void ResetMesh(int width, int height)
@@ -304,15 +304,15 @@ public class TriangleMeshRenderer : MonoBehaviour
  
 ```
 
- この Triangle Mesh Renderer を Game Object の `TriangleMesh` に追加します。
+この Triangle Mesh Renderer を Game Object の `TriangleMesh` に追加します。
 
 ![Triangle Mesh Renderer の追加]({{ site.baseurl }}/assets/images/20231028_3.png)
 
- Triangle Mesh Renderer (Script) の Source に `RsProcessingPipe` を選びます。
+Triangle Mesh Renderer (Script) の Source に `RsProcessingPipe` を選びます。
 
 ![Source に RsProcessingPipe を選択]({{ site.baseurl }}/assets/images/20231028_1.png)
 
- Material には `TriangleMeshMat` を選びます。
+Material には `TriangleMeshMat` を選びます。
 
 ![Material に TriangleMeshMat を選択]({{ site.baseurl }}/assets/images/20231028_2.png)
 
