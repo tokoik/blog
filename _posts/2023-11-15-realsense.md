@@ -2,6 +2,7 @@
 title: "RealSense (3) メッシュ化した点群を Geometry Instancing で描いてみる"
 category: Unity
 tags: [Unity, RealSense]
+math: true
 published: true
 ---
 

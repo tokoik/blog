@@ -1,6 +1,6 @@
 ---
 title: "落ち込んでなんていられない"
-category: 雑記
+categories: [雑記, VR]
 tags: [その他, VR]
 published: true
 ---

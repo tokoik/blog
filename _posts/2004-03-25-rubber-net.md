@@ -1,6 +1,6 @@
 ---
 title: "ゴム網シミュレータ"
-category: 資料
+categories: [資料, 物理シミュレーション]
 tags: [OpenGL, 3D液晶]
 published: true
 ---
