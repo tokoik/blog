@@ -231,7 +231,8 @@ main {
   */
   blockquote {
     border-style: none;
-    background-color: #dfd;
+    background-color: #efe;
+    border-left: thick solid #8ca;
     margin:  1em 4em;
     padding: 0.5em 1em;
   }
