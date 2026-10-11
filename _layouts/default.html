@@ -46,7 +46,7 @@
     {% endif %}
 
   </head>
-  <body>
+  <body id="top">
 
     <header>
       <h1><a href="{{ site.baseurl }}/">床井研究室</a></h1>
@@ -77,6 +77,46 @@
         </div>
       </div>
     </footer>
+
+    <a href="#top" class="back-to-top" title="トップへ戻る" aria-label="トップへ戻る">&#9650;</a>
+
+    <script>
+    // コードブロックにコピーボタンを配置
+    document.addEventListener('DOMContentLoaded', function() {
+      // Jekyll の rouge ハイライトブロック (.highlight pre) および一般の pre を対象
+      var preElements = document.querySelectorAll('main pre');
+      preElements.forEach(function(pre) {
+        // テーブルレイアウト内の pre や既に親が code-container の場合は除外
+        if (pre.closest('.code-container') || pre.closest('td.rouge-gutter')) return;
+
+        var container = pre.closest('div.highlight') || pre;
+        var wrapper = document.createElement('div');
+        wrapper.className = 'code-container';
+
+        container.parentNode.insertBefore(wrapper, container);
+        wrapper.appendChild(container);
+
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.textContent = 'コピー';
+        btn.setAttribute('aria-label', 'コードをクリップボードにコピー');
+
+        btn.addEventListener('click', function() {
+          var codeText = pre.innerText;
+          navigator.clipboard.writeText(codeText).then(function() {
+            btn.textContent = 'コピー完了!';
+            btn.classList.add('copied');
+            setTimeout(function() {
+              btn.textContent = 'コピー';
+              btn.classList.remove('copied');
+            }, 2000);
+          });
+        });
+
+        wrapper.appendChild(btn);
+      });
+    });
+    </script>
 
   </body>
 </html>

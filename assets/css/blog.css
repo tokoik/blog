@@ -1,464 +1,672 @@
 @charset "utf-8";
 
 /*
-ページ全体の背景色や文字色のなど基本的な設定
-*/
+ * blog.css
+ * 和歌山大学 床井研究室 blog スタイルシート (libglut / opengl モダンデザイン準拠)
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-	font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, "Noto Sans JP", sans-serif;
-	font-size: medium;
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, "Noto Sans JP", sans-serif;
+  font-size: medium;
+  line-height: 1.7;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-	color: #030;
-	background-color: #ffe;
+  color: #030;
+  background-color: #ffe;
+  margin: 0;
+  padding: 0;
 }
 
 /*
-等幅フォント
-*/
+ * 等幅フォント
+ */
 pre, code, var, samp, kbd, dt, .mono {
-	font-family: ui-monospace, Consolas, Menlo, "BIZ UDGothic", "Noto Sans Mono CJK JP", monospace;
+  font-family: ui-monospace, Consolas, Menlo, "BIZ UDGothic", "Noto Sans Mono CJK JP", monospace;
 }
 
 /*
-文字の修飾
-*/
+ * 文字の修飾
+ */
 em {
   font-style: normal;
-	color: #050;
+  font-weight: bold;
+  color: #050;
 }
+
 strong {
   font-style: normal;
-	font-weight: bold;
+  font-weight: bold;
+  color: #b00;
 }
 
-/*
-グレー文字
-*/
+kbd {
+  color: #922;
+  background-color: #f7ede2;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  border: 1px solid #d4c2b0;
+  font-size: 0.9em;
+}
+
+.blue {
+  color: #0066cc;
+}
+
 .gray {
-	color: #8a8;
+  color: #8a8;
 }
 
 /*
-リンク文字列
-*/
+ * リンク文字列
+ */
 a:link {
-	color: #360;
-	text-decoration: none;
+  color: #360;
+  text-decoration: none;
 }
+
 a:visited {
-	color: #240;
-	text-decoration: none;
+  color: #240;
+  text-decoration: none;
 }
+
 a:focus {
   color: #080;
   text-decoration: underline;
 }
+
 a:hover {
   color: #4a4;
-	text-decoration: underline;
-}
-a:active {
-	color: #a40;
   text-decoration: underline;
 }
 
+a:active {
+  color: #a40;
+  text-decoration: underline;
+}
+
+a.label {
+  color: inherit;
+  text-decoration: none;
+}
+
 /*
-罫線
-*/
+ * 罫線
+ */
 hr {
-	border-style: solid;
-	border-width: 2px 0 0 0;
-	border-color: #ada;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  border-color: #ada;
+  margin: 1.5rem 0;
 }
 
 /*
-記事のヘッダとフッタ
-*/
-header, footer {
+ * ヘッダー
+ */
+header {
+  width: 100%;
+  max-width: 980px;
+  margin: 0.5rem auto 0 auto;
+  padding: 0 1rem;
+}
 
-  /*
-  ブログのタイトル
-  */
-  h1 {
-    margin: 0.2em 0;
-    padding: 0.3em 0.5em 0.3em 0.5em;
-    font-weight: bold;
-    color: #fff;
-    background-color: #073;
-  }
-  h1 a:link, h1 a:visited, h1 a:focus, h1 a:hover, h1 a:active {
-    color: inherit;
-  }
+header h1 {
+  margin: 0.2em 0;
+  padding: 0.35em 0.6em;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #073;
+  border-radius: 4px;
+}
 
-  /*
-  ナビゲーションバー
-  */
-  div.navigation {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-
-    /*
-    記事のタイトル
-    */
-    h2 {
-      margin: 0.5em 0.2em 0.5em 1em;
-      padding: 0;
-      text-indent: -1.0em;
-      font-size: 120%;
-      font-weight: bold;
-      min-width: 0;
-    }
-
-    /*
-    ライセンス
-    */
-    div.license {
-      flex: 1;
-      text-align: left;
-      margin: 0;
-      padding: 0;
-      border: none;
-      cursor: pointer;
-
-      /*
-      ライセンスバナー
-      */
-      img {
-        border: none;
-        height: auto;
-        margin: 0;
-        padding: 0;
-        vertical-align: middle;
-      }
-    }
-
-    /*
-    中央
-    */
-    div.center {
-      flex: 1;
-      font-size: 16px;
-      text-align: center;
-    }
-
-    /*
-    ボタン領域
-    */
-    div.buttons {
-      flex: 1;
-      text-align: right;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      flex-wrap: nowrap;
-      gap: 0.2em;
-
-      /*
-      ボタン
-      */
-      button {
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        background-color: #ada;
-      }
-    }
-  }
+header h1 a:link,
+header h1 a:visited,
+header h1 a:focus,
+header h1 a:hover,
+header h1 a:active {
+  color: #fff;
+  text-decoration: none;
 }
 
 /*
-記事の本文
-*/
-main {
-	border-top: dashed 1px #ada;
-	margin: 0.1em 0.5em;
-	padding: 0;
+ * ナビゲーションバー
+ */
+div.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
 
-  /*
-  見出し
-  */
-  h2 {
-    margin: 1em 0 0.2em 1em;
-    font-size: 110%;
-    font-weight: bold;
-  }
+header div.navigation h2 {
+  margin: 0.4em 0;
+  padding: 0;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #030;
+  flex: 1 1 auto;
+  min-width: 0;
+}
 
-  /*
-  サブタイトル
-  */
-  h3 {
-    margin: 0.8em 0 0.2em 1em;
-    font-size: inherit;
-    font-weight: bold;
-  }
+header div.navigation .header-meta {
+  font-size: 0.9rem;
+  color: #363;
+}
 
-  /*
-  その他の見出し
-  */
-  h4 {
-    margin: 0.8em 0 0.2em 1em;
-    font-size: inherit;
-  }
+/* ナビゲーションの「前」「次」ボタン */
+div.navigation div.buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
 
-  /*
-  記事の段落
-  */
-  p {
-    line-height: 1.5;
-    margin: 0.5em 0.5em 0.5em 0;
-  }
+div.navigation div.buttons button,
+div.navigation div.buttons .button {
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ada;
+  color: #030;
+  padding: 0.25em 0.7em;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s, opacity 0.2s;
+}
 
-  /*
-  整形済みテキスト
-  */
-  pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    background-color: #fff;
-    border-style: solid;
-    border-color: #ada;
-    border-width: 1px;
-    margin: 1em 4em 1em 4em;
-    padding: 1em;
-  }
+div.navigation div.buttons button:hover:not(:disabled),
+div.navigation div.buttons .button:hover {
+  background-color: #8c8;
+}
 
-  /*
-  引用
-  */
-  blockquote {
-    border-style: none;
-    background-color: #efe;
-    border-left: thick solid #8ca;
-    margin:  1em 4em;
-    padding: 0.5em 1em;
-  }
-
-  /*
-  箇条書き
-  */
-  ul, ol {
-    margin: 0.5em 0 0.5em 2em;
-    padding: 0 0 0 0.5em;
-  }
-  li {
-    line-height: 1.5;
-    margin-bottom: 0.2em;
-  }
-
-  /*
-  項目リスト
-  */
-  dl {
-    margin: 0.5em 0 0.5em 2em;
-  }
-  dt {
-    margin: 0.2em 0 0.2em 2em;
-    text-indent: -2em;
-    font-weight: bold;
-  }
-  dd {
-    margin: 0 2em 0.2em 1em;
-  }
-
-  /*
-  テーブル
-  */
-  table {
-    margin: 1em auto;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #ada;
-    border-collapse: collapse;
-  }
-  th, td {
-    padding: 0.3em;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #ada;
-  }
-  table img {
-    border: none;
-    max-width: 100%;
-    height: auto;
-    margin: 0;
-    display: block;
-  }
-
-  /*
-  画像
-  */
-  img {
-    border: none;
-    max-width: 100%;
-    height: auto;
-    margin: 1em auto;
-    display: block;
-    float: none;
-  }
-  img.left {
-    display: inline;
-    float: left;
-  }
-  img.right {
-    display: inline;
-    float: right;
-  }
-  img.inline {
-    display: inline;
-    float: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  /*
-  図
-  */
-  div.figure {
-    margin: 1em 4em 1em 4em;
-    text-align: center;
-  }
-
-  /*
-  数式
-  */
-  div.expression {
-    margin: 0.5em 0 0.5em 2em;
-    text-align: center;
-  }
-
-  /*
-  脚注
-  */
-  div.footnotes {
-    font-size: 90%;
-    border-top: dashed 1px #ada;
-    margin: 2em 0 0 1.3em;
-    padding: 0;
-  }
-  div.footnotes ol {
-    margin: 0;
-    padding-left: 1.3em;
-  }
-  div.footnotes ol li {
-    line-height: 1.2;
-  }
-
-  /*
-  トップページ
-  */
-  div.top {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  /*
-  トップページのメインコンテンツ
-  */
-  div.main {
-    width: 64%;
-    padding: 0;
-  }
-
-  /*
-  トップページのサイドバー
-  */
-  div.sidebar {
-    margin: 0;
-    padding-left: 0.5em;
-    border-left: solid 1px #ada;
-    width: 32%;
-
-    /*
-    サイドバーの見出し
-    */
-    h2 {
-      margin: 1em 0 0.5em 0;
-      padding: 0.2em;
-      font-size: inherit;
-      background-color: #ada;
-      text-align: center;
-    }
-
-    /*
-    サイドバーのリスト
-    */
-    ul {
-      list-style-type: square;
-      margin: 0 0 0.5em 1.2em;
-      padding: 0;
-    }
-    li {
-      line-height: 1.2;
-      margin: 0.3em 0.1em;
-      padding: 0;
-    }
-  }
+div.navigation div.buttons button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /*
-フッタ
-*/
+ * フッター
+ */
 footer {
-	clear: both;
-	border-top: solid 1px #ada;
-	margin-top: 2em;
-	padding-top: 0.5em;
+  clear: both;
+  width: 100%;
+  max-width: 980px;
+  border-top: solid 1px #ada;
+  margin: 3rem auto 2rem auto;
+  padding: 1rem 1rem 0 1rem;
+}
+
+footer div.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+footer div.license {
+  display: flex;
+  align-items: center;
+}
+
+footer div.license img {
+  border: none;
+  vertical-align: middle;
+}
+
+footer div.center {
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+footer div.center a {
+  font-weight: bold;
 }
 
 /*
-レスポンシブデザイン
-*/
-@media screen and (max-width: 480px) {
-  body {
-    font-size: small;
-  }
-  main {
-    div.top {
-      display: block;
-      div.main {
-        width: 100%;
-      }
-      div.sidebar {
-        padding-left: 0;
-        width: 100%;
-        border: none;
-      }
-    }
-    h2, h3, h4 {
-      margin-left: 1em;
-      margin-right: 0;
-    }
-    p, dl, pre, blockquote, div.footnotes, footer {
-      margin-left: 0;
-      margin-right: 0;
-    }
-    h2, h3, h4, p, dl, dt, dd, div.footnotes, footer {
-      padding: 0;
-    }
-    ol, ul {
-      margin-left: 1em;
-      margin-right: 0;
-      padding: 0 0 0 0.5em;
-    }
-    pre, blockquote {
-      padding: 0.5em;
-    }
-    iframe {
-      max-width: 100%;
-      height: auto;
-    }
-  }
+ * メインコンテンツ (全ページ共通コンテナ)
+ */
+main {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  border-top: dashed 1px #ada;
+  margin-top: 0.4rem;
+  padding-top: 0.8rem;
 }
 
 /*
-シンタックスハイライティング (rouge)
-*/
+ * 見出しの装飾 (libglut準拠)
+ */
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid #ada;
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: #052;
+  scroll-margin-top: 1.2rem;
+}
+
+h3 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #063;
+  border-left: 4px solid #073;
+  padding-left: 0.5rem;
+  scroll-margin-top: 1.2rem;
+}
+
+h4 {
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  scroll-margin-top: 1.2rem;
+}
+
+.title {
+  margin-top: 1em;
+  border: none;
+  text-align: center;
+}
+
+/*
+ * 本文の段落
+ */
+p {
+  line-height: 1.7;
+  margin: 0.8em 0;
+}
+
+/*
+ * 引用
+ */
+blockquote {
+  border-style: none;
+  background-color: #efe;
+  border-left: 4px solid #8ca;
+  margin: 1.2em 0;
+  padding: 0.8em 1.2em;
+  border-radius: 0 4px 4px 0;
+}
+
+/*
+ * お知らせ / アラート
+ */
+.alert-notice {
+  background-color: #fff4f4;
+  border: 1px solid #f5c2c7;
+  border-left: 5px solid #d9534f;
+  color: #721c24;
+  padding: 0.8em 1.2em;
+  margin: 1.2em 0;
+  border-radius: 4px;
+}
+
+/*
+ * ドキュメント情報カード
+ */
+.doc-card {
+  background-color: #f7faf5;
+  border: 1px solid #cce5cc;
+  border-radius: 6px;
+  padding: 1rem 1.4rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.doc-card p {
+  margin: 0.4em 0;
+}
+
+/*
+ * 整形済みテキスト & コードブロック
+ */
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #fff;
+  border: 1px solid #ada;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1.2rem 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  position: relative;
+}
+
+/* C言語などのソースコード (静的HTML互換) */
+pre.source {
+  background-color: #ffffff;
+  border: 1px solid #99cc99;
+  border-left: 4px solid #073;
+}
+
+/* 実行結果などの画面表示 */
+pre.display {
+  color: #e6f4ea;
+  background-color: #17221d;
+  border: 1px solid #2d3b36;
+}
+
+/* コマンドライン実行例 */
+pre.sample {
+  background-color: #f7faf7;
+  border: 1px dashed #9bc49b;
+}
+
+/* コードブロックコンテナとコピーボタン */
+.code-container {
+  position: relative;
+  margin: 1.2rem 0;
+}
+
+.code-container pre,
+.code-container div.highlight {
+  margin: 0;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: #073;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s, background-color 0.2s;
+  z-index: 5;
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  background-color: #094;
+}
+
+.copy-btn.copied {
+  background-color: #2e7d32;
+  opacity: 1;
+}
+
+/*
+ * リスト
+ */
+ul, ol {
+  margin: 0.8em 0 0.8em 1.5em;
+  padding: 0 0 0 0.5em;
+}
+
+li {
+  line-height: 1.6;
+  margin-bottom: 0.3em;
+}
+
+dl {
+  margin: 1em 0 1em 1em;
+}
+
+dt {
+  margin-top: 0.6em;
+  font-weight: bold;
+  color: #052;
+}
+
+dd {
+  margin-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+/*
+ * テーブル
+ */
+table {
+  margin: 1.5rem auto;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #ada;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* 旧HTMLでコードブロックを囲むために使われていたテーブルの装飾をリセット */
+blockquote > table,
+table:has(pre) {
+  border: none !important;
+  background: transparent !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+blockquote > table td,
+blockquote > table th,
+table:has(pre) td,
+table:has(pre) th {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+th, td {
+  padding: 0.6rem 0.8rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ada;
+}
+
+th {
+  background-color: #eaf5ea;
+  color: #052;
+  font-weight: bold;
+}
+
+/*
+ * 画像と図
+ */
+img {
+  border: none;
+  max-width: 100%;
+  height: auto;
+}
+
+main img {
+  display: block;
+  margin: 1.2rem auto;
+}
+
+img.left {
+  display: inline;
+  float: left;
+  margin: 0.5rem 1rem 0.5rem 0;
+}
+
+img.right {
+  display: inline;
+  float: right;
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+img.inline {
+  display: inline;
+  float: none;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+div.figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+div.figure img {
+  display: inline-block;
+  margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+
+div.expression {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+/*
+ * 脚注
+ */
+div.footnotes {
+  font-size: 90%;
+  border-top: dashed 1px #ada;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+}
+
+div.footnotes ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+div.footnotes ol li {
+  line-height: 1.5;
+  margin-bottom: 0.4em;
+}
+
+/*
+ * トップページ専用スタイル (index.md)
+ */
+div.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.8rem;
+  margin-top: 0.5rem;
+}
+
+div.top div.main {
+  flex: 1 1 600px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+div.top div.main p {
+  line-height: 1.7;
+}
+
+div.top div.main ul {
+  list-style-type: square;
+  margin-left: 1.2em;
+}
+
+div.top div.main ul li {
+  margin-bottom: 0.35em;
+}
+
+div.top div.main span.date {
+  font-family: ui-monospace, Consolas, Menlo, monospace;
+  color: #474;
+  margin-right: 0.3em;
+  font-size: 0.95em;
+}
+
+div.top div.sidebar {
+  flex: 0 0 280px;
+  min-width: 260px;
+  margin: 0;
+  padding: 0.8rem 1rem;
+  background-color: #f7faf5;
+  border: 1px solid #cce5cc;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+div.top div.sidebar h2 {
+  margin: 0.8rem 0 0.5rem 0;
+  padding: 0.3rem 0.5rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  background-color: #073;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+}
+
+div.top div.sidebar h2:first-child {
+  margin-top: 0.2rem;
+}
+
+div.top div.sidebar ul {
+  list-style-type: square;
+  margin: 0 0 1rem 1.2rem;
+  padding: 0;
+}
+
+div.top div.sidebar li {
+  line-height: 1.45;
+  margin: 0.35em 0;
+  font-size: 0.92rem;
+}
+
+/*
+ * トップへ戻るフローティングボタン
+ */
+.back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background-color: #073;
+  color: #fff !important;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  font-size: 1.3rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.3s, transform 0.2s, background-color 0.2s;
+  z-index: 1000;
+  opacity: 0.85;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+  background-color: #0a4;
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+/*
+ * シンタックスハイライティング (Rouge)
+ */
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
@@ -585,4 +793,42 @@ code.language-plaintext.highlighter-rouge {
   background-color: #fff !important;
   padding: 2px 5px;
   border-radius: 3px;
+  border: 1px solid #d4c2b0;
+}
+
+/*
+ * レスポンシブデザイン
+ */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  header h1 {
+    font-size: 1.25rem;
+  }
+  header div.navigation h2 {
+    font-size: 1.05rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  h3 {
+    font-size: 1.05rem;
+  }
+  pre {
+    padding: 0.8rem;
+    font-size: 0.88rem;
+  }
+  div.top {
+    flex-direction: column;
+  }
+  div.top div.sidebar {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  footer div.navigation {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+  }
 }
