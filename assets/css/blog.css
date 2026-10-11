@@ -309,8 +309,16 @@ blockquote {
   background-color: #efe;
   border-left: 4px solid #8ca;
   margin: 1.2em 0;
-  padding: 0.8em 1.2em;
+  padding: 0.5em 1em;
   border-radius: 0 4px 4px 0;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
 }
 
 /*
