@@ -218,13 +218,14 @@ footer div.navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
 }
 
 footer div.license {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 footer div.license img {
@@ -235,10 +236,15 @@ footer div.license img {
 footer div.center {
   font-size: 0.95rem;
   text-align: center;
+  white-space: nowrap;
 }
 
 footer div.center a {
   font-weight: bold;
+}
+
+footer div.navigation div.buttons {
+  margin-top: 0;
 }
 
 /*
@@ -851,10 +857,5 @@ code.language-plaintext.highlighter-rouge {
   div.top div.sidebar {
     width: 100%;
     flex: 1 1 100%;
-  }
-  footer div.navigation {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.8rem;
   }
 }
